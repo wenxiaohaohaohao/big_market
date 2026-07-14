@@ -398,3 +398,583 @@ m_0\omega=\frac{\omega}{1-\beta-\alpha}.
 
 但当 \(0<\omega<1\) 时，
 
+\[
+\mathcal M(\omega)<m_0\omega.
+\]
+
+原因是 \(m_0\omega\) 只在第一轮支出中扣除一次外流，而真实模型中，后续每一轮零售消费都会再次按照 \(1-\omega\) 的比例流向外部。
+
+这个乘数还有直观的级数表达：
+
+\[
+\mathcal M(\omega)
+=
+\omega\sum_{k=0}^{\infty}(\beta+\alpha\omega)^k.
+\]
+
+此外，传统一次性修正对乘数的高估量为
+
+\[
+m_0\omega-\mathcal M(\omega)
+=
+\frac{\alpha\omega(1-\omega)}
+{(1-\alpha-\beta)(1-\beta-\alpha\omega)}>0.
+\]
+
+并且
+
+\[
+\frac{\partial\ln\mathcal M}
+{\partial\ln\omega}
+=
+\frac{1-\beta}{1-\beta-\alpha\omega}>1.
+\]
+
+同时，
+
+\[
+\frac{\partial^2\mathcal M}{\partial\omega^2}
+=
+\frac{2\alpha(1-\beta)}{(1-\beta-\alpha\omega)^3}>0.
+\]
+
+因此，本地留值率下降会使有效乘数出现超过同比例的下降，而且乘数对留值率的响应是凸的。这个超比例敏感性是本文相对于简单 \(m\omega\) 叙事的主要理论推进。
+
+需要谨慎说明：\(m\omega\) 并非在所有环境中都错误。如果 \(\omega\) 只作用于第一轮，而后续支出完全本地化，那么它可以成立。本文强调的是平台渠道在每一轮消费中持续存在时的递归留值。
+
+### 命题 2：有限市场一体化冲击的精确阈值
+
+正文仍令 \(G=0\)。考虑市场一体化程度从 \(z_0\) 提高到 \(z_1>z_0\)，并定义
+
+\[
+\mathcal B=\frac{B(z_1)}{B(z_0)},
+\qquad
+\mathcal D=\frac{D(z_1)}{D(z_0)},
+\qquad
+\mathcal P=\frac{P_M(z_1)}{P_M(z_0)}.
+\]
+
+当 \(\Delta\rho>0\) 时，平台份额上升导致 \(\mathcal D>1\)，平台降价导致 \(0<\mathcal P<1\)。精确地，
+
+\[
+\frac{Y_1}{Y_0}=\frac{\mathcal B}{\mathcal D},
+\qquad
+\frac{V_1}{V_0}=\frac{\mathcal B}{\mathcal D\mathcal P^\alpha}.
+\]
+
+因此：
+
+1. 若 \(\mathcal B>\mathcal D\)，名义收入与消费等价实际收入均提高；
+2. 若 \(\mathcal D\mathcal P^\alpha<\mathcal B<\mathcal D\)，名义收入下降、消费等价实际收入提高；
+3. 若 \(\mathcal B<\mathcal D\mathcal P^\alpha\)，二者均下降。
+
+由于 \(\mathcal P^\alpha<1\)，不存在“名义收入提高但消费等价实际收入下降”的第四种情形。这个有限变化版本应作为正文的主命题，因为它可以直接对应后续 counterfactual。
+
+### 推论 1：边际收入—实际收入阈值
+
+定义递归空间漏出项
+
+\[
+\Lambda(s)=
+\frac{
+\alpha\Delta\rho(\eta-1)s(1-s)
+}{
+1-\beta-\alpha\omega(s)
+}.
+\]
+
+由 \(B'(z)/B(z)=\varepsilon\) 可得
+
+\[
+\frac{d\ln Y}{dz}
+=\varepsilon-\Lambda(s),
+\]
+
+以及
+
+\[
+\frac{d\ln V}{dz}
+=\varepsilon+\alpha s-\Lambda(s).
+\]
+
+局部比较静态的三个结果区域分别为：
+
+#### 区域 I：地方收入和消费等价实际收入均提高
+
+若
+
+\[
+\Lambda(s)<\varepsilon,
+\]
+
+则外部市场准入收益足以超过平台替代造成的收入漏出；由于价格指数同时下降，消费等价实际收入也提高。
+
+#### 区域 II：地方收入下降，但消费等价实际收入提高
+
+若
+
+\[
+\varepsilon<\Lambda(s)<\varepsilon+\alpha s,
+\]
+
+则地方名义收入下降，但消费价格收益足以补偿收入损失。这是 local development 与 consumer welfare 分离的区域。
+
+#### 区域 III：地方收入和消费等价实际收入均下降
+
+若
+
+\[
+\Lambda(s)>\varepsilon+\alpha s,
+\]
+
+则即使平台价格下降、外部市场准入改善，递归收入漏出仍然使居民消费等价实际收入下降。
+
+当 \(\varepsilon=0\) 时，消费等价实际收入下降的条件可化为
+
+\[
+\Delta\rho(\eta-1)(1-s)
+>
+1-\beta-\alpha\omega.
+\]
+
+负效应更容易出现在：
+
+- 代理与平台的本地收入份额差距 \(\Delta\rho\) 较大；
+- 两个渠道的替代弹性 \(\eta\) 较高；
+- 平台尚未接近完全占领市场；
+- 本地非贸易服务支出份额 \(\beta\) 较高，原有地方收入循环较强；
+- 外部市场准入弹性 \(\varepsilon\) 较低。
+
+一个重要但反直觉的解释是：较强的传统地方乘数并不必然保护地方。当平台冲击降低留值率时，原本较强的本地循环也会放大被替代掉的本地收入。
+
+### 推论 2：边际渠道替代拖累在平台扩张过渡阶段最强
+
+若 \(\Delta\rho>0\)，令
+
+\[
+D_0=1-\beta-\alpha\rho_A,
+\qquad
+b=\alpha\Delta\rho.
+\]
+
+则
+
+\[
+\Lambda(s)
+=
+\alpha\Delta\rho(\eta-1)
+\frac{s(1-s)}{D_0+bs}.
+\]
+
+它在 \(s=0\) 和 \(s=1\) 时均为零，并在唯一的内部平台份额
+
+\[
+s^\dagger
+=
+\frac{\sqrt{D_0(D_0+b)}-D_0}{b}
+\]
+
+达到最大值。等价地，
+
+\[
+s^\dagger
+=
+\frac{1}{1+\sqrt{1+b/D_0}}<\frac12.
+\]
+
+令 \(q=\sqrt{1+b/D_0}\)，其最大值为
+
+\[
+\Lambda_{\max}
+=(\eta-1)\frac{q-1}{q+1}.
+\]
+
+因此，在某个平台渗透阶段出现地方收入边际下降的必要且充分条件是 \(\Lambda_{\max}>\varepsilon\)。
+
+经济含义是：平台替代造成的**边际收入拖累**通常在平台仍处于快速替代传统渠道的阶段最强，而不是平台已经完全占优之后。随着平台份额继续提高，可被替代的传统渠道变少，边际渠道重组效应下降。这里不能写成“总漏出在中间阶段最大”：累计留值损失 \(\rho_A-\omega=\Delta\rho s\) 随平台份额单调增加；\(\Lambda(1)=0\) 只是因为进一步降价不再引起渠道迁移。
+
+这个推论适合形成论文唯一的示意图，也可能成为标题或摘要中的第二个结果。
+
+### 推论 3：平台收益的空间归属具有纯收入效应
+
+可将平台渠道的本地留值率写成
+
+\[
+\rho_P=\delta+\lambda\kappa,
+\]
+
+其中 \(\delta\) 是本地履约收入份额，\(\kappa\) 是平台佣金或租金份额，\(\lambda\in[0,1]\) 表示其中有多少归本地所有者或被返还本地。
+
+在保持平台价格 \(p_P\) 不变时，提高 \(\lambda\) 不改变价格指数和渠道份额，但会提高 \(\rho_P\)、降低 \(\Delta\rho\)，从而提高地方收入和消费等价实际收入。当 \(G=0\) 时，
+
+\[
+\frac{\partial\ln V}{\partial\lambda}
+=
+\frac{\alpha s\kappa}{1-\beta-\alpha\omega}>0.
+\]
+
+这是一个纯粹的空间收入归属结果。考虑到篇幅，它可以只作为一句推论或机制关闭实验，不必在正文展开政策讨论。
+
+命题 2 和后续边际阈值均明确设定 \(G=0\)。当 \(G>0\) 时，\(B\) 与 \(\omega G\) 会同时随冲击变化，不能直接使用 \(\varepsilon-\Lambda(s)\) 的简化式；\(G\) 在正文中只用于定义命题 1 的外部支出乘数。
+
+---
+
+## 六、机制关闭与示意性反事实
+
+本文不做经验校准，也不做 Shapley 分解。为了说明机制，最多报告以下五个开关：
+
+1. **关闭空间留值差：** 令 \(\Delta\rho=0\)。此时市场一体化只产生外部市场准入和价格收益；
+2. **关闭渠道替代：** 令 \(\eta\to1\)，平台效率变化不再大幅重配渠道份额；
+3. **关闭外部市场准入：** 令 \(\varepsilon=0\)，只考察消费价格与收入漏出；
+4. **关闭递归传播：** 为保持冲击前均衡不变，使用
+   \[
+   Y_1^{\mathrm{no\ rec}}
+   =B_1+\beta Y_0+\omega_1(\alpha Y_0+G),
+   \]
+   与完整固定点比较；不要简单令 \(\alpha=0\) 或 \(\beta=0\)，因为那会同时改变基准均衡与消费结构；
+5. **平台租金本地化：** 在保持 \(p_P\) 不变时提高 \(\rho_P\) 或 \(\lambda\)，识别纯粹的空间所有权效应。
+
+正文只需要展示前三个或四个。其余结果可以放在一页在线附录或代码中。
+
+---
+
+## 七、示意图与数值例子
+
+### 7.1 唯一主图
+
+建议只放一张两面板图：
+
+- **Panel A：** 横轴为平台份额 \(s\)，画出边际收入拖累 \(\Lambda(s)\)、外部市场准入线 \(\varepsilon\) 和实际收入阈值 \(\varepsilon+\alpha s\)，直观显示三个结果区域；
+- **Panel B：** 画出完整模型、\(\Delta\rho=0\)、无递归反馈和 \(\varepsilon=0\) 时的名义收入或消费等价实际收入变化，用于说明机制。
+
+图中所有参数必须标注为 illustrative，不使用 calibrated、estimated 或 quantitative magnitude 等表述。
+
+### 7.2 一个可用于检查非空区域的示例
+
+可以暂用以下参数做代数和代码检查：
+
+\[
+\alpha=0.35,\quad
+\beta=0.30,\quad
+\eta=4,\quad
+\rho_A=0.45,\quad
+\rho_P=0.10,\quad
+s=0.30.
+\]
+
+此时
+
+\[
+\omega=0.345,
+\qquad
+D\approx0.579,
+\qquad
+\Lambda(s)\approx0.133,
+\qquad
+\alpha s=0.105.
+\]
+
+于是：
+
+- 若 \(\varepsilon=0.15\)，名义收入和消费等价实际收入均提高；
+- 若 \(\varepsilon=0.05\)，名义收入下降但消费等价实际收入提高；
+- 若 \(\varepsilon=0\)，二者均下降。
+
+这只用于证明三个参数区域都非空，不能被描述为中国的现实参数。
+
+---
+
+## 八、论文结构与英文篇幅
+
+官方要求下，内部应把摘要至结论控制在约 1,850—1,900 词，为公式、图注和最终修改留出空间。
+
+| 部分 | 内容 | 目标词数 |
+|---|---|---:|
+| Abstract | 问题、机制、两个结果 | 80—95 |
+| 1. Introduction | 现实问题、文献缺口、贡献 | 330—380 |
+| 2. Model | 偏好、渠道、留值、收入闭合 | 600—650 |
+| 3. Results | 两个命题、一个推论、主图 | 650—700 |
+| 4. Conclusion | 一般含义与边界 | 120—150 |
+
+不设置独立的 literature review、institutional background、calibration、policy discussion 或 robustness 章节。证明能在几行内完成的紧跟命题；机械代数放在简短附录。不要假设附录自动排除在 2,000 词限制之外。
+
+### 8.1 暂定英文标题
+
+首选：
+
+> **Platform Intermediation and Local Multipliers**
+
+备选：
+
+> **Market Integration, Platform Intermediation, and Local Value Capture**
+
+更强调反直觉结果的备选：
+
+> **Cheaper Platform Access and Weaker Local Income**
+
+### 8.2 Introduction 的叙事主线
+
+Introduction 不应从“平台佣金流向总部”这一未经单独建模的断言开始，而应从更一般、也更容易由现有证据支持的价格—收入分离事实开始：
+
+> Recent evidence shows that retail and e-commerce integration can lower the cost of living without generating comparable gains in local income (Atkin et al., 2018; Couture et al., 2021). Existing studies quantify consumer-access gains and direct income effects, while the local-multiplier literature emphasizes how initial income shocks propagate through local demand. We connect these two perspectives. When integration shifts expenditure toward a channel with lower local factor-income content, the local retention share falls in every round of spending. The resulting effective multiplier is \(\mathcal M(\omega)=\omega/(1-\beta-\alpha\omega)\). Integration can consequently lower local nominal income even when consumer prices fall. Closed-form thresholds determine whether nominal and consumption-equivalent real income both rise, move in opposite directions, or both fall.
+
+这一叙事必须遵守三条边界：
+
+1. 对 Couture et al. 使用 “provides a mechanism consistent with” 或 “rationalizes”，不用 “resolves”；
+2. 对 Atkin et al. 强调“已有直接收入分解、缺少递归收入闭合”，不用“纯消费侧部分均衡”；
+3. 对 Moretti 强调“借用地方需求传播思想”，不把本文公式归为对 Moretti 公式的机械修正。
+
+### 8.3 暂定英文摘要
+
+> We study a small region where integration expands external market access and shifts household spending toward a lower-cost platform channel with lower local factor-income content. Endogenous channel choice makes the local retention share enter every round of expenditure. We show that the effective local multiplier is more sensitive to retention than a first-round adjustment implies. Closed-form thresholds separate three outcomes: nominal and consumption-equivalent real income both rise, nominal income falls while real income rises, or both fall. The marginal income drag from channel substitution is strongest during intermediate platform penetration.
+
+### 8.4 暂定 highlights
+
+- Platform integration may lower local income despite cheaper access.
+- Local retention enters every round of the spending multiplier.
+- Real income depends on retention, substitution, and outward market access.
+- Marginal channel-reallocation drag peaks at intermediate penetration.
+
+### 8.5 关键词与 JEL
+
+**Keywords：** platform intermediation; market integration; local multipliers; value capture; spatial incidence  
+**JEL：** F15; L81; R11; R12
+
+---
+
+## 九、45 天执行计划与两人分工
+
+### 第 1 周：2026 年 7 月 14—20 日
+
+**目标：创新性和模型冻结。**
+
+交付物：
+
+- 10—15 篇最接近文献的对照矩阵；
+- 一页 research question memo；
+- 完整符号表；
+- 两个命题及其证明草稿；
+- 100 词以内摘要。
+
+第 3 天冻结研究问题；第 7 天冻结模型。此后不得加入税收、迁移、企业选址或平台最优定价。
+
+### 第 2 周：7 月 21—27 日
+
+**目标：数学内容冻结。**
+
+交付物：
+
+- 唯一均衡证明；
+- 命题 1、命题 2 和阶段性推论；
+- \(\rho_P\geq\rho_A\) 的反向情况；
+- 极限情况：\(\Delta\rho=0\)、\(\eta\to1\)、\(\varepsilon=0\)；
+- 另一位作者在不看原证明的情况下独立复推。
+
+第 14 天冻结数学内容，之后只修正错误，不增加主命题。
+
+### 第 3 周：7 月 28 日—8 月 3 日
+
+**目标：图、代码和初稿骨架。**
+
+交付物：
+
+- 一张两面板图；
+- 参数网格与有限差分检查；
+- 机制关闭结果；
+- 可重复运行代码与简短 README；
+- Introduction 和 Model 的英文初稿。
+
+### 第 4 周：8 月 4—10 日
+
+**目标：形成完整 v1 并获得外部反馈。**
+
+交付物：
+
+- 1,900—2,200 词的完整英文 v1；
+- 向一位空间/城市经济学研究者和一位平台/产业组织研究者各做一次 15 分钟报告；
+- 记录他们对“是否显然”“是否已有文献”“闭合是否可信”的反馈。
+
+第 28 天冻结章节结构和图形。
+
+### 第 5 周：8 月 11—17 日
+
+**目标：模拟审稿和科学内容冻结。**
+
+两位作者分别写一页拒稿式 referee report：
+
+- 模型负责人攻击闭合、证明和比较静态；
+- 论文负责人攻击创新、文献定位和过度声称。
+
+根据报告完成 v2，并将正文压到约 1,900 词。第 35 天 science freeze。
+
+### 第 6 周：8 月 18—24 日
+
+**目标：完成投稿包。**
+
+交付物：
+
+- 主文和证明附录；
+- LaTeX、BibTeX、独立图文件；
+- 代码、README 和参数表；
+- 100 词以内摘要；
+- 3—5 条 highlights；
+- cover letter；
+- funding、competing interests、data/code availability 与 AI-assisted writing 声明；
+- 与后续大项目的边界和相关稿件披露。
+
+第 42 天冻结投稿包。
+
+### 8 月 25—28 日：上传与正式提交
+
+- 两位作者分别逐页校读；
+- 完成投稿系统 dry run；
+- 检查系统生成 PDF 的公式、作者信息、图形和参考文献；
+- 只修复上传问题，不再重写模型；
+- 8 月 28 日正式提交。
+
+### 建议分工
+
+| 工作 | 模型负责人 | 论文负责人 |
+|---|---|---|
+| 方程与证明 | 首次推导和整理 | 独立复推、找反例 |
+| 数值图 | 代码、参数网格 | 经济解释、避免过度声称 |
+| 文献 | 核对模型来源 | 最近近邻文献矩阵 |
+| 写作 | Model、Appendix | Introduction、Results、Conclusion |
+| 投稿 | 代码和复现材料 | 格式、声明、cover letter |
+
+全程只由一位作者维护主 TeX 文件。每周安排一次 45 分钟决策会和一次 20—25 分钟进度会。第 7 天以后，任何新增机制必须以删除另一个机制为条件。
+
+---
+
+## 十、首周文献核验与停止条件
+
+**当前状态（2026-07-14）：** 暂定通过，可以同步推进模型证明和英文写作；尚未达到可以公开声称“无直接竞争者”的程度。最终核验必须保留可审计的检索和排除记录。
+
+### 10.1 必须重点查找的六类近邻文献
+
+1. **区域投入产出与重复进口漏出**  
+   检索词：regional income multiplier, import leakage, recursive local spending, regional input-output multiplier。
+
+2. **地方所有权与本地乘数**  
+   检索词：local ownership multiplier, locally owned firms, profit repatriation, local income retention。
+
+3. **电子商务的空间收入归属**  
+   检索词：e-commerce local employment, online retail local income, platform headquarters profits, spatial incidence of e-commerce。
+
+4. **平台交易与地方福利**  
+   检索词：platform trade local welfare, digital intermediation regional inequality, platform rent geography, online marketplace spatial equilibrium。
+
+5. **连锁零售、外来所有权与利润汇回**
+
+   检索词：chain store entry local income, foreign ownership profit repatriation regional multiplier, retail ownership local employment。
+
+6. **平台佣金与空间收入归属**
+
+   检索词：platform commission spatial incidence, marketplace fees local economy, digital platform rents regional income。
+
+除关键词检索外，必须完成 Atkin et al.、Couture et al.、Fan et al.、Moretti 和 Goldmanis et al. 的前向—后向引文核查，并覆盖期刊论文与最新工作论文。
+
+文献矩阵至少记录：研究问题、渠道选择是否内生、是否区分本地与外部收入、是否有递归乘数、是否有实际收入或福利阈值、平台收费是否内生、本文与其差异及排除理由。只有保留逐篇记录，才能支持 “to our knowledge” 的创新性表述。
+
+### 10.2 Kill criteria
+
+以下“停止”是指停止独立投 EL，并把结果并回大论文，而不是放弃整个研究方向。
+
+- **Day 3：** 无法用两句话说明相对最近文献的新结果，暂停建模并重做定位；
+- **Day 7：** 核心模型超过两个渠道、一个地区加外部经济、两个主要命题，立即删减；
+- **Day 10：** 已有论文完整包含“内生平台份额 + 递归地方留值 + 同一福利阈值”，停止独立 EL；
+- **Day 14：** 结果仍然只是 \(Y=m\omega X\) 的会计表达，停止独立 EL；
+- **Day 18：** 三个结果区域只能依赖极端或不允许的参数，停止 EL；
+- **Day 35：** 两位外部读者都认为结果显然或贡献无法识别，不仓促投稿；
+- **大项目边界：** 如果发表 Letter 会使后续模型加实证论文失去主要理论新意，则不拆分。
+
+---
+
+## 十一、主要审稿风险及预先回应
+
+### 风险 1：这是教科书式乘数或区域投入产出恒等式
+
+**回应：** 论文不能只展示乘数公式。贡献必须来自平台份额的内生变化、留值率的递归作用、实际收入阈值以及边际渠道替代拖累在中间平台份额达到最大值。首周必须系统核对区域投入产出与地方所有权文献。
+
+### 风险 2：\(\rho_A>\rho_P\) 直接预设平台有害
+
+**回应：** 用渠道生产成本份额微观化 \(\rho_c\)，把 \(\rho_A>\rho_P\) 写成可检验条件，并明确给出 \(\rho_P\geq\rho_A\) 时平台效率提高名义收入和消费等价实际收入的反向结果。
+
+### 风险 3：地方收入固定点缺乏资源约束
+
+**回应：** 明确把模型解释为短期小型开放地区均衡：本地支出购买本地生产的服务，本地服务在固定外部机会成本下弹性供给，外部商品和总部收入形成漏出。完整工资、迁移和住房调整不属于本文。
+
+### 风险 4：Faber 式 \(B(z)\) 过于简化
+
+**回应：** 在附录用外部 CES 需求给出 \(B'(z)/B(z)=\varepsilon\) 的最小推导。该项只表示 outward market access，不承担生产区位结论。
+
+### 风险 5：平台产业组织内容不够丰富
+
+**回应：** 本文研究的不是平台最优收费，而是既定交易技术下的平台收入归属。佣金和所有权外生是有意的边界，而不是遗漏。内生平台定价属于另一篇论文。
+
+### 风险 6：缺少数据和现实量级
+
+**回应：** 本文是纯理论 Letter。数值图只证明参数区域非空，不声称校准。任何关于中国现实量级的判断留给后续经验论文。
+
+---
+
+## 十二、数据、代码与投稿材料
+
+本项目不收集原创数据，不估计参数，也不进行政策量化。投稿时的数据声明可写为：
+
+> No data were used for the research described in this article.
+
+若公开图形代码，可增加：
+
+> The code used to reproduce the illustrative results is available at [repository].
+
+代码至少应包括：
+
+- 参数合法性检查；
+- 解析导数与有限差分的比对；
+- 三个结果区域的参数网格；
+- 主图生成脚本；
+- README 和参数表。
+
+按当前 *Economics Letters* 投稿指南，需准备：不超过 100 词的摘要、1—7 个关键词、最多 6 个 JEL codes、单独的 highlights 文件（3—5 条，每条不超过 85 个字符）、可编辑的 Word 或 LaTeX 源文件，以及 data-availability statement。若 AI 工具被用于文献综合、内容组织或稿件撰写，应按出版社规则披露，并由作者逐项核对所有方程、文献和表述。
+
+---
+
+## 十三、需要两位作者共同拍板的六个问题
+
+1. **是否同意把 Atkin 型渠道选择作为母框架，而不使用 Faber 的完整生产区位模型？**
+2. **是否同意把 Letter 的唯一理论对象固定为“递归地方留值”，将税收、企业迁移和 NSE 全部留给大论文？**
+3. **是否保留 \(B(z)\) 的 outward market-access 项？** 保留它可以完整呈现三种结果区域；删除它会使模型更短，但地方收入在 \(\rho_A>\rho_P\) 时基本单向下降。
+4. **主结果应强调哪一个？** 备选为“名义收入下降但实际收入提高”“价格下降但实际收入仍下降”或“边际渠道替代拖累在平台过渡期最大”。同时需要决定正文使用更严格的 resident real income，还是在补充劳动机会成本假设后使用 welfare。
+5. **未来大论文能否在引用本 Letter 后，仍凭借数据、识别和多地区 GE 独立成立？**
+6. **两人是否能够在前两周各投入至少 8—10 个专注小时，并严格执行 Day 7 模型冻结？**
+
+建议合作者会议先讨论这六个问题。只要第 1—3 项达成一致，模型推导和英文初稿即可立即并行推进。
+
+---
+
+## 参考文献（项目阶段核心清单）
+
+[Atkin, D., Faber, B., & Gonzalez-Navarro, M. (2018). Retail globalization and household welfare: Evidence from Mexico.](https://www.nber.org/papers/w21176) *Journal of Political Economy*, 126(1), 1–73.
+
+[Couture, V., Faber, B., Gu, Y., & Liu, L. (2021). Connecting the countryside via e-commerce: Evidence from China.](https://www.aeaweb.org/articles?id=10.1257/aeri.20190382) *American Economic Review: Insights*, 3(1), 35–50.
+
+Faber, B. (2014). Trade integration, market size, and industrialization: Evidence from China's National Trunk Highway System. *Review of Economic Studies*, 81(3), 1046–1070. https://doi.org/10.1093/restud/rdu010
+
+Fan, J., Tang, L., Zhu, W., & Zou, B. (2018). The Alibaba effect: Spatial consumption inequality and the welfare gains from e-commerce. *Journal of International Economics*, 114, 203–220. https://doi.org/10.1016/j.jinteco.2018.07.002
+
+[Goldmanis, M., Hortaçsu, A., Syverson, C., & Emre, Ö. (2010). E-commerce and the market structure of retail industries.](https://www.nber.org/papers/w14166) *Economic Journal*, 120(545), 651–682.
+
+[Moretti, E. (2010). Local multipliers.](https://www.aeaweb.org/articles?id=10.1257/aer.100.2.373) *American Economic Review*, 100(2), 373–377.
+
+Economics Letters. Guide for Authors. https://www.sciencedirect.com/journal/economics-letters/publish/guide-for-authors
+
+---
+
+## 最终压缩版
+
+这篇 Letter 只需要证明一件事：
+
+> **平台化市场整合会同时改善消费价格、扩大外部市场准入并改变交易收入的空间归属。当平台渠道比传统渠道保留更少的本地要素收入时，留值损失会在每一轮地方支出中重复发生，从而内生削弱地方乘数，并在可解析的参数条件下造成地方名义收入下降，甚至反转居民的消费等价实际收入。**
+
+基于截至 2026 年 7 月 14 日的暂定文献核验，这一命题可以进入模型和投稿开发；但在完成相邻概念、前向—后向引文及工作论文核查前，不应把“无直接竞争者”写入论文或对外材料。若两位作者同时同意与后续大论文严格分工，该项目适合继续按 45 天计划推进并投向 *Economics Letters*。
