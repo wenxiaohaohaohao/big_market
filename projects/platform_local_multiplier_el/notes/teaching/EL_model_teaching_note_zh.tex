@@ -1,0 +1,1639 @@
+% !TEX program = xelatex
+\documentclass[UTF8,11pt,scheme=chinese,fontset=fandol]{ctexart}
+
+\usepackage[a4paper,margin=2.35cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,longtable,tabularx,array}
+\usepackage{graphicx,float}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{../../figures/}}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.25em}
+\renewcommand{\arraystretch}{1.28}
+\setlist[itemize]{leftmargin=2.2em,itemsep=0.25em,topsep=0.35em}
+\setlist[enumerate]{leftmargin=2.4em,itemsep=0.25em,topsep=0.35em}
+
+\definecolor{deepblue}{RGB}{0,72,122}
+\definecolor{darkgreen}{RGB}{0,110,75}
+\definecolor{warmred}{RGB}{165,55,45}
+
+\newcommand{\E}{\mathbb E}
+\newcommand{\Rplus}{\mathbb R_{+}}
+\newcommand{\calB}{\mathcal B}
+\newcommand{\calD}{\mathcal D}
+\newcommand{\calP}{\mathcal P}
+\newcommand{\MG}{\mathcal M_G}
+\newcommand{\Lambdamax}{\Lambda_{\max}}
+
+\theoremstyle{definition}
+\newtheorem{teachingpoint}{教学提示}[section]
+\newtheorem{commonerror}{常见误解}[section]
+
+\title{\textbf{统一市场、平台化与地方乘数：价值捕获的空间重组}\\[0.5em]
+\large 解析模型逐步教学讲义}
+\author{依据 Wenxiao Dong 与 Yaqi Hu 的理论短文整理\\
+\small 本科生课堂使用稿，不是投稿论文的替代版本}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+本讲义逐步解释论文中的 small-open-region analytical model。目标不是只列出结论，
+而是说明每项假设为什么存在、家庭和渠道问题如何求解、本地留值率如何进入收入固定点、
+地方乘数为何需要区分收入注入与总支出注入，以及市场接入、消费者价格收益和地方价值
+捕获损失如何共同决定地区结果。讲义给出全部参数与变量的定义，完整推导两个命题和两个
+推论，解释机制图的每条曲线和每个区域，并以论文图中的参数完成一组可复算的数值例子。
+最后讨论内部解、极限情形、模型边界和课堂上最常见的误读。
+\end{abstract}
+
+\tableofcontents
+\clearpage
+
+\section{这篇论文究竟要回答什么}
+
+论文的核心问题可以写成一句话：
+
+\begin{quote}
+市场一体化何时主要产生 market-access gain，何时因平台中介重组降低 local value
+capture；本地组织能力如何决定一个地区能否把平台扩张转化为本地收入和地方乘数？
+\end{quote}
+
+直观上，市场一体化和数字平台扩张至少同时带来三种力量。
+
+\begin{enumerate}
+  \item \textbf{市场接入效应（market access）}：跨地区交易成本下降，平台价格下降；
+  本地生产者也可能获得更大的外部市场，因此本地自主基础收入可能提高。
+  \item \textbf{价值捕获效应（local value capture）}：居民支出从本地代理、经销和零售
+  渠道转向外部平台。平台费、外地卖家利润和部分服务收入可能在外地形成，所以交易发生在
+  本地不等于收入留在本地。
+  \item \textbf{地方传播效应（local multiplier）}：第一轮留在当地的工资、服务收入和
+  本地企业收入会继续购买餐饮、生活服务和零售品，进而形成第二轮、第三轮本地收入。
+\end{enumerate}
+
+因此，论文的机制不是一条只有渠道替代的单线链条，而是三条由同一个整合冲击触发的并行
+路径：
+\[
+\boxed{
+\begin{aligned}
+z\uparrow
+&\Longrightarrow \frac{d\ln B}{dz}=\varepsilon\geq0
+&&\Longrightarrow \text{market-access gain }(\varepsilon),\\
+z\uparrow
+&\Longrightarrow P_M(z)\downarrow
+&&\Longrightarrow \text{consumer-price gain }(\alpha s),\\
+z\uparrow
+&\Longrightarrow s(z)\uparrow
+\Longrightarrow \omega(z,\kappa)\ \text{变化}
+&&\Longrightarrow \text{local-capture effect }(-\Lambda).
+\end{aligned}}
+\]
+前两条路径提供非负收益，其中有限 \(z\) 下的价格路径严格为正；第三条路径的符号取决于
+平台渠道与本地代理渠道的留值差。三条
+路径共同决定本地名义收入 \(Y\)、消费等价实际收入 \(R\) 和有效地方乘数。
+
+这里的关键区分是：\textbf{消费价格改善不等于地方收入改善}。一个地区可能买到更便宜的
+商品，但本地商户、物流服务和本地所有企业获得的收入反而减少。模型要找出这两种力量谁
+占主导的精确条件。
+
+\begin{teachingpoint}
+课堂上应先讲“一元支出去了哪里”，再讲优化问题。学生如果尚未理解消费地与收入形成地
+可以分离，后面的 \(\rho_c\)、\(\omega\) 和 \(\Lambda\) 都会显得只是人为加入的参数。
+\end{teachingpoint}
+
+\section{模型定位：为什么不是完整空间一般均衡}
+
+模型研究一个小型开放地区 \(L\)，它嵌入外部经济 \(H\)。地区 \(L\) 足够小，因此它的
+选择不会改变外部经济的工资、平台价格或外部商品价格。平台总部、外地卖家和未被本地
+捕获的收入都可以理解为属于 \(H\)。
+
+当前模型是\textbf{短期地方收入均衡}，不是多地区 quantitative spatial GE。这样处理有
+三个目的。
+
+\begin{enumerate}
+  \item 把论文最关心的 access--capture trade-off 写成闭式解，而不让迁移、住房、企业
+  选址和平台定价淹没核心机制。
+  \item 允许我们严格区分价格效应、渠道替代、收入归属和后续乘数，而不是只做一个会计
+  分解。
+  \item 得到可证明的阈值、唯一性和边界结果，符合短篇解析理论文章的要求。
+\end{enumerate}
+
+代价是模型不回答长期人口迁移、生产区位、平台最优收费、税收分配和完整社会福利问题。
+这些不是“忘记加入”的变量，而是为了保持解析性而有意固定的边界。
+
+\section{模型中的地区、渠道、商品和收入}
+
+\subsection{两个地区和两种渠道}
+
+\begin{itemize}
+  \item \(L\)：被研究的本地地区。
+  \item \(H\)：本地以外的外部经济。
+  \item \(A\)：local-agent channel，可理解为本地代理商、经销商、实体零售商等组织的
+  交易渠道。
+  \item \(P\)：outside digital-platform channel，由外部数字平台组织的交易渠道。
+\end{itemize}
+
+平台不是被定义为“必然降低本地收入”。模型允许平台渠道的本地留值率高于、等于或低于
+本地代理渠道。只有在后续明确施加 \(\rho_P(\kappa)<\rho_A\) 时，渠道转向平台才形成
+capture drag。
+
+\subsection{三类消费品}
+
+代表性居民消费三类商品：
+
+\begin{enumerate}
+  \item \(M\)：零售综合品，可以通过 \(A\) 或 \(P\) 购买；
+  \item \(N\)：本地非贸易品，例如餐饮、个人服务和部分本地交通服务；
+  \item \(Z\)：外部商品，其支出离开本地，不再形成后续本地收入。
+\end{enumerate}
+
+三类商品承担不同任务。\(M\) 产生渠道选择和价值漏出；\(N\) 产生 Moretti 型地方收入
+传播；\(Z\) 提供每轮收入循环的外部漏出口。
+
+\subsection{两种外生注入：基础收入与外来零售支出}
+
+必须区分两个看似相近、实则不同的外部来源。
+
+\begin{itemize}
+  \item \(B(z)\) 是\textbf{已经形成为本地收入}的自主基础收入。例如本地外销、外部转移
+  或模型外基础部门的本地增加值。它进入本地时不需要再次乘以留值率。
+  \item \(G\) 是\textbf{由外部融资、但在本地零售市场发生的总支出}，例如游客消费或外部
+  采购。它尚未成为本地收入，必须先经过渠道分配，只有 \(\omega G\) 成为第一轮本地收入。
+\end{itemize}
+
+这个区分最终产生两个不同的乘数：\(m_B\) 和 \(\mathcal M_G\)。
+
+\section{全部符号、取值域与经济含义}
+
+\subsection{原始参数与外生对象}
+
+\small
+\begin{longtable}{>{\centering\arraybackslash}p{1.8cm}
+>{\raggedright\arraybackslash}p{2.5cm}
+>{\raggedright\arraybackslash}p{3.1cm}
+>{\raggedright\arraybackslash}p{7.2cm}}
+\toprule
+符号 & 类型或取值域 & 名称 & 经济含义 \\
+\midrule
+\endfirsthead
+\toprule
+符号 & 类型或取值域 & 名称 & 经济含义 \\
+\midrule
+\endhead
+\(L,H\) & 地区 & 本地与外部经济 & \(L\) 是研究对象；\(H\) 接收未被本地捕获的支付，并提供外部价格。\\
+\(A,P\) & 渠道 & 本地代理与平台渠道 & 同一种零售综合品可以由两种不同的交易组织方式提供。\\
+\(\alpha\) & \(\alpha>0\) & 零售支出份额 & 每一元居民收入中用于 \(M\) 的比例。\\
+\(\beta\) & \(\beta>0\) & 本地服务支出份额 & 每一元收入中用于 \(N\) 的比例，形成不经零售渠道漏出的本地传播。\\
+\(\gamma\) & \(1-\alpha-\beta>0\) & 外部商品份额 & 每轮收入中用于 \(Z\) 的比例，直接退出地方收入循环。\\
+\(a\) & \(a\in(0,1)\) & CES 渠道权重 & 平台便利性、渠道吸引力等的综合 distribution parameter；不是实际平台份额。\\
+\(\eta\) & \(\eta>1\) & 渠道替代弹性 & 相对价格变化一单位时，两种渠道相对需求调整的敏感程度。\\
+\(z\) & \(z\in\mathbb R\) & 市场一体化指数 & 更高 \(z\) 表示更低的平台交易成本；尺度规范为 \(d\ln p_P/dz=-1\)。\\
+\(p_A\) & \(p_A>0\) & 本地渠道价格 & 比较静态中保持不变。\\
+\(\bar p_P\) & \(\bar p_P>0\) & 平台基准价格 & \(z=0\) 时的平台价格。\\
+\(p_P(z)\) & \(\bar p_Pe^{-z}>0\) & 平台价格 & 一体化通过降低该价格产生消费者接入收益。\\
+\(\bar B\) & \(\bar B>0\) & 基准基础收入 & \(z=0\) 时模型外基础部门形成的本地收入。\\
+\(\varepsilon\) & \(\varepsilon\geq0\) & 基础收入半弹性 & 因为 \(d\ln B/dz=\varepsilon\)，它表示本地将一体化转化为外销或基础收入的能力。\\
+\(B(z)\) & \(\bar Be^{\varepsilon z}\) & 自主基础收入 & 已经在本地形成、可以直接进入收入循环的注入。\\
+\(G\) & \(G\geq0\) & 外来总零售支出 & 由外部融资，在本地零售市场发生，但尚未完成空间收入分配。\\
+\(\rho_A\) & \([0,1]\) & 代理渠道留值率 & 一元 \(A\) 渠道支出成为本地劳动、服务及本地所有企业收入的比例。\\
+\(\underline\rho_P\) & \([0,1]\) & 最低平台留值率 & \(\kappa=0\) 时一元平台支出的本地收入份额。\\
+\(\overline\rho_P\) & \((\underline\rho_P,1]\) & 最高平台留值率 & \(\kappa=1\) 时一元平台支出的本地收入份额。\\
+\(\delta_\rho\) & \(\overline\rho_P-\underline\rho_P>0\) & 能力改善幅度 & 组织能力从最低到最高时平台留值率可以提高的总幅度。\\
+\(\kappa\) & \([0,1]\) & 本地组织能力 & 本地卖家、履约、物流、售后和经营组织参与平台交易的能力。\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{内生变量和复合量}
+
+\small
+\begin{longtable}{>{\centering\arraybackslash}p{1.8cm}
+>{\raggedright\arraybackslash}p{3.0cm}
+>{\raggedright\arraybackslash}p{10.0cm}}
+\toprule
+符号 & 名称 & 定义与解释 \\
+\midrule
+\endfirsthead
+\toprule
+符号 & 名称 & 定义与解释 \\
+\midrule
+\endhead
+\(M_A,M_P\) & 两渠道条件需求 & 在给定零售综合品 \(M\) 时，通过成本最小化得到的两渠道购买量。\\
+\(M\) & 零售综合品 & \(M_A\) 与 \(M_P\) 通过 CES 聚合形成。\\
+\(N,Z\) & 本地服务与外部商品 & 外层家庭优化得到的两类消费数量。\\
+\(P_M\) & 零售价格指数 & 获得一单位 \(M\) 所需的最低支出，不是两种价格的简单平均。\\
+\(s\) & 平台支出份额 & \(s=p_PM_P/(P_MM)\)。它是支出份额，不是数量份额，也不等于 \(a\)。\\
+\(\rho_P(\kappa)\) & 平台留值率 & \(\underline\rho_P+\kappa\delta_\rho\)。\\
+\(\Delta(\kappa)\) & 渠道留值差 & \(\rho_A-\rho_P(\kappa)\)。当它为正时，平台替代降低本地留值。\\
+\(\omega\) & 平均本地留值率 & \((1-s)\rho_A+s\rho_P(\kappa)\)，即一元总零售支出平均形成的本地收入。\\
+\(D\) & 固定点分母 & \(1-\beta-\alpha\omega\)。越小表示地方收入再生越强。\\
+\(Y\) & 均衡本地名义收入 & 所有直接收入和后续传播收入之和。\\
+\(R\) & 消费等价实际收入 & \(K Y/P_M^\alpha\)，控制零售生活成本后的消费指数，不是完整社会福利。\\
+\(m_B\) & 本地收入注入乘数 & \(1/D\)，作用于已经形成为本地收入的一元 \(B\)。\\
+\(\mathcal M_G\) & 总支出乘数 & \(\omega/D\)，作用于尚未经过空间分配的一元 \(G\)。\\
+\(\calB,\calD,\calP\) & 有限变化比率 & 分别是 \(B_1/B_0\)、\(D_1/D_0\) 和 \(P_{M1}/P_{M0}\)。\\
+\(\Lambda\) & capture drag & 一体化通过平台替代降低留值率和乘数造成的边际比例拖累。\\
+\(d_A\) & 代理渠道基准分母 & \(1-\beta-\alpha\rho_A\)，等于 \(s=0\) 时的 \(D\)。\\
+\(h(s)\) & 阈值辅助量 & \((\eta-1)(1-s)\)。\\
+\(\kappa_R^*,\kappa_Y^*\) & 两个能力阈值 & 分别使实际收入效应和名义收入效应等于零。\\
+\(s^\dagger\) & 边际拖累峰值位置 & 使 \(\Lambda(s,\kappa)\) 最大的平台支出份额。\\
+\(\Lambda_{\max}\) & 最大边际拖累 & 固定组织能力时 \(\Lambda\) 的最大值。\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\begin{commonerror}
+\(a\)、\(s\)、\(\rho_P\)、\(\omega\) 不是同一个概念：\(a\) 是偏好权重；\(s\) 是内生
+平台支出份额；\(\rho_P\) 是平台渠道内部的本地收入份额；\(\omega\) 是两种渠道加权后的
+平均留值率。
+\end{commonerror}
+
+\section{本地生产、价格规范化与收入闭合}
+
+模型把外部商品价格和本地工资都规范为 1。这个规范化不是说现实工资不变，而是选择外部
+商品为计价单位，并假定在当前短期分析中本地劳动或服务能力以固定机会成本弹性供给。
+
+令 \(L_N\) 表示本地非贸易部门的劳动投入，\(w\) 表示本地工资，\(p_N\) 表示本地非贸易品
+价格。本地非贸易部门采用常数报酬技术
+\[
+N=L_N.
+\]
+完全竞争和零利润意味着
+\[
+p_N=w=1.
+\]
+所以居民对 \(N\) 的一元支出全部成为本地劳动收入。这使 \(N\) 部门成为清晰的地方乘数
+传播渠道，而不额外引入工资上升、土地拥挤或利润加成。
+
+渠道收入份额 \(\rho_c\) 的含义是：一元渠道 \(c\) 支出中，有多少最终形成本地劳动收入、
+本地服务收入和本地所有企业收入。它不是单纯的工资成本份额，也不是平台佣金率。
+
+模型还假定所有本地收入接受者拥有相同的支出倾向 \((\alpha,\beta,\gamma)\)。因此，不论
+第一轮收入流向劳动者、本地商户还是本地企业主，下一轮都会按同样比例消费。这一假设用
+代表性家庭关闭收入循环。
+
+\begin{teachingpoint}
+固定点不是把同一元钱机械地重复相加。每一轮新增支出都购买新生产的商品或服务，并形成
+新的收入；流向 \(Z\) 的支出和零售支出中的 \(1-\omega\) 部分离开本地，因而循环逐轮
+缩小。
+\end{teachingpoint}
+
+\section{家庭外层问题：收入怎样分配到三类商品}
+
+\subsection{效用函数和预算约束}
+
+家庭效用为
+\begin{equation}
+U=M^\alpha N^\beta Z^\gamma,
+\qquad \gamma\equiv1-\alpha-\beta>0.
+\label{teach:eq:utility}
+\end{equation}
+预算约束为
+\begin{equation}
+P_MM+N+Z=Y.
+\label{teach:eq:budget}
+\end{equation}
+
+这里 \(P_M\) 尚未被任意指定。它将在渠道内层问题中被推导为获得一单位零售综合品的最低
+成本。外部品和本地服务的价格因为前述规范化都等于 1。
+
+\subsection{为什么使用 Cobb--Douglas}
+
+Cobb--Douglas 让家庭把固定比例的收入花在三类商品上。这样做的好处是把地方乘数写成
+可解析的收入固定点：每新增一元本地收入，\(\alpha\) 元进入零售渠道，\(\beta\) 元直接
+成为本地服务收入，\(\gamma\) 元流向外部。
+
+它不是说现实支出份额永远不变，而是用最小结构清晰地隔离本文关心的渠道归属机制。
+
+\subsection{完整的一阶条件推导}
+
+因为对数是严格递增变换，最大化 \(U\) 等价于最大化 \(\ln U\)。令 \(\lambda\) 为家庭预算
+约束的 Lagrange multiplier，建立 Lagrangian：
+\begin{equation}
+\mathcal L
+=\alpha\ln M+\beta\ln N+\gamma\ln Z
++\lambda(Y-P_MM-N-Z).
+\label{teach:eq:outer-lagrangian}
+\end{equation}
+
+对 \(M,N,Z\) 求一阶条件：
+\begin{align}
+\frac{\partial\mathcal L}{\partial M}=0
+&\Longrightarrow \frac{\alpha}{M}=\lambda P_M,\\
+\frac{\partial\mathcal L}{\partial N}=0
+&\Longrightarrow \frac{\beta}{N}=\lambda,\\
+\frac{\partial\mathcal L}{\partial Z}=0
+&\Longrightarrow \frac{\gamma}{Z}=\lambda.
+\end{align}
+所以
+\begin{equation}
+P_MM=\frac{\alpha}{\lambda},\qquad
+N=\frac{\beta}{\lambda},\qquad
+Z=\frac{\gamma}{\lambda}.
+\end{equation}
+
+将三项支出相加并使用预算约束：
+\[
+Y=P_MM+N+Z
+=\frac{\alpha+\beta+\gamma}{\lambda}
+=\frac1\lambda.
+\]
+因此
+\[
+\lambda=\frac1Y.
+\]
+代回得到 Marshallian demands：
+\begin{equation}
+M=\frac{\alpha Y}{P_M},\qquad
+N=\beta Y,\qquad
+Z=\gamma Y.
+\label{teach:eq:outer-demands}
+\end{equation}
+
+相应支出为
+\[
+P_MM=\alpha Y,\qquad N=\beta Y,\qquad Z=\gamma Y.
+\]
+
+\begin{commonerror}
+\(M=\alpha Y/P_M\) 是数量需求；\(P_MM=\alpha Y\) 才是零售支出。把 \(M\) 错写成
+\(\alpha Y\) 会把价格指数遗漏掉。
+\end{commonerror}
+
+\section{渠道内层问题：本地代理与平台之间如何选择}
+
+\subsection{CES 聚合器}
+
+零售综合品由两种渠道消费聚合：
+\begin{equation}
+M=\left[(1-a)^{1/\eta}M_A^{(\eta-1)/\eta}
++a^{1/\eta}M_P^{(\eta-1)/\eta}\right]^{\eta/(\eta-1)}.
+\label{teach:eq:ces}
+\end{equation}
+
+\(a\) 是平台渠道在聚合器中的 distribution weight。\(\eta\) 是渠道替代弹性。\(\eta\)
+越大，消费者对两渠道相对价格越敏感。给定需要获得的 \(M\)，家庭选择成本最低的
+\((M_A,M_P)\)：
+\begin{equation}
+\min_{M_A,M_P\ge0}\ p_AM_A+p_PM_P
+\quad\text{s.t.}\quad \eqref{teach:eq:ces}.
+\label{teach:eq:inner-problem}
+\end{equation}
+
+这是 expenditure-minimization problem。外层先决定总零售支出，内层再决定用什么渠道以最低
+成本获得相应的零售综合品。
+
+\subsection{Lagrangian 和相对需求}
+
+令 \(\mathcal C(M_A,M_P)\) 表示 CES 聚合器，\(\mu\) 表示“必须获得给定 \(M\)”这一约束的
+Lagrange multiplier，建立
+\[
+\mathcal L_c=p_AM_A+p_PM_P+\mu[M-\mathcal C(M_A,M_P)].
+\]
+
+记 \(r=(\eta-1)/\eta\)。CES 的边际产出为
+\begin{align}
+\mathcal C_A
+&=\mathcal C^{1/\eta}(1-a)^{1/\eta}M_A^{-1/\eta},\\
+\mathcal C_P
+&=\mathcal C^{1/\eta}a^{1/\eta}M_P^{-1/\eta}.
+\end{align}
+
+一阶条件是
+\[
+p_A=\mu\mathcal C_A,
+\qquad
+p_P=\mu\mathcal C_P.
+\]
+两式相除：
+\[
+\frac{p_A}{p_P}
+=\left(\frac{1-a}{a}\right)^{1/\eta}
+\left(\frac{M_A}{M_P}\right)^{-1/\eta}.
+\]
+两边取 \(-\eta\) 次幂并整理：
+\begin{equation}
+\frac{M_A}{M_P}
+=\frac{1-a}{a}
+\left(\frac{p_A}{p_P}\right)^{-\eta}.
+\label{teach:eq:relative-demand}
+\end{equation}
+
+这就是标准的 CES 相对需求。若平台相对价格下降，\(M_P/M_A\) 上升；上升幅度由 \(\eta\)
+控制。
+
+\subsection{Hicksian demands 与单位支出函数}
+
+这里把“代回约束”完整写开。定义
+\[
+x\equiv\frac{M_A}{M_P}
+=\frac{1-a}{a}\left(\frac{p_A}{p_P}\right)^{-\eta}.
+\]
+由于 \(M_A=xM_P\)，CES 约束可以写成
+\begin{align*}
+M
+&=\left[(1-a)^{1/\eta}(xM_P)^{(\eta-1)/\eta}
++a^{1/\eta}M_P^{(\eta-1)/\eta}\right]^{\eta/(\eta-1)}\\
+&=M_P\left[(1-a)^{1/\eta}x^{(\eta-1)/\eta}
++a^{1/\eta}\right]^{\eta/(\eta-1)}.
+\end{align*}
+所以
+\[
+M_P
+=M\left[(1-a)^{1/\eta}x^{(\eta-1)/\eta}
++a^{1/\eta}\right]^{-\eta/(\eta-1)}.
+\]
+把 \(x\) 代入方括号并令
+\[
+Q\equiv(1-a)p_A^{1-\eta}+ap_P^{1-\eta},
+\]
+可逐步整理为
+\begin{align*}
+(1-a)^{1/\eta}x^{(\eta-1)/\eta}+a^{1/\eta}
+&=a^{-(\eta-1)/\eta}
+\left[(1-a)\left(\frac{p_A}{p_P}\right)^{1-\eta}+a\right]\\
+&=a^{-(\eta-1)/\eta}p_P^{\eta-1}Q.
+\end{align*}
+因此
+\[
+M_P
+=a\,p_P^{-\eta}Q^{\eta/(1-\eta)}M.
+\]
+定义单位支出函数
+\begin{equation}
+P_M\equiv Q^{1/(1-\eta)}
+=\left[(1-a)p_A^{1-\eta}+ap_P^{1-\eta}\right]^{1/(1-\eta)},
+\label{teach:eq:price-index}
+\end{equation}
+便得到
+\begin{align}
+M_P&=a\left(\frac{p_P}{P_M}\right)^{-\eta}M,
+\label{teach:eq:hicksian-p}\\
+M_A&=xM_P
+=(1-a)\left(\frac{p_A}{P_M}\right)^{-\eta}M.
+\label{teach:eq:hicksian}
+\end{align}
+
+为了核对这一结果，令
+\[
+Q=(1-a)p_A^{1-\eta}+ap_P^{1-\eta}.
+\]
+由 \(P_M=Q^{1/(1-\eta)}\)，把式 \eqref{teach:eq:hicksian-p}--\eqref{teach:eq:hicksian}
+代回 CES 聚合器后，括号内
+正好变成 \(M^{(\eta-1)/\eta}\)；把它们代回总支出则得到
+\[
+p_AM_A+p_PM_P=P_MM.
+\]
+因此 \(P_M\) 的确是获得一单位 \(M\) 的最低成本。
+
+\subsection{平台支出份额}
+
+平台支出份额定义为平台支出除以总零售支出：
+\[
+s(z)\equiv\frac{p_PM_P}{P_MM}.
+\]
+代入 Hicksian demand 得
+\begin{equation}
+s(z)=
+\frac{ap_P(z)^{1-\eta}}
+{(1-a)p_A^{1-\eta}+ap_P(z)^{1-\eta}}.
+\label{teach:eq:platform-share}
+\end{equation}
+
+因为有限 \(z\) 下 \(p_P(z)=\bar p_Pe^{-z}>0\)，而且 \(a\in(0,1)\)、\(p_A>0\)，
+分子和分母中的两项都严格为正。分母又比分子多一个正项，所以
+\begin{equation}
+0<s(z)<1
+\qquad\text{对所有有限 }z.
+\end{equation}
+
+这说明当前基准模型是内部 CES 均衡。\(s=0\) 或 \(s=1\) 只能作为极限讨论，而不是有限
+参数下的 corner solution。
+
+\subsection{两个关键导数}
+
+首先推导价格指数。由 \(\ln P_M=(1-\eta)^{-1}\ln Q\) 且
+\(d\ln p_P/dz=-1\)：
+\begin{align}
+\frac{d\ln P_M}{dz}
+&=\frac{1}{1-\eta}\frac{1}{Q}
+\left[a(1-\eta)p_P^{1-\eta}\frac{d\ln p_P}{dz}\right]\\
+&=\frac{ap_P^{1-\eta}}{Q}(-1)\\
+&=-s.
+\label{teach:eq:dprice}
+\end{align}
+
+所以平台支出份额越高，平台价格下降对总体零售生活成本的边际影响越大。
+
+其次，把平台份额写成 odds：
+\[
+\frac{s}{1-s}
+=\frac{a}{1-a}\left(\frac{p_P}{p_A}\right)^{1-\eta}.
+\]
+取对数并对 \(z\) 求导：
+\[
+\frac{s'}{s}+\frac{s'}{1-s}=\eta-1.
+\]
+左边等于 \(s'/[s(1-s)]\)，因此
+\begin{equation}
+\frac{ds}{dz}=(\eta-1)s(1-s)>0.
+\label{teach:eq:dshare}
+\end{equation}
+
+\(\eta-1\) 描述消费者的渠道替代敏感度，\(s(1-s)\) 描述当前还剩多少渠道可以被替代。
+当平台份额接近 0 或 1 时，进一步渠道重组的边际速度都趋近于零。
+
+\section{本地组织能力和交易留值率}
+
+\subsection{平台留值率为什么取线性形式}
+
+平台渠道的本地留值率设为
+\begin{equation}
+\rho_P(\kappa)=\underline\rho_P+\kappa\delta_\rho,
+\qquad
+\delta_\rho=\overline\rho_P-\underline\rho_P>0.
+\label{teach:eq:rhop}
+\end{equation}
+
+\(\kappa\) 汇总本地卖家能否上线经营、订单能否由本地仓储和履约网络完成、营销和售后
+服务能否由本地组织提供，以及平台交易收入能否成为本地所有者收入。线性形式的作用不是
+声称现实技术一定线性，而是把“低能力”和“高能力”之间的留值差写成最透明的参数化。
+
+在基准模型中，\(\kappa\) 只改变交易收入的空间归属，不改变 \(p_P\)、\(a\) 或 \(\eta\)。
+因此可以把 access 与 capture 分开：两个地区面对同样的平台价格和渠道选择，但由于组织
+能力不同，一元平台支出转化为本地收入的比例不同。
+
+\subsection{平均本地留值率}
+
+一元总零售支出中，\(1-s\) 通过本地代理渠道，\(s\) 通过平台渠道。因此平均留值率是
+\begin{equation}
+\omega(z,\kappa)
+=(1-s)\rho_A+s\rho_P(\kappa).
+\label{teach:eq:omega}
+\end{equation}
+定义渠道留值差
+\begin{equation}
+\Delta(\kappa)=\rho_A-\rho_P(\kappa),
+\end{equation}
+则
+\begin{equation}
+\omega=\rho_A-s\Delta(\kappa).
+\label{teach:eq:omega-gap}
+\end{equation}
+
+由式 \eqref{teach:eq:dshare}：
+\begin{align}
+\omega_z
+&=-\Delta(\kappa)\frac{ds}{dz}
+=-\Delta(\kappa)(\eta-1)s(1-s),
+\label{teach:eq:omega-z}\\
+\omega_\kappa
+&=s\frac{d\rho_P}{d\kappa}
+=s\delta_\rho>0.
+\label{teach:eq:omega-k}
+\end{align}
+
+这产生三种不同情形。
+
+\begin{enumerate}
+  \item \(\Delta(\kappa)>0\)：平台渠道的本地留值率较低，\(z\uparrow\) 使 \(s\uparrow\)，
+  因而 \(\omega\downarrow\)。这是论文重点分析的 capture-loss benchmark。
+  \item \(\Delta(\kappa)=0\)：两种渠道留值率相同，渠道替代不改变平均留值率。
+  \item \(\Delta(\kappa)<0\)：平台渠道比本地代理渠道更本地化，平台扩张反而使
+  \(\omega\uparrow\)。此时不应把平台化称为收入漏出。
+\end{enumerate}
+
+\begin{commonerror}
+\(\rho_A>\rho_P\) 是后续命题的 benchmark condition，而不是“平台”的定义。如果平台通过
+本地卖家、即时零售、当地履约和本地服务形成更高留值，模型允许 \(\Delta\le0\)。
+\end{commonerror}
+
+\section{本地收入固定点：为什么收入会递归传播}
+
+\subsection{第一轮收入形成}
+
+居民零售支出为 \(\alpha Y\)，外来零售支出为 \(G\)。两者合计 \(\alpha Y+G\)，在两种
+渠道之间按 \(s\) 分配：
+\begin{align}
+X_A&=(1-s)(\alpha Y+G),\\
+X_P&=s(\alpha Y+G).
+\end{align}
+这些支出形成的本地渠道收入为
+\begin{align}
+\rho_AX_A+\rho_P(\kappa)X_P
+&=\left[(1-s)\rho_A+s\rho_P(\kappa)\right](\alpha Y+G)\\
+&=\omega(\alpha Y+G).
+\end{align}
+
+居民还将 \(\beta Y\) 花在完全本地生产的 \(N\) 上。由于 \(p_N=1\) 且零利润，这部分全部
+成为本地劳动收入。最后，\(B(z)\) 是模型外已经形成的本地基础收入。
+
+所以均衡本地收入满足
+\begin{equation}
+Y=B(z)+\beta Y+\omega(z,\kappa)[\alpha Y+G].
+\label{teach:eq:fixed-point}
+\end{equation}
+
+把右侧逐项解释：
+\[
+\underbrace{B}_{\text{自主基础收入}}
++\underbrace{\beta Y}_{\text{本地服务收入}}
++\underbrace{\alpha\omega Y}_{\text{居民零售再支出的本地留值}}
++\underbrace{\omega G}_{\text{外来零售支出的首轮本地留值}}.
+\]
+
+\subsection{解析解}
+
+把所有包含 \(Y\) 的项移到左边：
+\[
+[1-\beta-\alpha\omega]Y=B+\omega G.
+\]
+定义
+\begin{equation}
+D(z,\kappa)=1-\beta-\alpha\omega(z,\kappa),
+\label{teach:eq:D}
+\end{equation}
+得到
+\begin{equation}
+\boxed{
+Y(z,\kappa,G)=\frac{B(z)+\omega(z,\kappa)G}{D(z,\kappa)}.}
+\label{teach:eq:Y-solution}
+\end{equation}
+
+\(D\) 可以理解为“一减去本地收入再生率”。再生率是
+\[
+\phi=\beta+\alpha\omega.
+\]
+其中 \(\beta\) 部分通过本地非贸易服务完整留存，\(\alpha\omega\) 部分经过零售渠道后留存。
+
+\subsection{存在性、唯一性和全局稳定性}
+
+仅仅把方程移项得到一个解，还不足以说明均衡一定存在、唯一并且稳定。定义收入映射
+\begin{equation}
+T(Y)=B+\omega G+(\beta+\alpha\omega)Y.
+\end{equation}
+由于 \(B>0\)、\(G\ge0\)、\(\omega\ge0\)，该映射把 \(\Rplus\) 映射到自身。
+
+对任意两个非负收入 \(Y,\widetilde Y\)：
+\begin{align}
+|T(Y)-T(\widetilde Y)|
+&=(\beta+\alpha\omega)|Y-\widetilde Y|.
+\end{align}
+又因为 \(0\le\omega\le1\)，
+\begin{equation}
+0\le\beta+\alpha\omega
+\le\alpha+\beta<1.
+\end{equation}
+因此 \(T\) 是 contraction。Banach fixed-point theorem 告诉我们：
+
+\begin{itemize}
+  \item 固定点存在；
+  \item 固定点唯一；
+  \item 从任意 \(Y_0\ge0\) 开始迭代 \(Y_{n+1}=T(Y_n)\) 都收敛到它；
+  \item \(D=1-\beta-\alpha\omega>0\)，收入循环不会爆炸。
+\end{itemize}
+
+\subsection{几何级数解释}
+
+由于 \(|\phi|<1\)，式 \eqref{teach:eq:Y-solution} 也可以写成
+\begin{equation}
+Y=(B+\omega G)\sum_{j=0}^{\infty}(\beta+\alpha\omega)^j.
+\label{teach:eq:Y-series}
+\end{equation}
+第 0 轮是 \(B+\omega G\)，第 1 轮是它乘以 \(\phi\)，第 2 轮再乘一次 \(\phi\)，如此继续。
+每轮都存在 \(Z\) 支出和零售漏出，所以序列收敛。
+
+\section{从名义收入到消费等价实际收入}
+
+把最优需求式 \eqref{teach:eq:outer-demands} 代入效用函数：
+\begin{align}
+U
+&=\left(\frac{\alpha Y}{P_M}\right)^\alpha
+(\beta Y)^\beta(\gamma Y)^\gamma\\
+&=\alpha^\alpha\beta^\beta\gamma^\gamma
+\frac{Y^{\alpha+\beta+\gamma}}{P_M^\alpha}.
+\end{align}
+由于 \(\alpha+\beta+\gamma=1\)，定义
+\begin{equation}
+K=\alpha^\alpha\beta^\beta(1-\alpha-\beta)^{1-\alpha-\beta},
+\end{equation}
+得到
+\begin{equation}
+\boxed{R=K\frac{Y}{P_M^\alpha}.}
+\label{teach:eq:R}
+\end{equation}
+
+\(R\) 同时反映名义收入和零售生活成本。对数变化为
+\begin{equation}
+d\ln R=d\ln Y-\alpha\,d\ln P_M.
+\end{equation}
+
+本文称它为 consumption-equivalent real income，而不称完整 welfare。原因是模型没有把
+劳动供给、服务能力扩张、住房拥挤或其他机会成本写入家庭效用；也没有核算外部平台股东的
+福利。因此 \(R\) 是在既定短期闭合下的消费指数。
+
+\section{命题一：为什么有两个不同的地方乘数}
+
+\subsection{已经成为本地收入的一元注入}
+
+固定 \(z,\kappa,G\)，把 \(B\) 看成独立的收入注入。由式 \eqref{teach:eq:Y-solution}：
+\begin{equation}
+m_B(\omega)
+\equiv\frac{\partial Y}{\partial B}
+=\frac1{1-\beta-\alpha\omega}
+=\frac1D.
+\label{teach:eq:mB}
+\end{equation}
+
+这元钱在进入模型时已经是本地工资、利润或其他本地收入，所以第一轮不需要再乘以
+\(\omega\)。
+
+\subsection{一元外来总零售支出}
+
+外来支出 \(G\) 尚未形成收入。一元 \(G\) 首先只有 \(\omega\) 元留在本地，然后才进入
+后续消费循环。因此
+\begin{equation}
+\MG(\omega)
+\equiv\frac{\partial Y}{\partial G}
+=\frac{\omega}{1-\beta-\alpha\omega}
+=\omega m_B(\omega).
+\label{teach:eq:MG}
+\end{equation}
+其几何级数为
+\begin{equation}
+\MG
+=\omega\sum_{j=0}^{\infty}(\beta+\alpha\omega)^j
+=\omega+\omega\phi+\omega\phi^2+\cdots.
+\label{teach:eq:MG-series}
+\end{equation}
+
+\subsection{为什么首轮留值调整会高估完整乘数}
+
+若所有零售支出都完全留在本地，即 \(\omega=1\)，传统乘数是
+\begin{equation}
+m_0=\frac1{1-\alpha-\beta}.
+\end{equation}
+一种简单做法是先将第一轮支出乘以 \(\omega\)，再使用完全留值乘数 \(m_0\)，得到
+\(m_0\omega\)。但这只在第一轮施加漏出，后续轮次错误地假定零售支出完全留存。
+
+严格比较：
+\begin{align}
+m_0\omega-\MG
+&=\frac{\omega}{1-\alpha-\beta}
+-\frac{\omega}{1-\beta-\alpha\omega}\\
+&=\frac{\alpha\omega(1-\omega)}
+{(1-\alpha-\beta)(1-\beta-\alpha\omega)}\ge0.
+\label{teach:eq:multiplier-gap}
+\end{align}
+当 \(0<\omega<1\) 时严格大于零；只有 \(\omega=0\) 或 \(1\) 时相等。
+
+\subsection{乘数对留值率的弹性}
+
+由 \(\MG=\omega/D\)，
+\begin{align}
+\frac{\partial\ln\MG}{\partial\ln\omega}
+&=1-\frac{\partial\ln D}{\partial\ln\omega}\\
+&=1+\frac{\alpha\omega}{D}\\
+&=\frac{1-\beta}{1-\beta-\alpha\omega}>1.
+\label{teach:eq:retention-elasticity}
+\end{align}
+
+留值率下降不仅减少第一轮收入，也削弱每一轮后续传播。因此 \(\omega\) 下降 1\% 时，
+\(\MG\) 可能下降超过 1\%。这正是“有效地方乘数取决于本地价值捕获”的严格含义。
+
+\section{命题二：有限市场一体化冲击的三个区域}
+
+\subsection{为什么同时考察有限冲击和边际冲击}
+
+边际结果回答 \(z\) 增加一点时会发生什么；有限结果回答从 \(z_0\) 到 \(z_1\) 的完整变化。
+政策和技术扩张往往不是无穷小变化，所以闭式有限阈值可以避免只依赖局部导数。
+
+令 \(G=0\)、\(z_1>z_0\)，定义
+\begin{equation}
+\calB=\frac{B_1}{B_0},\qquad
+\calD=\frac{D_1}{D_0},\qquad
+\calP=\frac{P_{M1}}{P_{M0}}.
+\label{teach:eq:finite-objects}
+\end{equation}
+
+在 \(\Delta(\kappa)>0\) 下，\(z\uparrow\Rightarrow s\uparrow\Rightarrow\omega\downarrow\)，
+所以 \(D=1-\beta-\alpha\omega\) 上升：
+\[
+\calD>1.
+\]
+同时平台价格下降使零售价格指数下降：
+\[
+0<\calP<1.
+\]
+而
+\[
+\calB=e^{\varepsilon(z_1-z_0)}\ge1.
+\]
+
+\subsection{收入比率}
+
+由 \(Y=B/D\)：
+\begin{equation}
+\frac{Y_1}{Y_0}=\frac{\calB}{\calD}.
+\label{teach:eq:Y-ratio}
+\end{equation}
+由 \(R=KY/P_M^\alpha\)：
+\begin{equation}
+\frac{R_1}{R_0}
+=\frac{\calB}{\calD\calP^\alpha}.
+\label{teach:eq:R-ratio}
+\end{equation}
+
+\subsection{三个互斥且完备的区域}
+
+\begin{center}
+\begin{tabular}{p{5.0cm}p{3.5cm}p{3.5cm}}
+\toprule
+条件 & 本地名义收入 \(Y\) & 实际收入 \(R\) \\
+\midrule
+\(\calB>\calD\) & 上升 & 上升 \\
+\(\calD\calP^\alpha<\calB<\calD\) & 下降 & 上升 \\
+\(\calB<\calD\calP^\alpha\) & 下降 & 下降 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+第二个区域是论文的关键分离结果：自主基础收入的增长不足以抵消留值率和乘数下降，因此
+地方名义收入下降；但平台降价带来的购买力改善足以使 \(R\) 上升。
+
+两个等号边界是：
+\begin{itemize}
+  \item \(\calB=\calD\)：名义收入不变，因为 \(\calP<1\)，实际收入严格上升；
+  \item \(\calB=\calD\calP^\alpha\)：实际收入不变，而名义收入严格下降。
+\end{itemize}
+
+不存在“名义收入上升但实际收入下降”的第四种情形。因为
+\[
+\frac{R_1}{R_0}
+=\frac{Y_1/Y_0}{\calP^\alpha},
+\]
+而 \(\calP^\alpha<1\)。如果 \(Y_1/Y_0>1\)，再除以一个小于 1 的数，实际收入比率只能
+更大。
+
+还可以判断第三个区域是否在 \(\calB\geq1\) 的可行冲击中出现。由于
+\(\calB=e^{\varepsilon(z_1-z_0)}\geq1\)，存在某个使两种收入都下降的 \(\calB\)，当且仅当
+\[
+\calD\calP^\alpha>1.
+\]
+这说明即使基础收入不下降，留值率和乘数损失仍可能强到超过价格收益。相应的边际特例是：
+当 \(\varepsilon=0\) 且 \(\Delta(\kappa)>0\) 时，名义收入必然下降；两种收入都下降当且
+仅当
+\[
+\Delta(\kappa)(\eta-1)(1-s)>D(s,\kappa).
+\]
+
+\section{边际分解：access gain、price gain 与 capture drag}
+
+\subsection{名义收入的边际效应}
+
+在 \(G=0\) 时，\(Y=B/D\)。取对数：
+\[
+\ln Y=\ln B-\ln D.
+\]
+对 \(z\) 求导：
+\begin{equation}
+\frac{d\ln Y}{dz}
+=\underbrace{\varepsilon}_{\text{基础收入的 access gain}}
+-\frac{D_z}{D}.
+\end{equation}
+
+因为
+\begin{align}
+D_z&=-\alpha\omega_z\\
+&=\alpha\Delta(\kappa)(\eta-1)s(1-s),
+\end{align}
+定义
+\begin{equation}
+\boxed{
+\Lambda(s,\kappa)
+=\frac{\alpha\Delta(\kappa)(\eta-1)s(1-s)}{D(s,\kappa)}.}
+\label{teach:eq:Lambda}
+\end{equation}
+则
+\begin{equation}
+\frac{d\ln Y}{dz}=\varepsilon-\Lambda(s,\kappa).
+\label{teach:eq:marginal-Y}
+\end{equation}
+
+\(\Lambda=d\ln D/dz\)，衡量一体化通过渠道替代提高固定点分母、削弱本地收入所造成的边际
+比例拖累。
+
+\subsection{实际收入的边际效应}
+
+由 \(\ln R=\ln K+\ln Y-\alpha\ln P_M\) 和
+\(d\ln P_M/dz=-s\)：
+\begin{equation}
+\frac{d\ln R}{dz}
+=\varepsilon+\alpha s-\Lambda(s,\kappa).
+\label{teach:eq:marginal-R}
+\end{equation}
+
+三部分分别是
+\[
+\underbrace{\varepsilon}_{\text{生产端或基础收入接入}}
++\underbrace{\alpha s}_{\text{消费者价格收益}}
+-\underbrace{\Lambda}_{\text{本地价值捕获拖累}}.
+\]
+
+这两个式子清楚展示论文的研究问题：同一个整合冲击既有正向 access，也可能有负向 capture；
+两者的相对大小决定地区结果。
+
+\section{本地组织能力如何改变整合结果}
+
+\subsection{组织能力的三个比较静态}
+
+在 \(G=0\) 时 \(Y=B/D\)，而 \(D_\kappa=-\alpha s\delta_\rho\)，所以
+\begin{equation}
+\frac{\partial\ln Y}{\partial\kappa}
+=\frac{\alpha s\delta_\rho}{D}>0.
+\label{teach:eq:kappa-income}
+\end{equation}
+
+为了推导 \(\Lambda_\kappa\)，写成
+\[
+D=d_A+\alpha s\Delta(\kappa),
+\qquad d_A\equiv1-\beta-\alpha\rho_A>0.
+\]
+对 \(\kappa\) 求导并使用 \(\Delta_\kappa=-\delta_\rho\)，得到
+\begin{equation}
+\frac{\partial\Lambda}{\partial\kappa}
+=-\frac{\alpha\delta_\rho(\eta-1)s(1-s)d_A}{D^2}<0.
+\label{teach:eq:kappa-drag}
+\end{equation}
+
+再由 \(\MG=\omega/D\)：
+\begin{equation}
+\frac{\partial\ln\MG}{\partial\kappa}
+=\frac{(1-\beta)s\delta_\rho}{\omega D}>0
+\quad(\omega>0).
+\label{teach:eq:kappa-multiplier}
+\end{equation}
+
+所以更强的本地组织能力同时提高本地收入、降低 capture drag，并提高外来总支出的有效地方
+乘数。
+
+\subsection{求解能力阈值}
+
+令
+\[
+h(s)=(\eta-1)(1-s).
+\]
+利用 \(D=d_A+\alpha s\Delta\)，capture drag 可写成
+\begin{equation}
+\Lambda(s,\kappa)
+=\frac{\alpha s h(s)\Delta(\kappa)}
+{d_A+\alpha s\Delta(\kappa)}.
+\label{teach:eq:Lambda-threshold-form}
+\end{equation}
+
+现在求使 \(\Lambda=q\) 的能力水平。先解留值差：
+\begin{align}
+q[d_A+\alpha s\Delta]
+&=\alpha s h\Delta,\\
+qd_A&=\alpha s\Delta(h-q),\\
+\Delta^*(q)
+&=\frac{qd_A}{\alpha s[h(s)-q]}.
+\end{align}
+这个解要求 \(q<h(s)\)。再使用
+\[
+\Delta(\kappa)=\rho_A-\underline\rho_P-\kappa\delta_\rho,
+\]
+得到
+\begin{equation}
+\boxed{
+\kappa(q)=\frac1{\delta_\rho}
+\left[\rho_A-\underline\rho_P
+-\frac{qd_A}{\alpha s[h(s)-q]}\right].}
+\label{teach:eq:kappa-q}
+\end{equation}
+
+实际收入效应等于零要求
+\[
+\Lambda=\varepsilon+\alpha s,
+\]
+所以
+\[
+\kappa_R^*=\kappa(\varepsilon+\alpha s).
+\]
+名义收入效应等于零要求
+\[
+\Lambda=\varepsilon,
+\]
+所以
+\[
+\kappa_Y^*=\kappa(\varepsilon).
+\]
+
+\(\kappa(q)\) 对 \(q\) 的导数是
+\[
+\kappa'(q)
+=-\frac{d_Ah(s)}
+{\alpha s\delta_\rho[h(s)-q]^2}<0.
+\]
+因此它对 \(q\) 递减，而 \(\varepsilon+\alpha s>\varepsilon\)。所谓 endpoint
+crossing condition 是
+\[
+\Lambda(s,0)>
+\varepsilon+\alpha s>
+\varepsilon>
+\Lambda(s,1).
+\]
+第一和最后一个不等式保证两条零效应水平都被从 \(\kappa=0\) 到 \(\kappa=1\) 的下降曲线
+穿过。因此在该条件下，
+\begin{equation}
+0<\kappa_R^*<\kappa_Y^*<1.
+\label{teach:eq:ordered-thresholds}
+\end{equation}
+
+实际收入更早转正，是因为它比名义收入多一项消费价格收益 \(\alpha s\)。
+若 endpoint crossing condition 不满足，某个阈值会落在 \([0,1]\) 外，相应的符号区域
+便不存在；此时不能继续声称有两个内部阈值。
+
+\section{为什么 capture drag 在平台份额低于一半时达到峰值}
+
+固定 \(\kappa\) 且 \(\Delta(\kappa)>0\)，定义
+\[
+b=\alpha\Delta(\kappa)>0,
+\qquad
+C=\alpha(\eta-1)\Delta(\kappa)>0.
+\]
+由于 \(D=d_A+bs\)，有
+\begin{equation}
+\Lambda(s,\kappa)=C\frac{s(1-s)}{d_A+bs}.
+\label{teach:eq:Lambda-peak-form}
+\end{equation}
+
+\subsection{一阶导数}
+
+使用商法则：
+\begin{align}
+\Lambda_s
+&=C\frac{(1-2s)(d_A+bs)-bs(1-s)}{(d_A+bs)^2}\\
+&=C\frac{d_A(1-2s)-bs^2}{(d_A+bs)^2}.
+\label{teach:eq:Lambda-s}
+\end{align}
+
+\subsection{二阶导数与严格凹性}
+
+再次求导并整理：
+\begin{equation}
+\Lambda_{ss}
+=-\frac{2Cd_A(d_A+b)}{(d_A+bs)^3}<0.
+\label{teach:eq:Lambda-ss}
+\end{equation}
+因此 \(\Lambda\) 在 \([0,1]\) 上严格凹，只可能有一个内部最大值。
+
+\subsection{求解唯一峰值}
+
+令一阶导数分子为零：
+\[
+d_A(1-2s)-bs^2=0.
+\]
+即
+\[
+bs^2+2d_As-d_A=0.
+\]
+取位于 \((0,1)\) 的正根：
+\begin{align}
+s^\dagger
+&=\frac{-d_A+\sqrt{d_A(d_A+b)}}{b}\\
+&=\frac1{1+\sqrt{1+b/d_A}}\\
+&=\boxed{
+\frac1{1+\sqrt{1+\alpha\Delta(\kappa)/d_A}}}<\frac12.
+\label{teach:eq:s-dagger}
+\end{align}
+
+如果分母没有随 \(s\) 上升，\(s(1-s)\) 会在 \(1/2\) 达到峰值。但当 \(\Delta>0\) 时，
+\(D=d_A+\alpha s\Delta\) 随平台份额上升。这个上升的分母使拖累在 \(1/2\) 之前就开始
+被压低，所以 \(s^\dagger<1/2\)。
+
+\subsection{峰值高度与组织能力}
+
+令
+\[
+t(\kappa)=\sqrt{1+\alpha\Delta(\kappa)/d_A}>1.
+\]
+在 \(s^\dagger=1/(1+t)\) 处代入式 \eqref{teach:eq:Lambda-peak-form}，得到
+\begin{equation}
+\Lambdamax(\kappa)
+=(\eta-1)\frac{t(\kappa)-1}{t(\kappa)+1}.
+\label{teach:eq:Lambda-max}
+\end{equation}
+
+由于 \(\Delta_\kappa=-\delta_\rho\)：
+\begin{align}
+\frac{\partial s^\dagger}{\partial\kappa}
+&=\frac{\alpha\delta_\rho}
+{2d_A t(1+t)^2}>0,\\
+\frac{\partial\Lambdamax}{\partial\kappa}
+&=-\frac{(\eta-1)\alpha\delta_\rho}
+{d_A t(1+t)^2}<0.
+\end{align}
+
+因此组织能力越强，最大拖累越低，峰值位置越接近 \(1/2\)。但必须强调：这是\textbf{边际}
+capture drag 的峰值，不是累计收入损失的峰值，也不是所谓“最优平台份额”。
+
+\section{两面板机制图的完整解释}
+
+论文的机制图使用
+\[
+\alpha=0.35,\quad \beta=0.25,\quad \eta=4,\quad
+\rho_A=0.8,\quad
+\underline\rho_P=0.1,\quad
+\overline\rho_P=0.6,\quad
+\varepsilon=0.1.
+\]
+这些数值只是为了展示解析结果可以同时产生三个符号区域，不是对中国数据的校准。
+
+图没有另外指定 \(a,p_A,\bar p_P,z\)，因为平台支出份额 \(s\) 是渠道重组的 sufficient
+statistic。由平台份额的 odds 式，对任意 \(s\in(0,1)\)，给定
+\((a,p_A,\bar p_P,\eta)\) 都存在唯一有限整合指数
+\[
+z(s)=
+\frac{
+\ln\!\left(\frac{s}{1-s}\right)
+-\ln\!\left(\frac{a}{1-a}\right)
+-(1-\eta)\ln\!\left(\frac{\bar p_P}{p_A}\right)}
+{\eta-1}.
+\]
+所以 Panel A 用 \(s\) 作横轴并未脱离原模型；它只是把不可直接观察的整合指数转换成更容易
+解释的内生渠道份额。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../../history/2026-07-16_pre_m1_m3/figures/mechanism_figure.pdf}
+\caption{M1--M3 修订前的局部机制图。Panel A 固定不同的组织能力并改变平台支出份额；
+Panel B 固定 \(s=0.25\) 并改变组织能力。旧 Panel A 的局部符号几何现保留为
+Supplementary Figure S1；正文 Figure 1 已改为一般 share-speed 单峰与有限变化阈值。}
+\label{teach:fig:mechanisms}
+\end{figure}
+
+\subsection{Panel A：平台渗透率怎样改变边际 capture drag}
+
+横轴是平台支出份额 \(s\)，纵轴是 \(\Lambda(s,\kappa)\)。三条曲线分别对应：
+
+\begin{itemize}
+  \item 蓝色实线：\(\kappa=0\)，平台留值最低、渠道留值差最大；
+  \item 黄色虚线：\(\kappa=0.5\)，组织能力和平台留值居中；
+  \item 绿色点划线：\(\kappa=1\)，平台留值最高、渠道留值差最小。
+\end{itemize}
+
+每条曲线在 \(s=0\) 和 \(s=1\) 都等于零。\(s\approx0\) 时平台规模太小；\(s\approx1\)
+时本地代理渠道已几乎没有剩余份额可以继续被替代。中间阶段渠道重组最强，所以曲线呈驼峰。
+
+三条曲线的峰值为
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+\(\kappa\) & \(\Delta(\kappa)\) & \(s^\dagger\) & \(\Lambda_{\max}\) \\
+\midrule
+0 & 0.70 & 0.447748 & 0.313514 \\
+0.5 & 0.45 & 0.463936 & 0.216382 \\
+1 & 0.20 & 0.482652 & 0.104086 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+组织能力提高使曲线整体下移，并把峰值推向 \(1/2\)。这是因为更强的本地卖家、履约和服务
+组织缩小了渠道留值差 \(\Delta\)。
+
+图中还有两条灰色线。
+
+\begin{enumerate}
+  \item 水平点线 \(\varepsilon\) 是名义收入的 access gain。若
+  \(\Lambda=\varepsilon\)，则 \(d\ln Y/dz=0\)。
+  \item 向上倾斜的虚线 \(\varepsilon+\alpha s\) 是实际收入的总正向项。它随 \(s\)
+  上升，是因为平台份额越大，平台价格下降对总体零售生活成本的影响越强。
+\end{enumerate}
+
+因此背景区域的含义是：
+\begin{itemize}
+  \item 绿色：\(\Lambda<\varepsilon\)，名义收入和实际收入都上升；
+  \item 黄色：\(\varepsilon<\Lambda<\varepsilon+\alpha s\)，名义收入下降、实际收入上升；
+  \item 红色：\(\Lambda>\varepsilon+\alpha s\)，两者都下降。
+\end{itemize}
+
+沿横轴向右不应被无条件解释成同一地区的必然历史路径。只有固定其他参数、利用
+\(ds/dz>0\) 时，才可以把向右移动理解为一体化加深所伴随的平台渗透增加。
+
+\subsection{Panel B：组织能力怎样产生两个收入阈值}
+
+Panel B 固定 \(s=0.25\)。横轴是本地组织能力 \(\kappa\)，纵轴是整合对收入的边际影响。
+
+\begin{itemize}
+  \item 蓝色实线：\(d\ln Y/dz=\varepsilon-\Lambda\)，即名义收入效应；
+  \item 橙色虚线：\(d\ln R/dz=\varepsilon+\alpha s-\Lambda\)，即实际收入效应。
+\end{itemize}
+
+两条线的垂直距离恒为
+\[
+\alpha s=0.35\times0.25=0.0875,
+\]
+即消费者价格收益。组织能力提高使 \(\Lambda\) 下降，所以两条曲线都向上。
+
+两个交点为
+\[
+\kappa_R^*=0.423377,
+\qquad
+\kappa_Y^*=0.900332.
+\]
+\(\kappa_R^*\) 是实际收入曲线的零点，\(\kappa_Y^*\) 是名义收入曲线的零点。三个区域是：
+
+\begin{enumerate}
+  \item \(0\le\kappa<\kappa_R^*\)：两种收入都下降；
+  \item \(\kappa_R^*<\kappa<\kappa_Y^*\)：名义收入下降，但实际收入上升；
+  \item \(\kappa>\kappa_Y^*\)：两种收入都上升。
+\end{enumerate}
+\(\kappa=\kappa_R^*\) 时实际收入效应恰为零、名义收入仍下降；\(\kappa=\kappa_Y^*\)
+时名义收入效应恰为零、实际收入严格上升。
+
+Panel B 最直接地表达论文的政策含义：不是简单判断平台“好”或“坏”，而是研究地区是否有
+能力把平台交易转化为本地卖家、履约、服务和本地所有者收入。
+
+\section{可复算的数值例子}
+
+固定 \(s=0.25\)，共同参数仍取图中的数值。首先
+\[
+\delta_\rho=0.6-0.1=0.5,
+\]
+所以
+\begin{align}
+\rho_P(\kappa)&=0.1+0.5\kappa,\\
+\Delta(\kappa)&=0.8-\rho_P(\kappa)=0.7-0.5\kappa,\\
+\omega&=0.75(0.8)+0.25\rho_P(\kappa)=0.625+0.125\kappa,\\
+d_A&=1-0.25-0.35(0.8)=0.47.
+\end{align}
+
+捕获拖累的公共系数为
+\[
+\alpha(\eta-1)s(1-s)
+=0.35\times3\times0.25\times0.75
+=0.196875.
+\]
+所以
+\[
+\Lambda(0.25,\kappa)=\frac{0.196875\Delta(\kappa)}{D}.
+\]
+
+\subsection{三个组织能力水平的结果}
+
+\begin{center}
+\small
+\begin{tabular}{cccccc}
+\toprule
+\(\kappa\) & \(\rho_P\) & \(\Delta\) & \(\omega\) & \(D\) & \(\Lambda\) \\
+\midrule
+0 & 0.100000 & 0.700000 & 0.625000 & 0.531250 & 0.259412 \\
+0.5 & 0.350000 & 0.450000 & 0.687500 & 0.509375 & 0.173926 \\
+1 & 0.600000 & 0.200000 & 0.750000 & 0.487500 & 0.080769 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\small
+\begin{tabular}{ccccc}
+\toprule
+\(\kappa\) & \(m_B=1/D\) & \(\MG=\omega/D\) & \(d\ln Y/dz\) & \(d\ln R/dz\) \\
+\midrule
+0 & 1.882353 & 1.176471 & -0.159412 & -0.071912 \\
+0.5 & 1.963190 & 1.349693 & -0.073926 & 0.013574 \\
+1 & 2.051282 & 1.538462 & 0.019231 & 0.106731 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\normalsize
+
+低能力地区的 capture drag 同时超过 \(\varepsilon=0.1\) 和
+\(\varepsilon+\alpha s=0.1875\)，所以两种收入都下降。中等能力地区满足
+\[
+\varepsilon<\Lambda<\varepsilon+\alpha s,
+\]
+所以名义收入下降、实际收入上升。高能力地区满足 \(\Lambda<\varepsilon\)，两者都上升。
+
+\subsection{以中等组织能力为例逐步计算}
+
+第一步，平台留值率：
+\[
+\rho_P(0.5)=0.1+0.5(0.5)=0.35.
+\]
+第二步，渠道留值差：
+\[
+\Delta(0.5)=0.8-0.35=0.45.
+\]
+第三步，平均留值率：
+\[
+\omega=0.75(0.8)+0.25(0.35)=0.6875.
+\]
+第四步，固定点分母：
+\[
+D=1-0.25-0.35(0.6875)=0.509375.
+\]
+第五步，两种乘数：
+\[
+m_B=\frac1{0.509375}=1.963190,
+\qquad
+\MG=\frac{0.6875}{0.509375}=1.349693.
+\]
+第六步，捕获拖累：
+\[
+\Lambda
+=\frac{0.196875(0.45)}{0.509375}
+=0.173926.
+\]
+最后：
+\begin{align}
+\frac{d\ln Y}{dz}&=0.1-0.173926=-0.073926,\\
+\frac{d\ln R}{dz}&=0.1+0.0875-0.173926=0.013574.
+\end{align}
+
+这就是“地方收入下降但消费者实际购买力上升”的具体数值例子。
+
+\subsection{能力阈值的数值计算}
+
+固定 \(s=0.25\) 时
+\[
+h(s)=(\eta-1)(1-s)=3(0.75)=2.25.
+\]
+实际收入阈值使用 \(q_R=\varepsilon+\alpha s=0.1875\)：
+\[
+\Delta^*(q_R)
+=\frac{0.1875(0.47)}{0.35(0.25)(2.25-0.1875)}
+=0.488311688.
+\]
+因此
+\[
+\kappa_R^*
+=\frac{0.7-0.488311688}{0.5}
+=0.423376623.
+\]
+
+名义收入阈值使用 \(q_Y=\varepsilon=0.1\)：
+\[
+\Delta^*(q_Y)
+=\frac{0.1(0.47)}{0.35(0.25)(2.25-0.1)}
+=0.249833887,
+\]
+所以
+\[
+\kappa_Y^*
+=\frac{0.7-0.249833887}{0.5}
+=0.900332226.
+\]
+
+\section{边界、极限和 corner solutions}
+
+\subsection{有限整合指数与平台份额极限}
+
+在有限 \(z\)、正价格、\(a\in(0,1)\)、\(\eta>1\) 下始终有 \(0<s<1\)。但是
+\begin{align}
+z\to-\infty&\Longrightarrow p_P\to\infty,\quad s\to0,\quad\omega\to\rho_A,\\
+z\to+\infty&\Longrightarrow p_P\to0,\quad s\to1,\quad\omega\to\rho_P(\kappa).
+\end{align}
+这些是极限，不是有限参数下的 corner solutions。
+
+\subsection{留值率的边界}
+
+因为有限 \(z\) 下两个渠道份额都为正：
+\begin{itemize}
+  \item \(\omega=0\) 当且仅当 \(\rho_A=\rho_P(\kappa)=0\)。此时 \(\MG=0\)，外来零售
+  支出不形成地方收入；
+  \item \(\omega=1\) 当且仅当 \(\rho_A=\rho_P(\kappa)=1\)。此时 \(\MG=m_0\)，恢复完全
+  本地留存乘数。
+\end{itemize}
+
+\subsection{渠道留值差的三种情况}
+
+\begin{itemize}
+  \item \(\Delta>0\)：平台替代降低留值，本文的 drag 和峰值结果适用；
+  \item \(\Delta=0\)：\(\Lambda\equiv0\)，所有 \(s\) 都最大化零函数，所以不存在唯一峰值；
+  \item \(\Delta<0\)：平台替代提高留值，\(\Lambda<0\)，不能套用“capture-drag peak”命题。
+\end{itemize}
+
+当 \(\Delta\downarrow0\) 时，
+\[
+s^\dagger\uparrow\frac12,
+\qquad
+\Lambda_{\max}\downarrow0.
+\]
+
+\subsection{偏好和替代弹性的极限}
+
+\begin{itemize}
+  \item \(\alpha\to0\)：居民不再把收入花在零售综合品上，零售渠道不再影响后续收入循环；
+  \item \(\beta\to0\)：不存在本地非贸易服务传播，只剩零售留值渠道；
+  \item \(\varepsilon=0\)：基础收入没有 access gain，可以隔离纯价格和留值机制；
+  \item \(\eta\to1\)：渠道聚合器收敛到 Cobb--Douglas，
+  \(P_M\to p_A^{1-a}p_P^a\)，\(s\to a\)；
+  \item \(\eta\to\infty\)：渠道趋向 perfect substitutes，需求集中到更便宜的渠道；若价格
+  完全相等，存在多个成本最小化配置。
+\end{itemize}
+
+\subsection{存在外来零售支出时的一般边际式}
+
+主文的 \(\varepsilon-\Lambda\) 结果明确限定 \(G=0\)。若 \(G>0\) 且其名义水平固定，
+一般导数是
+\begin{equation}
+\frac{d\ln Y}{dz}
+=\frac{\varepsilon B+\omega_zG}{B+\omega G}
++\frac{\alpha\omega_z}{1-\beta-\alpha\omega}.
+\label{teach:eq:G-positive}
+\end{equation}
+第一项同时包含 \(B\) 的增长和外来支出首轮留值 \(\omega G\) 的变化；第二项是收入固定点
+分母的变化。实际收入导数还要再加 \(\alpha s\)。
+
+有限冲击时应定义
+\[
+\mathcal N=\frac{B_1+\omega_1G}{B_0+\omega_0G},
+\]
+并用 \(\mathcal N\) 替代 \(\calB\) 进入三个阈值区域。
+
+\section{模型对整个项目的意义}
+
+\subsection{它把“交易规模”与“地方收入”分开}
+
+传统讨论容易把本地交易额、消费额或平台订单额当成地方发展。但本模型指出，交易总额必须
+先乘以由渠道组织决定的本地留值率，才形成第一轮本地收入。消费地、生产地、结算地和收入
+所有者所在地可以分离。
+
+\subsection{它把地方乘数的起点向前移动}
+
+地方乘数不能只问“一元本地收入会引致多少后续收入”，还必须问“一元总交易首先有多少
+成为本地收入”。因此
+\[
+\text{总支出冲击}
+\xrightarrow{\ \omega\ }
+\text{第一轮本地收入}
+\xrightarrow{\ 1/D\ }
+\text{均衡本地收入}.
+\]
+而且 \(\omega\) 还进入 \(D\)，所以它不仅影响第一轮，也影响每一轮零售再支出。
+
+\subsection{它解释地区异质性，而不是为地方保护辩护}
+
+\(\kappa\) 高的地区可以用本地卖家、履约、物流、服务和企业所有权把平台市场接入转化为
+本地收入。\(\kappa\) 低的地区可能主要获得消费价格收益，却难以保留对应的收入。
+
+因此政策含义不是恢复贸易壁垒或强制保留低效率中介，而是提高本地组织和供给能力，使统一
+市场的 access gain 能够转化为 local value capture。
+
+\subsection{它与未来大论文的边界}
+
+当前模型有意不包含：
+\begin{itemize}
+  \item 平台佣金、广告和排序的内生定价；
+  \item 多地区贸易流、生产区位和企业迁移；
+  \item 地方税收和总部利润的制度分配；
+  \item 人口迁移、通勤、住房和完整劳动供给福利；
+  \item 对中国现实参数的正式校准或因果识别。
+\end{itemize}
+
+这些机制适合后续模型加实证的大论文。当前 Letter 的任务是用最小解析结构证明 access、
+capture 和 propagation 可以产生可分辨的阈值与非单调边际效应。
+
+\subsection{方案 B 为什么暂时不进入基准模型}
+
+若加入平台采用固定成本 \(F>0\)，可以产生真正的无平台 corner \(s=0\)。但一旦采用平台，
+家庭仍进入当前内部 CES 子问题。仅加入平台固定成本不会自动产生严格的 \(s=1\)；完全
+平台化还需要 single-homing、本地渠道退出、另一项固定成本或 perfect-substitutes 极限。
+
+方案 B 会引入采用时序、不连续反应、阈值唯一性和可能的多重均衡。它是未来扩展，不是当前
+模型已经证明的结果。
+
+\section{课堂上最常见的十二个误解}
+
+\small
+\begin{longtable}{>{\centering\arraybackslash}p{0.9cm}p{6.2cm}p{7.7cm}}
+\toprule
+序号 & 错误理解 & 正确解释 \\
+\midrule
+\endfirsthead
+\toprule
+序号 & 错误理解 & 正确解释 \\
+\midrule
+\endhead
+1 & \(a\) 就是平台市场份额。 & \(a\) 是 CES 权重；实际份额 \(s(z)\) 由权重、相对价格和替代弹性共同决定。\\
+2 & \(s\) 是平台商品数量份额。 & \(s\) 是平台支出份额 \(p_PM_P/(P_MM)\)。\\
+3 & \(z\) 与 \(s\) 是同一个变量。 & \(z\) 是外生整合指数；\(s\) 是家庭优化产生的内生结果，满足 \(ds/dz>0\)。\\
+4 & \(\rho_P\)、\(\omega\) 和 \(\Delta\) 都是同一种留值率。 & \(\rho_P\) 是平台渠道留值率；\(\omega\) 是平均留值率；\(\Delta\) 是两渠道留值率之差。\\
+5 & \(\rho_c\) 就是平台佣金率。 & 它是成为本地工资、服务及本地所有者收入的总份额，并非单一收费项目。\\
+6 & \(B\)、\(G\) 和 \(Y\) 是同一种收入。 & \(B\) 已是本地收入；\(G\) 是总支出；\(Y\) 是所有传播完成后的均衡本地收入。\\
+7 & \(m_B\)、\(\MG\) 和 \(m_0\omega\) 可以互换。 & 三者的注入起点和后续漏出处理不同；\(m_0\omega\) 通常高估完整递归乘数。\\
+8 & \(R\) 是完整社会福利。 & \(R\) 只是给定闭合下的 consumption-equivalent real income，没有扣除劳动和能力扩张成本。\\
+9 & \(s^\dagger\) 是累计地方损失最大的份额。 & 它只最大化边际 capture drag，不是累计收入、总福利或政策最优点。\\
+10 & 有限参数下模型可以出现 \(s=0\) 或 \(1\)。 & 基准 CES 在有限 \(z\) 下严格内部；0 和 1 只是极限。\\
+11 & 平台必然比本地代理留值更低。 & 模型允许 \(\Delta\le0\)；平台留值较低只是部分结果的明确条件。\\
+12 & \(G>0\) 时仍可直接使用 \(\varepsilon-\Lambda\)。 & 该简式限定 \(G=0\)；\(G>0\) 必须使用式 \eqref{teach:eq:G-positive}。\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{建议的本科课堂讲授顺序}
+
+这份模型适合分为两次 90 分钟课程。
+
+\subsection*{第一讲：从消费者选择到地方收入固定点}
+\begin{enumerate}
+  \item 15 分钟：用一元平台支出的空间流向介绍 access、capture 和 propagation；
+  \item 20 分钟：Cobb--Douglas 外层问题和固定支出份额；
+  \item 25 分钟：CES 内层支出最小化、价格指数和平台份额；
+  \item 15 分钟：本地留值率 \(\rho_P,\Delta,\omega\)；
+  \item 15 分钟：收入固定点、存在唯一性和几何级数。
+\end{enumerate}
+
+\subsection*{第二讲：乘数、阈值和机制图}
+\begin{enumerate}
+  \item 20 分钟：\(m_B\) 与 \(\MG\) 的区别；
+  \item 20 分钟：有限冲击三个区域；
+  \item 20 分钟：边际分解和两个能力阈值；
+  \item 15 分钟：\(s^\dagger<1/2\) 的推导；
+  \item 15 分钟：两面板图和数值例子。
+\end{enumerate}
+
+\section{课堂练习与参考答案}
+
+\begin{enumerate}
+  \item \textbf{练习：}为什么 \(a\) 上升不等于平台份额机械增加相同幅度？\\
+  \textbf{答案要点：}平台份额还取决于相对价格和 \(\eta\)，且是非线性分式。
+
+  \item \textbf{练习：}证明 \(s\in(0,1)\)。\\
+  \textbf{答案要点：}式 \eqref{teach:eq:platform-share} 的分子为正，分母等于分子加一个
+  正项。
+
+  \item \textbf{练习：}若 \(\rho_A=\rho_P\)，一体化是否仍降低 \(P_M\)？是否改变
+  \(\omega\)？\\
+  \textbf{答案要点：}价格指数仍下降；但 \(\Delta=0\)，所以 \(\omega_z=0\)。
+
+  \item \textbf{练习：}为什么 \(m_B>\MG\) 在 \(0<\omega<1\) 时成立？\\
+  \textbf{答案要点：}\(m_B=1/D\)，\(\MG=\omega/D\)，后者的第一轮尚未完全成为本地
+  收入。
+
+  \item \textbf{练习：}能否出现 \(Y\) 上升而 \(R\) 下降？\\
+  \textbf{答案要点：}在本文的整合冲击下不能，因为 \(P_M\) 下降，故 \(R\) 的增长率总比
+  \(Y\) 多 \(\alpha s\)。
+
+  \item \textbf{练习：}为什么 \(\kappa_R^*<\kappa_Y^*\)？\\
+  \textbf{答案要点：}实际收入多一项价格收益，因此它能容忍更大的 capture drag，并在较低
+  能力水平先转正。
+
+  \item \textbf{练习：}为什么 \(s^\dagger\) 不是 \(1/2\)？\\
+  \textbf{答案要点：}虽然分子 \(s(1-s)\) 在 \(1/2\) 最大，但分母
+  \(d_A+\alpha s\Delta\) 随 \(s\) 上升，把峰值向左推。
+
+  \item \textbf{练习：}若 \(\Delta<0\)，如何重新解释平台扩张？\\
+  \textbf{答案要点：}\(\omega_z>0\)、\(\Lambda<0\)，平台扩张同时改善价格和本地留值，
+  drag-peak 命题不适用。
+\end{enumerate}
+
+\section{总结}
+
+整套模型可以压缩成四个方程：
+\begin{align*}
+\frac{ds}{dz}&=(\eta-1)s(1-s),\\
+\omega&=\rho_A-s\Delta(\kappa),\\
+Y&=\frac{B+\omega G}{1-\beta-\alpha\omega},\\
+\frac{d\ln R}{dz}&=\varepsilon+\alpha s-\Lambda(s,\kappa)\qquad(G=0).
+\end{align*}
+
+第一式说明整合如何重组渠道；第二式说明渠道重组如何改变地方价值捕获；第三式说明第一轮
+留值如何经过非贸易部门和零售再支出形成地方乘数；第四式把市场接入、消费价格收益和价值
+捕获拖累放在同一个可比较的表达式中。
+
+因此论文的中心结论不是“平台化好”或“平台化坏”，而是：\textbf{同样的统一市场和平台扩张，
+因为地方组织能力与交易留值结构不同，可以产生完全不同的地方收入和实际消费结果。}
+
+\section*{延伸阅读}
+\addcontentsline{toc}{section}{延伸阅读}
+
+\begin{itemize}
+  \item Atkin, David, Benjamin Faber, and Marco Gonzalez-Navarro (2018),
+  ``Retail Globalization and Household Welfare: Evidence from Mexico,''
+  \emph{Journal of Political Economy}, 126(1), 1--73.
+  \item Chodorow-Reich, Gabriel (2019), ``Geographic Cross-Sectional Fiscal Spending
+  Multipliers: What Have We Learned?'' \emph{American Economic Journal: Economic Policy},
+  11(2), 1--34.
+  \item Couture, Victor, Benjamin Faber, Yizhen Gu, and Lizhi Liu (2021),
+  ``Connecting the Countryside via E-Commerce: Evidence from China,''
+  \emph{American Economic Review: Insights}, 3(1), 35--50.
+  \item Fan, Jingting, Lixin Tang, Weiming Zhu, and Ben Zou (2018),
+  ``The Alibaba Effect: Spatial Consumption Inequality and the Welfare Gains from
+  E-Commerce,'' \emph{Journal of International Economics}, 114, 203--220.
+  \item Moretti, Enrico (2010), ``Local Multipliers,'' \emph{American Economic Review},
+  100(2), 373--377.
+\end{itemize}
+
+\bigskip
+\noindent\textbf{文件说明：}本讲义是对正式论文解析模型的教学性展开。正式论文的唯一主稿
+仍是 \texttt{main.tex}，正式附录是 \texttt{appendix.tex}，二者均位于 \texttt{paper}
+目录；本讲义不替代或分叉投稿版本。
+
+\end{document}

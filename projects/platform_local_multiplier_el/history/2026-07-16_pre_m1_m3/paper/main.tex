@@ -1,0 +1,468 @@
+% !TEX program = pdflatex
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[authoryear,round]{natbib}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{../figures/}}
+
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{definition}{Definition}
+
+\title{Market Integration, Platformization, and Local Multipliers:\\
+The Spatial Reorganization of Value Capture}
+\author{Wenxiao Dong \and Yaqi Hu}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We study how market integration and platformization reorganize where
+transaction value is captured. In a small open region, integration lowers the
+platform channel's price and may expand autonomous local income, but shifts
+spending toward an intermediary whose local-income share depends on local
+organizational capacity. We solve the income fixed point. Closed-form
+thresholds show when access gains dominate capture losses and when consumer
+gains coexist with falling local income. Stronger local organization raises
+effective multipliers and can reverse adverse integration effects. When the
+platform retains less value locally, capture drag peaks before platform
+penetration reaches one-half.
+\end{abstract}
+
+\noindent\textbf{Keywords:} market integration; digital platforms; local
+multipliers; value capture; spatial incidence
+
+\medskip
+\noindent\textbf{JEL codes:} F15; L81; R11; R12
+
+\section{Introduction}
+\label{sec:introduction}
+
+Market integration expands access to products and markets, but digital
+platforms also reorganize the intermediaries through which transactions are
+matched, settled, and fulfilled. Expenditure in a region need not become
+income there: platform fees, seller profits, and service revenue may accrue
+elsewhere. The local effect therefore depends on both market-access gains and
+the share of transaction value captured locally. Because captured income
+finances demand for local services, this spatial incidence also changes the
+effective local multiplier.
+
+Evidence from rural China shows that e-commerce access can lower living costs
+without generating comparable gains for local producers and workers
+\citep{couture2021connecting}. Online trade changes regional consumption and
+real wages \citep{fan2018alibaba}, and retail entry can generate price gains
+alongside local labor and profit effects \citep{atkin2018retail}.
+
+The local-multiplier literature studies how tradable-employment or
+fiscal-spending shocks propagate across local activity
+\citep{moretti2010local,chodorowreich2019geographic}. Retail channel
+organization, however, is not the object of analysis in these studies. With
+platforms, otherwise identical expenditure flows need not generate the same
+local income: seller margins, fulfillment revenue, platform payments, and
+ownership returns may accrue outside the region. Local propagation therefore
+depends on both respending and the transaction value retained in each round.
+
+We introduce this channel-specific retention margin into a small-open-region
+multiplier framework. Integration lowers the relative platform price and may
+expand autonomous base income, while endogenous channel substitution changes
+the average share of expenditure captured as local labor, service, and locally
+owned business income. Organizational capacity \(\kappa\) shifts platform
+retention between lower and upper bounds; it does not require local platform
+ownership. The model yields closed-form access--capture thresholds for nominal
+and consumption-equivalent real income and ordered capacity thresholds: weak
+local organization can make capture losses dominate, intermediate capacity can
+preserve consumer gains despite falling local income, and strong capacity can
+make access gains dominate while raising the effective multiplier. For a fixed
+capacity level with \(\Delta(\kappa)>0\), marginal capture drag is strictly
+hump-shaped and peaks before the platform share reaches one-half. This is a
+short-run local equilibrium, not a model of platform pricing or a multi-region
+quantitative spatial equilibrium.
+
+\section{Model}
+\label{sec:model}
+
+Consider a small region \(L\) embedded in an outside economy \(H\). Channel
+\(P\) is an outside digital-platform channel whose relative price responds to
+market integration; \(A\) is a local-agent channel.
+
+\begin{assumption}[Primitives]
+\label{ass:primitives}
+Let \(z\in\mathbb R\) index the degree of market integration; a higher \(z\)
+denotes stronger integration and a lower platform-channel trade cost.
+\(
+\alpha,\beta>0
+\), \(
+\alpha+\beta<1
+\), \(
+a\in(0,1)
+\), \(
+\eta>1
+\), and
+\[
+ p_A,\bar p_P,\bar B>0,\quad
+ G,\varepsilon\geq0,\quad \rho_A\in[0,1],\quad \kappa\in[0,1],
+\]
+\[
+ 0\leq\underline\rho_P<\overline\rho_P\leq1,\qquad
+ \delta_\rho\equiv\overline\rho_P-\underline\rho_P>0.
+\]
+The channel-\(P\) price is \(p_P(z)=\bar p_Pe^{-z}\), and autonomous base
+income is
+\(B(z)=\bar Be^{\varepsilon z}\).
+\end{assumption}
+
+\begin{assumption}[Local-income closure]
+\label{ass:closure}
+The outside-good price and local wage are one. A competitive constant-returns
+sector produces the nontradable with \(N=L_N\), so its price is \(p_N=1\);
+labor or capacity is elastically supplied at its fixed opportunity cost. Each dollar
+spent through channel \(c\) generates \(\rho_c\) dollars of local labor,
+service, and locally owned business income; the remainder accrues to \(H\).
+Local organizational capacity \(\kappa\) changes only the spatial incidence of
+platform transactions, not prices or preferences. Autonomous base income \(B\)
+is local value added outside the modeled retail and nontradable sectors and
+excludes income generated by \(G\). Residents own all local income and share
+the preferences below. Finally, \(G\) is retail expenditure funded from
+outside \(L\) and allocated across channels by \(s(z)\). Each induced spending
+round purchases newly produced output and creates income according to these
+incidence shares.
+\end{assumption}
+
+We treat \(L\) as small and take the platform-price schedule \(p_P(z)\) as
+exogenous to the region: integration moves the price along this schedule,
+whereas local income and expenditure do not feed back into it. We take the
+outside good as numeraire and assume that the fixed opportunity cost of
+elastically supplied local labor equals one in those units. Because the
+competitive nontradable technology uses only local labor, \(N=L_N\), zero
+profit implies \(p_N=w=1\), so all nontradable revenue is local labor income.
+These restrictions isolate channel-specific transaction incidence as the
+model's spatial-capture margin; \(\rho_c\) is therefore a total local-income
+share, not necessarily a labor-cost share.
+
+A representative resident solves
+\begin{equation}
+ \max_{M,N,Z\geq0} M^\alpha N^\beta Z^{1-\alpha-\beta}
+ \quad\text{s.t.}\quad P_MM+N+Z=Y.
+ \label{eq:outer-problem}
+\end{equation}
+Retail consumption combines a local-agent channel \(A\) and platform channel
+\(P\):
+\begin{equation}
+ M=\left[(1-a)^{1/\eta}M_A^{(\eta-1)/\eta}
+ +a^{1/\eta}M_P^{(\eta-1)/\eta}\right]^{\eta/(\eta-1)}.
+ \label{eq:channel-ces}
+\end{equation}
+Conditional on \(M\), the household minimizes
+\begin{equation}
+ \min_{M_A,M_P\geq0}\{p_AM_A+p_P(z)M_P\}
+ \quad\text{s.t. \eqref{eq:channel-ces}.}
+ \label{eq:inner-problem}
+\end{equation}
+
+\begin{lemma}[Household and channel demand]
+\label{lem:demand}
+For \(Y>0\), both problems have unique interior solutions. Expenditure on
+\((M,N,Z)\) is \((\alpha Y,\beta Y,(1-\alpha-\beta)Y)\). Moreover,
+\begin{align}
+ P_M(z)&=\left[(1-a)p_A^{1-\eta}
+ +ap_P(z)^{1-\eta}\right]^{1/(1-\eta)}, \label{eq:price-index}\\
+ M_c&=a_c\left(\frac{p_c}{P_M}\right)^{-\eta}M,
+ \quad (a_A,a_P)=(1-a,a), \label{eq:hicksian-demand}\\
+ s(z)&=\frac{ap_P(z)^{1-\eta}}
+ {(1-a)p_A^{1-\eta}+ap_P(z)^{1-\eta}}\in(0,1). \label{eq:platform-share}
+\end{align}
+For every finite \(z\),
+\begin{equation}
+ \frac{d\ln P_M}{dz}=-s,\qquad
+ \frac{ds}{dz}=(\eta-1)s(1-s)>0.
+ \label{eq:access-derivatives}
+\end{equation}
+\end{lemma}
+
+Platform transactions retain the share
+\begin{equation}
+ \rho_P(\kappa)=\underline\rho_P+\kappa\delta_\rho,
+ \label{eq:platform-retention}
+\end{equation}
+where \(\kappa\) summarizes the local seller, fulfillment, and service
+organization able to participate in platform trade. Average local value
+capture is
+\begin{align}
+ \omega(z,\kappa)&=(1-s)\rho_A+s\rho_P(\kappa),
+ \label{eq:retention}\\
+ \omega_z&=-\Delta(\kappa)(\eta-1)s(1-s),\qquad
+ \omega_\kappa=s\delta_\rho>0,
+ \label{eq:retention-derivatives}\\
+ \Delta(\kappa)&\equiv\rho_A-\rho_P(\kappa).
+\end{align}
+The benchmark condition \(\Delta(\kappa)>0\) is imposed only where stated; a
+lower platform retention share is not part of the definition of a platform.
+
+Residents spend \(\alpha Y\) through the retail channels and \(\beta Y\) on the
+local nontradable. With \(X_A=(1-s)(\alpha Y+G)\) and
+\(X_P=s(\alpha Y+G)\), Assumption~\ref{ass:closure} gives nontradable revenue
+\(p_NN=N=\beta Y\) and channel income
+\(\rho_AX_A+\rho_P(\kappa)X_P=\omega(\alpha Y+G)\).
+
+\begin{definition}[Local-income equilibrium]
+\label{def:equilibrium}
+For given \(z\), \(\kappa\), and \(G\), an equilibrium is
+\[
+(M_A,M_P,M,N,Z,s,\omega,Y,R)
+\]
+that satisfies household optimization, channel expenditure minimization,
+\eqref{eq:retention}, and
+\begin{equation}
+ Y=B(z)+\beta Y+\omega(z,\kappa)[\alpha Y+G],
+ \label{eq:income-fixed-point}
+\end{equation}
+ with \(R\) the consumption-equivalent real-income index implied by the
+ household problem. The objects \(P_M\) and \(D\) are derived uniquely from
+ \(z\) and the primitives.
+\end{definition}
+
+\begin{lemma}[Existence and uniqueness]
+\label{lem:equilibrium}
+An equilibrium exists, is unique, and has \(Y>0\). For fixed \(z\), the income
+map
+\[
+ T(Y)=B+\omega G+(\beta+\alpha\omega)Y
+\]
+is a contraction on \(\mathbb R_+\); iteration from any \(Y_0\geq0\) converges
+to
+\begin{equation}
+ Y(z,\kappa,G)=\frac{B(z)+\omega(z,\kappa)G}{D(z,\kappa)},\qquad
+ D(z,\kappa)=1-\beta-\alpha\omega(z,\kappa)>0.
+ \label{eq:income-solution}
+\end{equation}
+\end{lemma}
+
+Indeed, \(0\leq\beta+\alpha\omega\leq\alpha+\beta<1\).
+Household optimization then gives consumption-equivalent real income
+\begin{equation}
+ R(z,\kappa,G)=K\frac{Y(z,\kappa,G)}{P_M(z)^\alpha},\qquad
+ K=\alpha^\alpha\beta^\beta
+ (1-\alpha-\beta)^{1-\alpha-\beta}.
+ \label{eq:real-income}
+\end{equation}
+This is an indirect consumption index conditional on Assumption~\ref{ass:closure},
+not social welfare including labor supply and opportunity costs.
+
+\section{Results}
+\label{sec:results}
+
+\begin{proposition}[Local-income and gross-spending multipliers]
+\label{prop:multiplier}
+Holding \(z\), \(\kappa\), and \(G\) fixed, treat realized \(B\) as an
+independent autonomous-income injection (equivalently, vary its level shifter
+\(\bar B\)).
+\begin{align}
+ m_B(\omega)&\equiv\frac{\partial Y}{\partial B}
+ =\frac{1}{1-\beta-\alpha\omega},
+ \label{eq:local-income-multiplier}\\
+ \mathcal M_G(\omega)&\equiv\frac{\partial Y}{\partial G}
+ =\frac{\omega}{1-\beta-\alpha\omega}
+ =\omega m_B(\omega)
+ =\omega\sum_{k=0}^{\infty}(\beta+\alpha\omega)^k.
+ \label{eq:recursive-multiplier}
+\end{align}
+Let \(m_0=(1-\alpha-\beta)^{-1}\). Then
+\(\mathcal M_G(\omega)\leq m_0\omega\), with equality exactly at
+\(\omega\in\{0,1\}\) and strict inequality for \(0<\omega<1\). For
+\(\omega>0\),
+\begin{equation}
+ \frac{\partial\ln\mathcal M_G}{\partial\ln\omega}
+ =\frac{1-\beta}{1-\beta-\alpha\omega}>1.
+ \label{eq:retention-elasticity}
+\end{equation}
+\end{proposition}
+
+The multiplier \(m_B\) propagates one dollar already formed as local income.
+The gross-spending multiplier \(\mathcal M_G\) additionally applies first-round
+incidence \(\omega\). Its series shows why \(m_0\omega\) overstates propagation:
+the latter applies leakage only initially, whereas retail leakage recurs when
+induced income finances new retail expenditure.
+
+Set \(G=0\), take \(z_1>z_0\), let
+\(B_j=B(z_j)\), \(D_j=D(z_j,\kappa)\), and
+\(P_{Mj}=P_M(z_j)\) for \(j\in\{0,1\}\), and define
+\begin{equation}
+ \mathcal B=\frac{B_1}{B_0},\qquad
+ \mathcal D=\frac{D_1}{D_0},\qquad
+ \mathcal P=\frac{P_{M1}}{P_{M0}}.
+ \label{eq:finite-objects}
+\end{equation}
+
+\begin{proposition}[Finite access--capture thresholds]
+\label{prop:thresholds}
+Fix \(\kappa\). Suppose \(G=0\) and \(\Delta(\kappa)>0\). Then
+\(\mathcal D>1\), \(0<\mathcal P<1\), and
+\begin{equation}
+ \frac{Y_1}{Y_0}=\frac{\mathcal B}{\mathcal D},\qquad
+ \frac{R_1}{R_0}=
+ \frac{\mathcal B}{\mathcal D\mathcal P^\alpha}.
+ \label{eq:finite-ratios}
+\end{equation}
+The three strict regions are: (i) both incomes rise if
+\(\mathcal B>\mathcal D\); (ii) nominal income falls but real income rises if
+\(\mathcal D\mathcal P^\alpha<\mathcal B<\mathcal D\); and (iii) both fall if
+\(\mathcal B<\mathcal D\mathcal P^\alpha\). At
+\(\mathcal B=\mathcal D\), nominal income is unchanged and real income rises;
+at \(\mathcal B=\mathcal D\mathcal P^\alpha\), nominal income falls and real
+income is unchanged. These cases are exhaustive; nominal income cannot rise
+while real income falls.
+\end{proposition}
+
+Two consequences are useful. Since \(\mathcal B\geq1\), holding
+\(\mathcal D\) and \(\mathcal P\) fixed
+while allowing \(\varepsilon\geq0\), the joint-loss region is nonempty if and
+only if \(\mathcal D\mathcal P^\alpha>1\). At
+\(\varepsilon=0\), the local condition
+\(\Delta(\kappa)(\eta-1)(1-s)>D(s,\kappa)\) makes both marginal effects
+negative.
+
+For marginal changes at \(G=0\), define
+\begin{equation}
+ \Lambda(s,\kappa)=
+ \frac{\alpha\Delta(\kappa)(\eta-1)s(1-s)}
+ {D(s,\kappa)}.
+ \label{eq:substitution-drag}
+\end{equation}
+
+\begin{corollary}[Organizational capacity and integration]
+\label{cor:marginal}
+Suppose \(G=0\). Then
+\begin{equation}
+ \frac{d\ln Y}{dz}=\varepsilon-\Lambda(s,\kappa),\qquad
+ \frac{d\ln R}{dz}=\varepsilon+\alpha s-\Lambda(s,\kappa).
+ \label{eq:marginal-effects}
+\end{equation}
+Moreover,
+\begin{align}
+ \frac{\partial\ln Y}{\partial\kappa}
+ &=\frac{\alpha s\delta_\rho}{D}>0, \label{eq:capacity-income}\\
+ \frac{\partial\Lambda}{\partial\kappa}
+ &=-\frac{\alpha\delta_\rho(\eta-1)s(1-s)
+ (1-\beta-\alpha\rho_A)}{D^2}<0, \label{eq:capacity-drag}\\
+ \frac{\partial\ln\mathcal M_G}{\partial\kappa}
+ &=\frac{(1-\beta)s\delta_\rho}{\omega D}>0
+ \quad\text{if }\omega>0. \label{eq:capacity-multiplier}
+\end{align}
+Let \(h(s)=(\eta-1)(1-s)\) and
+\(d_A=1-\beta-\alpha\rho_A\). For \(q\geq0\) satisfying
+\(\Lambda(s,0)>q>\Lambda(s,1)\), the condition implies \(q<h(s)\); define
+\begin{equation}
+ \kappa(q)=\frac{1}{\delta_\rho}
+ \left[
+ \rho_A-\underline\rho_P-
+ \frac{q\,d_A}{\alpha s[h(s)-q]}
+ \right].
+ \label{eq:capacity-threshold}
+\end{equation}
+This is the unique capacity in \((0,1)\) at which
+\(\Lambda(s,\kappa)=q\). If
+\(\Lambda(s,0)>\varepsilon+\alpha s>\varepsilon>\Lambda(s,1)\), then
+\[
+ 0<\kappa_R^*\equiv\kappa(\varepsilon+\alpha s)
+ <\kappa_Y^*\equiv\kappa(\varepsilon)<1.
+\]
+Both marginal effects are negative below \(\kappa_R^*\); only real income
+rises between the two thresholds; and both rise above \(\kappa_Y^*\).
+\end{corollary}
+
+The two access gains are \(\varepsilon\) for nominal income and
+\(\varepsilon+\alpha s\) after adding the consumer-price effect. Organizational
+capacity lowers the opposing capture drag and increases the multiplier. If
+\(\rho_P(\kappa)\geq\rho_A\), then \(\Lambda\leq0\), so integration cannot
+reduce either income measure under \(\varepsilon\geq0\).
+
+\begin{corollary}[Intermediate-penetration peak]
+\label{cor:peak}
+Fix \(\kappa\) with \(\Delta(\kappa)>0\), and let
+\(d_A=1-\beta-\alpha\rho_A\). The function
+\(s\mapsto\Lambda(s,\kappa)\), extended continuously to \([0,1]\), is strictly
+concave and has the unique maximizer
+\begin{equation}
+ s^\dagger(\kappa)=
+ \frac{1}{1+\sqrt{1+\alpha\Delta(\kappa)/d_A}}<\frac12.
+ \label{eq:penetration-peak}
+\end{equation}
+Writing \(t(\kappa)=\sqrt{1+\alpha\Delta(\kappa)/d_A}\), its maximum is
+\begin{equation}
+ \Lambda_{\max}(\kappa)
+ =(\eta-1)\frac{t(\kappa)-1}{t(\kappa)+1}.
+ \label{eq:maximum-drag}
+\end{equation}
+Over interior capacity levels for which \(\Delta(\kappa)>0\),
+\(\partial s^\dagger/\partial\kappa>0\) and
+\(\partial\Lambda_{\max}/\partial\kappa<0\); the corresponding feasible
+one-sided derivatives apply at \(\kappa\in\{0,1\}\).
+\end{corollary}
+
+The peak is a marginal, not cumulative, effect. Platform substitution is weak
+near either channel-share boundary, while stronger local organization reduces
+the retention gap at every interior share. Figure~\ref{fig:mechanisms}
+illustrates both implications with an admissible parameterization satisfying
+the endpoint-crossing condition; it is not a calibration.
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=\textwidth]{mechanism_figure.pdf}
+ \caption{Value-capture mechanisms. \textbf{(a)} At fixed low, medium, and high
+ organizational capacity, capture drag is hump-shaped in platform penetration;
+ stronger organization lowers the peak and moves it toward one-half.
+ The horizontal \(\varepsilon\) line and upward-sloping
+ \(\varepsilon+\alpha s\) line delimit the three sign regions.
+ \textbf{(b)} At a fixed platform share, the nominal- and real-income effects of
+ integration increase with organizational capacity and cross zero at
+ \(\kappa_R^*<\kappa_Y^*\), producing the three sign regions in
+ Corollary~\ref{cor:marginal}. Parameters are
+ \(\alpha=0.35\), \(\beta=0.25\), \(\eta=4\), \(\rho_A=0.8\),
+ \(\underline\rho_P=0.1\), \(\overline\rho_P=0.6\), and
+ \(\varepsilon=0.1\); panel \textbf{(b)} fixes \(s=0.25\).}
+ \label{fig:mechanisms}
+\end{figure}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+Market integration can expand access while platformization relocates the
+income generated by transactions. The model separates these forces and shows
+how the retained share governs both first-round income formation and subsequent
+local demand. Low organizational capacity can make capture losses dominate;
+intermediate capacity can preserve consumer gains despite lower local income;
+and sufficiently high capacity can make access gains dominate while raising
+the effective multiplier. When \(\Delta(\kappa)>0\), the marginal capture drag
+is greatest during intermediate platform penetration, before either channel
+dominates. The framework is deliberately a short-run local equilibrium: it
+takes the platform-price schedule and production locations as given, abstracts
+from tax incidence, and evaluates consumption-equivalent real income rather
+than full social welfare. These restrictions isolate channel-specific retention
+as the link between platform intermediation and local income formation;
+embedding this mechanism in a multi-region equilibrium is a natural extension.
+
+\section*{Data availability}
+
+No data were used for the research described in this article.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\clearpage
+\input{appendix}
+
+\end{document}

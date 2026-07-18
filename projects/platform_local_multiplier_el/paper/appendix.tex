@@ -1,0 +1,322 @@
+\appendix
+\setcounter{equation}{0}
+\renewcommand{\theequation}{A.\arabic{equation}}
+\renewcommand{\theHequation}{A.\arabic{equation}}
+
+\section{Proofs and Demand Details}
+\label{app:proofs}
+
+\begin{proof}[Proof of Lemma~\ref{lem:demand}]
+Write \(\gamma=1-\alpha-\beta>0\). The first-order conditions for the
+outer household problem are
+\[
+ \frac{\alpha}{M}=\lambda P_M,\qquad
+ \frac{\beta}{N}=\lambda,\qquad
+ \frac{\gamma}{Z}=\lambda.
+\]
+The budget constraint gives \(\lambda=1/Y\), hence expenditures on
+\((M,N,Z)\) equal \((\alpha Y,\beta Y,\gamma Y)\). Substitution into utility
+gives
+\begin{equation}
+ R=K\frac{Y}{P_M^\alpha},\qquad
+ K=\alpha^\alpha\beta^\beta\gamma^\gamma.
+ \label{eq:indirect-utility-proof}
+\end{equation}
+
+Let \(h_P(p_A,p_P,1)\) be the platform Hicksian demand for one unit of the
+homothetic retail aggregate. Differentiability of the unit-expenditure
+function and Shephard's lemma imply
+\[
+ \frac{\partial P_M}{\partial p_P}=h_P(p_A,p_P,1),\qquad
+ s=\frac{p_Ph_P(p_A,p_P,1)}{P_M}
+   =\frac{\partial\ln P_M}{\partial\ln p_P}.
+\]
+Because \(p_A\) is fixed and \(d\ln p_P/dz=-1\), the chain rule yields
+\(d\ln P_M/dz=-s\), proving the demand identities in the lemma.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:equilibrium}]
+For fixed \((z,\kappa,G)\), define
+\[
+ T(Y)=B+\omega G+(\beta+\alpha\omega)Y.
+\]
+Since \(s\in(0,1)\) and both retention shares lie in \([0,1]\),
+\(0\leq\omega\leq1\). Thus \(T\) maps \(\mathbb R_+\) into itself and
+\[
+ |T(Y)-T(\widetilde Y)|
+ = (\beta+\alpha\omega)|Y-\widetilde Y|,
+ \qquad \beta+\alpha\omega\leq\alpha+\beta<1.
+\]
+The contraction theorem gives a unique fixed point and convergence of
+iteration from every nonnegative initial value. Solving the fixed-point
+equation yields \eqref{eq:income-solution}. Its numerator is positive, while
+\(D\geq1-\alpha-\beta>0\), so \(Y>0\). Lemma~\ref{lem:demand} then determines
+the remaining household objects uniquely.
+\end{proof}
+
+\subsection{Benchmark multipliers}
+
+Holding \((z,\kappa,G)\) fixed and varying the realized autonomous-income
+injection or outside-funded retail spending gives
+\[
+ \frac{\partial Y}{\partial B}=\frac1D,
+ \qquad
+ \frac{\partial Y}{\partial G}=\frac{\omega}{D}
+ =\omega\sum_{n=0}^{\infty}(\beta+\alpha\omega)^n.
+\]
+The series converges because \(\beta+\alpha\omega<1\). It records that retail
+leakage recurs in every induced spending round.
+
+\begin{proof}[Proof of Proposition~\ref{prop:finite-capacity}]
+The ratio identities follow immediately from \(Y=B/D\) and
+\(R=KY/P_M^\alpha\). Organizational capacity does not affect \(B_j\),
+\(s_j\), or \(P_{Mj}\). Differentiating
+\[
+ \mathcal D(\kappa)=\frac{D_1(\kappa)}{D_0(\kappa)}
+\]
+therefore gives
+\begin{align}
+ \frac{\partial\ln\mathcal D(\kappa)}{\partial\kappa}
+ &=-\alpha\delta_\rho
+ \left[\frac{s_1}{D_1(\kappa)}-
+       \frac{s_0}{D_0(\kappa)}\right] \notag\\
+ &=-\frac{\alpha\delta_\rho d_A(s_1-s_0)}
+ {D_1(\kappa)D_0(\kappa)}<0.
+ \label{eq:finite-capacity-monotonicity-proof}
+\end{align}
+Hence both finite income ratios are strictly increasing in \(\kappa\).
+
+For any \(q\in(\mathcal D(1),\mathcal D(0))\), continuity and strict
+monotonicity give a unique \(\kappa(q)\in(0,1)\) satisfying
+\(\mathcal D(\kappa(q))=q\). Solving
+\[
+ d_A+\alpha s_1\Delta(\kappa)
+ =q[d_A+\alpha s_0\Delta(\kappa)]
+\]
+gives \eqref{eq:finite-capacity-solution}. The denominator in that expression
+is positive at a solution because
+\[
+ s_1-qs_0
+ =\frac{s_1D_0(\kappa)-s_0D_1(\kappa)}{D_0(\kappa)}
+ =\frac{d_A(s_1-s_0)}{D_0(\kappa)}>0.
+\]
+Since \(0<\mathcal P<1\),
+\(q_R^F=\mathcal B/\mathcal P^\alpha>q_Y^F=\mathcal B\). The inverse of the
+strictly decreasing function \(\mathcal D\) is decreasing, so
+\(\kappa_R^F<\kappa_Y^F\). Comparing \(\mathcal D(\kappa)\) with the two
+targets proves the three strict regions. At the first threshold,
+\[
+ \frac{R_1}{R_0}=1,\qquad
+ \frac{Y_1}{Y_0}=\mathcal P^\alpha<1;
+\]
+at the second,
+\[
+ \frac{Y_1}{Y_0}=1,\qquad
+ \frac{R_1}{R_0}=\mathcal P^{-\alpha}>1.
+\]
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:increasing-differences}]
+At \(G=0\),
+\[
+ Y=\frac{B}{D},\qquad
+ D=d_A+\alpha s\Delta(\kappa),\qquad
+ D_\kappa=-\alpha s\delta_\rho.
+\]
+Therefore \(\partial\ln Y/\partial\kappa=\alpha s\delta_\rho/D\). Since
+\(D_z=\alpha\Delta(\kappa)s_z\),
+\begin{align}
+ \frac{\partial^2\ln Y}{\partial z\,\partial\kappa}
+ &=\alpha\delta_\rho
+ \frac{s_zD-sD_z}{D^2} \\
+ &=\frac{\alpha\delta_\rho d_A s_z}{D^2}>0.
+\end{align}
+Finally, \(\ln R=\ln K+\ln Y-\alpha\ln P_M\), and \(P_M\) is independent
+of \(\kappa\), so the same cross-partial holds for \(\ln R\).
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:general-share-speed}]
+Strict concavity, the endpoint restrictions, and interior positivity imply
+\(g'(0)>0\) and \(g'(1)<0\). For example, for every \(u\in(0,1)\),
+\[
+ g'(0)\geq\frac{g(u)-g(0)}u>0,
+ \qquad
+ g'(1)\leq\frac{g(1)-g(u)}{1-u}<0.
+\]
+Write \(b=\alpha\Delta(\kappa)>0\) and define
+\[
+ F(s,b)=g'(s)(d_A+bs)-bg(s).
+\]
+Direct differentiation gives
+\begin{equation}
+ \frac{\partial\Lambda_g}{\partial s}
+ =\frac{bF(s,b)}{(d_A+bs)^2},
+ \qquad
+ F_s(s,b)=g''(s)(d_A+bs)<0.
+ \label{eq:general-peak-foc}
+\end{equation}
+Moreover,
+\[
+ F(0,b)=d_Ag'(0)>0,
+ \qquad
+ F(1,b)=(d_A+b)g'(1)<0.
+\]
+Thus \(F\) has exactly one zero \(s^*(b)\in(0,1)\). Equation
+\eqref{eq:general-peak-foc} shows that \(\Lambda_g\) rises before this zero and
+falls after it. Since its endpoint values are zero and it is positive in the
+interior, \(s^*\) is the unique global maximizer.
+
+If \(g(s)=g(1-s)\), differentiability gives \(g'(1/2)=0\), so
+\(F(1/2,b)=-bg(1/2)<0\). Because \(F(0,b)>0\) and \(F\) is strictly
+decreasing, \(s^*(b)<1/2\).
+
+For the capacity comparative statics, evaluate expressions at \(s=s^*(b)\)
+and write \(D^*=d_A+bs^*\). The first-order condition implies
+\(g'(s^*)=bg(s^*)/D^*\), and hence
+\[
+ F_b(s^*,b)=s^*g'(s^*)-g(s^*)
+ =-\frac{d_Ag(s^*)}{D^*}<0.
+\]
+The implicit-function theorem, \(b_\kappa=-\alpha\delta_\rho\), and the
+envelope theorem yield
+\begin{align}
+ \frac{\partial s^*}{\partial\kappa}
+ &=-\frac{\alpha\delta_\rho d_Ag(s^*)}
+ {g''(s^*)[D^*]^2}>0, \\
+ \frac{\partial\Lambda_g^{\max}}{\partial\kappa}
+ &=-\frac{\alpha\delta_\rho d_Ag(s^*)}{[D^*]^2}<0.
+ \label{eq:general-peak-comparative-statics-proof}
+\end{align}
+\end{proof}
+
+\subsection{Admissibility of the general share-speed}
+
+The share-speed restriction is consistent with a two-channel homogeneous demand
+system. Let \(t=\ln(p_P/p_A)\) and take any interior solution of
+\(ds/dt=-g(s)\). Define
+\[
+ \phi(r)=\exp\left\{\int_{r_0}^{r}s(\ln u)\,d\ln u\right\},
+ \qquad
+ P_M(p_A,p_P)=p_A\phi(p_P/p_A).
+\]
+Then \(P_M\) is linearly homogeneous and its platform expenditure share is
+\(p_P P_{M,p_P}/P_M=s\). It is increasing because the two expenditure shares
+are \(s\) and \(1-s\). Moreover,
+\[
+ \phi''(r)
+ =-\frac{\phi(r)}{r^2}\left[g(s)+s(1-s)\right]<0,
+\]
+so \(P_M\) is a valid concave unit-expenditure function. This construction also
+shows that the non-CES share-speed in Figure~\ref{fig:mechanisms} is not merely
+an arbitrary curve detached from a demand system.
+
+\subsection{CES specialization}
+\label{app:ces}
+
+The main assumptions nest the two-channel CES aggregator
+\begin{equation}
+ M=\left[(1-a)^{1/\eta}M_A^{(\eta-1)/\eta}
+ +a^{1/\eta}M_P^{(\eta-1)/\eta}\right]^{\eta/(\eta-1)},
+ \qquad a\in(0,1),\quad\eta>1.
+ \label{eq:ces-specialization}
+\end{equation}
+Cost minimization gives
+\begin{align}
+ P_M(z)&=\left[(1-a)p_A^{1-\eta}
+ +ap_P(z)^{1-\eta}\right]^{1/(1-\eta)}, \\
+ s(z)&=\frac{ap_P(z)^{1-\eta}}
+ {(1-a)p_A^{1-\eta}+ap_P(z)^{1-\eta}}, \\
+ s'(z)&=(\eta-1)s(1-s).
+ \label{eq:ces-price-share}
+\end{align}
+Thus \(g(s)=(\eta-1)s(1-s)\) satisfies all conditions in
+Proposition~\ref{prop:general-share-speed}, including symmetry. With
+\(t(\kappa)=\sqrt{1+\alpha\Delta(\kappa)/d_A}\), its unique peak and height
+have the closed forms
+\begin{align}
+ s^*(\kappa)&=\frac{1}{1+t(\kappa)}<\frac12, \\
+ \Lambda_g^{\max}(\kappa)
+ &=(\eta-1)\frac{t(\kappa)-1}{t(\kappa)+1}.
+ \label{eq:ces-peak-closed-form}
+\end{align}
+These expressions are the CES specialization, not assumptions needed for the
+general peak result.
+
+As \(\eta\downarrow1\), the CES system approaches the Cobb--Douglas channel
+case, \(P_M\to p_A^{1-a}p_P^a\) and \(s\to a\). At fixed unequal prices,
+\(\eta\to\infty\) concentrates expenditure on the cheaper channel. These are
+limits of the specialization rather than finite-parameter corners in the main
+interior demand path.
+
+Figure~\ref{fig:local-marginal-regions} combines this CES specialization with
+the marginal-income identities in the main text. It is a local derivative
+map, not a finite-change calculation: for each fixed capacity level, the
+position of \(\Lambda_g(s,\kappa)\) relative to \(\varepsilon\) and
+\(\varepsilon+\alpha s\) determines the signs of \(d\ln Y/dz\) and
+\(d\ln R/dz\). Movement to the right can represent deeper integration only
+conditional on the maintained mapping \(ds/dz>0\) and fixed remaining
+parameters. At finite CES prices the share lies strictly in \((0,1)\); the
+displayed endpoints are the continuous extension used by the peak theorem.
+The CES weight \(a\) and the two price levels determine the mapping from \(z\)
+to \(s\), but do not enter this geometry once \(s\) is placed on the horizontal
+axis.
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=0.97\textwidth]{supplementary_local_marginal_regions.pdf}
+ \caption{Local marginal income regions in the CES specialization. Under
+ \(G=0\), the curves plot \(\Lambda_g(s,\kappa)\) at \(\kappa=0,0.5,1\) for
+ \(g(s)=3s(1-s)\), \(\alpha=0.35\),
+ \(\beta=0.25\), \(\eta=4\), \(\varepsilon=0.10\), \(\rho_A=0.8\), and
+ \((\underline\rho_P,\overline\rho_P)=(0.1,0.6)\). The horizontal line is
+ \(\varepsilon\); the upward-sloping line is \(\varepsilon+\alpha s\).
+ Below \(\varepsilon\), nominal local income and consumption-equivalent real
+ income both rise. Between the two reference lines, nominal local income falls
+ while consumption-equivalent real income rises. Above
+ \(\varepsilon+\alpha s\), both fall; equality with a reference line gives
+ zero marginal change for the corresponding income measure. Open markers
+ identify drag maxima, not optimal platform shares. The regions classify local
+ marginal effects, not finite changes. Illustration, not calibration.}
+ \label{fig:local-marginal-regions}
+\end{figure}
+
+\subsection{Boundary cases and outside-funded spending}
+
+If \(\Delta(\kappa)=0\), then \(\Lambda_g\equiv0\), so no unique drag peak
+exists. If \(\Delta(\kappa)<0\), integration shifts expenditure toward the
+higher-retention channel and the capture-drag proposition does not apply. The
+capacity derivatives in Proposition~\ref{prop:general-share-speed} are ordinary
+interior derivatives; feasible one-sided versions apply at \(\kappa=0,1\).
+Without symmetry of \(g\), the unique peak remains but need not lie below
+one-half.
+
+The endpoint-crossing condition in Proposition~\ref{prop:finite-capacity} is
+sufficient for two interior capacity thresholds. A target strictly outside
+\([\mathcal D(1),\mathcal D(0)]\) has no threshold on \([0,1]\); equality with
+an endpoint places the threshold at \(\kappa=1\) or \(0\), respectively. Only a
+target in \((\mathcal D(1),\mathcal D(0))\) yields an interior threshold. The
+finite ratio identities remain valid in every case.
+
+For completeness, when nominal outside-funded spending \(G>0\) is fixed,
+\begin{align}
+ \frac{d\ln Y}{dz}
+ &=\frac{\varepsilon B+\omega_zG}{B+\omega G}
+ +\frac{\alpha\omega_z}{D}, \\
+ \frac{d\ln R}{dz}
+ &=\frac{\varepsilon B+\omega_zG}{B+\omega G}
+ +\frac{\alpha\omega_z}{D}+\alpha s, \\
+ \frac{\partial\ln Y}{\partial\kappa}
+ &=s\delta_\rho\left[\frac{G}{B+\omega G}+\frac{\alpha}{D}\right]>0,
+ \qquad
+ \frac{\partial\ln R}{\partial\kappa}
+ =\frac{\partial\ln Y}{\partial\kappa}.
+ \label{eq:g-positive-derivatives}
+\end{align}
+For a finite change, define
+\[
+ \mathcal N=\frac{B_1+\omega_1G}{B_0+\omega_0G}.
+\]
+Then \(Y_1/Y_0=\mathcal N/\mathcal D\) and
+\(R_1/R_0=\mathcal N/(\mathcal D\mathcal P^\alpha)\). Because
+\(\mathcal N\) itself varies with capacity, the closed-form M1 capacity
+thresholds are stated for \(G=0\).

@@ -13,6 +13,7 @@ Thumbs.db
 *.run.xml
 *.synctex.gz
 *.toc
+*.xdv
 
 # Temporary and local environment files
 .env

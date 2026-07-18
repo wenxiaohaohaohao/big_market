@@ -1,0 +1,302 @@
+\appendix
+\setcounter{equation}{0}
+\renewcommand{\theequation}{A.\arabic{equation}}
+\renewcommand{\theHequation}{A.\arabic{equation}}
+
+\section{Proofs and Boundary Cases}
+\label{app:proofs}
+
+\begin{proof}[Proof of Lemma~\ref{lem:demand}]
+Write \(\gamma=1-\alpha-\beta>0\). Maximizing log utility in
+\eqref{eq:outer-problem} gives
+\begin{equation}
+ \frac{\alpha}{M}=\lambda P_M,\qquad
+ \frac{\beta}{N}=\lambda,\qquad
+ \frac{\gamma}{Z}=\lambda.
+ \label{eq:outer-focs}
+\end{equation}
+The budget constraint implies \(\lambda=1/Y\), hence
+\begin{equation}
+ M=\frac{\alpha Y}{P_M},\qquad N=\beta Y,\qquad Z=\gamma Y.
+ \label{eq:outer-demands}
+\end{equation}
+Strictly positive shares, prices, and income make this solution interior.
+Substitution yields
+\begin{equation}
+ U=\alpha^\alpha\beta^\beta\gamma^\gamma
+ \frac{Y}{P_M^\alpha},
+ \label{eq:indirect-utility-proof}
+\end{equation}
+which establishes \eqref{eq:real-income}.
+
+For the inner problem, let \(\mathcal C(M_A,M_P)\) denote the right side of
+\eqref{eq:channel-ces}. A corner cannot minimize cost. For example, as
+\(M_A\downarrow0\) with \(M_P>0\),
+\(\mathcal C_A/\mathcal C_P\to\infty\); moving along the isoquant has marginal
+cost \(p_A-p_P\mathcal C_A/\mathcal C_P<0\) near the boundary. The symmetric
+argument excludes \(M_P=0\). We may therefore use the interior Lagrangian
+\begin{equation}
+\mathcal L=p_AM_A+p_PM_P+\mu[M-\mathcal C(M_A,M_P)].
+ \label{eq:channel-lagrangian}
+\end{equation}
+Its first-order conditions imply
+\begin{equation}
+ \frac{M_A}{M_P}
+ =\frac{1-a}{a}\left(\frac{p_A}{p_P}\right)^{-\eta}.
+ \label{eq:relative-channel-demand}
+\end{equation}
+Using the binding constraint gives
+\begin{equation}
+ M_A=(1-a)\left(\frac{p_A}{P_M}\right)^{-\eta}M,\qquad
+ M_P=a\left(\frac{p_P}{P_M}\right)^{-\eta}M,
+ \label{eq:conditional-demands-proof}
+\end{equation}
+and unit cost is \eqref{eq:price-index}. Strict quasiconcavity of the CES
+aggregator makes its expenditure-requirement set strictly convex, so the
+positive-price solution is unique. All terms in \eqref{eq:platform-share} are
+positive, hence \(0<s<1\) for finite \(z\).
+
+Let \(Q=(1-a)p_A^{1-\eta}+ap_P^{1-\eta}\). Since
+\(d\ln p_P/dz=-1\),
+\begin{equation}
+ \frac{d\ln P_M}{dz}
+ =\frac{ap_P^{1-\eta}}{Q}\frac{d\ln p_P}{dz}=-s.
+ \label{eq:price-derivative-proof}
+\end{equation}
+Also,
+\begin{equation}
+ \frac{s}{1-s}=\frac{a}{1-a}
+ \left(\frac{p_P}{p_A}\right)^{1-\eta}
+ \quad\Longrightarrow\quad
+ s'=(\eta-1)s(1-s).
+ \label{eq:share-derivative-proof}
+\end{equation}
+Differentiating \eqref{eq:platform-retention} and \eqref{eq:retention} gives
+\eqref{eq:retention-derivatives}.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:equilibrium}]
+For fixed \(z\), \(T\) maps \(\mathbb R_+\) into itself because
+\(B+\omega G>0\). Since \(s\in(0,1)\) and both channel-retention shares lie in
+\([0,1]\), \(0\leq\omega\leq1\). For any \(Y,\widetilde Y\geq0\),
+\begin{equation}
+ |T(Y)-T(\widetilde Y)|
+ =(\beta+\alpha\omega)|Y-\widetilde Y|,
+ \qquad 0\leq\beta+\alpha\omega\leq\alpha+\beta<1.
+ \label{eq:contraction-proof}
+\end{equation}
+The contraction theorem gives a unique fixed point and global convergence of
+\(Y_{n+1}=T(Y_n)\). Solving the fixed-point equation gives
+\eqref{eq:income-solution}; its numerator and denominator are positive.
+Lemma~\ref{lem:demand} then uniquely determines all remaining objects.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:multiplier}]
+Fixing \(z\), \(\kappa\), and \(G\), treat realized \(B\) as an independent
+autonomous-income injection, equivalently a change in the level shifter
+\(\bar B\). Differentiating \eqref{eq:income-solution} in that injection and in
+gross external retail spending \(G\) gives
+\eqref{eq:local-income-multiplier} and \eqref{eq:recursive-multiplier}; the
+series converges because
+\(\beta+\alpha\omega<1\). Moreover,
+\begin{equation}
+ m_0\omega-\mathcal M_G(\omega)=
+ \frac{\alpha\omega(1-\omega)}
+ {(1-\alpha-\beta)(1-\beta-\alpha\omega)}.
+ \label{eq:multiplier-gap}
+\end{equation}
+Every denominator is positive, proving the inequality and both equality cases.
+Direct differentiation gives \eqref{eq:retention-elasticity} and
+\begin{equation}
+ \mathcal M_G''(\omega)=
+ \frac{2\alpha(1-\beta)}
+ {(1-\beta-\alpha\omega)^3}>0.
+ \label{eq:multiplier-convexity}
+\end{equation}
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:thresholds}]
+At fixed \(\kappa\), \(\Delta(\kappa)>0\) and
+Lemma~\ref{lem:demand} imply
+\(\omega_1<\omega_0\), \(D_1>D_0\), and \(P_{M1}<P_{M0}\). With \(G=0\),
+\begin{equation}
+ \frac{Y_1}{Y_0}=\frac{B_1/D_1}{B_0/D_0}
+ =\frac{\mathcal B}{\mathcal D},\qquad
+ \frac{R_1}{R_0}=
+ \frac{\mathcal B}{\mathcal D\mathcal P^\alpha}.
+ \label{eq:threshold-proof-ratios}
+\end{equation}
+Because \(0<\mathcal P^\alpha<1\),
+\(\mathcal D\mathcal P^\alpha<\mathcal D\). Comparing
+\(\mathcal B\) with these ordered thresholds proves the three regions and both
+boundaries. If \(Y_1/Y_0>1\), then
+\(R_1/R_0=(Y_1/Y_0)/\mathcal P^\alpha>1\), excluding the fourth sign pattern.
+Finally, \(\mathcal B=e^{\varepsilon(z_1-z_0)}\geq1\). Holding the other
+ratios fixed and allowing \(\varepsilon\geq0\), a \(\mathcal B\) in the
+joint-loss interval exists exactly when
+\(\mathcal D\mathcal P^\alpha>1\).
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:marginal}]
+For \(G=0\), \(Y=B/D\), \(D'=-\alpha\omega'\), and
+\begin{equation}
+ \frac{d\ln Y}{dz}=\varepsilon-\frac{D'}D
+ =\varepsilon-\Lambda(s,\kappa),\qquad
+ \frac{d\ln R}{dz}=\frac{d\ln Y}{dz}+\alpha s.
+ \label{eq:marginal-proof}
+\end{equation}
+Let \(d_A=1-\beta-\alpha\rho_A\geq1-\alpha-\beta>0\). Since
+\begin{equation}
+ D=d_A+\alpha s\Delta(\kappa),\quad
+ \Delta_\kappa=-\delta_\rho,\quad
+ D_\kappa=-\alpha s\delta_\rho,
+ \label{eq:capacity-denominator}
+\end{equation}
+direct differentiation gives \eqref{eq:capacity-income} and
+\eqref{eq:capacity-drag}. From
+\(\mathcal M_G=\omega/D\), \(\omega_\kappa=s\delta_\rho\), and
+\(D+\alpha\omega=1-\beta\), we obtain
+\eqref{eq:capacity-multiplier}.
+
+Write \(h=(\eta-1)(1-s)>0\). Then
+\begin{equation}
+ \Lambda(s,\kappa)
+ =\frac{\alpha s h\,\Delta(\kappa)}
+ {d_A+\alpha s\Delta(\kappa)}.
+ \label{eq:capacity-drag-rewrite}
+\end{equation}
+Equation~\eqref{eq:capacity-drag} makes this function continuous and strictly
+decreasing in \(\kappa\). Hence the endpoint condition around any \(q\)
+implies a unique solution in \((0,1)\). Moreover,
+\(\Lambda(s,0)>q\geq0\) implies \(q<h\), and solving
+\(\Lambda=q\) gives
+\[
+ \Delta(\kappa)=\frac{q\,d_A}{\alpha s(h-q)}.
+\]
+Using
+\(\Delta(\kappa)=\rho_A-\underline\rho_P-\kappa\delta_\rho\)
+gives \eqref{eq:capacity-threshold}.
+
+The function \(\kappa(q)\) is strictly decreasing in \(q\). Therefore the
+combined endpoint condition gives
+\(\kappa_R^*<\kappa_Y^*\). Equation~\eqref{eq:marginal-effects} and strict
+monotonicity of \(\Lambda\) give all three sign regions and the equality
+boundaries. At \(\kappa_R^*\), real income is locally constant while nominal
+income falls; at \(\kappa_Y^*\), nominal income is locally constant while real
+income rises.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:peak}]
+Fix \(\kappa\) with \(\Delta(\kappa)>0\), and write
+\[
+ d_A=1-\beta-\alpha\rho_A>0,\qquad
+ b=\alpha\Delta(\kappa)>0,\qquad
+ C=\alpha(\eta-1)\Delta(\kappa)>0.
+\]
+Because \(D=d_A+bs\), direct differentiation gives
+\begin{align}
+ \Lambda_s(s,\kappa)
+ &=C\frac{d_A(1-2s)-bs^2}{(d_A+bs)^2},
+ \label{eq:drag-first-derivative}\\
+ \Lambda_{ss}(s,\kappa)
+ &=-\frac{2C\,d_A(d_A+b)}{(d_A+bs)^3}<0.
+ \label{eq:drag-second-derivative}
+\end{align}
+Thus \(\Lambda\) is strictly concave. The numerator
+\(H(s)=d_A(1-2s)-bs^2\) of \eqref{eq:drag-first-derivative} satisfies
+\(H(0)>0\), \(H(1)<0\), and \(H'(s)=-2d_A-2bs<0\). It therefore has one
+zero in \((0,1)\). Solving \(H(s)=0\) yields
+\eqref{eq:penetration-peak}; the strict inequality follows because
+\(\sqrt{1+b/d_A}>1\).
+
+Let \(t=\sqrt{1+b/d_A}>1\). At \(s^\dagger=1/(1+t)\), use
+\(b=d_A(t^2-1)\) to obtain \eqref{eq:maximum-drag}. Finally,
+\(\Delta_\kappa=-\delta_\rho\) implies
+\begin{align}
+ \frac{\partial s^\dagger}{\partial\kappa}
+ &=\frac{\alpha\delta_\rho}{2d_A t(1+t)^2}>0,
+ \label{eq:peak-location-capacity}\\
+ \frac{\partial\Lambda_{\max}}{\partial\kappa}
+ &=-\frac{(\eta-1)\alpha\delta_\rho}{d_A t(1+t)^2}<0.
+ \label{eq:peak-height-capacity}
+\end{align}
+These derivatives apply while \(\Delta(\kappa)>0\).
+\end{proof}
+
+\subsection{Boundary and limiting cases}
+
+For finite \(z\), Lemma~\ref{lem:demand} rules out channel corners. Instead,
+\(z\to-\infty\) implies \(s\to0\) and \(\omega\to\rho_A\), while
+\(z\to\infty\) implies \(s\to1\) and
+\(\omega\to\rho_P(\kappa)\).
+Likewise, \(a\to0\) and \(a\to1\) produce the respective degenerate-share
+limits, outside Assumption~\ref{ass:primitives}.
+Because \(s\in(0,1)\), \(\omega=0\) exactly when
+\(\rho_A=\rho_P(\kappa)=0\), giving \(\mathcal M_G=0\) and
+\(Y=B/(1-\beta)\). Likewise, \(\omega=1\) exactly when
+\(\rho_A=\rho_P(\kappa)=1\), giving \(\mathcal M_G=m_0\).
+
+The endpoints \(\kappa=0,1\) produce
+\(\rho_P(0)=\underline\rho_P\) and
+\(\rho_P(1)=\overline\rho_P\), respectively. In the excluded
+limit \(\delta_\rho=0\), organizational capacity has no effect. If
+\(\rho_A=\rho_P(\kappa)\), retention is locally invariant to \(z\). If
+\(\rho_A<\rho_P(\kappa)\), then \(\omega_z>0\); with \(G=0\) and
+\(\varepsilon\geq0\), nominal and real income rise. As \(\alpha\to0\),
+\[
+ Y\to\frac{B+\omega G}{1-\beta},\qquad
+ \mathcal M_G\to\frac{\omega}{1-\beta};
+\]
+as \(\beta\to0\), \(D\to1-\alpha\omega\) and
+\(\mathcal M_G\to\omega/(1-\alpha\omega)\). Setting \(\varepsilon=0\) isolates
+retention and price effects. If \(\alpha+\beta\uparrow1\), contraction ceases
+to be uniform; at equality a finite fixed point remains only when
+\(\omega<1\), while \(D=0\) at full retention.
+
+As \(\eta\to1\),
+\begin{equation}
+ P_M\to p_A^{1-a}p_P^a,\qquad s\to a,
+ \label{eq:cobb-douglas-limit}
+\end{equation}
+the Cobb--Douglas channel limit. As \(\eta\to\infty\) at fixed unequal prices,
+demand converges to the cheaper channel. At equal prices the
+perfect-substitutes problem has multiple
+cost-minimizing allocations, although the CES sequence selects \(s=a\).
+
+For Corollary~\ref{cor:peak}, \(\Delta(\kappa)\downarrow0\) implies
+\(s^\dagger\uparrow1/2\) and \(\Lambda_{\max}\downarrow0\). At
+\(\Delta(\kappa)=0\), \(\Lambda\equiv0\), so every share maximizes the zero
+function and the peak is not unique. If \(\Delta(\kappa)<0\), integration
+raises rather than lowers local retention; the drag-peak result does not apply.
+
+Holding nominal \(G>0\) fixed, the general derivatives are
+\begin{equation}
+ \frac{d\ln Y}{dz}
+ =\frac{\varepsilon B+\omega_zG}{B+\omega G}
+ +\frac{\alpha\omega_z}{1-\beta-\alpha\omega}.
+\label{eq:general-g-derivative}
+\end{equation}
+\begin{equation}
+ \frac{d\ln R}{dz}
+ =\frac{\varepsilon B+\omega_zG}{B+\omega G}
+ +\frac{\alpha\omega_z}{1-\beta-\alpha\omega}+\alpha s.
+ \label{eq:general-g-real-derivative}
+\end{equation}
+For organizational capacity,
+\begin{equation}
+ \frac{\partial\ln Y}{\partial\kappa}
+ =s\delta_\rho\left[
+ \frac{G}{B+\omega G}+\frac{\alpha}{D}\right]>0,\qquad
+ \frac{\partial\ln R}{\partial\kappa}
+ =\frac{\partial\ln Y}{\partial\kappa}.
+ \label{eq:general-capacity-derivative}
+\end{equation}
+For a finite change define
+\begin{equation}
+ \mathcal N=
+ \frac{B_1+\omega_1G}{B_0+\omega_0G}.
+ \label{eq:general-finite-numerator}
+\end{equation}
+Then \(Y_1/Y_0=\mathcal N/\mathcal D\) and
+\(R_1/R_0=\mathcal N/(\mathcal D\mathcal P^\alpha)\); replacing
+\(\mathcal B\) by \(\mathcal N\) gives the general thresholds.

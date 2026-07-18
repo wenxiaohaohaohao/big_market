@@ -10,6 +10,15 @@
 
 **文献核验状态（2026-07-14）：** 暂定通过，可以开始模型与写作；相邻文献筛查仍需继续，不使用“直接竞争者为零”或“已完成创新性证明”等绝对表述
 
+**投稿稿更新（2026-07-17）：** 当前英文稿已经采用一般 homothetic
+两渠道需求，CES 降为 Supplement 中的闭式特例。正式主结果现为：
+（M1）有限整合冲击下唯一且有序的能力阈值；（M2）严格凹 share-speed
+下唯一的 capture-drag 峰值；（M3）integration 与 organizational
+capacity 的 log-income increasing differences。标准地方 multiplier
+只作为 benchmark。本备忘录后文保留项目形成过程和旧版 CES 推导，若
+与当前稿冲突，以 `README.md`、`paper/main.tex` 和
+`paper/supplement.tex` 为准。
+
 ---
 
 ## 建议转发给合作者时附上的短消息

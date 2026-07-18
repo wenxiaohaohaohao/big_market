@@ -1,0 +1,29 @@
+% !TEX program = pdflatex
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xr-hyper}
+\usepackage[hidelinks]{hyperref}
+
+\externaldocument{../output/paper}
+\graphicspath{{../figures/}}
+
+\title{Online Supplement to\\
+``Market Integration, Platformization, and Local Multipliers''}
+\author{Wenxiao Dong \and Yaqi Hu}
+\date{}
+
+\begin{document}
+
+\maketitle
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\theHfigure}{S.\arabic{figure}}
+\input{appendix}
+
+\end{document}
