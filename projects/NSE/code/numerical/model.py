@@ -33,20 +33,20 @@ class Parameters:
     sigma: float = 4.0
     b0: float = 1.0
     market0: float = 5.0
-    epsilon: float = 0.05
+    psi: float = 0.19
     gamma: float = 0.10
-    chi: float = 0.20
+    # Optional extension: platform access and public infrastructure can have
+    # increasing differences. The paper's baseline sets this term to zero.
+    chi_extension: float = 0.0
     c: float = 0.90
     d_p: float = 0.40
     d_l: float = 0.10
-    f: float = 0.30
-    big_f: float = 0.50
+    f: float = 0.34
+    big_f: float = 0.53
     platform_localization: float = 0.0
-    tau_o_bar: float = 1.65
-    aca_reference_cost: float = 1.46
 
     # Enabling-state block
-    kappa_private: float = 2.0
+    kappa_private: float = 4.0
     kappa_government: float = 0.30
     infrastructure_revenue_scale: float = 0.80
 
@@ -68,12 +68,10 @@ def validate_parameters(p: Parameters) -> None:
         raise ValueError("the local mode requires 0 <= d_l < d_p")
     if min(p.c, p.f, p.big_f, p.market0, p.b0) <= 0.0:
         raise ValueError("cost, fixed-cost, market, and background-income terms must be positive")
-    if min(p.gamma, p.chi) < 0.0:
-        raise ValueError("gamma and chi must be nonnegative")
+    if min(p.psi, p.gamma, p.chi_extension) < 0.0:
+        raise ValueError("producer-access cost effects must be nonnegative")
     if not 0.0 <= p.platform_localization <= 1.0:
         raise ValueError("platform_localization must lie in [0,1]")
-    if min(p.tau_o_bar, p.aca_reference_cost) <= 0.0:
-        raise ValueError("ACA comparison costs must be positive")
     if not 0.0 < p.kappa_government < p.kappa_private:
         raise ValueError("government financing wedge must be below the private wedge")
 
@@ -131,16 +129,14 @@ def capture_drag(z: float, p: Parameters) -> float:
 
 
 def producer_market_access(z: float, g: float, p: Parameters) -> float:
-    exponent = p.epsilon * z + (p.sigma - 1.0) * (p.gamma + p.chi * z) * g
+    exponent = (p.sigma - 1.0) * (
+        p.psi * z + p.gamma * g + p.chi_extension * z * g
+    )
     return p.market0 * exp(exponent)
 
 
 def producer_access_elasticity(g: float, p: Parameters) -> float:
-    return p.epsilon + (p.sigma - 1.0) * p.chi * g
-
-
-def outbound_iceberg_cost(z: float, g: float, p: Parameters) -> float:
-    return p.tau_o_bar * exp(-(p.gamma + p.chi * z) * g)
+    return (p.sigma - 1.0) * (p.psi + p.chi_extension * g)
 
 
 def marginal_cost(mode: str, p: Parameters) -> float:
@@ -149,19 +145,6 @@ def marginal_cost(mode: str, p: Parameters) -> float:
     if mode == "L":
         return p.c + p.d_l
     raise ValueError(f"unknown producer mode: {mode}")
-
-
-def actual_comparative_advantage_index(
-    mode: str, z: float, g: float, p: Parameters
-) -> float:
-    """Delivered candidate/background cost relative to the reference region.
-
-    The local background cost and the reference region's delivered
-    candidate/background cost ratio are summarized by aca_reference_cost.
-    Values below one indicate actual comparative advantage.
-    """
-
-    return outbound_iceberg_cost(z, g, p) * marginal_cost(mode, p) / p.aca_reference_cost
 
 
 def fixed_cost(mode: str, p: Parameters) -> float:
@@ -221,8 +204,8 @@ def industry_income_share(z: float, g: float, p: Parameters) -> float:
 
 
 def nominal_effect(z: float, g: float, p: Parameters) -> float:
-    theta = industry_income_share(z, g, p)
-    return theta * producer_access_elasticity(g, p) - capture_drag(z, p)
+    zeta = industry_income_share(z, g, p)
+    return zeta * producer_access_elasticity(g, p) - capture_drag(z, p)
 
 
 def real_effect(z: float, g: float, p: Parameters) -> float:
@@ -230,7 +213,7 @@ def real_effect(z: float, g: float, p: Parameters) -> float:
 
 
 def _raw_mode_threshold(mode: str, z: float, p: Parameters) -> float:
-    omega = (p.sigma - 1.0) * (p.gamma + p.chi * z)
+    omega = (p.sigma - 1.0) * (p.gamma + p.chi_extension * z)
     if omega <= 0.0:
         return np.inf
     coefficient = operating_profit_coefficient(p)
@@ -239,7 +222,7 @@ def _raw_mode_threshold(mode: str, z: float, p: Parameters) -> float:
         / (
             coefficient
             * p.market0
-            * exp(p.epsilon * z)
+            * exp((p.sigma - 1.0) * p.psi * z)
             * marginal_cost(mode, p) ** (1.0 - p.sigma)
         )
     )
@@ -255,7 +238,7 @@ def raw_local_entry_threshold(z: float, p: Parameters) -> float:
 
 
 def raw_organization_switch_threshold(z: float, p: Parameters) -> float:
-    omega = (p.sigma - 1.0) * (p.gamma + p.chi * z)
+    omega = (p.sigma - 1.0) * (p.gamma + p.chi_extension * z)
     if omega <= 0.0:
         return np.inf
     coefficient = operating_profit_coefficient(p)
@@ -263,25 +246,15 @@ def raw_organization_switch_threshold(z: float, p: Parameters) -> float:
         1.0 - p.sigma
     )
     numerator = log(
-        p.big_f / (coefficient * p.market0 * exp(p.epsilon * z) * delta_b)
+        p.big_f
+        / (
+            coefficient
+            * p.market0
+            * exp((p.sigma - 1.0) * p.psi * z)
+            * delta_b
+        )
     )
     return numerator / omega
-
-
-def raw_actual_advantage_threshold(mode: str, z: float, p: Parameters) -> float:
-    slope = p.gamma + p.chi * z
-    initial_index = p.tau_o_bar * marginal_cost(mode, p) / p.aca_reference_cost
-    if slope <= 0.0:
-        return -np.inf if initial_index <= 1.0 else np.inf
-    return log(initial_index) / slope
-
-
-def actual_advantage_threshold(z: float, p: Parameters) -> float:
-    raw = min(
-        raw_actual_advantage_threshold("P", z, p),
-        raw_actual_advantage_threshold("L", z, p),
-    )
-    return max(0.0, raw)
 
 
 def entry_threshold(z: float, p: Parameters) -> float:
@@ -314,29 +287,54 @@ def _minimal_effect_threshold(
     upper: float = 2.5,
     grid_size: int = 5001,
 ) -> float:
-    grid = np.linspace(lower, upper, grid_size)
-    values = np.array([effect(z, float(g), p) for g in grid])
-    hits = np.flatnonzero(values >= 0.0)
-    if hits.size == 0:
-        return np.nan
-    idx = int(hits[0])
-    if idx == 0:
-        return float(grid[0])
+    del grid_size  # retained for API compatibility; thresholds are event-exact.
+    if effect(z, lower, p) >= 0.0:
+        return float(lower)
 
-    lo = float(grid[idx - 1])
-    hi = float(grid[idx])
-    mode_lo = producer_choice(z, lo, p)
-    mode_hi = producer_choice(z, hi, p)
-    if mode_lo != mode_hi:
-        return hi
+    structural_events = sorted(
+        {
+            float(lower),
+            float(upper),
+            *[
+                float(value)
+                for value in (entry_threshold(z, p), organization_threshold(z, p))
+                if np.isfinite(value) and lower < value < upper
+            ],
+        }
+    )
 
-    f_lo = effect(z, lo, p)
-    f_hi = effect(z, hi, p)
-    if f_lo == 0.0:
-        return lo
-    if f_hi == 0.0:
-        return hi
-    return float(brentq(lambda g: effect(z, float(g), p), lo, hi, xtol=1e-12, rtol=1e-12))
+    for idx in range(len(structural_events) - 1):
+        left = structural_events[idx]
+        right = structural_events[idx + 1]
+        interval_scale = max(1.0, abs(left), abs(right))
+        event_epsilon = min(1e-9 * interval_scale, 0.01 * (right - left))
+        probe_left = left if idx == 0 else left + event_epsilon
+        probe_right = (
+            right
+            if idx == len(structural_events) - 2
+            else right - event_epsilon
+        )
+        value_left = effect(z, probe_left, p)
+        value_right = effect(z, probe_right, p)
+
+        # If a discrete entry or organization switch makes the effect
+        # nonnegative immediately to its right, the economic threshold is the
+        # exact structural event, not the next point on an arbitrary grid.
+        if value_left >= 0.0:
+            return float(left)
+
+        if value_right >= 0.0:
+            return float(
+                brentq(
+                    lambda g: effect(z, float(g), p),
+                    probe_left,
+                    probe_right,
+                    xtol=1e-12,
+                    rtol=1e-12,
+                )
+            )
+
+    return np.nan
 
 
 def nominal_income_threshold(z: float, p: Parameters) -> float:
@@ -402,7 +400,6 @@ def threshold_rows(
         rows.append(
             {
                 "c": float(c),
-                "G_A": actual_advantage_threshold(z, pc),
                 "G_E": entry_threshold(z, pc),
                 "G_L": organization_threshold(z, pc),
                 "G_R": real_income_threshold(z, pc),

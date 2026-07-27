@@ -102,16 +102,17 @@ For a given organization \(r\), equation~\eqref{eq:revenue_profit} becomes:
 \[
 \pi_r(z,G)
 =
-k\Mcal_0e^{\varepsilon z+\Omega(z)G}(c+d_r)^{1-\sigma}
+k\Mcal_0e^{(\sigma-1)(\psi z+\gamma G)}(c+d_r)^{1-\sigma}
 -F_r.
 \]
-It is strictly increasing in \(G\) whenever \(\Omega(z)>0\).  The unique raw
+It is strictly increasing in \(G\) whenever \(\Omega=(\sigma-1)\gamma>0\).
+The unique raw
 zero-profit threshold is equation~\eqref{eq:mode_entry_threshold}.  Direct
 differentiation gives:
 \[
 \frac{\partial G_r^0}{\partial c}
 =
-\frac{\sigma-1}{\Omega(z)(c+d_r)}>0.
+\frac{\sigma-1}{\Omega(c+d_r)}>0.
 \]
 The minimum of two strictly increasing functions is strictly increasing:
 for \(c_2>c_1\), both \(G_P^0(c_2)>G_P^0(c_1)\) and
@@ -128,39 +129,9 @@ Holding the external-region and background-industry ratios fixed,
 \frac{\partial c}{\partial\mathcal C^P_{ij}}>0
 \]
 at an interior threshold.
-
-For the ACA interpretation, the focal region's delivered marginal cost is
-\(\tau_O(z,G)(c+d_r)\).  Since
-\[
-\frac{\partial\ln\tau_O(z,G)}{\partial G}
-=-(\gamma+\chi z)<0,
-\]
-infrastructure lowers the focal region's total-cost ratio relative to a fixed
-reference region.  More directly, the raw organization-specific ACA threshold
-from equation~\eqref{eq:aca_index} is:
-\[
-G_{Ar}^0
-=
-\frac{\ln[\bar\tau_O(c+d_r)/\bar c_h^A]}
-{\gamma+\chi z}.
-\]
-At an interior threshold:
-\[
-\frac{\partial G_{Ar}^0}{\partial c}
-=
-\frac{1}{(\gamma+\chi z)(c+d_r)}>0.
-\]
-The minimum across organizations preserves strict monotonicity before
-truncation at zero, by the same argument used for \(G_E\).  Holding the
-reference-region and background-industry ratios fixed and applying
-\(\partial c/\partial\mathcal C^P_{ij}>0\) yields the stated LCA comparative
-statics for \(G_A\).
-
 Stronger LCA therefore starts from a lower production-cost ratio and requires
-weakly less \(G\) both to achieve a delivered-cost advantage and to cover the
-fixed cost.  The first condition defines ACA; the second defines viability.
-They need not coincide because \(\bar c_h^A\) appears only in \(G_A\), while
-fixed costs appear only in \(G_E\).  Entry, production, and sales constitute
+weakly less \(G\) to cover all fixed and variable economic costs.  Once the
+producer chooses an active mode, entry, production, and sales constitute
 realization.
 \end{proof}
 
@@ -175,7 +146,7 @@ b_L=k(c+d_L)^{1-\sigma},
 so \(b_L>b_P>0\).  It is convenient to express the state problem in terms of
 effective market scale:
 \[
-X(z,G)=\Mcal_0e^{\varepsilon z+\Omega(z)G}.
+X(z,G)=\Mcal_0e^{(\sigma-1)(\psi z+\gamma G)}.
 \]
 Profits are:
 \[
@@ -262,13 +233,13 @@ When \(F>\bar F\), the raw switch threshold is:
 \[
 G_X
 =
-\frac{\ln F-\ln[k\Mcal_0e^{\varepsilon z}]-\ln\Delta(c)}
-{\Omega(z)}.
+\frac{\ln F-\ln[k\Mcal_0e^{(\sigma-1)\psi z}]-\ln\Delta(c)}
+{\Omega}.
 \]
 Its cost derivative is:
 \[
 \frac{\partial G_X}{\partial c}
-=-\frac{\Delta'(c)}{\Omega(z)\Delta(c)}.
+=-\frac{\Delta'(c)}{\Omega\Delta(c)}.
 \]
 Because:
 \[
@@ -284,7 +255,7 @@ enters directly, so the economically relevant embeddedness threshold is
 \[
 \frac{\partial G_L^0}{\partial c}
 =
-\frac{\sigma-1}{\Omega(z)(c+d_L)}>0.
+\frac{\sigma-1}{\Omega(c+d_L)}>0.
 \]
 Thus equation~\eqref{eq:embedding_threshold_piecewise} is weakly increasing in
 \(c\) in either parameter region; truncation at zero preserves weak
@@ -295,7 +266,7 @@ In the three-region case, for \(G>G_X\):
 \[
 \pi_L-\pi_P
 =
-k\Mcal_0e^{\varepsilon z+\Omega G}\Delta(c)-F>0.
+k\Mcal_0e^{(\sigma-1)(\psi z+\gamma G)}\Delta(c)-F>0.
 \]
 Hence \(L\) is selected whenever it also weakly dominates no entry.  In the
 direct-local case, it is selected once \(G\geq G_L^0\).  The classification in
@@ -335,7 +306,7 @@ be written:
 B_j^r(z,G)
 =
 A_r
-\exp\{\varepsilon z+\Omega(z)G\},
+\exp\{(\sigma-1)(\psi z+\gamma G)\},
 \]
 where:
 \[
@@ -346,46 +317,45 @@ A_r
 Therefore:
 \[
 \frac{\partial\ln B_j^r}{\partial G}
-=\Omega(z)>0,
+=\Omega>0,
 \]
 and:
 \[
-\frac{\partial\theta_r}{\partial G}
+\frac{\partial\zeta_r}{\partial G}
 =
-\Omega(z)\theta_r(1-\theta_r)>0.
+\Omega\zeta_r(1-\zeta_r)>0.
 \]
 Define:
 \[
-a(G)=\varepsilon+(\sigma-1)\chi G\geq0.
+a_0=(\sigma-1)\psi>0.
 \]
 The nominal integration effect within organization \(r\) is:
 \[
-h_Y(G)=\theta_r(G)a(G)-\Lambda(z).
+h_Y(G)=\zeta_r(G)a_0-\Lambda(z).
 \]
 Its derivative is:
 \begin{equation}
 h_Y'(G)
 =
-\Omega(z)\theta_r(1-\theta_r)a(G)
-+\theta_r(\sigma-1)\chi>0.
+\Omega\zeta_r(1-\zeta_r)a_0>0.
 \label{eq:nominal_effect_derivative}
 \end{equation}
 The price term \(\alpha_Ms(z)\) is independent of \(G\), so:
 \[
 h_R'(G)=h_Y'(G)>0
 \]
-within an active state.  In the no-entry state, \(\theta=0\); both effects
+within an active state.  In the no-entry state, \(\zeta=0\); both effects
 are constant in \(G\) until entry.
 
 \subsection{Jumps at state changes}
 
-Immediately before entry, \(\theta=0\), so \(h_Y=-\Lambda\).  Immediately
+Immediately before entry, \(\zeta=0\), so \(h_Y=-\Lambda\).  Immediately
 after entry, the viable mode generates positive sales and local producer
-income, so \(\theta>0\).  Since \(a(G)\geq0\), the integration effect jumps
-weakly upward and strictly upward if \(a(G)>0\).
+income, so \(\zeta>0\).  Since \(a_0>0\), the integration effect jumps
+strictly upward.
 
 At a \(P\)-to-\(L\) switch, Proposition~\ref{prop:embedding} gives
-\(B_j^L>B_j^P\).  Hence \(\theta_L>\theta_P\), while \(a(G)\) and
+\(B_j^L>B_j^P\).  Hence \(\zeta_L>\zeta_P\), while \(a_0\) and
 \(\Lambda(z)\) are unchanged at the switch.  Both nominal and real effects
 jump strictly upward.
 
@@ -398,16 +368,23 @@ organization, and have no downward state jumps.  Under the baseline
 \(\ell_A>\ell_P\) and an interior platform share, the no-entry effect is
 strictly negative because \(\Lambda>0\).
 
-As \(G\rightarrow\infty\), the local mode is selected,
-\(\theta_L\rightarrow1\), and:
+As \(G\rightarrow\infty\), the local mode is selected and
+\(\zeta_L\rightarrow1\).  Hence:
 \[
-a(G)=\varepsilon+(\sigma-1)\chi G\rightarrow\infty
+\lim_{G\to\infty}h_Y(G)=a_0-\Lambda(z),
+\qquad
+\lim_{G\to\infty}h_R(G)
+=a_0-\Lambda(z)+\alpha_Ms(z).
 \]
-when \(\chi>0\).  Hence \(h_Y(G)\rightarrow\infty\), and the real effect is
-larger still.  More generally, it is sufficient to assume a finite upper
-endpoint at which the relevant effect is positive.  Monotonicity and endpoint
-crossing therefore imply a unique minimum threshold, allowing the crossing to
-occur either continuously or at an upward jump.
+Unlike a specification with an unbounded \(zG\) interaction, the parsimonious
+baseline does not make endpoint crossing automatic.  A sufficient condition
+for a nominal threshold is \(a_0>\Lambda(z)\); a sufficient condition for a
+real threshold is
+\(a_0+\alpha_Ms(z)>\Lambda(z)\), unless the real effect is already
+nonnegative at the lower endpoint.  More generally, Proposition~\ref{prop:income_thresholds}
+states the required finite endpoint-crossing condition explicitly.
+Monotonicity and endpoint crossing imply a unique minimum threshold, allowing
+the crossing to occur either continuously or at an upward jump.
 
 Pointwise:
 \[
@@ -454,7 +431,7 @@ where \(\mu=\sigma/(\sigma-1)\).  Thus lower \(c\) raises local producer
 income in either mode.  It also weakly advances entry and the switch to the
 higher-income local mode by Propositions~\ref{prop:entry} and
 \ref{prop:embedding}.  At every fixed \(G\), stronger LCA therefore weakly
-raises \(\theta_{r^*}\) and the two integration effects.  Their minimum
+raises \(\zeta_{r^*}\) and the two integration effects.  Their minimum
 thresholds weakly fall.  The relationship is strict when the relevant root
 remains interior to the same active organizational state.
 \end{proof}
@@ -493,20 +470,23 @@ For any fixed structural threshold \(G_H\), the monotonicity of
 a unique minimum \(\vartheta_H\), except for an economically irrelevant flat
 boundary if the infrastructure solution itself is constrained.  Increasing
 \(\vartheta\) reduces \(G_H-G(\vartheta)\).  Stronger LCA lowers
-\(G_A,G_E,G_L,G_R,G_Y\) by Propositions~\ref{prop:entry}--\ref{prop:income_thresholds};
+\(G_E,G_L,G_R,G_Y\) by Propositions~\ref{prop:entry}--\ref{prop:income_thresholds};
 applying the increasing inverse of \(G(\vartheta)\) weakly lowers the
 associated participation thresholds.
+\end{proof}
 
-For the protection comparison, a consumer wedge \(\tau_C>1\) changes the
-effective platform price to \(\tau_C\bar p_Pe^{-z}\).  The CES price index is
-increasing in an input price, so protection raises \(P_M\) and lowers the
-platform expenditure share.  On the producer side:
+\subsection{External-channel restriction calculation}
+
+A consumer wedge \(\tau_C>1\) changes the effective platform price to
+\(\tau_C\bar p_Pe^{-z}\).  The CES price index is increasing in an input
+price, so the restriction raises \(P_M\) and lowers the platform expenditure
+share.  On the producer side:
 \[
 \frac{\partial G_P^0}{\partial d_P}
 =
-\frac{\sigma-1}{\Omega(z)(c+d_P)}>0.
+\frac{\sigma-1}{\Omega(c+d_P)}>0.
 \]
-Thus protection makes the low-fixed-cost external entry mode harder for a
+Thus the restriction makes the low-fixed-cost external entry mode harder for a
 marginal producer.
 
 Let:
@@ -523,15 +503,14 @@ the switch threshold satisfies:
 \[
 \frac{\partial G_X}{\partial d_P}
 =
--\frac{1}{\Omega(z)\Delta}
+-\frac{1}{\Omega\Delta}
 \frac{\partial\Delta}{\partial d_P}<0.
 \]
-Protection can therefore induce a switch toward \(L\), but it does so by
+The restriction can therefore induce a switch toward \(L\), but it does so by
 worsening \(P\), while simultaneously harming consumer access and making
 platform-based entry more difficult.  Facilitation raises \(G\), which
 increases market access under both modes and does not enter the consumer price
-equation.  The policies are not equivalent.
-\end{proof}
+equation.  The two interventions are not equivalent.
 
 \section{Boundary Cases and Counterexamples}
 
@@ -547,7 +526,7 @@ The nominal effect becomes:
 \[
 \frac{d\ln Y}{dz}
 =
-\theta_r[\varepsilon+(\sigma-1)\chi G]\geq0
+\zeta_r(\sigma-1)\psi\geq0
 \]
 in every active producer state.  A negative nominal effect can then arise
 only in an extension with another first-round loss.  This case confirms that
@@ -566,19 +545,22 @@ Setting \(\lambda=1\) in equation~\eqref{eq:partial_localization} gives
 separates the cost advantage of local organization from its payment-location
 advantage.
 
-\subsection{No infrastructure--platform complementarity}
+\subsection{Positive infrastructure--platform complementarity extension}
 
-If \(\chi=0\), producer market access is:
+The baseline producer market access is:
 \[
 \Mcal(z,G)
 =
-\Mcal_0e^{\varepsilon z+(\sigma-1)\gamma G}.
+\Mcal_0e^{(\sigma-1)(\psi z+\gamma G)}.
 \]
-Infrastructure can still raise the level of candidate-industry income and
-therefore \(\theta_r\), but it no longer increases the marginal producer
-benefit of platform integration directly.  Equation~\eqref{eq:nominal_effect}
-loses the term \((\sigma-1)\chi G\).  The threshold mechanism can survive,
-but the strong complementarity interpretation cannot.
+An optional extension adds
+\(\chi^{\mathrm{ext}}zG\) inside the final parentheses.  The producer-access
+elasticity then becomes
+\((\sigma-1)(\psi+\chi^{\mathrm{ext}}G)\), so infrastructure raises both the
+level of candidate-industry income and its marginal response to platform
+integration.  The baseline sets \(\chi^{\mathrm{ext}}=0\) because this extra
+interaction is not needed for any core proposition; the numerical mechanism
+file shows how a positive value strengthens the producer-side effect.
 
 \subsection{Collapse of the platform-dependent region}
 
@@ -606,17 +588,6 @@ The pointwise inequality \(h_R>h_Y\) is not enough to create two different
 minimum thresholds when a common discrete jump crosses both zeroes.  This is
 why Proposition~\ref{prop:income_thresholds} states strict ordering only under
 a continuous interior-root condition.
-
-\subsection{Instability of the local-income closure}
-
-If:
-\[
-D(z)=1-\beta-\alpha_M\omega_C(z)\leq0,
-\]
-the household-spending recursion does not converge.  This is not an
-alternative equilibrium of the paper.  It is an inadmissible parameter
-region.  The baseline values satisfy \(D(z)>0\) for the full numerical
-support.
 
 \section{Mapping to the Companion EL Income Block}
 
@@ -686,16 +657,20 @@ The numerical implementation consists of:
 
 For \(z=0.5,c=0.9\), the code obtains:
 \[
-G_P^0=0.330038,\quad
-G_L^0=0.652932,\quad
-G_X=0.881716,
+G_P^0=0.210619,\quad
+G_L^0=0.718802,\quad
+G_X=1.090996,
 \]
 \[
-G_A=0.611694,\quad
-G_R=0.330500,\quad
-G_Y=0.835116.
+G_R=G_E=0.210619,\quad
+G_Y=0.555415,\quad
+G_L=1.090996.
 \]
-Finite-difference derivatives have the signs established in the proofs.
+The equality \(G_R=G_E\) is event-exact: viable entry generates a discrete
+upward jump in the real effect.  The threshold routine evaluates entry and
+organization events directly rather than returning the next point on a
+numerical grid.  Finite-difference derivatives have the signs established in
+the proofs.
 The program also verifies that lowering \(F\) below \(\bar F\) removes the
 platform-dependent interval and that equal consumer-channel local contents
 set \(\Lambda\) exactly to zero.
@@ -708,49 +683,50 @@ reports the full \(G\)-grid for:
  \item \(\ell_A=\ell_P\);
  \item \(\ell_P>\ell_A\);
  \item complete platform-service localization;
- \item \(\chi=0\);
+ \item a positive access--infrastructure complementarity extension;
  \item partial platform-service localization.
 \end{enumerate}
 
-\subsection{Equal-localization policy comparison}
+\subsection{Equal-localization intervention comparison}
 
-The policy comparison holds \(z=0.5\) and \(c=0.9\) fixed.  The baseline
-provides \(G=0.75\) and selects the external platform organization.  The
-facilitation exercise raises shared infrastructure to \(G=0.90\).  The
-protection exercise instead leaves \(G=0.75\), raises the external producer
-organization cost from \(d_P=0.40\) to \(0.50\), and applies a ten-percent
-consumer platform-price wedge.  Both counterfactuals select \(L\), so the
-comparison holds the binary localization outcome fixed rather than comparing
-different organizational regimes.
+The comparison holds \(z=0.5\) and \(c=0.9\) fixed.  The baseline provides
+\(G=0.80\) and selects the external platform organization.  The facilitation
+exercise raises shared infrastructure to \(G=1.15\).  The
+external-channel-restriction exercise instead leaves \(G=0.80\), raises the
+external producer organization cost from \(d_P=0.40\) to \(0.50\), and
+applies a ten-percent consumer platform-price wedge.  Both counterfactuals
+select \(L\), so the comparison holds the binary localization outcome fixed
+rather than comparing different organizational regimes.
 
 \begin{table}[htbp]
 \centering
-\caption{Illustrative facilitation and protection comparison}
-\label{tab:policy_comparison}
+\caption{Illustrative facilitation and external-channel restriction}
+\label{tab:channel_restriction}
 \begin{tabular}{lccc}
 \toprule
-Outcome & Baseline & Facilitation & Protection\\
+Outcome & Baseline & Facilitation & Restriction\\
 \midrule
-Infrastructure \(G\) & 0.75 & 0.90 & 0.75\\
+Infrastructure \(G\) & 0.80 & 1.15 & 0.80\\
 Equilibrium organization & \(P\) & \(L\) & \(L\)\\
 Platform expenditure share & 0.7655 & 0.7655 & 0.6696\\
 Consumer price index & 0.8287 & 0.8287 & 0.8875\\
-Entry threshold \(G_E\) & 0.3300 & 0.3300 & 0.6529\\
-First-round local producer income & 1.1876 & 3.7113 & 3.3919\\
-Nominal local income & 3.5527 & 7.6514 & 7.3737\\
-Consumption-equivalent income & 3.7942 & 8.1714 & 7.6882\\
+Entry threshold \(G_E\) & 0.2106 & 0.2106 & 0.7188\\
+First-round local producer income & 1.2485 & 3.9606 & 3.5658\\
+Nominal local income & 3.6516 & 8.0562 & 7.6657\\
+Consumption-equivalent income & 3.8998 & 8.6037 & 7.9926\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Facilitation and protection both induce local organization in this
+Facilitation and the external-channel restriction both induce local
+organization in this
 illustrative comparison, but they do so through different margins.
 Facilitation leaves consumer access unchanged, expands producer access, and
-raises local producer income.  Protection lowers the consumer platform share,
-raises the price index, and nearly doubles the entry threshold relative to the
-unprotected baseline.  These results are source-data outputs rather than
+raises local producer income.  The restriction lowers the consumer platform
+share, raises the price index, and more than triples the entry threshold
+relative to the unrestricted baseline.  These results are source-data outputs rather than
 calibrated welfare estimates.  The exact values are stored in
-\texttt{figures/source\_data/appendix\_policy\_comparison.csv}.
+\texttt{figures/source\_data/appendix\_channel\_restriction.csv}.
 
 All reported exercises use normalized, illustrative values.  No parameter is
 estimated, and the exercises do not constitute a calibration.

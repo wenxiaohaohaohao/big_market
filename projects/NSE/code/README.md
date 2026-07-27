@@ -29,9 +29,9 @@ code/
   `D:\application\miktex\miktex\bin\x64`。
 
 当前验证环境使用 Python 3.14、NumPy 2.4.1、SciPy 1.17.0 和
-Matplotlib 3.10.8，版本记录在 `code/requirements.txt`。连续收入阈值先用
-有界网格寻找符号变化区间，再由 SciPy 的 Brent 方法求根；若跨越离散的进入
-或组织切换点，则保留该离散边界，不把跳跃误当作连续根。
+Matplotlib 3.10.8，版本记录在 `code/requirements.txt`。连续收入阈值在固定
+组织区间内由 SciPy 的 Brent 方法求根；代码先精确检查 \(G_E,G_L\) 等离散结构
+事件。若效应在离散事件处跳跃转正，返回事件本身，不返回依赖网格密度的相邻点。
 
 ## 复现命令
 
@@ -49,7 +49,7 @@ python -m venv .venv
 
 - 正文图：`figures/figure_*.pdf` 和 `figures/figure_*.png`；
 - 图形数据：`figures/source_data/*.csv`；
-- 政策对照：`figures/source_data/appendix_policy_comparison.csv`；
+- 干预对照：`figures/source_data/appendix_channel_restriction.csv`；
 - 编译论文：`output/NSE_draft.pdf`；
 - LaTeX 临时文件：`tmp/latex/`。
 

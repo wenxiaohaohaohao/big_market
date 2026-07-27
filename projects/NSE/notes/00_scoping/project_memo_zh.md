@@ -18,8 +18,9 @@
 
 因此，本文不是一般性的 LCA--ACA 论文，也不是一篇完整 NSE 论文附带平台应用。
 平台化造成的 `market access--local capture` 分离是研究对象；NSE 为地方发展侧
-提供结构骨架，贯穿禀赋与产业选择、LCA--ACA、viability、组织嵌入、本地产业
-联系、capture formation 和 facilitating-state 边界。
+提供结构骨架，贯穿禀赋与产业选择、LCA、实际交易约束、viability、组织嵌入、
+本地产业联系、capture formation 和 facilitating-state 边界。ACA 仍按 NSE
+文献严格定义，但不是本文另行构造的均衡状态。
 
 ## 二、不可改变的主从关系
 
@@ -36,7 +37,6 @@
   -> 相对生产成本
   -> latent comparative advantage
   -> transaction and organizational costs
-  -> actual comparative advantage
   -> viability and realized firm entry
   -> local organizational embeddedness
   -> local complementary services and linkages
@@ -93,12 +93,12 @@ EL 的完整固定点不进入生产侧资源约束，但 access--capture 分解
 - 地区禀赋和行业要素密集度决定相对生产成本；
 - 相对生产成本定义 LCA，而不是使用外生匹配指数；
 - 全国市场接入和软硬基础设施决定总交易成本；
-- 当 LCA 产业在现有软硬基础设施下形成相对总成本优势时，它由 LCA 转化为
-  actual comparative advantage（ACA）；
+- NSE 将加入现实交易成本后仍存在的比较优势称为 actual comparative advantage
+  （ACA）；本文保留该严格概念，但不为它另造参照地区总成本方程或独立门槛；
 - viability 表示企业在开放竞争市场中不依赖持续保护或补贴而覆盖全部实际成本；
   realization 表示企业实际进入、生产和销售。realization 是可观察的均衡结果，不是
-  ACA 的定义，也不自动证明 ACA；符合 NSE 的可持续转化需要分别考察 LCA、ACA 与
-  viability；
+  ACA 的定义，也不自动证明 ACA；本文正式求解的是具有 LCA 的产业能否达到
+  viability 并实现进入；
 - 进入全国市场以后，企业在外部平台组织与本地嵌入式组织之间选择；
 - 组织选择决定履约、认证、营销和供应链服务由本地还是外部主体提供；
 - 本地产业联系是同一交易所需配套服务的本地化结果，不是另加一个外生留值能力。
@@ -127,8 +127,8 @@ local producer income
 
 ## 五、核心命题层级
 
-1. **LCA、ACA 与 viable entry 命题**：更强的 LCA 分别降低形成 ACA 和 viable
-   entry 所需的基础设施条件；\(G_A\) 与 \(G_E\) 不合并。
+1. **LCA 与 viable realization 命题**：更强的 LCA 降低 viable entry 所需的
+   基础设施条件 \(G_E\)。
 2. **组织嵌入命题**：本地组织和共享基础设施决定进入后的生产及配套服务有多少
    留在当地。
 3. **名义地方收入阈值**：只有 producer-side 和 local-service gains 足以抵消
@@ -136,11 +136,11 @@ local producer income
    平台化才提高名义地方收入。
 4. **实际收入阈值及排序**：消费价格收益使实际收入阈值弱低于名义收入阈值；
    两个根位于同一连续且活跃的组织区间时严格低于，离散切换时可以重合。
-5. **facilitating-state 推论**：具有共享性市场失灵时，降低真实交易和组织成本与
-   通过保护提高外部渠道成本不等价。
+5. **facilitating-state 推论**：政府参与缓解共享基础设施融资约束并提高 \(G\)；
+   通过 external-channel restriction 提高外部渠道成本是单独的非等价政策例子。
 
 基准模型保留最小的“外部平台组织--本地嵌入式组织”选择，用于生成本地服务支付
-和外部支付。正文使用 ACA 阈值 \(G_A\)、进入阈值 \(G_E\) 和组织嵌入阈值
+和外部支付。正文使用进入阈值 \(G_E\) 和组织嵌入阈值
 \(G_L\)；完整的 \(G_P^0,G_L^0,G_X\) 状态分类用于证明三个组织区域何时存在，
 不承担全文主命题。
 

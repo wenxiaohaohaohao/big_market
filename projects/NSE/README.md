@@ -27,7 +27,7 @@
   -> relative production cost
   -> LCA
   -> hard/soft infrastructure and transaction costs
-  -> ACA and viability
+  -> viability and realization under actual transaction costs
   -> entry and organizational choice
   -> local complementary services and linkages
   -> endogenous components of local capture
@@ -67,7 +67,7 @@ Comparative-Advantage Realization, and Local Value Capture**
 | 层面 | 当前 NSE 稿 |
 |---|---|
 | 研究问题 | 保留 consumer access 与 local capture 的分离 |
-| NSE 结构骨架 | 内生化 LCA--ACA、viability、生产者进入、组织嵌入、本地产业联系和 facilitating state |
+| NSE 结构骨架 | 严格区分 LCA、ACA、viability 与 realization，并内生化生产者进入、组织嵌入、本地产业联系和 facilitating state；不为 ACA 另造独立状态 |
 | 平台模块 | 给出 consumer/producer access 和渠道替代冲击，不被重新解释为 NSE |
 | 留值率 | 由均衡支付流生成，不是外生能力指标 |
 | EL 作用 | access--capture 基准进入正文；精确传播公式在末端或附录映射 |
@@ -75,12 +75,13 @@ Comparative-Advantage Realization, and Local Value Capture**
 
 ## 第一版核心结果
 
-1. 更强的 LCA 分别降低形成 ACA 与 viable entry 所需的结构门槛，但
-   \(G_A\) 与 \(G_E\) 不被混为同一条件；
+1. 更强的 LCA 降低 viable realization 所需的基础设施门槛；ACA 作为 NSE 的
+   实际总成本概念保留，但不在 focal-region 模型中另造 \(G_A\)；
 2. 组织选择和本地配套服务来源内生决定 production gain 有多少转化为 local capture；
 3. 存在平台化提高名义地方收入的能力/基础设施阈值；
 4. 实际收入阈值弱低于名义收入阈值；两个根位于同一连续组织区间时严格更低；
-5. facilitating investment 与 protection 对 access、entry 和 capture 不等价。
+5. facilitating investment 与一个窄化的 external-channel restriction 对
+   access、entry 和 capture 不等价；后者不是一般 protection 定理。
 
 ## Legacy 规则
 
@@ -122,7 +123,7 @@ NSE/
 - [x] 归档偏离主轴的旧 contract；
 - [x] 建立活动 Model Contract v3.1 和命题台账；
 - [x] 闭合 consumer access 和 consumer-channel 支付流；
-- [x] 推导 ACA、producer-entry 和 organizational-embedding thresholds；
+- [x] 严格定义 ACA，并推导 producer-entry 和 organizational-embedding thresholds；
 - [x] 证明名义、实际收入阈值及条件性排序；
 - [x] 建立精简 facilitating-state 模块；
 - [x] 完成 illustrative numerical exercises、机制关闭和 source data；

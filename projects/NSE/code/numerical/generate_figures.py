@@ -13,14 +13,13 @@ from matplotlib.colors import BoundaryNorm, ListedColormap
 
 from model import (
     Parameters,
-    actual_advantage_threshold,
-    actual_comparative_advantage_index,
     consumer_price_index,
     entry_threshold,
     infrastructure_supply,
     local_producer_income,
     nominal_effect,
     nominal_income,
+    organization_threshold,
     platform_share,
     producer_choice,
     real_effect,
@@ -80,23 +79,18 @@ def figure_phase_diagram(p: Parameters, z: float = 0.5) -> None:
             pc = replace(p, c=float(c))
             choice = producer_choice(z, float(g), pc)
             regime[i, j] = code[choice]
-            aca_index = min(
-                actual_comparative_advantage_index("P", z, float(g), pc),
-                actual_comparative_advantage_index("L", z, float(g), pc),
-            )
             rows.append(
                 {
                     "z": z,
                     "c": float(c),
                     "G": float(g),
                     "regime": choice,
-                    "actual_comparative_advantage": int(aca_index <= 1.0),
                 }
             )
 
     write_rows(
         SOURCE_DIR / "figure_1_phase_diagram.csv",
-        ["z", "c", "G", "regime", "actual_comparative_advantage"],
+        ["z", "c", "G", "regime"],
         rows,
     )
 
@@ -116,21 +110,20 @@ def figure_phase_diagram(p: Parameters, z: float = 0.5) -> None:
     )
     cbar = fig.colorbar(mesh, ax=ax, ticks=[0, 1, 2], pad=0.02)
     cbar.ax.set_yticklabels(["No entry", "External platform", "Local embedded"])
-    ga = np.array([actual_advantage_threshold(z, replace(p, c=float(c))) for c in costs])
-    ga_visible = np.where(ga <= infrastructure[-1], ga, np.nan)
-    ax.plot(
-        costs,
-        ga_visible,
-        color="#222222",
-        linestyle=":",
-        linewidth=1.6,
-        label=r"ACA boundary $G_A$",
+    entry_line = np.array(
+        [entry_threshold(z, replace(p, c=float(c))) for c in costs],
+        dtype=float,
     )
+    embedded_line = np.array(
+        [organization_threshold(z, replace(p, c=float(c))) for c in costs],
+        dtype=float,
+    )
+    ax.plot(costs, entry_line, color="#555555", linewidth=1.0, linestyle="--")
+    ax.plot(costs, embedded_line, color="#8c5d19", linewidth=1.0)
     ax.set_xlabel("Relative production cost, $c$ (lower = stronger LCA)")
     ax.set_ylabel("Shared infrastructure, $G$")
     ax.set_ylim(infrastructure[0], infrastructure[-1])
     ax.set_title("Industry realization and organizational regime")
-    ax.legend(frameon=False, loc="upper left")
     ax.text(
         0.02,
         0.02,
@@ -143,18 +136,17 @@ def figure_phase_diagram(p: Parameters, z: float = 0.5) -> None:
 
 
 def figure_thresholds(p: Parameters, z: float = 0.5) -> None:
-    costs = np.linspace(0.50, 1.10, 121)
+    costs = np.linspace(0.82, 1.02, 121)
     rows = threshold_rows(costs, z, p)
     write_rows(
         SOURCE_DIR / "figure_2_thresholds.csv",
-        ["c", "G_A", "G_E", "G_L", "G_R", "G_Y"],
+        ["c", "G_E", "G_L", "G_R", "G_Y"],
         rows,
     )
 
     fig, ax = plt.subplots(figsize=(6.4, 4.3))
     c = np.array([row["c"] for row in rows])
     styles = {
-        "G_A": ("#222222", ":", "ACA $G_A$"),
         "G_E": ("#666666", "--", "Entry $G_E$"),
         "G_L": ("#f2a541", "-", "Embedding $G_L$"),
         "G_R": ("#54a24b", "-.", "Real income $G_R$"),
@@ -166,8 +158,8 @@ def figure_thresholds(p: Parameters, z: float = 0.5) -> None:
 
     ax.set_xlabel("Relative production cost, $c$ (lower = stronger LCA)")
     ax.set_ylabel("Infrastructure threshold")
-    ax.set_ylim(0.0, 2.10)
-    ax.set_title("Comparative advantage and development thresholds")
+    ax.set_ylim(0.0, 2.60)
+    ax.set_title("LCA-conditioned development thresholds")
     ax.legend(frameon=False, ncol=3)
     ax.text(
         0.02,
@@ -182,7 +174,7 @@ def figure_thresholds(p: Parameters, z: float = 0.5) -> None:
 
 def figure_reform_paths(p: Parameters) -> None:
     z_grid = np.linspace(0.0, 1.2, 161)
-    participation = [0.05, 0.50, 0.95]
+    participation = [0.05, 0.50, 0.99]
     colors = ["#4c78a8", "#f2a541", "#54a24b"]
     rows: list[dict] = []
 
@@ -193,12 +185,18 @@ def figure_reform_paths(p: Parameters) -> None:
         g = infrastructure_supply(vartheta, p)
         nominal_effects = []
         real_effects = []
+        nominal_levels = []
+        real_levels = []
+        nominal_base = nominal_income(float(z_grid[0]), g, p)
+        real_base = real_income(float(z_grid[0]), g, p)
         for z in z_grid:
             s = platform_share(float(z), p)
             y_effect = nominal_effect(float(z), g, p)
             r_effect = real_effect(float(z), g, p)
             nominal_effects.append(y_effect)
             real_effects.append(r_effect)
+            nominal_levels.append(nominal_income(float(z), g, p) / nominal_base)
+            real_levels.append(real_income(float(z), g, p) / real_base)
             rows.append(
                 {
                     "vartheta": vartheta,
@@ -209,14 +207,16 @@ def figure_reform_paths(p: Parameters) -> None:
                     "real_income_effect": r_effect,
                     "nominal_income": nominal_income(float(z), g, p),
                     "real_income": real_income(float(z), g, p),
+                    "nominal_income_index": nominal_levels[-1],
+                    "real_income_index": real_levels[-1],
                     "consumer_price_index": consumer_price_index(float(z), p),
                     "regime": producer_choice(float(z), g, p),
                 }
             )
 
         label = rf"$\vartheta={vartheta:.2f}$, $G={g:.2f}$"
-        axes[1].plot(z_grid, nominal_effects, color=color, linewidth=2, label=label)
-        axes[2].plot(z_grid, real_effects, color=color, linewidth=2, label=label)
+        axes[1].plot(z_grid, nominal_levels, color=color, linewidth=2, label=label)
+        axes[2].plot(z_grid, real_levels, color=color, linewidth=2, label=label)
 
     write_rows(
         SOURCE_DIR / "figure_3_reform_paths.csv",
@@ -229,6 +229,8 @@ def figure_reform_paths(p: Parameters) -> None:
             "real_income_effect",
             "nominal_income",
             "real_income",
+            "nominal_income_index",
+            "real_income_index",
             "consumer_price_index",
             "regime",
         ],
@@ -237,14 +239,14 @@ def figure_reform_paths(p: Parameters) -> None:
 
     axes[0].set_title("Consumer access")
     axes[0].set_ylabel("Platform expenditure share")
-    axes[1].set_title("Nominal local-income effect")
-    axes[1].set_ylabel(r"$d\ln Y/dz$")
-    axes[2].set_title("Consumption-equivalent effect")
-    axes[2].set_ylabel(r"$d\ln R/dz$")
+    axes[1].set_title("Nominal local income")
+    axes[1].set_ylabel(r"$Y(z)/Y(0)$")
+    axes[2].set_title("Consumption-equivalent income")
+    axes[2].set_ylabel(r"$R(z)/R(0)$")
     for ax in axes:
         ax.set_xlabel("Platform integration, $z$")
-    axes[1].axhline(0.0, color="#999999", linewidth=0.8, linestyle=":")
-    axes[2].axhline(0.0, color="#999999", linewidth=0.8, linestyle=":")
+    axes[1].axhline(1.0, color="#999999", linewidth=0.8, linestyle=":")
+    axes[2].axhline(1.0, color="#999999", linewidth=0.8, linestyle=":")
     axes[1].legend(frameon=False, fontsize=7.5)
     save_figure(fig, "figure_3_reform_paths")
 
@@ -255,7 +257,9 @@ def mechanism_closures(p: Parameters, z: float = 0.5) -> None:
         "no_consumer_capture_gap": replace(p, ell_p=p.ell_a),
         "reverse_consumer_capture_gap": replace(p, ell_p=min(1.0, p.ell_a + 0.10)),
         "producer_payments_localized": replace(p, platform_localization=1.0),
-        "no_access_infrastructure_complementarity": replace(p, chi=0.0),
+        "positive_access_infrastructure_complementarity": replace(
+            p, chi_extension=0.20
+        ),
         "partial_platform_localization": replace(p, platform_localization=0.5),
     }
     rows: list[dict] = []
@@ -289,20 +293,28 @@ def mechanism_closures(p: Parameters, z: float = 0.5) -> None:
     )
 
 
-def policy_comparison(p: Parameters, z: float = 0.5) -> None:
-    """Compare facilitation and protection at the same binary localization outcome."""
+def channel_restriction_comparison(p: Parameters, z: float = 0.5) -> None:
+    """Compare facilitation and an external-channel restriction.
+
+    The restriction is a deliberately narrow policy example. It is not the
+    general NSE concept of protecting a comparative-advantage-defying sector.
+    """
 
     scenarios = [
-        ("baseline", replace(p), 0.75),
-        ("facilitation", replace(p), 0.90),
+        ("baseline", replace(p), 0.80),
+        ("facilitation", replace(p), 1.15),
         (
-            "protection",
+            "external_channel_restriction",
             replace(p, d_p=0.50, consumer_platform_wedge=1.10),
-            0.75,
+            0.80,
         ),
     ]
     rows: list[dict] = []
-    expected_modes = {"baseline": "P", "facilitation": "L", "protection": "L"}
+    expected_modes = {
+        "baseline": "P",
+        "facilitation": "L",
+        "external_channel_restriction": "L",
+    }
     for name, ps, g in scenarios:
         mode = producer_choice(z, g, ps)
         if mode != expected_modes[name]:
@@ -327,7 +339,7 @@ def policy_comparison(p: Parameters, z: float = 0.5) -> None:
         )
 
     write_rows(
-        SOURCE_DIR / "appendix_policy_comparison.csv",
+        SOURCE_DIR / "appendix_channel_restriction.csv",
         [
             "scenario",
             "z",
@@ -356,7 +368,7 @@ def main() -> None:
     figure_thresholds(p)
     figure_reform_paths(p)
     mechanism_closures(p)
-    policy_comparison(p)
+    channel_restriction_comparison(p)
     print(f"Figures written to {FIGURE_DIR}")
     print(f"Source data written to {SOURCE_DIR}")
 

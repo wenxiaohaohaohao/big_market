@@ -1,11 +1,11 @@
 # Core Reference Metadata and Claim Audit
 
-日期：2026-07-27
+日期：2026-07-28
 范围：当前 NSE 理论论文正文实际使用的核心来源
 
 ## 1. 审计结论
 
-所有进入 `paper/references.bib` 的 16 个条目均已通过期刊、出版社、官方研究
+所有进入 `paper/references.bib` 的 17 个条目均已通过期刊、出版社、官方研究
 机构页面、DOI 页面或本地原文首页核对。正文引用键与 BibTeX 条目一一对应：无
 dangling citation，也无 orphan reference。`NSE_literature_variable_inventory.md`
 继续作为候选文献清单，不直接等同于正文引用清单。
@@ -28,6 +28,7 @@ dangling citation，也无 orphan reference。`NSE_literature_variable_inventory
 | 文献 | 本文用途 |
 |---|---|
 | Ahn, Khandelwal and Wei (2011), `10.1016/j.jinteco.2010.12.003` | 低固定成本、高边际分销成本的中介选择逻辑；本文只借用成本排序，不引入异质企业 |
+| Rodríguez-Clare (1996), `10.1016/0304-3878(95)00051-8` | 本地专业化生产者服务、共同固定成本与产业联系的理论解释；本文不复制其完整发展联系模型 |
 | Fan et al. (2018), `10.1016/j.jinteco.2018.07.002` | 电商降低固定进入和距离摩擦、改善偏远地区消费接入 |
 | Couture et al. (2021), `10.1257/aeri.20190382` | 农村电商主要产生部分消费者生活成本收益，而本地生产者和劳动收入改善有限 |
 | Atkin, Faber and Gonzalez-Navarro (2018), `10.1086/695476` | 零售全球化可通过生活成本下降产生消费者福利，同时改变本地商店利润与收入 |
@@ -57,7 +58,7 @@ conditional local-income propagation，不把乘数本身再次作为 NSE 新贡
 
 ## 6. 最终逐条核实轨迹
 
-核实日期：2026-07-27。下列链接均指向期刊、出版社、作者机构页或官方研究机构；
+核实日期：2026-07-28。下列链接均指向期刊、出版社、作者机构页或官方研究机构；
 每一项均核对作者、标题、年份、刊物或工作论文编号及页码/DOI（如适用）。
 
 | BibTeX key | 核实来源 | 结论 |
@@ -77,4 +78,5 @@ conditional local-income propagation，不把乘数本身再次作为 NSE 新贡
 | `LinWang2023` | [INSE working-paper page](https://www.nse.pku.edu.cn/en/Research/WorkingPaper/d920dcc480d14eab8c0ccf2d4c7ebfa8.htm) | VERIFIED |
 | `MillerBlair2009` | [Cambridge front matter](https://assets.cambridge.org/97805215/17133/frontmatter/9780521517133_frontmatter.pdf) | VERIFIED |
 | `Moretti2010` | [AEA article page](https://www.aeaweb.org/articles?id=10.1257/aer.100.2.373) | VERIFIED |
+| `RodriguezClare1996` | [author-hosted published paper](https://eml.berkeley.edu/~arodeml/Papers/DOL.pdf)；DOI `10.1016/0304-3878(95)00051-8` | VERIFIED |
 | `Romalis2004` | [AEA article page](https://www.aeaweb.org/articles?id=10.1257/000282804322970715) | VERIFIED |
