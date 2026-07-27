@@ -1,574 +1,668 @@
-# Model Contract v2.1
+# Model Contract v3.0
 
-日期：2026-07-24
+日期：2026-07-27
 
-状态：活动理论合约
+状态：活动理论合约（`FROZEN`）
 
-主轴：`platform access--local capture`；NSE 构成地方发展侧的结构骨架
+主轴：`platform access--local capture`
+论文身份：EL 原问题的独立 NSE 理论扩展
 
-## 1. 合约目的
+## 1. 研究问题与理论分工
 
-本文件约束当前过渡性论文的模型范围。任何新增主体、变量或机制必须回答：
+本文研究：
 
-1. 它改变 consumer-side access、comparative-advantage realization、
-   organizational embeddedness、local capture、nominal local income 或
-   consumption-equivalent income 中的哪一个对象？
-2. 它是否产生当前模型没有的新命题？
-3. 它是否可以通过已有变量表达？
+> 平台化市场整合为什么能够普遍改善消费者接入，却只有在潜在比较优势得到实现、
+> 生产组织嵌入当地时，才转化为本地生产、收入和价值捕获？
 
-不能回答上述问题的模块不进入基准模型。
+理论分工固定如下：
 
-## 2. 冻结的研究问题
+1. 标准 CES 需求解释消费者渠道替代和价格接入；
+2. NSE 解释禀赋决定的 latent comparative advantage（LCA）如何通过软硬基础设施
+   转化为 actual comparative advantage（ACA）、viability、实际进入和本地组织嵌入；
+3. 支付流决定 consumer-side retention \(\omega_C\) 和 producer-side retention
+   \(\rho_r\)，二者都不是外生“本地能力”函数；
+4. EL 兼容的收入递归将第一轮本地收入映射为名义地方收入和消费等价实际收入；
+5. facilitating-state 模块只解释基础设施供给及融资约束，不求解全国最优政策。
 
-> 为什么平台化市场整合能够普遍改善消费者接入，却只有在潜在比较优势能够通过
-> 适宜的本地组织和基础设施条件得到实现时，才会转化为本地生产和地方收入？
+NSE 可以贯穿生产成本、实际交易条件、企业自生能力、组织形式和基础设施供给，但
+不得取代平台冲击、消费者需求或收入传播的理论来源。全文最终解释的对象仍是
+platform access 与 local capture 的分离。
 
-主结果必须同时包含：
+## 2. 空间范围、主体与时序
 
-- 平台化降低消费价格或提高品类接入；
-- 平台化改变本地与外部渠道的交易份额；
-- 本地生产者利用全国市场的能力取决于 LCA 及交易条件；
-- 名义地方收入和消费等价实际收入可以出现不同符号；
-- 结构阈值随 LCA 强度和 facilitating infrastructure 系统变化。
+### 2.1 空间范围
 
-## 3. 理论层级
+一个 focal region \(i\) 嵌入全国市场。外部参照地区为 \(h\)。全国候选产业需求
+规模和参照地区成本对 focal region 而言外生。背景产业给出候选产业面对的要素
+机会成本；在本文考察的局部区间，边际要素服务可按该机会成本弹性供给，例如来自
+闲置产能或额外工时。因此 \(B_0+B_j\) 是短期 transaction-related nominal
+income，不是充分就业条件下的长期净福利。本文不求解完整多地区一般均衡，
+因此不报告 national welfare。
 
-### 3.1 研究对象
-
-平台化统一市场对地方消费者、生产者和交易服务收入的联合影响。
-
-### 3.2 NSE 地方结构骨架
-
-```text
-endowment structure
-  -> relative production cost
-  -> latent comparative advantage
-  -> total cost under actual infrastructure
-  -> actual comparative advantage
-  -> viability and realized entry
-  -> organizational embeddedness
-  -> local complementary services and linkages
-  -> endogenous local production and capture.
-```
-
-### 3.3 EL 连接
-
-EL 提供 access--capture 分解和第一轮收入传播逻辑。新稿必须内生化第一轮本地
-收入及留值，但不得把 EL 固定点重复计入生产侧资源约束。
-
-### 3.4 理论边界
-
-- consumer preferences 和渠道需求使用标准消费/贸易理论；
-- \(p_P(z)\) 与 \(M(z)\) 是平台化带来的 consumer-side 和 producer-side 冲击；
-- NSE 决定地方如何通过产业选择、基础设施、viability 和组织嵌入回应冲击；
-- payment-flow accounting 将上述选择转化为 local capture；
-- EL 将第一轮地方收入映射为名义和消费等价实际收入。
-
-NSE 可以贯穿地方发展转化链的多个环节，但不替代平台冲击、消费者需求或 EL
-收入传播的理论来源。
-
-## 4. 最小环境
-
-### 4.1 空间范围
-
-一个 focal region \(i\) 嵌入全国市场。全国支出和外部价格指数可以作为小地区
-面对的外生市场条件。
-
-基准模型不求解全国地区体系的一般均衡，因此不报告严格意义上的 national welfare。
-
-### 4.2 经济主体
+### 2.2 主体
 
 - 本地代表性家庭；
-- 一个竞争性背景部门 \(0\)；
-- 一个候选本地产业 \(j\)；
-- 本地代理或本地交易服务提供者 \(A\)；
-- 地区外平台渠道 \(P\)；
-- 本地嵌入式生产者服务组织 \(L\)，作为候选组织方式，不必设为独立产业；
-- 地方政府，仅在政策部分提供共享性基础设施。
+- 竞争性背景产业 \(0\)；
+- 代表性候选产业 \(j\)；
+- 消费者侧本地渠道 \(A\) 和外部平台渠道 \(P\)；
+- 生产者侧外部平台组织 \(P\) 和本地嵌入式组织 \(L\)；
+- 基础设施提供者；
+- 通过融资参与度 \(\vartheta\) 影响基础设施融资成本的政府。
 
-不在基准模型引入企业生产率分布。若一个代表性候选企业已经能够产生进入和组织
-阈值，则异质企业属于扩展。
+消费者侧的 \(A/P\) 是购买渠道；生产者侧的 \(P/L\) 是本地候选产业进入全国市场
+后的组织方式。两个 \(P\) 都依赖外部平台，但支付流不同，正文必须按语境区分。
 
-### 4.3 平台化冲击
+### 2.3 时序
 
-平台化程度为 \(z\)。它可以同时影响：
+1. 地区禀赋、产业技术和政府参与度 \(\vartheta\) 给定；
+2. 基础设施提供者选择 \(G\)；
+3. 平台化程度 \(z\) 决定消费者平台价格和生产者市场接入；
+4. 候选产业比较不进入、外部平台组织和本地嵌入组织的利润；
+5. 家庭分配支出，支付流形成第一轮本地收入；
+6. EL 兼容的本地收入递归闭合 \(Y\) 和 \(R\)。
+
+## 3. 消费者接入与渠道支付流
+
+### 3.1 偏好
 
 \[
-p_P'(z)<0
+U=Q_M^{\alpha_M}N^\beta Z^{1-\alpha_M-\beta},
+\qquad
+\alpha_M+\beta<1.
 \]
 
-和：
+市场品复合品为：
 
 \[
-M'(z)>0.
-\]
-
-前者是本地消费者通过平台购买外部商品的成本；后者是本地生产者面对的全国市场
-接入。两者由同一改革过程推动，但在模型中保持为两个不同的作用渠道。
-
-## 5. Block A：消费者接入
-
-本地家庭将一部分支出用于渠道复合品。传统渠道 \(A\) 和外部平台渠道 \(P\)
-之间采用 CES 聚合：
-
-\[
-C_M
-=
+Q_M=
 \left[
-C_A^{(\eta-1)/\eta}
-+
-C_P^{(\eta-1)/\eta}
+(1-a_P)^{1/\eta}Q_A^{(\eta-1)/\eta}
++a_P^{1/\eta}Q_P^{(\eta-1)/\eta}
 \right]^{\eta/(\eta-1)},
 \qquad \eta>1.
 \]
 
-对应的平台支出份额记为：
+平台化降低平台有效价格：
 
 \[
-s(z)
-=
-\frac{p_P(z)^{1-\eta}}
-{p_A^{1-\eta}+p_P(z)^{1-\eta}}.
+p_P(z)=\bar p_Pe^{-z},
+\qquad p_A=1.
+\]
+
+平台支出份额和市场品价格指数为：
+
+\[
+s(z)=
+\frac{a_Pp_P(z)^{1-\eta}}
+{(1-a_P)p_A^{1-\eta}+a_Pp_P(z)^{1-\eta}},
+\]
+
+\[
+P_M(z)=
+\left[
+(1-a_P)p_A^{1-\eta}+a_Pp_P(z)^{1-\eta}
+\right]^{1/(1-\eta)}.
 \]
 
 因此：
 
 \[
-s'(z)>0,
+s'(z)=(\eta-1)s(z)[1-s(z)]>0,
 \qquad
-P_M'(z)<0.
+\frac{d\ln P_M}{dz}=-s(z)<0.
 \]
 
-这一部分只负责建立 consumer access 和消费价格效应，不负责决定本地产业进入。
+### 3.2 消费渠道留值
 
-### 支付归属
+\(\ell_A\) 和 \(\ell_P\) 是每单位本地消费者渠道支出形成的本地收入含量。它们来自
+同一支付流口径：
 
-每单位传统渠道交易和平台交易必须分别列出：
+| 支付项目 | 本地渠道 \(A\) | 外部平台渠道 \(P\) |
+|---|---:|---:|
+| 本地零售、批发、仓储、售后增加值 | 本地 | 基准中较少或为零 |
+| 外部商品生产支付 | 外部 | 外部 |
+| 平台费、外地结算和外地服务 | 少或为零 | 外部 |
+| 本地所有者净收入 | 本地 | 按实际所有权归属 |
 
-- 商品生产支付；
-- 本地代理、批发、仓储、物流和售后服务；
-- 外部平台费、结算和外地组织服务；
-- 本地所有者利润。
-
-传统渠道与平台渠道的留值率不能作为任意能力函数。它们由所有权和服务所在地的
-支付流计算。
-
-## 6. Block B：NSE 结构实现与本地组织嵌入
-
-### 6.1 禀赋与生产成本
-
-地区 \(i\) 的禀赋为：
+基准设定为 \(\ell_A>\ell_P\)，但附录报告 \(\ell_P\geq\ell_A\)。
 
 \[
-E_i=(K_i,L_i).
+\omega_C(z)=[1-s(z)]\ell_A+s(z)\ell_P,
 \]
-
-行业 \(j\) 的要素密集度为 \(\theta_j\)。背景部门形成机会成本
-\((w_i,r_i)\)，候选产业的单位生产成本为：
 
 \[
-c^P_{ij}=c_j(w_i,r_i;\theta_j).
+D(z)=1-\beta-\alpha_M\omega_C(z)>0.
 \]
 
-### 6.2 LCA
+消费者侧 capture drag 为：
 
-令 \(0\) 为地区内部基准产业，\(h\) 为外部参照地区。生产成本比较指标为：
+\[
+\Lambda(z)=
+\frac{\alpha_M(\ell_A-\ell_P)s'(z)}
+{D(z)}.
+\]
+
+## 4. 禀赋、LCA、ACA、viability 与 realization
+
+### 4.1 禀赋和机会成本
+
+地区 \(i\) 的资本劳动禀赋为：
+
+\[
+e_i=\frac{K_i}{L_i}.
+\]
+
+背景产业使用 Cobb--Douglas 技术：
+
+\[
+Y_{i0}=A_0K_{i0}^{\theta_0}L_{i0}^{1-\theta_0}.
+\]
+
+当候选产业相对于背景产业足够小，背景产业决定基准机会成本：
+
+\[
+w_i=(1-\theta_0)A_0e_i^{\theta_0},
+\qquad
+r_i=\theta_0A_0e_i^{\theta_0-1}.
+\]
+
+候选产业的生产技术为：
+
+\[
+Y_{ij}=A_jK_{ij}^{\theta_j}L_{ij}^{1-\theta_j}.
+\]
+
+其单位生产成本为：
+
+\[
+c^P_{ij}
+=
+\frac{1}{A_j}
+\left(\frac{r_i}{\theta_j}\right)^{\theta_j}
+\left(\frac{w_i}{1-\theta_j}\right)^{1-\theta_j}
+=\xi_j e_i^{\theta_0-\theta_j},
+\]
+
+其中 \(\xi_j>0\) 汇总技术参数。当 \(\theta_j>\theta_0\) 时，资本相对丰富降低候选
+产业相对于背景产业的生产成本。
+
+### 4.2 四个不得混用的概念
+
+**Latent comparative advantage（LCA）** 由地区和产业双重相对生产成本定义：
 
 \[
 \mathcal C^P_{ij}
 =
 \frac{c^P_{ij}/c^P_{i0}}
-     {c^P_{hj}/c^P_{h0}}.
+{c^P_{hj}/c^P_{h0}}.
 \]
-
-若：
-
-\[
-\mathcal C^P_{ij}<1,
-\]
-
-则地区 \(i\) 在产业 \(j\) 上具有 latent comparative advantage。
-
-\(1/c_{ij}\) 只能作为成本竞争力的单调变换，不能单独称为严格比较优势。
-
-### 6.3 交易成本、ACA 与 viability
-
-渠道 \(r\) 下的总成本为：
-
-\[
-c^T_{ijr}
-=
-c^P_{ij}+t_{ijr}(G_i).
-\]
-
-令 \(c^T_{i0}\) 和 \(c^T_{h0}\) 为两地基准产业的对应总成本。定义：
-
-\[
-\mathcal C^T_{ij}
-=
-\frac{\min_r c^T_{ijr}/c^T_{i0}}
-     {\min_r c^T_{hjr}/c^T_{h0}}.
-\]
-
-当：
 
 \[
 \mathcal C^P_{ij}<1
-\quad\text{且}\quad
-\mathcal C^T_{ij}<1,
 \]
 
-候选产业既具有 latent comparative advantage，又在现有软硬基础设施与交易环境下
-形成 actual comparative advantage（ACA）。LCA 比较要素生产成本；ACA 比较包含
-交易成本在内的总成本。二者都不是用观察到的产值或出口份额反推得到的指标。
+表示地区 \(i\) 在产业 \(j\) 具有 LCA。正文中用于比较静态的 \(c\) 是
+\(\mathcal C^P_{ij}\) 的单调成本充分统计量；\(1/c\) 不能单独定义比较优势。
 
-viability 进一步要求企业在开放竞争市场中，不依赖持续保护或补贴即可覆盖全部
-实际成本并获得社会可接受的正常利润。企业进入、生产和外销是比较优势得到实现的
-均衡表现，不能反过来用作 LCA 或 ACA 的定义。
-
-企业利润写为：
+**Actual comparative advantage（ACA）** 比较现实软硬基础设施下的相对总交付
+成本。令完整的 outbound iceberg cost 为：
 
 \[
-\pi_{ijr}
+\tau_O(z,G)=\bar\tau_O\exp[-(\gamma+\chi z)G],
+\qquad \bar\tau_O>1,\quad\gamma\geq0,\quad\chi>0.
+\]
+
+分析限制在 \(\tau_O(z,G)\geq1\) 的区间。常数项
+\(\bar\tau_O^{1-\sigma}\) 吸收到后文的 \(\mathcal M_0\)，因此不成为新的自由
+比较静态参数。渠道 \(r\) 的总交付成本为 \(\tau_O(z,G)m_r\)。ACA 指候选产业的
+双重相对总成本低于参照地区，而不是指已经观察到生产或出口。
+
+**Viability** 指企业在开放竞争中、不依赖持续保护，能够覆盖生产成本、组织成本和
+固定进入成本：
+
+\[
+\max_{r\in\{P,L\}}\pi_r\geq0.
+\]
+
+**Realization** 指候选产业在均衡中实际进入、生产和销售。它是 LCA 经过 ACA 和
+viability 条件转化后的结果，不是 LCA 或 ACA 的定义。
+
+## 5. 生产者市场接入、进入与组织选择
+
+### 5.1 市场接入
+
+全国 CES 需求为：
+
+\[
+q_r=\mathcal M(z,G)p_r^{-\sigma},
+\qquad \sigma>1.
+\]
+
+全国支出机会为 \(\mathcal M_0e^{\varepsilon z}\)。将 iceberg cost 代入 CES 需求
+得到：
+
+\[
+\mathcal M(z,G)
 =
-M(z)b_j(c^T_{ijr})
--
-f_{ijr}(G_i).
-\]
-
-producer-side 组织方式只包括外部平台组织 \(P\) 与本地嵌入式组织 \(L\)。
-本地代理 \(A\) 属于 Block A 的消费者渠道，不能与 producer-side 的 \(L\) 混用。
-
-企业进入和组织选择为：
-
-\[
-n_{ij}^*
-=
-\mathbf 1
-\left\{
-\max_r\pi_{ijr}\geq0
-\right\},
-\]
-
-\[
-r_{ij}^*
-\in
-\arg\max_r
-\left\{
-0,\pi_{ijP},\pi_{ijL}
+\mathcal M_0
+\exp\left\{
+\varepsilon z+(\sigma-1)(\gamma+\chi z)G
 \right\}.
 \]
 
-### 6.4 组织嵌入与本地产业联系
+\(\varepsilon\) 是平台化直接扩大 producer-side market access 的效应；
+\(\chi>0\) 表示平台接入与地方基础设施互补。消费者平台价格和生产者市场接入由
+同一 \(z\) 推动，但不是同一个价格或成本对象。
 
-\(P\) 使用外部平台已有的营销、结算、履约或供应链组织服务；\(L\) 使用由本地
-主体提供的对应服务。二者的利润差为：
+### 5.2 两种组织方式
 
 \[
-\Delta\pi_{ij}^{L-P}
+m_P=c+d_P,
+\qquad
+m_L=c+d_L,
+\qquad
+0\leq d_L<d_P.
+\]
+
+\[
+F_P=f,
+\qquad
+F_L=f+F,
+\qquad f>0,\quad F>0.
+\]
+
+外部平台组织 \(P\) 利用现成的外部营销、结算、履约和供应链服务，固定成本较低，
+但每单位外部组织支付较高。本地嵌入组织 \(L\) 需要承担额外共同固定成本 \(F\)，
+但其单位组织成本更低。
+
+CES 加成、销售额和利润为：
+
+\[
+\mu=\frac{\sigma}{\sigma-1},
+\qquad
+p_r=\mu m_r,
+\]
+
+\[
+\mathcal R_r(z,G)
 =
-\pi_{ijL}-\pi_{ijP}.
+\mathcal M(z,G)\mu^{1-\sigma}m_r^{1-\sigma},
 \]
 
-组织选择不仅影响企业利润，也决定同一交易的服务支付位置。对组织方式 \(r\)，
-将交易所需服务成本逐项分为：
-
 \[
-H_{ijr}
+\pi_r(z,G)
 =
-H_{ijr}^{local}
-+
-H_{ijr}^{external}.
+\frac{\mathcal R_r(z,G)}{\sigma}-F_r.
 \]
 
-本地组织服务收入由 \(H_{ijr}^{local}\) 进入 \(S_i^{local}\)；外部平台及外地
-服务支付由 \(H_{ijr}^{external}\) 进入 leakage。两者必须来自同一成本和支付流
-表，不能另外设定任意的 local-service share。
-
-这里的 local linkages 只表示候选产业生产和平台销售所需配套服务由本地提供，
-不包含 NEG 式集聚外部性、内生供应商品种或动态累积因果。
-
-若 \(\Delta\pi_{ij}^{L-P}\) 对 \(G_i\) 或市场规模具有 single crossing，模型可以
-产生 organizational-embedding threshold。该阈值进入基准模型的唯一理由是它改变
-\(S_i^{local}\) 和 external payments，进而改变名义或实际收入阈值。
-
-### 6.5 为什么这不是外生能力的重新命名
-
-NSE 模块必须生成：
-
-- 是否存在本地生产；
-- 本地销售规模；
-- 采用外部平台还是本地嵌入式服务；
-- 本地配套服务是否形成；
-- 生产利润和组织服务支付的空间归属。
-
-不得直接设定：
+企业选择：
 
 \[
-\kappa_i=\kappa(CA_i,G_i)
+r^*(z,G)\in
+\arg\max\{0,\pi_P(z,G),\pi_L(z,G)\}.
 \]
 
-再代回 EL 模型作为唯一扩展。
+精确平局时选择本地嵌入程度更高的状态；这一约定只决定边界点，不改变阈值。
 
-## 7. Block C：第一轮本地收入和 capture
+### 5.3 完整状态阈值
 
-对同一组交易，第一轮本地收入定义为互不重复的支付项：
+令：
 
 \[
-V_i
+k=\frac{\mu^{1-\sigma}}{\sigma},
+\qquad
+\Omega(z)=(\sigma-1)(\gamma+\chi z)>0.
+\]
+
+两种组织方式各自达到零利润的原始阈值为：
+
+\[
+G_r^0(z,c)
 =
-W_i^{local}
-+
-\Pi_i^{local}
-+
-S_i^{local}
-+
-T_i^{local}
--
-C_i^{policy}.
+\frac{
+\ln\left[
+\frac{F_r}
+{k\mathcal M_0e^{\varepsilon z}m_r^{1-\sigma}}
+\right]
+}{\Omega(z)},
+\qquad r\in\{P,L\}.
 \]
 
-其中：
-
-- \(W_i^{local}\)：本地生产和服务劳动收入；
-- \(\Pi_i^{local}\)：本地居民所有企业获得的净经营盈余；
-- \(S_i^{local}\)：本地代理、履约、认证、营销和供应链服务增加值；
-- \(T_i^{local}\)：地方财政净收入，只在政策部分使用；
-- \(C_i^{policy}\)：公共投入的真实资源成本。
-
-本地价值留存率是：
+实际进入阈值：
 
 \[
-\omega_i
+G_E(z,c)=\max\{0,\min[G_P^0(z,c),G_L^0(z,c)]\}.
+\]
+
+本地组织与外部平台组织利润相等的原始阈值为：
+
+\[
+G_X(z,c)
 =
-\frac{V_i}
-{\text{与 }V_i\text{ 对应的交易总价值}}.
+\frac{
+\ln\left[
+\frac{F}
+{k\mathcal M_0e^{\varepsilon z}
+\left(m_L^{1-\sigma}-m_P^{1-\sigma}\right)}
+\right]
+}{\Omega(z)}.
 \]
 
-分子和分母必须对应同一交易集合。
-
-### 7.1 平台化的第一轮收入分解
+本地组织嵌入阈值：
 
 \[
-\Delta V_i
+G_L(z,c)=\max\{0,G_X(z,c)\}.
+\]
+
+令 \(b_r=km_r^{1-\sigma}\)。当：
+
+\[
+F>\bar F
+\equiv
+f\frac{b_L-b_P}{b_P},
+\]
+
+有：
+
+\[
+G_P^0<G_L^0<G_X.
+\]
+
+于是存在“不进入—外部平台依赖—本地嵌入”三个区间。若
+\(F\leq\bar F\)，企业可能从不进入直接转入 \(L\)；这一反例必须在附录报告。
+
+## 6. 生产者支付流与第一轮本地收入
+
+候选产业本地收入为：
+
+\[
+B_j^r(z,G)=\rho_r\mathcal R_r(z,G).
+\]
+
+极化基准下：
+
+\[
+\rho_P
 =
-\underbrace{\Delta V_i^{producer}}_{\text{本地生产和外销}}
-+
-\underbrace{\Delta V_i^{local\ services}}_{\text{本地平台配套服务}}
--
-\underbrace{\Delta V_i^{agent\ displacement}}_{\text{本地渠道被替代}}
--
-\underbrace{\Delta V_i^{external\ payments}}_{\text{平台及外地服务支付}}.
+1-\frac{d_P}{\mu(c+d_P)}
+<1,
+\qquad
+\rho_L=1.
 \]
 
-\(\Delta V_i^{producer}\) 必须由 Block B 的进入和销售决定，不能使用外生增长率。
-\(\Delta V_i^{local\ services}\) 和
-\(\Delta V_i^{external\ payments}\) 必须由 Block B 的组织选择与同一支付流表
-决定，不能使用外生留值能力函数。
+这里 \(d_Pq_P\) 是支付给外部平台及外地组织服务的单位支付。生产要素收入、企业
+利润和本地组织服务收入归本地。固定成本 \(f\) 和 \(F\) 决定 viability 与组织
+选择；若它们由本地要素和服务提供者获得，则是本地内部支付，不能再次从本地收入
+中扣除。
 
-## 8. 名义收入与消费等价实际收入
-
-EL 的精确传播公式在下一阶段根据 companion paper 的最终记号逐项映射。活动
-contract 只冻结两个要求：
-
-1. 第一轮收入 \(V_i\) 先由 NSE 和支付流生成；
-2. 收入传播不得重复计算生产、平台服务或本地代理支付。
-
-可暂记为：
+允许平台服务的一部分在本地提供：
 
 \[
-Y_i=\mathcal M_i(\omega_i)V_i.
+\rho_P(\lambda)
+=
+1-\frac{(1-\lambda)d_P}{\mu(c+d_P)},
+\qquad \lambda\in[0,1].
+\]
+
+当企业由 \(P\) 转向 \(L\) 时：
+
+- producer revenue 从 \(\mathcal R_P\) 上升至 \(\mathcal R_L\)；
+- 外部单位服务支付下降；
+- 本地服务收入和本地企业收入上升；
+- \(\rho_r\) 从 \(\rho_P\) 上升至 \(\rho_L\)。
+
+这些变化来自同一成本和支付流，不另外引入 local-capacity 函数。
+
+## 7. EL 兼容的地方收入传播
+
+令 \(B_0>0\) 为背景产业第一轮本地收入。家庭把收入的 \(\beta\) 用于本地非贸易品，
+把 \(\alpha_M\) 用于市场品；其中 \(\omega_C(z)\) 成为本地收入。避免重复计算后的
+固定点为：
+
+\[
+Y
+=
+B_0+B_j^{r^*}
++\beta Y+\alpha_M\omega_C(z)Y,
+\]
+
+即：
+
+\[
+Y(z,G)
+=
+\frac{B_0+B_j^{r^*}(z,G)}
+{D(z)}.
 \]
 
 消费等价实际收入为：
 
 \[
-R_i
+R(z,G)=\frac{Y(z,G)}{P_M(z)^{\alpha_M}}.
+\]
+
+定义候选产业在第一轮收入中的份额：
+
+\[
+\theta_r(z,G)
 =
-\frac{Y_i}{P_M(z)^\alpha}.
+\frac{B_j^r(z,G)}
+{B_0+B_j^r(z,G)}.
 \]
 
-核心分解为：
+在固定组织状态内：
 
 \[
-\frac{d\ln R_i}{dz}
+\frac{d\ln Y}{dz}
 =
-\frac{d\ln Y_i}{dz}
--
-\alpha\frac{d\ln P_M(z)}{dz}.
+\theta_r(z,G)
+\left[\varepsilon+(\sigma-1)\chi G\right]
+-\Lambda(z),
 \]
 
-由于 \(P_M'(z)<0\)，价格接入收益使实际收入转正所需的结构条件弱于名义收入。
-
-## 9. 核心命题合同
-
-### P1a：LCA realization
-
-存在进入所需的基础设施或组织条件阈值：
-
 \[
-G_E^*(\mathcal C^P_{ij},M).
-\]
-
-目标比较静态为：
-
-\[
-\frac{\partial G_E^*}
-{\partial\text{LCA strength}}<0.
-\]
-
-P1a 只说明 producer-side entry，不足以单独构成全文贡献。
-
-### P1b：Organizational embeddedness
-
-在本地嵌入式组织相对于外部平台组织具有更高固定成本、但能够降低相关边际服务
-成本或外部支付时，目标结果是存在：
-
-\[
-G_L^*
-\quad\text{或等价的}\quad
-M_L^*,
-\]
-
-使进入后的企业选择 \(L\) 而不是 \(P\)。P1b 必须进一步证明组织选择改变：
-
-\[
-S_i^{local}
-\quad\text{和}\quad
-\Delta V_i^{external\ payments}.
-\]
-
-若 P1b 不能改变 P2 或 P3，它不进入基准模型。
-
-### P2：Nominal local-income threshold
-
-定义平台化对名义地方收入的边际效应：
-
-\[
-\frac{d\ln Y_i}{dz}
+\frac{d\ln R}{dz}
 =
-\Gamma^{producer}(\text{LCA},G_i,M)
-+
-\Gamma^{linkage}(\text{LCA},G_i,M)
--
-\Lambda^{agent}(s)
--
-\Lambda^{external}(r_{ij}^*,\text{payment incidence}).
+\frac{d\ln Y}{dz}+\alpha_Ms(z).
 \]
 
-目标结果是存在唯一：
+\(Y\) 是名义地方收入，\(R\) 是消费等价地方收入。二者均不是 national welfare；
+基础设施真实资源成本和外部主体福利没有被纳入完整全国资源约束。
+
+## 8. Facilitating state
+
+政府参与度 \(\vartheta\in[0,1]\) 降低基础设施融资楔子：
 
 \[
-G_Y^*
-\]
-
-使：
-
-\[
-\frac{dY_i}{dz}\geq0
-\iff
-G_i\geq G_Y^*.
-\]
-
-其中 \(\Gamma^{producer}\) 由 viability 和进入推导，
-\(\Gamma^{linkage}\) 由本地组织和配套服务支付推导；
-\(\Lambda^{agent}\) 来自 consumer-side 渠道替代，
-\(\Lambda^{external}\) 来自 producer-side 组织选择和支付流。
-
-### P3：Real-income threshold and ordering
-
-存在：
-
-\[
-G_R^*
-\]
-
-使消费等价实际收入在 \(G_i\geq G_R^*\) 时不下降，并证明：
-
-\[
-G_R^*<G_Y^*.
-\]
-
-进一步目标为：
-
-\[
-\frac{\partial G_R^*}{\partial\text{LCA strength}}<0,
+\kappa_I(\vartheta)
+=
+\kappa_p-(\kappa_p-\kappa_g)\vartheta,
 \qquad
-\frac{\partial G_Y^*}{\partial\text{LCA strength}}<0.
+0<\kappa_g<\kappa_p.
 \]
 
-严格排序是全文最重要的连接结果，因为它同时使用 EL 的价格收益和 NSE 生成的
-生产、组织及本地产业联系响应。
-
-### P4：Facilitation versus protection
-
-只有在 \(G_i\) 对应共享性基础设施、协调失败或不可完全内部化的交易环境时，才
-允许形成 facilitating-state 命题。
-
-赋能降低真实本地交易或组织成本：
+基础设施提供者解决：
 
 \[
-f_{ijr}'(G_i)<0
-\quad\text{或}\quad
-t_{ijr}'(G_i)<0.
+\max_{G\geq0}
+\left\{
+\mathcal U_I(G)-\kappa_I(\vartheta)C(G)
+\right\},
 \]
 
-保护提高外部渠道成本或价格。二者对 consumer access、producer entry 和 local
-capture 的作用不相同。
+其中：
 
-P4 在概念上是 NSE 的核心组成，但在解析顺序上不得先于 P2 和 P3 完成。只有先
-确定哪个结构约束阻止 LCA 转化为 ACA、viability 和 local embeddedness，才能
-定义政府所要解决的共享基础设施或协调失败。
+\[
+\mathcal U_I'>0,\quad
+\mathcal U_I''<0,\quad
+C'>0,\quad C''\geq0.
+\]
 
-## 10. 旧组织阈值模型的处理
+内点一阶条件为：
 
-基准模型恢复 \(P\) 与 \(L\) 的最小利润比较和 payment-incidence 结果。归档 v1
-中的完整平台进入阈值 \(M_P\)、本地组织盈利阈值 \(M_{L0}\) 和组织切换阈值
-\(M_X\) 不整体进入基准 contract。
+\[
+\mathcal U_I'[G(\vartheta)]
+=
+\kappa_I(\vartheta)C'[G(\vartheta)].
+\]
 
-完整三阈值结果只有满足以下条件时，才作为 lemma 或 extension 恢复：
+严格凹性保证唯一解。政府参与缓解共享基础设施融资约束，但本文不声称
+\(\vartheta\) 是全国福利最优值。
 
-1. 组织选择改变 \(\Delta V_i^{local\ services}\) 或
-   \(\Delta V_i^{external\ payments}\)；
-2. 该变化进一步改变 \(G_Y^*\) 或 \(G_R^*\)；
-3. 不需要引入新的独立状态变量。
+数值练习使用：
 
-## 11. 文献基座
+\[
+\mathcal U_I(G)=a_I\ln(1+G),
+\qquad
+C(G)=\frac{G^2}{2},
+\]
 
-| 层级 | 文献角色 |
-|---|---|
-| EL companion paper | access--capture 问题、价格与收入传播基准 |
-| Lin and Wang (2023) | LCA--ACA、交易成本与 facilitating state |
-| Lin (2011, 2012); Lin and Monga (2011) | 禀赋与产业结构、hard/soft infrastructure、viability、facilitating state |
-| Ju, Lin and Wang (2015) | 禀赋驱动的产业结构来源，不复制完整动态模型 |
-| Ahn, Khandelwal and Wei (2011) | 必要时提供中介与直接渠道的成本选择 |
+从而：
 
-Ahn 型组织选择不是全文唯一数学母体。Rodríguez-Clare 产业联系只有在正式加入
-专业化投入品种或供应商进入时才能作为直接模型来源。
+\[
+G(\vartheta)
+=
+\frac{-1+\sqrt{1+4a_I/\kappa_I(\vartheta)}}{2}.
+\]
 
-## 12. 第一版排除
+保护政策同时提高消费者侧平台价格和生产者侧外部平台组织成本。它可能通过恶化
+外部渠道诱导本地化，却降低消费者接入并提高边际企业的进入门槛。facilitation
+提高 \(G\)，降低真实交易约束且不直接提高消费者平台价格。
 
-- 完整 NEG、迁移和集聚外部性；
-- 内生全国市场规模；
-- 多平台竞争和平台内生定价；
+## 9. 四个正式命题
+
+### Proposition 1：Comparative-advantage realization
+
+在 \(\Omega(z)>0\) 且进入阈值为内部解时，\(G_E\) 存在并且：
+
+\[
+\frac{\partial G_E}{\partial c}>0.
+\]
+
+由于 \(c\) 是 \(\mathcal C^P_{ij}\) 的单调成本统计量：
+
+\[
+\frac{\partial G_E}{\partial\mathcal C^P_{ij}}>0.
+\]
+
+更强 LCA 降低形成 ACA 和 viable entry 所需的基础设施。若原始阈值小于零，
+截断后的 \(G_E\) 只弱单调；这是边界而不是反例。
+
+### Proposition 2：Organizational embeddedness
+
+在 \(d_L<d_P\)、\(F>0\)、\(\Omega(z)>0\) 下，\(G_L\) 存在。在内部解处：
+
+\[
+\frac{\partial G_L}{\partial c}>0.
+\]
+
+当 \(G\geq G_L\) 时，企业选择 \(L\)，并有：
+
+\[
+\rho_L>\rho_P,\qquad
+B_j^L>B_j^P.
+\]
+
+若 \(F>\bar F\)，外部平台依赖是进入和本地嵌入之间的独立均衡区间；若
+\(F\leq\bar F\)，该区间可以消失。
+
+### Proposition 3：Nominal and real-income thresholds
+
+在每个固定组织区间内，\(d\ln Y/dz\) 和 \(d\ln R/dz\) 对 \(G\) 严格增加；进入和
+从 \(P\) 转向 \(L\) 产生向上的离散跳跃。若端点跨越零，则分别存在唯一最小阈值：
+
+\[
+G_Y=\inf\left\{G:\frac{d\ln Y}{dz}\geq0\right\},
+\]
+
+\[
+G_R=\inf\left\{G:\frac{d\ln R}{dz}\geq0\right\}.
+\]
+
+由于 \(\alpha_Ms(z)>0\)：
+
+\[
+G_R\leq G_Y.
+\]
+
+若两个根均位于同一连续组织区间且为内部解：
+
+\[
+G_R<G_Y.
+\]
+
+若零点由同一个离散进入或组织切换跨越，可能有 \(G_R=G_Y\)。更强 LCA 弱降低
+两个阈值，并在相同内部组织区间内严格降低它们。
+
+### Proposition 4：State enabling and protection
+
+基础设施供给唯一并满足：
+
+\[
+G'(\vartheta)>0.
+\]
+
+对任一存在的结构或收入阈值 \(G_H\)，定义：
+
+\[
+\vartheta_H=\inf\{\vartheta:G(\vartheta)\geq G_H\},
+\quad
+H\in\{E,L,R,Y\}.
+\]
+
+政府参与提高 \(G\)，从而缩小 \(G_H-G(\vartheta)\)。更强 LCA 通过降低
+\(G_E,G_L,G_R,G_Y\) 弱降低相应政府参与门槛。
+
+facilitation 和 protection 都可能促进本地化，但不等价：前者降低真实基础设施
+约束并扩大 producer access；后者提高外部平台价格或组织成本，恶化 consumer
+access，并可能提高使用平台进入全国市场的边际企业门槛。
+
+## 10. 边界和反例合同
+
+正文或附录必须报告：
+
+1. \(\ell_A=\ell_P\)：consumer-side capture drag 消失；
+2. \(\ell_P>\ell_A\)：平台渠道替代提高 consumer-side retention；
+3. \(\rho_P=\rho_L\)：组织切换不再产生 producer-side 空间支付差；
+4. \(\chi=0\)：基础设施与平台 producer access 的互补性消失；
+5. \(\lambda>0\)：平台服务部分本地化，外部支付差缩小；
+6. \(F\leq\bar F\)：平台依赖区间消失；
+7. \(G_R=G_Y\)：两个效应在同一个离散状态切换点转正；
+8. 保护提高 \(d_P\)：可能降低 \(G_L\)，但同时提高平台进入门槛并损害消费者接入；
+9. 阈值原始值小于零：截断阈值为零，比较静态弱化；
+10. \(D(z)\leq0\)：收入递归不稳定，该参数区域排除。
+
+## 11. 第一版明确排除
+
+- 完整 New Economic Geography；
+- 人口迁移、土地、住房和内生城市规模；
+- 企业生产率分布和自由进入；
 - 动态组织资本；
-- Pareto 企业分布和自由进入，除非代表性企业无法生成 P1--P3；
-- 地方税收分成和财政联邦主义；
-- national welfare 结论；
-- 未经证明的“平台化降低地方收入”一般性判断。
+- 多平台战略定价和双边网络效应；
+- 全国社会规划者和 national welfare；
+- 地方财政分成、税收归属和转移支付；
+- 使用实际数据的 calibration 或经验识别。
 
-## 13. 进入论文正文前的验收门槛
+## 12. 数值与复现合同
 
-- [ ] consumer-side access 和 producer-side access 均已定义；
-- [ ] 支付流可以产生 local channel displacement；
-- [ ] LCA、ACA、viability、realization 和 revealed measures 未混用；
-- [ ] 企业进入生成 producer-side local income；
-- [ ] 组织选择生成 local complementary-service income 和 external payments；
-- [ ] local linkages 是支付流结果，而不是外生能力函数；
-- [ ] \(\omega_i\) 是支付流结果；
-- [ ] P2 的收入阈值存在且唯一；
-- [ ] P3 的严格排序得到证明；
-- [ ] 政策部分只有一个明确市场失灵；
-- [ ] EL 传播公式已与 companion paper 的最终版本逐项核对；
-- [ ] legacy 文件未被正文直接引用；
-- [ ] numerical exercises 只用于说明已证明命题。
+数值练习只证明参数区域非空并展示解析机制，不识别或估计中国参数。所有图必须：
+
+- 由 `code/numerical/generate_figures.py` 生成；
+- 同时输出 PDF、PNG 和 CSV source data；
+- 使用 `code/theory/validate_model.py` 对解析导数、阈值唯一性、边界和有限差分进行
+  核验；
+- 在正文中称为 `illustrative numerical exercises`，不得称为 calibration。
+
+## 13. 正文进入条件
+
+- [x] consumer-side 和 producer-side access 已分开定义；
+- [x] LCA、ACA、viability 和 realization 已严格区分；
+- [x] 企业进入和组织选择由同一利润问题生成；
+- [x] \(\omega_C\) 和 \(\rho_r\) 均由支付流生成；
+- [x] 固定成本、外部支付和本地内部支付不存在重复扣除；
+- [x] 四个命题已经完成解析推导和边界检查；
+- [x] \(G_R<G_Y\) 只在充分条件下声称；
+- [x] facilitating state 对应基础设施融资约束，不等于任意补贴；
+- [x] numerical exercises 已通过有限差分和参数网格检查；
+- [x] local income、consumption-equivalent income 和 national welfare 已区分；
+- [x] 全文研究对象仍是 platform access--local capture。

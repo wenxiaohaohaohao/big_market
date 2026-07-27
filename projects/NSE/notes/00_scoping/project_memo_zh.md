@@ -131,13 +131,15 @@ local producer income
 3. **名义地方收入阈值**：只有 producer-side 和 local-service gains 足以抵消
    channel displacement 与 external payments 时，
    平台化才提高名义地方收入。
-4. **实际收入阈值及排序**：消费价格收益使实际收入阈值严格低于名义收入阈值。
+4. **实际收入阈值及排序**：消费价格收益使实际收入阈值弱低于名义收入阈值；
+   两个根位于同一连续且活跃的组织区间时严格低于，离散切换时可以重合。
 5. **facilitating-state 推论**：具有共享性市场失灵时，降低真实交易和组织成本与
    通过保护提高外部渠道成本不等价。
 
 基准模型保留最小的“外部平台组织--本地嵌入式组织”选择，用于生成本地服务支付
-和外部支付。旧稿完整的 \(M_P,M_{L0},M_X\) 三阈值体系仍只作为扩展，不再承担
-全文主命题。
+和外部支付。正文只使用进入阈值 \(G_E\) 和组织嵌入阈值 \(G_L\)；完整的
+\(G_P^0,G_L^0,G_X\) 状态分类已恢复到附录，仅用于证明三个组织区域何时存在，
+不承担全文主命题。
 
 ## 六、第一版明确排除
 
@@ -155,7 +157,7 @@ local producer income
 - LCA、ACA 和 viability 使用严格且不混淆的定义；
 - 企业进入、组织嵌入和支付归属由行为方程决定；
 - NSE 同时生成 local production 和 local complementary-service income；
-- 至少证明名义与实际收入阈值及其严格排序；
+- 至少证明名义与实际收入阈值及其条件性排序；
 - facilitating state 对应一个明确的公共品或协调失败；
 - numerical exercises 只称 illustrative，不称 calibration；
 - 所有引用进入 `references.bib` 前完成元数据核实；

@@ -6,6 +6,7 @@ $OutputDir = Join-Path $ProjectRoot "output"
 $TempRoot = Join-Path $ProjectRoot "tmp"
 $BuildDir = Join-Path $TempRoot "latex"
 $XeLaTeX = "D:\application\miktex\miktex\bin\x64\xelatex.exe"
+$BibTeX = "D:\application\miktex\miktex\bin\x64\bibtex.exe"
 
 New-Item -ItemType Directory -Force -Path $OutputDir, $BuildDir | Out-Null
 
@@ -14,6 +15,9 @@ $env:TMP = $TempRoot
 
 if (-not (Test-Path -LiteralPath $XeLaTeX)) {
     throw "MiKTeX xelatex was not found at $XeLaTeX"
+}
+if (-not (Test-Path -LiteralPath $BibTeX)) {
+    throw "MiKTeX bibtex was not found at $BibTeX"
 }
 
 Push-Location $PaperDir
@@ -24,10 +28,36 @@ try {
         throw "First XeLaTeX pass failed with exit code $LASTEXITCODE"
     }
 
+    $PreviousBibInputs = $env:BIBINPUTS
+    $env:BIBINPUTS = "$PaperDir;"
+    Push-Location $BuildDir
+    try {
+        & $BibTeX "NSE_draft"
+        if ($LASTEXITCODE -ne 0) {
+            throw "BibTeX pass failed with exit code $LASTEXITCODE"
+        }
+    }
+    finally {
+        Pop-Location
+        $env:BIBINPUTS = $PreviousBibInputs
+    }
+
     & $XeLaTeX -interaction=nonstopmode -halt-on-error `
         -jobname=NSE_draft -output-directory="$BuildDir" "main.tex"
     if ($LASTEXITCODE -ne 0) {
         throw "Second XeLaTeX pass failed with exit code $LASTEXITCODE"
+    }
+
+    & $XeLaTeX -interaction=nonstopmode -halt-on-error `
+        -jobname=NSE_draft -output-directory="$BuildDir" "main.tex"
+    if ($LASTEXITCODE -ne 0) {
+        throw "Third XeLaTeX pass failed with exit code $LASTEXITCODE"
+    }
+
+    & $XeLaTeX -interaction=nonstopmode -halt-on-error `
+        -jobname=NSE_draft -output-directory="$BuildDir" "main.tex"
+    if ($LASTEXITCODE -ne 0) {
+        throw "Fourth XeLaTeX pass failed with exit code $LASTEXITCODE"
     }
 
     $BuiltPdf = Join-Path $BuildDir "NSE_draft.pdf"

@@ -1,56 +1,85 @@
-# Proposition Ledger
+# Proposition Ledger v3.0
 
-日期：2026-07-24
-
+日期：2026-07-27
 对应合约：`notes/01_theory/model_contract.md`
 
-本台账只记录当前 `access--capture` 主轴下的正式结果。归档 contract 中的组织阈值
-不自动继承证明状态。
+## 1. 正式结果状态
 
-| ID | 目标结果 | 必要来源 | 关键条件 | 状态 |
-|---|---|---|---|---|
-| L0 | 平台化提高平台支出份额并降低消费价格指数 | Block A | CES；平台相对价格随 \(z\) 下降 | TO PROVE |
-| P1a | 更强 LCA 降低本地企业将平台市场机会转化为实际进入所需的 \(G_E^*\) | Block B | 严格相对成本；viability 和进入条件 | TO DERIVE |
-| P1b | 存在最小 organizational-embedding threshold \(G_L^*\) 或 \(M_L^*\)，组织选择改变本地服务收入与外部支付 | Block B | \(P\)--\(L\) 利润差 single crossing；共同支付流表 | TO DERIVE |
-| P2 | 存在唯一名义地方收入阈值 \(G_Y^*\) | Blocks A--C | producer 与 linkage gains 对 \(G\) 的净效应单调；capture loss 有界 | TO DERIVE |
-| P3 | 存在实际收入阈值 \(G_R^*\)，且 \(G_R^*<G_Y^*\) | Blocks A--C + EL mapping | \(P_M'(z)<0\)；两个阈值均为内部解 | TO DERIVE |
-| C1 | 更强 LCA 同时降低 \(G_R^*\) 和 \(G_Y^*\) | P1a--P3 | production 与 organizational embeddedness 的 increasing differences 或等价条件 | TO DERIVE |
-| P4 | 赋能与保护对 access、entry 和 capture 的作用不等价 | Policy block | 一个明确公共品或协调失败；政策真实资源成本 | BLOCKED BY P2/P3 |
-| E1 | 外部平台效率提高可能降低进入门槛、提高本地组织切换门槛 | Legacy organization module | 高固定成本--低边际成本的本地组织 | LEGACY; OPTIONAL |
-| C2 | EL 收入传播放大第一轮收入，但不改变已证明的阈值排序 | EL mapping | 与 companion paper 分母和支付口径一致 | TO VERIFY |
+| ID | 正式结果 | 关键条件 | 解析结论 | 边界或反例 | 状态 |
+|---|---|---|---|---|---|
+| L0 | 平台化提高平台支出份额并降低消费价格指数 | CES；\(\eta>1\)；\(p_P=\bar p_Pe^{-z}\) | \(s'=(\eta-1)s(1-s)>0\)；\(d\ln P_M/dz=-s<0\) | \(s\to0,1\) 时边际份额响应趋近零 | PROVED |
+| P1 | 更强 LCA 降低 viable entry 所需基础设施 | 双重相对成本；\(\Omega(z)>0\)；代表性产业 | \(\partial G_E/\partial \mathcal C^P_{ij}>0\)（内部解） | 阈值截断于零时只有弱单调；active mode 可切换 | PROVED |
+| P2 | 本地嵌入组织存在阈值并改变支付归属 | \(d_L<d_P\)；\(F>0\)；\(\Omega(z)>0\) | \(\partial G_L/\partial c>0\)；\(G\geq G_L\Rightarrow \rho_L>\rho_P,B_j^L>B_j^P\) | \(F\leq\bar F\) 时平台依赖区间消失 | PROVED |
+| P3a | 名义地方收入存在唯一最小阈值 | \(D>0\)；端点跨越；固定区间严格单调；状态切换向上跳 | \(G_Y=\inf\{G:d\ln Y/dz\geq0\}\) 唯一 | 若零点位于状态切换，阈值是离散边界 | PROVED |
+| P3b | 实际收入阈值弱低于名义收入阈值 | \(\alpha_Ms(z)>0\) | \(G_R\leq G_Y\)；同一连续区间内 \(G_R<G_Y\) | 同一离散切换可使 \(G_R=G_Y\) | PROVED |
+| C1 | 更强 LCA 降低收入阈值 | 更低 \(c\) 提高每个给定 \(G\) 的 \(B_j\) 和 \(\theta_r\) | \(G_R,G_Y\) 对 LCA strength 弱下降；同一内部区间严格下降 | 离散状态切换或零截断处可为弱关系 | PROVED |
+| P4 | 政府参与提高基础设施，并与保护不等价 | \(\mathcal U_I''<0\)；\(C''\geq0\)；\(\kappa_I'<0\) | \(G'(\vartheta)>0\)；结构门槛映射为 \(\vartheta_H\) | 不声称 \(\vartheta\) 为全国福利最优；无门槛跨越时 \(\vartheta_H\) 不存在 | PROVED |
+| C2 | EL 递归传播放大第一轮收入但不重复支付 | \(D=1-\beta-\alpha_M\omega_C>0\) | \(Y=(B_0+B_j)/D\)；\(R=Y/P_M^{\alpha_M}\) | \(D\leq0\) 时固定点不稳定，排除 | VERIFIED |
 
-## 当前优先顺序
+## 2. 证明索引
 
-```text
-L0
- -> P1a
- -> minimal P--L organization choice
- -> payment-flow accounting
- -> P1b
- -> P2
- -> P3
- -> C1
- -> P4
- -> optional full E1 extension.
-```
+| 结果 | 证明位置 | 代码核验 |
+|---|---|---|
+| L0 | `paper/appendix.tex`, Consumer block | CES 解析恒等式与有限差分 |
+| P1 | `paper/appendix.tex`, Proof of Proposition 1 | 成本网格；raw/clipped threshold 检查 |
+| P2 | `paper/appendix.tex`, Proof of Proposition 2 | \(F>\bar F\) 与 \(F\leq\bar F\) 两个区域 |
+| P3 | `paper/appendix.tex`, Proof of Proposition 3 | 全局 \(G\) 网格、状态跳跃和二分根 |
+| P4 | `paper/appendix.tex`, Proof of Proposition 4 | FOC 有限差分和闭式示例 |
+| 全部 | `code/theory/validate_model.py` | 解析、有限差分、边界与反例 |
 
-## 停止条件
+## 3. 参数区域核验
 
-出现以下任一情况时，不继续增加模型模块：
+基准 illustrative 参数在 \(z=0.5,c=0.8\) 时产生：
 
-1. Block A 无法产生可单独识别的消费价格收益；
-2. Block B 的 producer gain 仍由外生增长率给定；
-3. organizational embeddedness 不能改变 local-service 或 external-payment incidence；
-4. capture loss 不是支付流结果；
-5. \(G_Y^*\) 的存在需要直接假定目标结论；
-6. \(G_R^*<G_Y^*\) 不能由价格效应严格推出；
-7. 完整恢复 legacy 三阈值后仍不改变 P2 或 P3。
+\[
+G_P^0=-0.070176,\qquad
+G_L^0=0.126129,\qquad
+G_X=0.256065,
+\]
 
-## 完成定义
+\[
+G_R=0.046348,\qquad
+G_Y=0.550487.
+\]
 
-一个命题只有在以下四项同时完成时才标记为 `PROVED`：
+因此：
 
-- 正式陈述；
-- 参数条件；
-- 解析证明；
-- 边界和反例检查。
+- 候选产业在 \(G=0\) 已可通过外部平台进入；
+- \(G<G_L\) 时维持外部平台依赖；
+- \(G\geq G_L\) 时形成本地嵌入；
+- 实际收入先于名义地方收入对平台化转正；
+- 严格排序不是由同一连续区间假定得到，而是数值例中的均衡结果；正式命题仍只在
+  充分条件下声称严格排序。
+
+政府参与的闭式示例产生：
+
+\[
+G(0.1)=0.3261,\qquad
+G(0.5)=0.4434,\qquad
+G(0.9)=0.7169.
+\]
+
+三种参与度跨越不同的收入阈值，支持改革路径图。
+
+## 4. 机制关闭
+
+| 情景 | 被关闭或减弱的机制 | 理论预期 |
+|---|---|---|
+| \(\ell_A=\ell_P\) | consumer-side capture loss | \(\Lambda(z)=0\) |
+| \(\rho_P=\rho_L\) | producer-side 空间支付差 | 组织选择只影响成本和销售，不影响留值率 |
+| \(\chi=0\) | 基础设施与平台 producer access 互补 | 收入效应失去 \((\sigma-1)\chi G\) 项 |
+| \(\lambda>0\) | 外部平台服务完全外地化 | \(\rho_P\) 上升，组织切换的 capture gain 缩小 |
+| \(F\leq\bar F\) | 独立的平台依赖区间 | 企业可由不进入直接转入 \(L\) |
+| protection | 外部渠道效率 | 本地化可能增加，但消费者接入和边际进入恶化 |
+
+## 5. 完成定义
+
+本台账中的 `PROVED` 表示同时完成：
+
+1. 正式命题陈述；
+2. 明确参数条件；
+3. 解析证明；
+4. 边界和反例；
+5. 代码有限差分或参数网格核验。
+
+正文写作不得把附录中的条件性结论改写为无条件一般命题。

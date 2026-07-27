@@ -56,7 +56,7 @@ Comparative-Advantage Realization, and Local Value Capture**
 - `paper/references.bib`：唯一 BibTeX 文献库；
 - `notes/00_scoping/project_memo_zh.md`：项目身份和范围；
 - `notes/00_scoping/decision_log.md`：冻结决定；
-- `notes/01_theory/model_contract.md`：唯一活动模型合约；
+- `notes/01_theory/model_contract.md`：唯一活动模型合约（v3.0）；
 - `notes/01_theory/proposition_ledger.md`：唯一活动命题台账。
 
 候选文献清单不是正式 bibliography。只有完成元数据核实的来源才能进入
@@ -78,7 +78,7 @@ Comparative-Advantage Realization, and Local Value Capture**
 1. 更强的 LCA 降低本地企业实现 producer-side market access 所需的结构门槛；
 2. 组织选择和本地配套服务来源内生决定 production gain 有多少转化为 local capture；
 3. 存在平台化提高名义地方收入的能力/基础设施阈值；
-4. 消费价格收益使实际收入阈值严格低于名义收入阈值；
+4. 实际收入阈值弱低于名义收入阈值；两个根位于同一连续组织区间时严格更低；
 5. facilitating investment 与 protection 对 access、entry 和 capture 不等价。
 
 ## Legacy 规则
@@ -88,7 +88,8 @@ Comparative-Advantage Realization, and Local Value Capture**
 `history/legacy_2026-07-24_pre_axis_reset/`
 
 这些文件保留有效推导，但状态为 `SUPERSEDED`，不得作为当前项目依据。旧
-\(M_P,M_{L0},M_X\) 组织阈值只有在改变当前收入阈值时才可作为扩展恢复。
+正文只使用 \(G_E,G_L\) 两个经济阈值；完整的 \(G_P^0,G_L^0,G_X\) 状态分类
+已在附录恢复，用于证明三组织区域何时存在，不作为正文的独立贡献。
 
 ## 关于 NEG
 
@@ -118,10 +119,11 @@ NSE/
 - [x] 固定 access--capture 研究主轴；
 - [x] 明确 NSE 是地方发展侧结构骨架，并划清 EL 与平台模块边界；
 - [x] 归档偏离主轴的旧 contract；
-- [x] 建立活动 Model Contract v2.1 和命题台账；
-- [ ] 闭合 Block A 的消费接入与支付流；
-- [ ] 推导 P1a 的 producer-entry threshold 与 P1b 的 organizational-embedding threshold；
-- [ ] 证明名义和实际收入阈值及严格排序；
-- [ ] 在 P2/P3 完成后建立 facilitating-state 模块；
-- [ ] 完成 illustrative numerical exercises；
-- [ ] 形成可供外部审阅的完整理论稿。
+- [x] 建立活动 Model Contract v3.0 和命题台账；
+- [x] 闭合 consumer access 和 consumer-channel 支付流；
+- [x] 推导 producer-entry 和 organizational-embedding thresholds；
+- [x] 证明名义、实际收入阈值及条件性排序；
+- [x] 建立精简 facilitating-state 模块；
+- [x] 完成 illustrative numerical exercises、机制关闭和 source data；
+- [x] 完成核心文献元数据审计和 EL 重复性审计；
+- [x] 形成20页英文正文、证明附录和可编译 PDF。

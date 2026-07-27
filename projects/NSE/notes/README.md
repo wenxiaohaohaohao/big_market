@@ -52,8 +52,9 @@ consumer-side platform access
 
 `../history/legacy_2026-07-24_pre_axis_reset/`
 
-该目录状态为 `SUPERSEDED`。其中的外部平台--本地组织阈值只有在能够改变当前
-名义或实际收入阈值时才可重新使用。
+该目录状态为 `SUPERSEDED`，不作为当前模型来源。v3 需要的组织状态分类已经
+重新推导并写入当前 `model_contract.md` 与 `paper/appendix.tex`，不再引用
+legacy 文件。
 
 ## 第一版排除
 

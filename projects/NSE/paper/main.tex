@@ -1,480 +1,1212 @@
 \documentclass[11pt]{article}
 
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb,amsthm}
-\usepackage{booktabs}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array}
+\usepackage{graphicx}
 \usepackage{microtype}
+\usepackage{natbib}
+\usepackage{setspace}
+\usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
+
+\onehalfspacing
+\setlength{\parindent}{1.4em}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.6em,itemsep=2pt,topsep=3pt}
+\setlist[enumerate]{leftmargin=1.8em,itemsep=2pt,topsep=3pt}
 
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
 \newtheorem{lemma}{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
 
 \newcommand{\LCA}{\ensuremath{\mathrm{LCA}}}
 \newcommand{\ACA}{\ensuremath{\mathrm{ACA}}}
+\newcommand{\Mcal}{\mathcal M}
+\newcommand{\Rcal}{\mathcal R}
 
-\title{When Does Market Access Become Local Development?\\
+\title{\textbf{When Does Market Access Become Local Development?}\\
 Platform Integration, Comparative-Advantage Realization,\\
 and Local Value Capture}
 \author{}
-\date{Internal Theory-Architecture Draft --- July 2026}
+\date{July 2026}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-Platform integration can lower local consumer prices while shifting trade away
-from locally embedded channels.  It also gives local producers access to a
-larger market, but that opportunity need not become local production and
-income.  This paper asks when these two sides of platform integration jointly
-produce local development.  Its theoretical object is the access--capture
-problem developed in a companion short paper.  New Structural Economics
-supplies the structural backbone on the local-development side: endowments
-shape latent comparative advantage; hard and soft infrastructure determine
-actual comparative advantage and firm viability; and organizational
-embeddedness determines whether production and complementary-service payments
-remain local.  The model therefore separates consumer access, producer access,
-local channel displacement, comparative-advantage realization, and local
-capture formation.  Its target results are
-distinct thresholds for nominal local income and consumption-equivalent real
-income, with the latter strictly lower because consumers benefit from the
-price decline even when first-round local receipts fall.  Public facilitation
-addresses an explicit shared-infrastructure or coordination failure in an
-\LCA-consistent activity.  This internal draft fixes the paper's theoretical
-architecture; proposition statements are not claims of proof until the
-corresponding derivations are completed in the appendix.
+\noindent
+Platform integration can lower consumer prices everywhere without generating
+local production and income everywhere.  This paper develops a tractable
+theory of that divergence.  A platform simultaneously reallocates household
+spending from a locally embedded channel toward an external channel and
+expands the national market accessible to local producers.  New Structural
+Economics disciplines the supply response: regional endowments determine
+latent comparative advantage; infrastructure determines whether that
+advantage survives actual transaction costs and supports viable entry; and a
+fixed-cost--variable-cost choice determines whether production relies on an
+external platform organization or becomes embedded in local complementary
+services.  Payment flows, rather than an assumed local-capability index,
+generate both consumer-channel retention and producer-side value capture.
+The model yields four results.  Stronger latent comparative advantage lowers
+the infrastructure thresholds for entry and local organizational
+embeddedness.  Nominal and consumption-equivalent local income have distinct
+infrastructure thresholds; the latter is weakly lower because consumers also
+benefit from the price decline.  Government participation that relaxes a
+shared-infrastructure financing constraint raises infrastructure supply and
+reduces the participation needed to cross those thresholds.  Facilitation is
+not equivalent to protection: protection can induce localization only by
+worsening the external channel, thereby reducing consumer access and possibly
+deterring marginal producers.  Illustrative numerical exercises establish
+that the relevant parameter regions are nonempty; they are not a calibration.
 \end{abstract}
+
+\noindent\textit{Keywords:} platform integration; local value capture; latent
+comparative advantage; actual comparative advantage; facilitating state;
+regional development.
+
+\noindent\textit{JEL codes:} F12, O14, O18, R11, L81.
 
 \section{Introduction}
 
-A common market does not connect every region to the national economy in the
-same way.  Platform integration can make goods produced elsewhere cheaper and
-more accessible to local consumers.  At the same time, it can displace local
-wholesale, retail, logistics, and transaction services.  For local producers,
-the same platform can enlarge the potential customer base.  Whether that
-producer-side opportunity becomes local output, employment, service income,
-and profits depends on the region's production structure and the transaction
-conditions under which its firms operate.
+Digital platforms and domestic market integration can make a national market
+look more uniform from the consumer's side.  A household in a remote place can
+buy varieties previously available only in a large city, and the effective
+price of those varieties falls as search, payment, and delivery improve.
+Evidence from online trade in China shows that e-commerce reduces the role of
+distance and disproportionately improves consumption access in smaller and
+more remote cities \citep{FanTangZhuZou2018}.  Rural e-commerce expansion also
+reduced the cost of living for adopters in the experiment studied by
+\citet{CoutureFaberGuLiu2021}.  Similar consumer gains arise when modern retail
+channels enter developing markets \citep{AtkinFaberGonzalezNavarro2018}.
 
-The paper asks:
-\begin{quote}
-Why does platform-enabled market integration broadly improve consumer access,
-yet translate into local production and income only when a region's latent
-comparative advantage can be realized through appropriate local organization
-and infrastructure?
-\end{quote}
+Consumer access, however, is not the same object as local development.  The
+rural e-commerce program studied by \citet{CoutureFaberGuLiu2021} produced
+little average evidence of higher income for local producers and workers.
+Modern retail entry can lower the cost of living while displacing income and
+profits in incumbent local stores \citep{AtkinFaberGonzalezNavarro2018}.
+More generally, reductions in domestic trade costs do not guarantee that
+peripheral places industrialize: highway connections to larger markets
+reduced industrial growth in the peripheral Chinese counties examined by
+\citet{Faber2014}.  These findings are not evidence that integration is
+generally harmful.  They show that an improvement in the set of goods a place
+can buy need not coincide with an improvement in what that place can
+competitively produce, organize, and retain.
 
-This formulation fixes the division of labor between the paper's two
-theoretical components.  The access--capture problem is the object to be
-explained.  New Structural Economics (NSE) provides the local structural
-block: it disciplines industry choice, the conversion from latent to actual
-comparative advantage, firm viability, organizational embeddedness, local
-linkages, and the facilitating-state boundary.  The platform block supplies
-the market-access and channel-substitution shocks, while the companion paper
-supplies the income-propagation block.  The paper is therefore neither a
-general theory of structural transformation with a platform added at the end
-nor a version of the companion model in which ``local capability'' is simply
-renamed comparative advantage.
+This paper asks when platform-enabled market access becomes local development.
+Its central distinction is between \emph{access} and \emph{capture}.  Access
+describes the effective prices and market opportunities faced by local
+consumers and producers.  Capture describes the location of the production,
+service, and profit income generated by the associated transactions.  A
+platform can improve inbound consumer access while shifting local expenditure
+away from locally embedded wholesale, retail, logistics, and after-sales
+services.  The same platform can improve outbound producer access, but a local
+industry must still be sufficiently competitive to enter, and it may continue
+to purchase marketing, fulfillment, certification, settlement, and supply
+chain services from outside the region after entry.  Market participation
+therefore admits an economically important intermediate state: local
+production has been realized, but its organization remains externally
+dependent.
 
-The intended contribution has three parts.  First, consumer-side and
-producer-side market access are modeled separately, even though both improve
-with platform integration.  Second, local value capture is derived from the
-location and ownership of production and transaction-service payments, rather
-than imposed as a regional parameter; production and local complementary
-services are jointly generated by the NSE block.  Third, the paper connects
-the NSE distinction among latent comparative advantage, actual comparative
-advantage, viability, and realization to the companion paper's distinction
-between nominal local income and consumption-equivalent real income.
+New Structural Economics (NSE) supplies the production-side discipline needed
+to explain this intermediate state.  NSE starts from the proposition that an
+economy's viable industrial structure is conditioned by its endowment
+structure and that each industrial structure requires corresponding hard and
+soft infrastructure \citep{Lin2011,Lin2012}.  A firm following the comparative
+advantage implied by local factor endowments can nevertheless fail to operate
+if actual transaction costs are too high.  \citet{LinWang2023} formalize this
+distinction as one between latent comparative advantage (LCA), based on
+relative production costs, and actual comparative advantage (ACA), based on
+relative total costs after transaction costs.  The distinction matters for
+policy because infrastructure constraints often cannot be removed by a single
+firm.  A facilitating state can help industries with potential comparative
+advantage overcome shared infrastructure and coordination constraints
+\citep{LinMonga2010}; it is not meant to sustain indefinitely an industry that
+remains nonviable in open competition \citep{Lin2003}.
+
+The use of NSE here is deliberately narrower than a general theory of
+structural transformation and broader than relabeling an exogenous
+``capacity'' parameter.  Endowments determine relative production costs.
+Infrastructure affects actual delivered costs and producer market access.
+Those objects jointly determine viable entry and the organizational form used
+after entry.  Organizational choice then determines the location of
+complementary-service payments.  Thus NSE affects both whether local
+production exists and how much of the resulting value is locally embedded.
+It does not replace consumer demand, the platform shock, or the local-income
+propagation mechanism.
+
+The model has five parts.  First, a representative household consumes a market
+good through a local channel and an external platform channel.  Platform
+integration lowers the platform price, raises its expenditure share, and
+lowers the market-good price index.  The local income content of each channel
+comes from a payment-flow table.  When the local channel has greater local
+income content, the channel shift creates a consumer-side capture drag.
+
+Second, a focal region is embedded in an otherwise exogenous national market.
+A competitive background industry determines local factor opportunity costs.
+The region's capital--labor endowment and the candidate industry's factor
+intensity generate its unit production cost.  LCA is defined strictly as a
+region--industry double relative production cost.  ACA, viability, and
+realization are separately defined: ACA includes actual transaction costs,
+viability requires nonnegative profit without persistent protection, and
+realization is equilibrium entry and sales.
+
+Third, a representative candidate producer faces CES national demand.  The
+same platform-integration index that reduces the consumer platform price also
+expands producer market access.  Shared infrastructure reduces outbound
+iceberg costs, and platform integration makes that infrastructure more
+productive.  A producer can rely on an external platform organization with a
+low fixed cost and a high unit service payment, or build a locally embedded
+organization with a higher fixed cost and a lower unit organizational cost.
+This conditional fixed-cost--variable-cost ordering is related to the trade
+intermediation mechanism in \citet{AhnKhandelwalWei2011}, but the present
+paper uses a representative industry rather than a heterogeneous-firm
+distribution.
+
+Fourth, the producer's revenue is split according to the location of actual
+payments.  In the external mode, the unit platform-service payment leaves the
+region.  In the local mode, production and complementary organizational
+services are locally supplied.  These payment flows generate the
+producer-retention rate; no separate retention-capacity function is assumed.
+The resulting first-round producer income enters an EL-compatible
+local-income propagation equation.  The propagation block is a one-region,
+household-endogenous multiplier, closely related to standard social-accounting
+and local-multiplier reasoning \citep{MillerBlair2009,Moretti2010}.  Its role
+is conditional: it transmits first-round income generated by the new model
+rather than constituting the new contribution.
+
+Finally, a reduced-form infrastructure provider faces a financing wedge that
+falls with government participation.  This block follows the enabling-state
+logic of \citet{LinWang2023}: the state helps relax a financing constraint on
+transaction-cost-reducing infrastructure.  It is not a national social
+planner, and the paper does not claim that the chosen government participation
+is nationally optimal.
+
+Four propositions organize the results.  Proposition~1 shows that stronger
+LCA lowers the infrastructure required for viable entry.  Proposition~2 shows
+that a second threshold determines organizational embeddedness; stronger LCA
+also lowers this threshold, and crossing it changes local service income,
+external payments, and the producer-retention rate.  Proposition~3 combines
+these supply responses with the consumer channel shift.  It establishes
+unique minimum infrastructure thresholds for nonnegative nominal and
+consumption-equivalent income effects under endpoint-crossing conditions.
+The real-income threshold is weakly below the nominal-income threshold and is
+strictly below it when the two roots are interior to the same continuous
+organizational regime.  This qualification matters because discrete entry or
+organization switches can make the thresholds coincide.  Proposition~4 maps
+the thresholds into minimum government-participation levels and distinguishes
+facilitation from protection.
+
+The paper contributes to three literatures.  Relative to the literature on
+e-commerce and retail access, it explains why consumer price gains can be more
+geographically diffuse than producer and income gains.  Relative to NSE, it
+introduces platform-mediated organizational dependence as a distinct stage
+between realizing production and embedding complementary services locally.
+Relative to local-multiplier models, it derives the first-round local-income
+term and retention rates from comparative advantage, entry, organization, and
+payment location.  The contribution is not the multiplier itself and not a
+claim that local retention should be maximized at the expense of consumers.
+
+The analysis is intentionally a small-region partial equilibrium.  It does not
+contain migration, land, endogenous national expenditure, platform strategic
+pricing, or New Economic Geography agglomeration.  It therefore cannot
+evaluate national welfare or long-run spatial equilibrium.  This restriction
+keeps the paper focused on the question that motivates it: when a common
+platform improves access, what structural conditions allow a region to
+convert that opportunity into locally captured income?
 
 \section{The Access--Capture Benchmark}
 
-\subsection{Consumer access and channel substitution}
+\subsection{Households and consumer access}
 
-Consider one focal region embedded in a larger national market.  A
-representative local household consumes a channel-composite good supplied
-through a locally embedded channel $A$ and an external platform channel $P$:
-\[
- C_M=
+A representative household allocates nominal income among a market-good
+composite \(Q_M\), a locally produced nontraded good \(N\), and an outside
+numeraire \(Z\):
+\begin{equation}
+ U=Q_M^{\alpha_M}N^\beta Z^{1-\alpha_M-\beta},
+ \qquad
+ \alpha_M>0,\quad \beta\geq0,\quad \alpha_M+\beta<1.
+ \label{eq:utility}
+\end{equation}
+Following the standard CES benchmark \citep{DixitStiglitz1977}, the market-good
+composite is purchased through a locally embedded channel
+\(A\) and an external platform channel \(P\):
+\begin{equation}
+ Q_M=
  \left[
- a_A^{1/\eta}C_A^{(\eta-1)/\eta}
- a_P^{1/\eta}C_P^{(\eta-1)/\eta}
+ (1-a_P)^{1/\eta}Q_A^{(\eta-1)/\eta}
+ +a_P^{1/\eta}Q_P^{(\eta-1)/\eta}
  \right]^{\eta/(\eta-1)},
  \qquad \eta>1.
-\]
-The associated price index and platform expenditure share are
-\[
- P_M(z)=
+ \label{eq:consumer_ces}
+\end{equation}
+Normalize \(p_A=1\).  Platform integration \(z\) lowers the effective platform
+price:
+\begin{equation}
+ p_P(z)=\bar p_Pe^{-z}.
+ \label{eq:platform_price}
+\end{equation}
+This price can include the delivered product price, search and payment costs,
+and any consumer-facing platform charge.  It is distinct from the
+producer-side organizational payment introduced below.
+
+The platform expenditure share and market-good price index are:
+\begin{align}
+ s(z)
+ &=
+ \frac{a_Pp_P(z)^{1-\eta}}
+ {(1-a_P)p_A^{1-\eta}+a_Pp_P(z)^{1-\eta}},
+ \label{eq:platform_share}\\
+ P_M(z)
+ &=
  \left[
- a_Ap_A^{\,1-\eta}
- a_Pp_P(z)^{\,1-\eta}
- \right]^{1/(1-\eta)}
-\]
-and
-\[
- s_P(z)=
- \frac{a_Pp_P(z)^{\,1-\eta}}
- {a_Ap_A^{\,1-\eta}+a_Pp_P(z)^{\,1-\eta}}.
-\]
-Platform integration is indexed by $z$ and satisfies $p_P'(z)<0$.  Hence
-\[
- s_P'(z)>0,
+ (1-a_P)p_A^{1-\eta}
+ +a_Pp_P(z)^{1-\eta}
+ \right]^{1/(1-\eta)}.
+ \label{eq:price_index}
+\end{align}
+Standard CES differentiation gives:
+\begin{equation}
+ s'(z)=(\eta-1)s(z)[1-s(z)]>0,
  \qquad
- P_M'(z)<0.
-\]
-This block establishes a consumer-access gain and a shift in transaction
-organization.  It does not, by itself, determine whether local firms can sell
-to the national market.
+ \frac{d\ln P_M(z)}{dz}=-s(z)<0.
+ \label{eq:consumer_comparative_static}
+\end{equation}
+Thus the platform unambiguously improves the model's consumer-access object:
+its expenditure share rises and the cost of a unit of \(Q_M\) falls.
 
-\subsection{Payment location}
+\subsection{Consumer-channel payment incidence}
 
-Let $\ell_A$ and $\ell_P$ denote the locally received value generated by one
-unit of expenditure through the two channels.  They are accounting outcomes,
-not independent behavioral parameters.  Each is constructed from mutually
-exclusive payments to commodity producers, wholesale and retail services,
-logistics and fulfilment services, platform services, and locally owned
-profits.  In the benchmark case,
-\[
- \ell_A>\ell_P,
-\]
-because a larger share of the traditional channel's transaction services is
-locally provided, whereas platform fees and part of the platform's
-organizational services accrue outside the focal region.
+Access does not determine where income is generated.  Let \(\ell_A\) and
+\(\ell_P\) denote the local income generated per unit of expenditure through
+the two consumer channels.  Table~\ref{tab:consumer_flows} clarifies their
+content.  Both measures use the same transaction boundary and therefore can
+be combined without treating an external payment as a national resource loss.
 
-For a fixed first-round expenditure base $X_i$, the local transaction-service
-component is
-\[
- V_i^{\mathrm{channel}}(z)
- =
- X_i\left[
- \bigl(1-s_P(z)\bigr)\ell_A+s_P(z)\ell_P
- \right].
-\]
-Thus channel substitution can lower local receipts even while it lowers the
-consumer price index.  This is the benchmark capture loss that the
-production-side model must offset; it is not the paper's final result.
+\begin{table}[htbp]
+\centering
+\caption{Consumer-channel payment incidence}
+\label{tab:consumer_flows}
+\begin{tabular}{p{0.39\textwidth}cc}
+\toprule
+Payment generated by one unit of local household expenditure
+& Local channel \(A\) & External platform \(P\)\\
+\midrule
+Local wholesale, retail, storage, and after-sales value added
+& local income & limited in baseline\\
+External production and interregional shipping
+& external payment & external payment\\
+Platform, settlement, and externally supplied digital services
+& limited & external payment\\
+Locally owned operating surplus
+& local income & included if locally owned\\
+\midrule
+Local income content
+& \(\ell_A\) & \(\ell_P\)\\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\section{Endowments and Latent Comparative Advantage}
+The baseline assumes \(\ell_A>\ell_P\).  This is a transparent spatial
+incidence assumption, not an assertion that platforms always retain less
+value locally.  A platform that develops local fulfillment, seller services,
+or ownership can have \(\ell_P\geq\ell_A\); that reverse case is reported in
+the appendix.
 
-\subsection{Production costs}
+The local income content of household market-good expenditure is:
+\begin{equation}
+ \omega_C(z)=[1-s(z)]\ell_A+s(z)\ell_P.
+ \label{eq:consumer_retention}
+\end{equation}
+Define:
+\begin{equation}
+ D(z)=1-\beta-\alpha_M\omega_C(z).
+ \label{eq:denominator}
+\end{equation}
+The maintained stability condition is \(D(z)>0\).  When
+\(\ell_A>\ell_P\), platform substitution lowers \(\omega_C\) and raises
+\(D\).  The corresponding proportional capture drag is:
+\begin{equation}
+ \Lambda(z)=
+ \frac{\alpha_M(\ell_A-\ell_P)s'(z)}
+ {D(z)}>0.
+ \label{eq:capture_drag}
+\end{equation}
+The numerator records how rapidly expenditure moves toward the lower-retention
+channel; the denominator captures repeated local spending.  This term is
+consumer-side channel displacement.  It is separate from the producer-side
+external platform payment developed in Section~\ref{sec:organization}.
 
-Region $i$ has endowment vector $E_i=(K_i,L_i)$.  A competitive background
-sector $0$ anchors local opportunity costs $(w_i,r_i)$.  Candidate industry
-$j$ has factor intensity $\theta_j$ and unit production cost
-\[
- c^P_{ij}=c_j(w_i,r_i;\theta_j).
-\]
-The superscript $P$ identifies production cost before industry-specific
-transaction costs.  This distinction is essential: NSE does not define
-comparative advantage as the inverse of a single industry's absolute cost.
+\section{Endowments, Comparative Advantage, and Producer Access}
 
-\subsection{Strict relative-cost definition}
+\subsection{A focal region and factor opportunity costs}
 
-Let $h$ be an external reference region and let $0$ be the internal benchmark
-industry.  Define the production-cost comparison
-\[
+Consider a small focal region \(i\) with baseline factor endowments \(K_i\) and
+\(L_i\).  Let:
+\begin{equation}
+ e_i=\frac{K_i}{L_i}.
+ \label{eq:endowment_ratio}
+\end{equation}
+A competitive background industry \(0\) uses:
+\begin{equation}
+ Y_{i0}=A_0K_{i0}^{\theta_0}L_{i0}^{1-\theta_0}.
+ \label{eq:background_technology}
+\end{equation}
+The candidate industry is small relative to the background economy.  The
+background industry therefore determines the factor opportunity costs
+relevant for its entry decision.  Over the range studied, marginal factor
+services can be supplied at those opportunity costs without changing the
+factor-price schedule.  This assumption can represent underused capacity,
+additional work hours, or a locally elastic short-run supply margin.  With the
+background good as numeraire, competitive factor pricing gives:
+\begin{equation}
+ w_i=(1-\theta_0)A_0e_i^{\theta_0},
+ \qquad
+ r_i=\theta_0A_0e_i^{\theta_0-1}.
+ \label{eq:factor_prices}
+\end{equation}
+This closure avoids treating factor prices as free parameters while preserving
+a tractable small-region problem.  It is not a full-employment two-sector
+general equilibrium: a long-run welfare analysis would have to subtract
+production forgone in the background industry and solve the factor
+reallocation explicitly.
+
+Candidate industry \(j\) uses:
+\begin{equation}
+ Y_{ij}=A_jK_{ij}^{\theta_j}L_{ij}^{1-\theta_j}.
+ \label{eq:candidate_technology}
+\end{equation}
+Its unit production cost is:
+\begin{align}
+ c^P_{ij}
+ &=
+ \frac{1}{A_j}
+ \left(\frac{r_i}{\theta_j}\right)^{\theta_j}
+ \left(\frac{w_i}{1-\theta_j}\right)^{1-\theta_j}
+ \notag\\
+ &=\xi_j e_i^{\theta_0-\theta_j},
+ \qquad \xi_j>0.
+ \label{eq:unit_production_cost}
+\end{align}
+If the candidate industry is more capital intensive than the background
+industry, \(\theta_j>\theta_0\), a higher regional capital--labor endowment
+lowers its relative unit cost.  This is the minimal factor-proportions channel
+required for an NSE paper.  It is consistent with the broader result that
+factor abundance shifts production and trade toward industries intensive in
+the abundant factor \citep{Romalis2004}, and with the NSE view that industrial
+composition evolves with endowment structure \citep{JuLinWang2015}.
+
+\subsection{LCA, ACA, viability, and realization}
+
+The four concepts used below are related but not interchangeable.
+
+\begin{definition}[Latent comparative advantage]
+Let \(h\) be an external reference region and \(0\) a background industry in
+each region.  Region \(i\)'s production-cost comparative-advantage index for
+industry \(j\) is:
+\begin{equation}
  \mathcal C^P_{ij}
  =
  \frac{c^P_{ij}/c^P_{i0}}
-      {c^P_{hj}/c^P_{h0}}.
-\]
-Region $i$ has latent comparative advantage (\LCA) in industry $j$ when
-\[
- \mathcal C^P_{ij}<1.
-\]
-This is a double-relative production-cost statement.  It says that, before
-industry-specific transaction costs and infrastructure constraints, industry
-$j$ is relatively better suited to region $i$ than to the reference region.
-It does not imply that firms in $i$ can profitably produce and sell the good
-under the existing business environment.
+ {c^P_{hj}/c^P_{h0}}.
+ \label{eq:lca}
+\end{equation}
+Region \(i\) has latent comparative advantage in \(j\) when
+\(\mathcal C^P_{ij}<1\).
+\end{definition}
 
-For clarity, the paper maintains four distinct concepts:
-\begin{center}
-\begin{tabular}{p{0.22\textwidth}p{0.68\textwidth}}
+The double ratio is essential.  A low absolute unit cost is not by itself a
+definition of comparative advantage.  In the analytical and numerical
+comparative statics below, \(c\) is a monotone sufficient statistic for
+\(\mathcal C^P_{ij}\), holding the reference-region and background-industry
+ratios fixed:
+\begin{equation}
+ \frac{\partial c}{\partial\mathcal C^P_{ij}}>0.
+ \label{eq:cost_lca_mapping}
+\end{equation}
+Lower \(c\) therefore means stronger LCA, but the underlying definition
+remains equation~\eqref{eq:lca}.
+
+\begin{definition}[Actual comparative advantage]
+Actual comparative advantage compares the same region--industry double
+relative cost after adding the transaction costs generated by the current
+hard and soft infrastructure.  It is present when the minimum delivered-cost
+ratio for industry \(j\), relative to industry \(0\), is below the
+corresponding ratio in region \(h\).
+\end{definition}
+
+To make this definition operational, let the outbound iceberg cost be:
+\begin{equation}
+ \tau_O(z,G)=\bar\tau_O\exp[-(\gamma+\chi z)G],
+ \qquad \bar\tau_O>1,\quad\gamma\geq0,\quad\chi>0,
+\label{eq:iceberg}
+\end{equation}
+and restrict the local analysis to the range in which
+\(\tau_O(z,G)\geq1\).  The baseline component \(\bar\tau_O^{1-\sigma}\)
+will be absorbed into the market-access normalization below.
+The delivered marginal cost under organization \(r\) is
+\(\tau_O(z,G)m_r\), where \(m_r\) is defined below.  Holding the external
+reference fixed, a larger \(G\) lowers the local total-cost ratio.  Thus a
+region can possess LCA while lacking ACA because inadequate infrastructure
+leaves its total delivered cost too high.
+
+\begin{definition}[Viability and realization]
+The candidate producer is viable if at least one available organization
+earns nonnegative profit in open competition without persistent protection:
+\[
+\max\{\pi_P,\pi_L\}\geq0.
+\]
+Comparative advantage is realized when the producer actually enters, produces,
+and sells in equilibrium.
+\end{definition}
+
+LCA describes a structural cost potential; ACA describes that potential under
+actual transaction conditions; viability is a firm-level profit condition;
+realization is an equilibrium outcome.  Observed exports or revealed
+comparative advantage can measure realization, but they do not define LCA.
+
+\subsection{Producer market access}
+
+The candidate producer faces a national CES demand schedule:
+\begin{equation}
+ q_r=\Mcal(z,G)p_r^{-\sigma},
+ \qquad \sigma>1.
+ \label{eq:producer_demand}
+\end{equation}
+Let \(\Mcal_0e^{\varepsilon z}\) be the national expenditure opportunity
+available to the focal industry after absorbing the invariant factor
+\(\bar\tau_O^{1-\sigma}\) into \(\Mcal_0\).  Substituting the variable
+component of equation~\eqref{eq:iceberg} into CES demand gives:
+\begin{equation}
+ \Mcal(z,G)
+ =
+ \Mcal_0
+ \exp\left[
+ \varepsilon z+(\sigma-1)(\gamma+\chi z)G
+ \right].
+ \label{eq:market_access}
+\end{equation}
+This formulation has the standard market-access structure in which bilateral
+trade costs enter with elasticity \(1-\sigma\)
+\citep{DonaldsonHornbeck2016}.  The term \(\varepsilon z\) captures the
+direct producer-access effect of platform integration.  The cross term
+\((\sigma-1)\chi zG\) captures complementarity: logistics, certification,
+quality control, digital connectivity, and similar infrastructure have a
+larger payoff when a platform can connect the producer to a broader market.
+
+Equation~\eqref{eq:market_access} is not the consumer price equation written
+twice.  Consumer access in equation~\eqref{eq:platform_price} concerns what
+local households can buy; producer access concerns the demand that local
+producers can reach.  The same reform index \(z\) moves both, but their
+incidence and dependence on \(G\) differ.
+
+\subsection{Entry and the realization threshold}
+
+The producer can use an external platform organization \(P\) or a locally
+embedded organization \(L\):
+\begin{equation}
+ m_P=c+d_P,\qquad
+ m_L=c+d_L,\qquad
+ 0\leq d_L<d_P,
+ \label{eq:marginal_costs}
+\end{equation}
+\begin{equation}
+ F_P=f,\qquad F_L=f+F,\qquad f>0,\quad F>0.
+ \label{eq:fixed_costs}
+\end{equation}
+The external organization uses a platform's existing national marketing,
+settlement, fulfillment, and supply-chain system.  It therefore avoids the
+shared fixed cost \(F\), but it entails a larger unit service payment.  The
+local organization builds or coordinates those complementary services
+locally.  This ordering is conditional, not a universal property of digital
+platforms.  Its purpose is to represent a well-defined organizational choice:
+buy an external service flow or incur a fixed cost to embed the service
+locally.
+
+With constant elasticity demand, the markup, price, revenue, and profit are:
+\begin{align}
+ \mu&=\frac{\sigma}{\sigma-1},&
+ p_r&=\mu m_r,
+ \label{eq:markup}\\
+ \Rcal_r(z,G)
+ &=\Mcal(z,G)\mu^{1-\sigma}m_r^{1-\sigma},&
+ \pi_r(z,G)
+ &=\frac{\Rcal_r(z,G)}{\sigma}-F_r.
+ \label{eq:revenue_profit}
+\end{align}
+The producer selects:
+\begin{equation}
+ r^*(z,G)\in\arg\max\{0,\pi_P(z,G),\pi_L(z,G)\}.
+ \label{eq:producer_choice}
+\end{equation}
+
+Define:
+\begin{equation}
+ k=\frac{\mu^{1-\sigma}}{\sigma},
+ \qquad
+ \Omega(z)=(\sigma-1)(\gamma+\chi z)>0.
+ \label{eq:k_omega}
+\end{equation}
+The zero-profit infrastructure threshold for organization \(r\) is:
+\begin{equation}
+ G_r^0(z,c)
+ =
+ \frac{
+ \ln\left[
+ \dfrac{F_r}
+ {k\Mcal_0e^{\varepsilon z}(c+d_r)^{1-\sigma}}
+ \right]
+ }{\Omega(z)}.
+ \label{eq:mode_entry_threshold}
+\end{equation}
+The economically relevant entry threshold is:
+\begin{equation}
+ G_E(z,c)=
+ \max\left\{0,\min[G_P^0(z,c),G_L^0(z,c)]\right\}.
+ \label{eq:entry_threshold}
+\end{equation}
+
+\begin{proposition}[Comparative-advantage realization]
+\label{prop:entry}
+Suppose \(\Omega(z)>0\).  A unique minimum infrastructure level \(G_E\)
+supports viable entry.  At an interior threshold:
+\begin{equation}
+ \frac{\partial G_E}{\partial c}>0,
+ \qquad
+ \frac{\partial G_E}{\partial\mathcal C^P_{ij}}>0.
+ \label{eq:entry_lca_comparative_static}
+\end{equation}
+Hence stronger LCA lowers the infrastructure required to obtain ACA and
+viable realization.  If the raw threshold is negative, the economically
+truncated threshold is zero and the comparative static is weak.
+\end{proposition}
+
+The result is not an assumption that LCA raises local income.  It follows from
+the profit problem: a lower endowment-conditioned production cost raises
+operating profit under either organization and reduces the amount of
+transaction-cost-reducing infrastructure needed to cover the fixed cost.
+Proofs of all propositions are in the appendix.
+
+\section{Organization, Capture, and Local Income}
+\label{sec:organization}
+
+\subsection{The organizational-embeddedness threshold}
+
+The local mode has a higher operating-profit coefficient because
+\(d_L<d_P\), but it must cover the additional fixed cost \(F\).  The
+infrastructure level at which \(\pi_L=\pi_P\) is:
+\begin{equation}
+ G_X(z,c)
+ =
+ \frac{
+ \ln\left[
+ \dfrac{F}
+ {k\Mcal_0e^{\varepsilon z}
+ \{(c+d_L)^{1-\sigma}-(c+d_P)^{1-\sigma}\}}
+ \right]
+ }{\Omega(z)}.
+ \label{eq:switch_threshold_raw}
+\end{equation}
+The economically relevant embeddedness threshold is:
+\begin{equation}
+ G_L(z,c)=\max\{0,G_X(z,c)\}.
+ \label{eq:embedding_threshold}
+\end{equation}
+
+The full state classification requires distinguishing \(G_P^0\),
+\(G_L^0\), and \(G_X\).  Let:
+\begin{equation}
+ b_r=k(c+d_r)^{1-\sigma},
+ \qquad
+ \bar F=f\frac{b_L-b_P}{b_P}.
+ \label{eq:Fbar}
+\end{equation}
+If \(F>\bar F\), then:
+\begin{equation}
+ G_P^0<G_L^0<G_X.
+ \label{eq:three_region_order}
+\end{equation}
+The equilibrium consequently passes through three regions as infrastructure
+rises:
+\[
+\text{no entry}
+\quad\longrightarrow\quad
+\text{external platform dependence}
+\quad\longrightarrow\quad
+\text{local organizational embeddedness}.
+\]
+If \(F\leq\bar F\), the platform-dependent middle region can disappear:
+the producer may move directly from no entry to the local organization.  The
+middle state is therefore an economic result with a transparent parameter
+condition, not a stage imposed by terminology.
+
+\subsection{Producer-side payment incidence}
+
+Producer revenue is not automatically local income.  Let \(d_Pq_P\) be the
+payment to the external platform and externally supplied complementary
+services.  Production factors and the residual operating surplus are locally
+owned in the baseline.  Under the local mode, the organizational-service
+payment \(d_Lq_L\) is made to local providers.  Table~\ref{tab:producer_flows}
+records the incidence.
+
+\begin{table}[htbp]
+\centering
+\caption{Producer organization and spatial payment incidence}
+\label{tab:producer_flows}
+\begin{tabular}{p{0.39\textwidth}cc}
 \toprule
-Concept & Meaning in the model \\
+Payment generated by candidate-industry sales
+& External mode \(P\) & Local mode \(L\)\\
 \midrule
-\LCA & Relative production-cost advantage implied by endowments and sectoral
-factor intensities, before industry-specific transaction constraints. \\
-\ACA & Relative total-cost advantage after the prevailing hard and soft
-infrastructure, transaction costs, and organizational environment are taken
-into account. \\
-Viability & A firm's ability to cover actual production, transaction, and
-fixed costs without permanent protection. \\
-Realized comparative advantage & The equilibrium manifestation of
-comparative advantage through viable entry, production, and sales.  It is an
-outcome, not an alternative name for \LCA. \\
+Local production-factor income
+& local & local\\
+Local producer operating surplus
+& local & local\\
+Unit marketing, settlement, fulfillment, and supply-chain service
+& external \(d_Pq_P\) & local \(d_Lq_L\)\\
+Shared organizational fixed cost
+& not incurred & locally supplied \(F\)\\
+Common entry cost
+& locally supplied \(f\) & locally supplied \(f\)\\
+\midrule
+External payment included in retention measure
+& \(d_Pq_P\) & \(0\)\\
 \bottomrule
 \end{tabular}
-\end{center}
+\end{table}
 
-\section{The NSE Structural Block}
+Fixed costs affect viability and organization, but locally supplied fixed-cost
+services are payments to local factors or firms.  Deducting them again from
+local income would double count a local resource payment.  Conversely, the
+external unit payment is excluded from local income even if it is not a
+national loss.
 
-\subsection{Producer access, comparative advantage, and viability}
-
-Let $M(z)$ measure the national demand accessible to a local producer, with
-$M'(z)>0$.  Channel $r$ entails transaction cost $t_{ijr}(G_i)$ and fixed
-entry or organizational cost $f_{ijr}(G_i)$, where $G_i$ is a parsimonious
-measure of the relevant shared infrastructure.  The total unit cost is
-\[
- c^T_{ijr}
+Let \(B_j^r\) denote first-round local income generated by candidate-industry
+sales:
+\begin{equation}
+ B_j^r(z,G)=\rho_r\Rcal_r(z,G).
+ \label{eq:producer_local_income}
+\end{equation}
+The payment table implies:
+\begin{equation}
+ \rho_P
  =
- c^P_{ij}+t_{ijr}(G_i),
-\]
-and operating profit can be written as
-\[
- \pi_{ijr}(z,G_i)
+ 1-\frac{d_P}{\mu(c+d_P)}
+ <1,
+ \qquad
+ \rho_L=1.
+ \label{eq:producer_retention}
+\end{equation}
+If a fraction \(\lambda\in[0,1]\) of platform services is supplied locally:
+\begin{equation}
+ \rho_P(\lambda)
  =
- M(z)b_j\!\left(c^T_{ijr}\right)-f_{ijr}(G_i),
- \qquad b_j'(\cdot)<0.
-\]
-The firm enters the national market if
-\[
- \max_r\pi_{ijr}(z,G_i)\geq0.
-\]
-This condition converts the potential represented by \LCA into an actual
-producer response.  It also shows why \LCA, \ACA, viability, and realized
-comparative advantage cannot be collapsed into one index.  \LCA is a relative
-production-cost statement; \ACA incorporates the prevailing transaction
-environment; viability requires the firm to cover its actual costs without
-persistent protection; and entry is the equilibrium realization of these
-conditions.
+ 1-\frac{(1-\lambda)d_P}{\mu(c+d_P)}.
+ \label{eq:partial_localization}
+\end{equation}
+The baseline is \(\lambda=0\).  This robustness parameter changes payment
+location, not productive efficiency.
 
-\subsection{Organizational embeddedness and local linkages}
+\begin{proposition}[Organizational embeddedness]
+\label{prop:embedding}
+Suppose \(d_L<d_P\), \(F>0\), and \(\Omega(z)>0\).  There exists a
+minimum embeddedness threshold \(G_L\).  At an interior threshold:
+\begin{equation}
+ \frac{\partial G_L}{\partial c}>0,
+ \qquad
+ \frac{\partial G_L}{\partial\mathcal C^P_{ij}}>0.
+ \label{eq:embedding_lca}
+\end{equation}
+For \(G\geq G_L\), the producer selects \(L\), and the switch satisfies:
+\begin{equation}
+ \rho_L>\rho_P,\qquad
+ \Rcal_L>\Rcal_P,\qquad
+ B_j^L>B_j^P.
+ \label{eq:embedding_capture}
+\end{equation}
+If \(F>\bar F\), platform dependence is a distinct equilibrium region between
+entry and local embeddedness.  If \(F\leq\bar F\), that region may disappear.
+\end{proposition}
 
-On the producer side, an entrant chooses between external platform
-organization $P$ and locally embedded organization $L$.  The locally embedded
-consumer channel $A$ in the previous section is not a third producer-side
-organization.  The choice is
-\[
- r_{ij}^*
- \in
- \arg\max_{r\in\{P,L\}}
- \left\{0,\pi_{ijr}(z,G_i)\right\}.
-\]
-Mode $P$ uses marketing, settlement, fulfilment, or supply-chain services
-provided outside the focal region.  Mode $L$ obtains the corresponding
-services from local providers.  For each mode, the same service bill is
-decomposed as
-\[
- H_{ijr}
+This proposition is the main way NSE affects capture beyond production.
+Stronger LCA makes local sales sufficiently large to cover the shared
+organizational fixed cost at a lower infrastructure level.  Crossing the
+threshold does not merely relabel the firm: it reduces external payments and
+creates local complementary-service income.
+
+\subsection{Nominal and consumption-equivalent local income}
+
+Let \(B_0>0\) denote autonomous first-round income from the background economy
+over the local partial-equilibrium range.  Consistent with the locally elastic
+factor-supply assumption above, candidate-industry factor payments are
+incremental nominal receipts; their full opportunity cost is not a welfare
+gain.  Household spending generates additional rounds of local income.  The share \(\beta\)
+spent on locally produced nontraded goods remains local.  The share
+\(\alpha_M\) spent on market goods generates local income at rate
+\(\omega_C(z)\).  Avoiding any duplication of the first-round producer
+payments, nominal local income satisfies:
+\begin{equation}
+ Y=
+ B_0+B_j^{r^*}(z,G)
+ +\beta Y+\alpha_M\omega_C(z)Y.
+ \label{eq:income_fixed_point}
+\end{equation}
+Therefore:
+\begin{equation}
+ Y(z,G)=
+ \frac{B_0+B_j^{r^*}(z,G)}
+ {D(z)}.
+ \label{eq:nominal_income}
+\end{equation}
+This is a conditional local-income accounting equilibrium.  It is appropriate
+when the relevant local services and nontraded goods can respond at a fixed
+short-run opportunity cost.  It is not a full welfare measure.
+
+Consumption-equivalent income deflates nominal income by the market-good price
+index:
+\begin{equation}
+ R(z,G)=\frac{Y(z,G)}{P_M(z)^{\alpha_M}}.
+ \label{eq:real_income}
+\end{equation}
+Define the candidate industry's share in first-round local income:
+\begin{equation}
+ \theta_r(z,G)=
+ \frac{B_j^r(z,G)}
+ {B_0+B_j^r(z,G)}.
+ \label{eq:theta}
+\end{equation}
+Within a fixed organizational state, equations
+\eqref{eq:market_access}, \eqref{eq:capture_drag}, and
+\eqref{eq:nominal_income} yield:
+\begin{equation}
+ \frac{d\ln Y}{dz}
  =
- H_{ijr}^{\mathrm{local}}
- +
- H_{ijr}^{\mathrm{external}}.
-\]
-The first component enters local service income and the second is an external
-payment.  Consequently, organizational embeddedness is not an independent
-retention parameter: it is the payment-incidence consequence of the firm's
-profit-maximizing organization.
+ \theta_r(z,G)
+ \left[\varepsilon+(\sigma-1)\chi G\right]
+ -\Lambda(z).
+ \label{eq:nominal_effect}
+\end{equation}
+The first term is the local producer-income gain from better platform access.
+It is larger when the candidate industry already has a greater weight in
+local income and when infrastructure complements platform access.  The second
+term is the consumer-channel capture drag.
 
-In this baseline, local linkages mean only that complementary services
-required by the candidate industry and its platform sales are supplied
-locally.  They do not introduce endogenous supplier varieties, agglomeration
-externalities, or cumulative causation.
-
-\subsection{Why infrastructure is in the model}
-
-$G_i$ is introduced only for infrastructure or organizational services with
-a specific economic role: they reduce a transaction or fixed cost that a
-potentially viable industry faces when reaching the integrated market.  In the
-policy section, public provision is permitted only if this input is shared,
-indivisible, coordination-intensive, or otherwise not fully internalized by a
-single entrant.  Generic ``capacity'' that directly raises local retention is
-not admissible.
-
-\subsubsection*{Target result 1a: Comparative-advantage realization}
-Under monotonicity and single-crossing conditions, there is an infrastructure
-threshold
-\[
- G_E^*=G_E^*(\mathcal C^P_{ij},M)
-\]
-above which a local firm enters.  Stronger \LCA should reduce the infrastructure
-required for entry.  The result must be derived from the profit condition,
-rather than imposed through an increasing capability function.
-
-\subsubsection*{Target result 1b: Organizational embeddedness}
-If local organization has a higher fixed cost but lowers the relevant
-variable service cost or external payment, the profit difference
-\[
- \Delta\pi_{ij}^{L-P}
+The consumption-equivalent effect is:
+\begin{equation}
+ \frac{d\ln R}{dz}
  =
- \pi_{ijL}-\pi_{ijP}
-\]
-can generate an organizational-embedding threshold $G_L^*$ or $M_L^*$.
-This result enters the baseline only if crossing the threshold changes
-$H_{ijr}^{\mathrm{local}}$, $H_{ijr}^{\mathrm{external}}$, and therefore the
-nominal or real local-income threshold.
+ \frac{d\ln Y}{dz}
+ +\alpha_Ms(z).
+ \label{eq:real_effect}
+\end{equation}
+The final term is the direct consumer price benefit.  Equations
+\eqref{eq:nominal_effect} and \eqref{eq:real_effect} preserve the original
+access--capture question while replacing an exogenous producer gain and
+retention capacity with equilibrium entry, organization, and payment flows.
 
-\section{Local Value Capture and Income}
+\begin{proposition}[Nominal and real-income thresholds]
+\label{prop:income_thresholds}
+Maintain \(D(z)>0\), \(\chi>0\), and the baseline payment ordering.  Within
+each active producer organization, both \(d\ln Y/dz\) and \(d\ln R/dz\) are
+strictly increasing in \(G\); in the no-entry state they are constant in
+\(G\).  Entry and the switch from \(P\) to \(L\) generate upward jumps.  If
+the relevant effect is negative at the lower endpoint and positive at an
+upper endpoint, there is a unique minimum threshold:
+\begin{align}
+ G_Y&=\inf\left\{G:\frac{d\ln Y}{dz}\geq0\right\},
+ \label{eq:GY}\\
+ G_R&=\inf\left\{G:\frac{d\ln R}{dz}\geq0\right\}.
+ \label{eq:GR}
+\end{align}
+Pointwise,
+\begin{equation}
+ G_R\leq G_Y.
+ \label{eq:weak_order}
+\end{equation}
+If both roots are interior to the same continuous organizational region,
+\begin{equation}
+ G_R<G_Y.
+ \label{eq:strict_order}
+\end{equation}
+If both effects cross zero at the same discrete entry or organization switch,
+the thresholds can coincide.  Stronger LCA weakly lowers both thresholds and
+strictly lowers them when the relevant roots remain interior to the same
+organizational states.
+\end{proposition}
 
-\subsection{First-round local income}
-
-For one common set of transactions, first-round local income is
-\[
- V_i
- =
- W_i^{\mathrm{local}}
- +\Pi_i^{\mathrm{local}}
- +S_i^{\mathrm{local}}
- +T_i^{\mathrm{local}}
- -C_i^{\mathrm{policy}}.
-\]
-The components are local labor income, locally owned net operating surplus,
-local transaction-service value added, net local fiscal receipts when policy
-is present, and the real resource cost of policy.  Each payment appears once.
-The corresponding local retention share is
-\[
- \omega_i
- =
- \frac{V_i}
- {\text{transaction value generated by the same transaction set}}.
-\]
-
-The change induced by platform integration is organized as
-\[
-\begin{aligned}
- \Delta V_i
- ={}&
- \Delta V_i^{\mathrm{producer}}
- +\Delta V_i^{\mathrm{local\ services}}\\
- &-\Delta V_i^{\mathrm{agent\ displacement}}
- -\Delta V_i^{\mathrm{external\ payments}}.
-\end{aligned}
-\]
-The four terms respectively capture local entry, output, and outward sales;
-locally supplied platform complements; the loss of locally embedded channel
-services; and payments to the platform and outside organizational services.
-The NSE structural block generates the first term through viability and entry,
-and the second and fourth terms through organizational choice and service
-payment incidence.  Only local-agent displacement is generated entirely by
-the consumer-side channel-substitution block.  The substantive NSE extension
-therefore concerns both production and the local organizational structure
-through which transaction value is captured.
-
-\subsection{The companion-paper income block}
-
-The access--capture companion paper provides a conditional local-income
-propagation block.  Denote its exact mapping by
-\[
- Y_i=\mathcal M_i(\omega_i)V_i.
-\]
-The final version will substitute the companion paper's exact fixed-point
-formula after matching the transaction denominator and avoiding double
-counting of producer and service payments.  Consumption-equivalent local
-income is
-\[
- R_i=\frac{Y_i}{P_M(z)^\alpha},
-\]
-so that
-\[
- \frac{d\ln R_i}{dz}
- =
- \frac{d\ln Y_i}{dz}
- -
- \alpha\frac{d\ln P_M(z)}{dz}.
-\]
-The propagation block amplifies the first-round local-income consequence.  It
-does not replace the production-side entry problem, and it must not be added
-as a second demand feedback inside the firm's resource constraint.
-
-\section{Target Equilibrium Results}
-
-\subsubsection*{Target result 2: Nominal local-income threshold}
-The model must derive a unique $G_Y^*$ satisfying
-\[
- \frac{dY_i}{dz}\geq0
- \quad\Longleftrightarrow\quad
- G_i\geq G_Y^*.
-\]
-Economically, infrastructure and \LCA jointly determine whether producer and
-local-linkage gains offset local-agent displacement and external platform
-payments.  NSE affects both the positive production margin and the spatial
-incidence of complementary-service payments.
-
-\subsubsection*{Target result 3: Real-income threshold}
-The consumer price decline implies a distinct threshold $G_R^*$ satisfying
-\[
- \frac{dR_i}{dz}\geq0
- \quad\Longleftrightarrow\quad
- G_i\geq G_R^*.
-\]
-When both thresholds are interior, the target ordering is
-\[
- G_R^*<G_Y^*.
-\]
-This ordering generates three economically distinct regions:
-\[
-\begin{cases}
-G_i<G_R^*: &
-\text{nominal and consumption-equivalent local income both fall},\\[3pt]
-G_R^*\leq G_i<G_Y^*: &
-\text{nominal local income falls but the price gain raises real income},\\[3pt]
-G_i\geq G_Y^*: &
-\text{production and local-linkage gains make both measures rise}.
-\end{cases}
-\]
-Stronger \LCA should lower both thresholds because a given improvement in
-producer access and infrastructure induces a larger viable supply response and
-can support locally embedded complementary services.  This statement requires
-an increasing-differences or equivalent single-crossing condition; it cannot
-be inferred merely by relabeling local capability.
+The proposition separates three regional outcomes.  Below \(G_R\), producer
+gains are too small to offset both channel displacement and the relevant cost
+of living, so nominal and consumption-equivalent income fall.  Between
+\(G_R\) and \(G_Y\), nominal income falls but the consumer price gain is large
+enough to raise consumption-equivalent income.  Above \(G_Y\), producer access
+and local capture are strong enough for both measures to rise.  The
+classification is conditional: if \(\ell_P\geq\ell_A\), capture drag is
+nonpositive and the low-infrastructure loss region can disappear.
 
 \section{The Facilitating State}
 
-The facilitating state is conceptually central to the NSE block but
-analytically downstream of the positive equilibrium results.  Public action is
-justified only when potentially viable firms in an \LCA-consistent industry
-cannot individually supply a shared input or coordinate complementary
-investments.  Facilitation then lowers a real fixed or transaction cost:
+\subsection{Infrastructure supply}
+
+The preceding analysis treats \(G\) as a local structural condition.  This
+section endogenizes its supply without introducing a national social planner.
+Let \(\vartheta\in[0,1]\) denote government participation in infrastructure
+finance.  The financing wedge is:
+\begin{equation}
+ \kappa_I(\vartheta)
+ =
+ \kappa_p-(\kappa_p-\kappa_g)\vartheta,
+ \qquad
+ 0<\kappa_g<\kappa_p.
+ \label{eq:financing_wedge}
+\end{equation}
+The infrastructure provider solves:
+\begin{equation}
+ \max_{G\geq0}
+ \left\{
+ \mathcal U_I(G)-\kappa_I(\vartheta)C(G)
+ \right\},
+ \label{eq:provider_problem}
+\end{equation}
+where:
+\begin{equation}
+ \mathcal U_I'>0,\quad
+ \mathcal U_I''<0,\quad
+ C'>0,\quad C''\geq0.
+ \label{eq:provider_curvature}
+\end{equation}
+\(\mathcal U_I\) is the provider's appropriable revenue from infrastructure
+services.  The gap between this revenue and the broader producer-access gains
+captures the shared nature of logistics, standards, certification, digital
+systems, and other infrastructure.  Government participation lowers the
+financing wedge; it does not directly subsidize candidate-industry output.
+
+An interior solution satisfies:
+\begin{equation}
+ \mathcal U_I'[G(\vartheta)]
+ =
+ \kappa_I(\vartheta)C'[G(\vartheta)].
+ \label{eq:provider_foc}
+\end{equation}
+The curvature assumptions guarantee uniqueness.
+
+\subsection{Government-participation thresholds}
+
+\begin{proposition}[State enabling and protection]
+\label{prop:state}
+The infrastructure supply in equation~\eqref{eq:provider_problem} is unique
+and:
+\begin{equation}
+ G'(\vartheta)>0.
+ \label{eq:state_G}
+\end{equation}
+For \(H\in\{E,L,R,Y\}\), define the minimum government participation needed
+to cross an existing threshold:
+\begin{equation}
+ \vartheta_H=\inf\{\vartheta:G(\vartheta)\geq G_H\}.
+ \label{eq:state_thresholds}
+\end{equation}
+Greater government participation reduces each gap \(G_H-G(\vartheta)\).
+Stronger LCA weakly lowers \(\vartheta_E,\vartheta_L,\vartheta_R\), and
+\(\vartheta_Y\), with strict effects where the corresponding structural
+thresholds are interior.
+
+Facilitation and protection are not equivalent.  Facilitation raises \(G\),
+reduces actual transaction constraints, and expands producer market access
+without raising the consumer platform price.  A protection instrument that
+raises the external consumer price and the external producer organization
+cost can make \(L\) relatively more attractive, but it worsens consumer
+access and raises the platform-entry threshold for a marginal producer.
+\end{proposition}
+
+To see the second part formally, let protection multiply \(p_P\) by a wedge
+\(\tau_C>1\) and raise \(d_P\).  The consumer price index rises and the
+platform expenditure share falls.  On the producer side:
+\begin{equation}
+ \frac{\partial G_P^0}{\partial d_P}
+ =
+ \frac{\sigma-1}{\Omega(z)(c+d_P)}>0.
+ \label{eq:protection_entry}
+\end{equation}
+Protection therefore makes external-platform entry harder.  At the same time,
+raising \(d_P\) increases the local mode's variable-cost advantage and can
+lower \(G_X\).  It can induce localization by degrading the alternative.
+Facilitation instead allows the region to cross the entry and embeddedness
+thresholds by reducing a real shared constraint.  This is the model's precise
+version of the NSE distinction between facilitating a potentially viable
+industry and protecting a nonviable activity.
+
+The state result is deliberately limited.  It does not prove that more
+government participation is always desirable, that the provider captures all
+social returns, or that \(\vartheta=1\) is optimal.  A complete national
+welfare problem would require government fiscal costs, external platform
+profits, other regions, and general-equilibrium factor responses, all of which
+are outside the focal-region model.
+
+\section{Illustrative Numerical Exercises}
+
+\subsection{Purpose and parameterization}
+
+The numerical exercises have one purpose: to demonstrate that the parameter
+regions described by Propositions~\ref{prop:entry}--\ref{prop:state} are
+nonempty and to display the model's discontinuities.  They are not a
+calibration and none of the values is presented as an estimate for China.
+Table~\ref{tab:parameters} reports the standardized baseline.
+
+\begin{table}[htbp]
+\centering
+\caption{Illustrative baseline parameters}
+\label{tab:parameters}
+\begin{tabular}{lll}
+\toprule
+Block & Parameters & Values\\
+\midrule
+Household
+& \(\alpha_M,\beta,\eta\)
+& \(0.35,\ 0.30,\ 6\)\\
+Consumer channels
+& \(\ell_A,\ell_P,B_0\)
+& \(0.70,\ 0.10,\ 1\)\\
+Producer demand
+& \(\sigma,\Mcal_0,\varepsilon\)
+& \(4,\ 5,\ 0.05\)\\
+Infrastructure access
+& \(\gamma,\chi\)
+& \(0.10,\ 0.20\)\\
+Production and organization
+& \(c,d_P,d_L,f,F\)
+& \(0.8,\ 0.4,\ 0.1,\ 0.3,\ 0.5\)\\
+State block
+& \(\kappa_p,\kappa_g,a_I\)
+& \(2.0,\ 0.5,\ 0.8\)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The consumer CES weight is \(a_P=0.4\), and the pre-integration platform
+price is \(\bar p_P=1.2\).  For the state exercise:
+\begin{equation}
+ \mathcal U_I(G)=a_I\ln(1+G),
+ \qquad
+ C(G)=\frac{G^2}{2}.
+ \label{eq:numerical_state}
+\end{equation}
+Equation~\eqref{eq:provider_foc} then has the closed-form solution:
+\begin{equation}
+ G(\vartheta)=
+ \frac{-1+\sqrt{1+4a_I/\kappa_I(\vartheta)}}{2}.
+ \label{eq:numerical_G}
+\end{equation}
+
+\subsection{The structural phase diagram}
+
+Figure~\ref{fig:phase} varies the candidate industry's relative production
+cost and infrastructure at \(z=0.5\).  Moving right weakens LCA.  Moving up
+improves the infrastructure through which LCA can be converted into viable
+entry and local organization.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\textwidth]{../figures/figure_1_phase_diagram.pdf}
+\caption{Industry realization and organizational regime}
+\label{fig:phase}
+\end{figure}
+
+The gray region contains no viable candidate industry.  The blue region
+contains local production that reaches the national market through the
+external platform organization.  The orange region contains locally embedded
+production and complementary services.  At a given \(G\), a stronger LCA
+industry is more likely both to enter and to embed.  At a given production
+cost, infrastructure can move the region through all three states.  The
+middle region is sizable under the baseline because \(F>\bar F\).
+
+\subsection{Development thresholds}
+
+Figure~\ref{fig:thresholds} plots the entry, organizational, real-income, and
+nominal-income thresholds against \(c\).  The curves are computed from the
+exact equilibrium choice and the minimum-\(G\) definitions in equations
+\eqref{eq:entry_threshold}, \eqref{eq:embedding_threshold},
+\eqref{eq:GY}, and \eqref{eq:GR}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\textwidth]{../figures/figure_2_thresholds.pdf}
+\caption{Comparative advantage and development thresholds}
+\label{fig:thresholds}
+\end{figure}
+
+All four thresholds weakly rise as LCA weakens.  Kinks are economically
+meaningful: they occur when the identity of the active entry mode or the
+organizational state containing an income threshold changes.  In the
+baseline at \(c=0.8,z=0.5\), the raw state thresholds are:
 \[
- f_{ijr}'(G_i)<0
- \quad\text{or}\quad
- t_{ijr}'(G_i)<0,
+G_P^0=-0.0702,\qquad
+G_L^0=0.1261,\qquad
+G_X=0.2561.
 \]
-at a convex resource cost to the local economy.
+The real- and nominal-income thresholds are:
+\[
+G_R=0.0463,\qquad G_Y=0.5505.
+\]
+The numerical ordering is strict, although the formal proposition preserves
+the weaker boundary result when a discrete switch determines both thresholds.
 
-This intervention differs from protection.  Facilitation improves the
-region's ability to realize a production-cost advantage and, where relevant,
-to form locally embedded complementary services.  Protection raises the
-relative cost of the outside channel or shields firms that may not be viable.
-The model does not assume that every infrastructure project is beneficial or
-that facilitation always dominates every temporary support instrument.  The
-policy result is conditional on three elements: an independently defined
-\LCA, an explicit market failure preventing comparative-advantage realization
-or organizational embeddedness, and benefits that exceed the policy's real
-resource cost.
+\subsection{Platform integration under alternative state participation}
 
-\section{Scope and Extensions}
+The state specification yields:
+\[
+G(0.1)=0.3261,\qquad
+G(0.5)=0.4434,\qquad
+G(0.9)=0.7169.
+\]
+Figure~\ref{fig:reform} follows platform integration for those three
+infrastructure levels.  The first panel is common across participation levels
+because the baseline state intervention affects producer infrastructure, not
+the consumer platform price.  The second and third panels report marginal
+effects, not income indices.
 
-The baseline deliberately excludes endogenous migration, agglomeration
-externalities, endogenous national market size, dynamic organizational
-capital, platform price setting, and a full multi-region general equilibrium.
-These mechanisms are not required to answer the access--capture question.
-New Economic Geography becomes relevant only in a later paper if endogenous
-firm location and market size produce cumulative causation, multiplicity, or
-path dependence.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{../figures/figure_3_reform_paths.pdf}
+\caption{Platform integration, state participation, and local-income effects}
+\label{fig:reform}
+\end{figure}
 
-The baseline retains only the minimal $P$--$L$ comparison required to
-endogenize local-service and external-payment incidence.  An earlier model
-contract studied three full producer-side thresholds: entry through an
-external platform, stand-alone profitability of a local organizational
-system, and switching from the platform to that system.  The complete
-three-threshold structure may be restored as an extension only if it changes
-$G_Y^*$ or $G_R^*$ without introducing an additional state variable.
+Platform penetration rises for every region.  At low participation, the
+nominal effect is initially negative and becomes positive only after
+producer-access gains and organizational embeddedness strengthen.  The
+consumption-equivalent effect crosses zero earlier because it includes the
+price gain.  Higher participation shifts both effects upward, but the
+consumer platform share is unchanged.  The small jumps in the income-effect
+curves are the entry or \(P\)-to-\(L\) organization switches established in
+the analytical model.
+
+The appendix reports five mechanism closures.  Setting
+\(\ell_A=\ell_P\) eliminates consumer-side capture drag.  Equating
+\(\rho_P\) and \(\rho_L\) eliminates the producer-side spatial payment
+difference.  Setting \(\chi=0\) eliminates infrastructure--platform
+complementarity.  A positive \(\lambda\) partially localizes platform
+services.  Finally, an equal-localization comparison shows that protection
+and facilitation have different consumer-access and marginal-entry
+consequences.  Every figure is generated from the same public code and is
+accompanied by CSV source data.
+
+\section{Discussion and Testable Implications}
+
+\subsection{What the model does and does not call development}
+
+The model distinguishes three outcomes.  \(P_M\) measures consumer access.
+\(Y\) measures nominal local income generated within the focal accounting
+boundary.  \(R\) measures how much market-good consumption that nominal
+income can support after the platform price change.  None is a national
+welfare measure.  A payment to an external domestic platform is a leakage
+from the focal region but remains income somewhere in the national economy.
+Likewise, a high local-retention rate is not itself a sufficient policy
+objective: a policy can mechanically raise retention by making an efficient
+external channel more costly.
+
+This distinction prevents a protectionist reading of the access--capture
+problem.  A region with little infrastructure may receive a genuine consumer gain
+even when nominal local income falls.  The relevant development question is
+not how to preserve every incumbent local intermediary.  It is how to enable
+industries consistent with the region's potential comparative advantage to
+enter, expand, and build complementary local services without sacrificing the
+consumer gains from national integration.
+
+\subsection{Testable implications}
+
+Although the paper contains no original data, its mechanisms generate
+specific empirical predictions.
+
+First, platform expansion should reduce consumer price dispersion more
+broadly than it increases local producer income.  Consumer effects should
+depend primarily on pre-platform access and platform adoption, whereas
+producer-income effects should load on the interaction between pre-existing
+endowment--industry congruence and infrastructure.  This prediction sharpens
+the access--income divergence documented by
+\citet{CoutureFaberGuLiu2021}.
+
+Second, among locations with similar platform access, lower
+endowment-conditioned relative production costs should predict earlier
+seller entry.  Infrastructure should have larger producer effects in
+industries that are intensive in locally abundant factors.  A credible test
+would construct LCA from pre-shock regional endowments and national industry
+factor intensities, rather than infer comparative advantage from post-shock
+sales.
+
+Third, producer entry and local capture should not be treated as the same
+outcome.  In the platform-dependent region, local seller sales can rise while
+platform, settlement, fulfillment, certification, and marketing payments
+remain external.  Crossing the embeddedness threshold predicts a discrete
+increase in local complementary-service establishments, employment, or
+payroll relative to sales.  Buyer--seller locations alone are therefore
+insufficient to measure capture; service-provider and ownership locations are
+also needed.
+
+Fourth, facilitating infrastructure and protection should have different
+joint signatures.  Facilitation should raise outbound seller participation
+without raising the local consumer platform price.  Protection may increase
+the local share of some services while reducing platform adoption, raising
+consumer prices, and deterring marginal platform-dependent sellers.
+Empirically similar local-sales shares can therefore conceal very different
+access and productivity consequences.
+
+Fifth, partial localization of platform services should compress the
+difference between \(P\) and \(L\).  Regions hosting fulfillment, seller
+operations, payment, or platform-service employment should retain more value
+for a given volume of platform trade.  This prediction separates the location
+of production from the location of organizational capture.
+
+\subsection{Scope and extensions}
+
+Several mechanisms are intentionally absent.  Firm heterogeneity would turn
+the two organization thresholds into productivity cutoffs, as in trade
+intermediation models, but is not needed for the regional thresholds derived
+here.  New Economic Geography feedback could make local service depth and
+market access endogenous to entry, possibly generating multiple equilibria.
+Dynamic endowment accumulation could move a region across industries over
+time.  Platform strategic pricing could make the consumer and producer wedges
+jointly endogenous.  These are natural extensions, but adding them to the
+present paper would obscure its distinct result: platform access can be
+diffuse while production and organizational capture remain structurally
+conditional.
 
 \section{Conclusion}
 
-The paper's fixed subject is not the general formation of comparative
-advantage.  It is the local development incidence of platform-enabled market
-integration.  NSE provides the local structural backbone: endowments determine
-latent comparative advantage; the actual infrastructure and transaction
-environment determine \ACA and viability; and organizational embeddedness
-determines whether complementary-service payments remain local.  Combined
-with the consumer price effect, local-channel displacement, and the
-companion-paper income block, this mechanism can explain why equalized access
-coexists with unequal local capture.
+Platform integration changes both sides of a local economy.  It improves what
+households can buy, and it expands what local producers might sell.  Those
+opportunities do not automatically become local development.  Endowments
+determine latent comparative advantage; infrastructure determines whether
+that advantage survives actual transaction costs and supports viable entry;
+and organizational choice determines whether complementary-service payments
+remain local.
 
+This chain produces a platform-dependent intermediate state in which local
+production exists but organizational capture remains external.  It also
+produces separate thresholds for nominal and consumption-equivalent local
+income.  Consumer price gains make the real-income threshold weakly lower,
+while discrete entry or organization switches explain why strict ordering is
+conditional rather than universal.  A facilitating state can help a
+potentially viable industry cross these thresholds by relaxing shared
+infrastructure financing constraints.  Protection can also induce
+localization, but only by degrading an external channel and therefore cannot
+be treated as equivalent.
+
+The central conclusion is consequently not that platforms either help or
+hurt local development.  It is that access and capture are different
+equilibrium objects.  A common platform can equalize consumer access while
+leaving the production and organizational foundations of local income highly
+unequal.
+
+\clearpage
+\bibliographystyle{apalike}
+\bibliography{references}
+
+\clearpage
 \appendix
 \input{appendix}
 

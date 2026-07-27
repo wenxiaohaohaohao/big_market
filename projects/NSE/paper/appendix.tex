@@ -1,71 +1,680 @@
-\section{Proof and Accounting Appendix}
+\section{Proofs}
 
-This appendix records the exact completion standard for the internal theory
-draft.  A target result in the main text becomes a formal proposition only
-after the corresponding item below contains assumptions, a complete
-derivation, and boundary cases.
+\subsection{Consumer access and channel retention}
 
-\subsection{Consumer-access block}
+\begin{lemma}[Consumer access]
+\label{lem:consumer}
+Under equations \eqref{eq:consumer_ces} and \eqref{eq:platform_price},
+\[
+s'(z)=(\eta-1)s(z)[1-s(z)]>0
+\quad\text{and}\quad
+\frac{d\ln P_M(z)}{dz}=-s(z)<0.
+\]
+If \(\ell_A>\ell_P\), then \(\omega_C'(z)<0\) and
+\(\Lambda(z)>0\).
+\end{lemma}
 
+\begin{proof}
+Write:
+\[
+x(z)=a_Pp_P(z)^{1-\eta},
+\qquad
+a=(1-a_P)p_A^{1-\eta}.
+\]
+Then \(s=x/(a+x)\).  Because \(d\ln p_P/dz=-1\),
+\[
+\frac{x'(z)}{x(z)}=-(1-\eta)=\eta-1.
+\]
+Therefore:
+\[
+s'
+=\frac{x'a}{(a+x)^2}
+=(\eta-1)\frac{x}{a+x}\frac{a}{a+x}
+=(\eta-1)s(1-s)>0.
+\]
+For the price index:
+\[
+\ln P_M=\frac{1}{1-\eta}\ln(a+x).
+\]
+Hence:
+\[
+\frac{d\ln P_M}{dz}
+=\frac{1}{1-\eta}\frac{x'}{a+x}
+=\frac{\eta-1}{1-\eta}s
+=-s.
+\]
+Finally:
+\[
+\omega_C'(z)=(\ell_P-\ell_A)s'(z).
+\]
+It is negative when \(\ell_A>\ell_P\).  Since \(D>0\), the definition in
+equation~\eqref{eq:capture_drag} then implies \(\Lambda>0\).
+\end{proof}
+
+At the limits \(s\rightarrow0\) and \(s\rightarrow1\), \(s'\rightarrow0\).
+The platform continues to reduce \(P_M\), but the expenditure-reallocation
+margin vanishes at either channel boundary.  This is why capture drag is
+largest at an intermediate platform share rather than at complete platform
+penetration.
+
+\subsection{Endowment-conditioned production costs}
+
+The background technology in equation~\eqref{eq:background_technology}
+implies:
+\[
+w_i=(1-\theta_0)\frac{Y_{i0}}{L_i},
+\qquad
+r_i=\theta_0\frac{Y_{i0}}{K_i}.
+\]
+With \(Y_{i0}=A_0K_i^{\theta_0}L_i^{1-\theta_0}\), division by the relevant
+factor endowment yields equation~\eqref{eq:factor_prices}.  Substituting those
+factor prices into the candidate industry's Cobb--Douglas unit expenditure
+function gives:
+\begin{align*}
+c^P_{ij}
+&=
+\frac{1}{A_j}
+\left(\frac{\theta_0A_0e_i^{\theta_0-1}}{\theta_j}\right)^{\theta_j}
+\left(
+\frac{(1-\theta_0)A_0e_i^{\theta_0}}{1-\theta_j}
+\right)^{1-\theta_j}\\
+&=
+\frac{A_0}{A_j}
+\left(\frac{\theta_0}{\theta_j}\right)^{\theta_j}
+\left(\frac{1-\theta_0}{1-\theta_j}\right)^{1-\theta_j}
+e_i^{\theta_0-\theta_j}\\
+&\equiv \xi_j e_i^{\theta_0-\theta_j}.
+\end{align*}
+Thus:
+\[
+\frac{\partial\ln c^P_{ij}}{\partial\ln e_i}
+=\theta_0-\theta_j.
+\]
+For \(\theta_j>\theta_0\), capital abundance lowers the candidate industry's
+production cost relative to the background opportunity cost.  LCA still
+requires the external-reference double ratio in equation~\eqref{eq:lca};
+the derivative is only the local structural component of that comparison.
+
+\subsection{Proof of Proposition~\ref{prop:entry}}
+
+\begin{proof}
+For a given organization \(r\), equation~\eqref{eq:revenue_profit} becomes:
+\[
+\pi_r(z,G)
+=
+k\Mcal_0e^{\varepsilon z+\Omega(z)G}(c+d_r)^{1-\sigma}
+-F_r.
+\]
+It is strictly increasing in \(G\) whenever \(\Omega(z)>0\).  The unique raw
+zero-profit threshold is equation~\eqref{eq:mode_entry_threshold}.  Direct
+differentiation gives:
+\[
+\frac{\partial G_r^0}{\partial c}
+=
+\frac{\sigma-1}{\Omega(z)(c+d_r)}>0.
+\]
+The minimum of two strictly increasing functions is strictly increasing:
+for \(c_2>c_1\), both \(G_P^0(c_2)>G_P^0(c_1)\) and
+\(G_L^0(c_2)>G_L^0(c_1)\), so their minimum at \(c_2\) exceeds their minimum
+at \(c_1\).  The truncation at zero preserves weak monotonicity.  At an
+interior threshold, the relationship is strict.
+
+Holding the external-region and background-industry ratios fixed,
+\(\partial c/\partial\mathcal C^P_{ij}>0\).  The chain rule therefore gives:
+\[
+\frac{\partial G_E}{\partial\mathcal C^P_{ij}}
+=
+\frac{\partial G_E}{\partial c}
+\frac{\partial c}{\partial\mathcal C^P_{ij}}>0
+\]
+at an interior threshold.
+
+For the ACA interpretation, the focal region's delivered marginal cost is
+\(\tau_O(z,G)(c+d_r)\).  Since
+\[
+\frac{\partial\ln\tau_O(z,G)}{\partial G}
+=-(\gamma+\chi z)<0,
+\]
+infrastructure lowers the focal region's total-cost ratio relative to a fixed
+reference region.  Stronger LCA starts from a lower production-cost ratio, so
+it requires weakly less \(G\) both to achieve a total-cost advantage and to
+cover the fixed cost.  The first condition is ACA; the second is viability.
+Entry and sales are realization.
+\end{proof}
+
+\section{Complete Entry and Organization Classification}
+
+Let:
+\[
+b_P=k(c+d_P)^{1-\sigma},
+\qquad
+b_L=k(c+d_L)^{1-\sigma},
+\]
+so \(b_L>b_P>0\).  It is convenient to express the state problem in terms of
+effective market scale:
+\[
+X(z,G)=\Mcal_0e^{\varepsilon z+\Omega(z)G}.
+\]
+Profits are:
+\[
+\pi_P=Xb_P-f,
+\qquad
+\pi_L=Xb_L-f-F.
+\]
+The corresponding market-scale thresholds are:
+\[
+X_P=\frac{f}{b_P},
+\qquad
+X_{L0}=\frac{f+F}{b_L},
+\qquad
+X_X=\frac{F}{b_L-b_P}.
+\]
+
+\begin{lemma}[Three-region condition]
+\label{lem:three_region}
+Define:
+\[
+\bar F=f\frac{b_L-b_P}{b_P}.
+\]
+If \(F>\bar F\), then:
+\[
+X_P<X_{L0}<X_X,
+\]
+equivalently \(G_P^0<G_L^0<G_X\), and the equilibrium states are:
+\[
+\begin{cases}
+0,&X<X_P,\\
+P,&X_P\leq X<X_X,\\
+L,&X\geq X_X.
+\end{cases}
+\]
+If \(F=\bar F\), all three thresholds coincide.  If \(F<\bar F\), the
+platform-dependent interval is absent and the producer enters through \(L\).
+\end{lemma}
+
+\begin{proof}
+First:
+\begin{align*}
+X_P<X_{L0}
+&\Longleftrightarrow
+\frac{f}{b_P}<\frac{f+F}{b_L}\\
+&\Longleftrightarrow
+f(b_L-b_P)<Fb_P\\
+&\Longleftrightarrow F>\bar F.
+\end{align*}
+Second:
+\begin{align*}
+X_{L0}<X_X
+&\Longleftrightarrow
+\frac{f+F}{b_L}<\frac{F}{b_L-b_P}\\
+&\Longleftrightarrow
+f(b_L-b_P)<Fb_P\\
+&\Longleftrightarrow F>\bar F.
+\end{align*}
+Thus the same condition orders all three thresholds.  Below \(X_P\), both
+profits are negative.  At \(X_P\), \(\pi_P=0\), while:
+\[
+\pi_L-\pi_P
+=X_P(b_L-b_P)-F
+=\bar F-F<0.
+\]
+Because:
+\[
+\pi_L-\pi_P=X(b_L-b_P)-F
+\]
+is strictly increasing in \(X\), it crosses zero exactly once at \(X_X\).
+This proves the three states.  Equality collapses all thresholds to one
+point.  If \(F<\bar F\), the local mode is already more profitable at the
+first viable entry scale, so \(P\) is never selected.
+\end{proof}
+
+\section{Proof of Proposition~\ref{prop:embedding}}
+
+\begin{proof}
+Define:
+\[
+\Delta(c)
+=(c+d_L)^{1-\sigma}-(c+d_P)^{1-\sigma}>0.
+\]
+The raw switch threshold is:
+\[
+G_X
+=
+\frac{\ln F-\ln[k\Mcal_0e^{\varepsilon z}]-\ln\Delta(c)}
+{\Omega(z)}.
+\]
+Its cost derivative is:
+\[
+\frac{\partial G_X}{\partial c}
+=-\frac{\Delta'(c)}{\Omega(z)\Delta(c)}.
+\]
+Because:
+\[
+\Delta'(c)
+=(1-\sigma)
+\left[(c+d_L)^{-\sigma}-(c+d_P)^{-\sigma}\right]<0,
+\]
+we have \(\partial G_X/\partial c>0\).  Truncation at zero preserves weak
+monotonicity.  The LCA result follows from
+\(\partial c/\partial\mathcal C^P_{ij}>0\).
+
+For \(G>G_X\):
+\[
+\pi_L-\pi_P
+=
+k\Mcal_0e^{\varepsilon z+\Omega G}\Delta(c)-F>0.
+\]
+Hence \(L\) is selected whenever it also weakly dominates no entry; the
+classification in Lemma~\ref{lem:three_region} covers the possible entry
+orders.
+
+Since \(d_L<d_P\):
+\[
+(c+d_L)^{1-\sigma}>(c+d_P)^{1-\sigma},
+\]
+and therefore \(\Rcal_L>\Rcal_P\) at a common \((z,G)\).  The payment-flow
+definitions imply:
+\[
+\rho_L=1>
+1-\frac{d_P}{\mu(c+d_P)}
+=\rho_P.
+\]
+Both inequalities are strict, so:
+\[
+B_j^L=\rho_L\Rcal_L
+>
+\rho_P\Rcal_P=B_j^P.
+\]
+The external payment changes from \(d_Pq_P>0\) to zero in the polar baseline,
+while the unit organizational service \(d_Lq_L\) and the shared fixed
+organizational service \(F\) are locally supplied.  The organizational switch
+therefore changes local service income, external payments, and total
+first-round local income.
+\end{proof}
+
+\section{Proof of Proposition~\ref{prop:income_thresholds}}
+
+\subsection{Income derivatives within a producer state}
+
+Fix an active producer organization \(r\).  The local producer-income term can
+be written:
+\[
+B_j^r(z,G)
+=
+A_r
+\exp\{\varepsilon z+\Omega(z)G\},
+\]
+where:
+\[
+A_r
+=
+\rho_r\Mcal_0\mu^{1-\sigma}(c+d_r)^{1-\sigma}>0.
+\]
+Therefore:
+\[
+\frac{\partial\ln B_j^r}{\partial G}
+=\Omega(z)>0,
+\]
+and:
+\[
+\frac{\partial\theta_r}{\partial G}
+=
+\Omega(z)\theta_r(1-\theta_r)>0.
+\]
+Define:
+\[
+a(G)=\varepsilon+(\sigma-1)\chi G\geq0.
+\]
+The nominal integration effect within organization \(r\) is:
+\[
+h_Y(G)=\theta_r(G)a(G)-\Lambda(z).
+\]
+Its derivative is:
+\begin{equation}
+h_Y'(G)
+=
+\Omega(z)\theta_r(1-\theta_r)a(G)
++\theta_r(\sigma-1)\chi>0.
+\label{eq:nominal_effect_derivative}
+\end{equation}
+The price term \(\alpha_Ms(z)\) is independent of \(G\), so:
+\[
+h_R'(G)=h_Y'(G)>0
+\]
+within an active state.  In the no-entry state, \(\theta=0\); both effects
+are constant in \(G\) until entry.
+
+\subsection{Jumps at state changes}
+
+Immediately before entry, \(\theta=0\), so \(h_Y=-\Lambda\).  Immediately
+after entry, the viable mode generates positive sales and local producer
+income, so \(\theta>0\).  Since \(a(G)\geq0\), the integration effect jumps
+weakly upward and strictly upward if \(a(G)>0\).
+
+At a \(P\)-to-\(L\) switch, Proposition~\ref{prop:embedding} gives
+\(B_j^L>B_j^P\).  Hence \(\theta_L>\theta_P\), while \(a(G)\) and
+\(\Lambda(z)\) are unchanged at the switch.  Both nominal and real effects
+jump strictly upward.
+
+\subsection{Existence, uniqueness, and ordering}
+
+\begin{proof}[Completion of the proof]
+The preceding derivatives and jump results imply that the integration effects
+are globally nondecreasing in \(G\), strictly increasing in every active
+organization, and have no downward state jumps.  Under the baseline
+\(\ell_A>\ell_P\) and an interior platform share, the no-entry effect is
+strictly negative because \(\Lambda>0\).
+
+As \(G\rightarrow\infty\), the local mode is selected,
+\(\theta_L\rightarrow1\), and:
+\[
+a(G)=\varepsilon+(\sigma-1)\chi G\rightarrow\infty
+\]
+when \(\chi>0\).  Hence \(h_Y(G)\rightarrow\infty\), and the real effect is
+larger still.  More generally, it is sufficient to assume a finite upper
+endpoint at which the relevant effect is positive.  Monotonicity and endpoint
+crossing therefore imply a unique minimum threshold, allowing the crossing to
+occur either continuously or at an upward jump.
+
+Pointwise:
+\[
+h_R(G)=h_Y(G)+\alpha_Ms(z)>h_Y(G).
+\]
+Thus every \(G\) that makes the nominal effect nonnegative also makes the real
+effect positive, establishing \(G_R\leq G_Y\).
+
+Suppose both roots lie in the same active continuous organization and are
+interior.  At \(G_Y\), \(h_Y(G_Y)=0\), so:
+\[
+h_R(G_Y)=\alpha_Ms(z)>0.
+\]
+Since \(h_R\) is continuous and strictly increasing in that organization, its
+zero must occur strictly below \(G_Y\).  Hence \(G_R<G_Y\).  If both effects
+jump from negative to nonnegative at the same discrete state change, their
+minimum thresholds are identical even though \(h_R>h_Y\) on either side.
+
+It remains to establish the comparative static with respect to LCA.  For the
+local mode:
+\[
+B_j^L
+=
+\Mcal\mu^{1-\sigma}(c+d_L)^{1-\sigma},
+\]
+which is strictly decreasing in \(c\).  For the platform mode:
+\begin{align*}
+B_j^P
+&=
+\Mcal\mu^{1-\sigma}
+\left[
+(c+d_P)^{1-\sigma}
+-\frac{d_P}{\mu}(c+d_P)^{-\sigma}
+\right].
+\end{align*}
+Differentiating the bracket gives:
+\begin{align*}
+&(1-\sigma)(c+d_P)^{-\sigma}
++\frac{\sigma d_P}{\mu}(c+d_P)^{-\sigma-1}\\
+&\qquad
+=-(\sigma-1)c(c+d_P)^{-\sigma-1}<0,
+\end{align*}
+where \(\mu=\sigma/(\sigma-1)\).  Thus lower \(c\) raises local producer
+income in either mode.  It also weakly advances entry and the switch to the
+higher-income local mode by Propositions~\ref{prop:entry} and
+\ref{prop:embedding}.  At every fixed \(G\), stronger LCA therefore weakly
+raises \(\theta_{r^*}\) and the two integration effects.  Their minimum
+thresholds weakly fall.  The relationship is strict when the relevant root
+remains interior to the same active organizational state.
+\end{proof}
+
+\section{Proof of Proposition~\ref{prop:state}}
+
+\begin{proof}
+Define the infrastructure provider's first-order condition:
+\[
+\Phi(G,\vartheta)
+=
+\mathcal U_I'(G)-\kappa_I(\vartheta)C'(G)=0.
+\]
+Its derivative with respect to \(G\) is:
+\[
+\Phi_G
+=
+\mathcal U_I''(G)-\kappa_I(\vartheta)C''(G)<0.
+\]
+The objective is therefore strictly concave and has at most one interior
+solution.  Under the maintained endpoint conditions, that solution exists and
+is unique.  Since:
+\[
+\Phi_\vartheta
+=-\kappa_I'(\vartheta)C'(G)>0,
+\]
+implicit differentiation gives:
+\[
+G'(\vartheta)
+=-\frac{\Phi_\vartheta}{\Phi_G}>0.
+\]
+
+For any fixed structural threshold \(G_H\), the monotonicity of
+\(G(\vartheta)\) implies that the set
+\(\{\vartheta:G(\vartheta)\geq G_H\}\) is an interval.  When nonempty, it has
+a unique minimum \(\vartheta_H\), except for an economically irrelevant flat
+boundary if the infrastructure solution itself is constrained.  Increasing
+\(\vartheta\) reduces \(G_H-G(\vartheta)\).  Stronger LCA lowers
+\(G_E,G_L,G_R,G_Y\) by Propositions~\ref{prop:entry}--\ref{prop:income_thresholds};
+applying the increasing inverse of \(G(\vartheta)\) weakly lowers the
+associated participation thresholds.
+
+For the protection comparison, a consumer wedge \(\tau_C>1\) changes the
+effective platform price to \(\tau_C\bar p_Pe^{-z}\).  The CES price index is
+increasing in an input price, so protection raises \(P_M\) and lowers the
+platform expenditure share.  On the producer side:
+\[
+\frac{\partial G_P^0}{\partial d_P}
+=
+\frac{\sigma-1}{\Omega(z)(c+d_P)}>0.
+\]
+Thus protection makes the low-fixed-cost external entry mode harder for a
+marginal producer.
+
+Let:
+\[
+\Delta=(c+d_L)^{1-\sigma}-(c+d_P)^{1-\sigma}.
+\]
+Because:
+\[
+\frac{\partial\Delta}{\partial d_P}
+=
+(\sigma-1)(c+d_P)^{-\sigma}>0,
+\]
+the switch threshold satisfies:
+\[
+\frac{\partial G_X}{\partial d_P}
+=
+-\frac{1}{\Omega(z)\Delta}
+\frac{\partial\Delta}{\partial d_P}<0.
+\]
+Protection can therefore induce a switch toward \(L\), but it does so by
+worsening \(P\), while simultaneously harming consumer access and making
+platform-based entry more difficult.  Facilitation raises \(G\), which
+increases market access under both modes and does not enter the consumer price
+equation.  The policies are not equivalent.
+\end{proof}
+
+\section{Boundary Cases and Counterexamples}
+
+\subsection{No consumer-side capture gap}
+
+If \(\ell_A=\ell_P\), then:
+\[
+\omega_C(z)=\ell_A,
+\qquad
+\Lambda(z)=0.
+\]
+The nominal effect becomes:
+\[
+\frac{d\ln Y}{dz}
+=
+\theta_r[\varepsilon+(\sigma-1)\chi G]\geq0
+\]
+in every active producer state.  A negative nominal effect can then arise
+only in an extension with another first-round loss.  This case confirms that
+the baseline negative region is generated by an explicit payment-incidence
+gap rather than platform terminology.
+
+If \(\ell_P>\ell_A\), then \(\Lambda<0\).  Platform substitution raises
+consumer-side retention as well as reducing the price index.  Both nominal
+and real effects shift upward; the low-infrastructure loss region may vanish.
+
+\subsection{No producer-side spatial payment gap}
+
+Setting \(\lambda=1\) in equation~\eqref{eq:partial_localization} gives
+\(\rho_P=1=\rho_L\).  The organization switch can still raise sales because
+\(d_L<d_P\), but it no longer changes the spatial retention rate.  This case
+separates the cost advantage of local organization from its payment-location
+advantage.
+
+\subsection{No infrastructure--platform complementarity}
+
+If \(\chi=0\), producer market access is:
+\[
+\Mcal(z,G)
+=
+\Mcal_0e^{\varepsilon z+(\sigma-1)\gamma G}.
+\]
+Infrastructure can still raise the level of candidate-industry income and
+therefore \(\theta_r\), but it no longer increases the marginal producer
+benefit of platform integration directly.  Equation~\eqref{eq:nominal_effect}
+loses the term \((\sigma-1)\chi G\).  The threshold mechanism can survive,
+but the strong complementarity interpretation cannot.
+
+\subsection{Collapse of the platform-dependent region}
+
+Lemma~\ref{lem:three_region} gives the exact counterexample to a universal
+three-stage development path.  When \(F\leq\bar F\), the local mode is
+sufficiently inexpensive in fixed-cost terms that the candidate industry
+enters directly through \(L\).  Platform dependence is therefore neither
+necessary nor universal.
+
+\subsection{Weak rather than strict income-threshold ordering}
+
+Suppose an entry or organizational switch occurs at \(\widehat G\), with:
+\[
+h_R(\widehat G^-)<0,\qquad h_Y(\widehat G^-)<0,
+\]
+and:
+\[
+h_R(\widehat G^+)\geq0,\qquad h_Y(\widehat G^+)\geq0.
+\]
+Then:
+\[
+G_R=G_Y=\widehat G.
+\]
+The pointwise inequality \(h_R>h_Y\) is not enough to create two different
+minimum thresholds when a common discrete jump crosses both zeroes.  This is
+why Proposition~\ref{prop:income_thresholds} states strict ordering only under
+a continuous interior-root condition.
+
+\subsection{Instability of the local-income closure}
+
+If:
+\[
+D(z)=1-\beta-\alpha_M\omega_C(z)\leq0,
+\]
+the household-spending recursion does not converge.  This is not an
+alternative equilibrium of the paper.  It is an inadmissible parameter
+region.  The baseline values satisfy \(D(z)>0\) for the full numerical
+support.
+
+\section{Mapping to the Companion EL Income Block}
+
+The companion access--capture model can be written:
+\[
+Y^{EL}
+=
+\frac{B^{EL}+\omega^{EL}G^{EL}}
+{1-\beta^{EL}-\alpha^{EL}\omega^{EL}}.
+\]
+The present paper does not insert this expression into the producer problem.
+It uses the following one-to-one mapping only after first-round payments have
+been determined:
+
+\begin{table}[htbp]
+\centering
+\caption{Mapping to the companion income-propagation block}
+\begin{tabular}{p{0.28\textwidth}p{0.29\textwidth}p{0.35\textwidth}}
+\toprule
+Companion object & Present object & Accounting rule\\
+\midrule
+\(B^{EL}+\omega^{EL}G^{EL}\)
+& \(B_0+B_j^{r^*}\)
+& autonomous first-round local income only\\
+\(\alpha^{EL}\)
+& \(\alpha_M\)
+& household market-good expenditure share\\
+\(\beta^{EL}\)
+& \(\beta\)
+& locally supplied nontraded-good expenditure share\\
+\(\omega^{EL}\)
+& \(\omega_C(z)\)
+& local income content of induced market-good spending\\
+consumer price index
+& \(P_M(z)\)
+& identical CES market-good price concept\\
+nominal income
+& \(Y\)
+& equation~\eqref{eq:nominal_income}\\
+consumption-equivalent income
+& \(R\)
+& equation~\eqref{eq:real_income}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The candidate-industry sales payment enters \(B_j^{r^*}\) once.  It does not
+also enter \(\omega_C\), which applies only to subsequent household
+market-good expenditure.  The external platform organization payment enters
+\(\rho_P\) once.  Consumer-channel external payments enter \(\ell_P\) and
+\(\omega_C\), not \(\rho_P\).  This separation prevents production,
+organizational services, and induced household spending from being counted
+twice.
+
+\section{Numerical Reproducibility and Mechanism Closures}
+
+The numerical implementation consists of:
+\begin{itemize}
+ \item \texttt{code/numerical/model.py}, which implements the equations and
+ equilibrium choices;
+ \item \texttt{code/numerical/generate\_figures.py}, which generates all
+ figures and source-data CSV files;
+ \item the validation script, which checks analytical derivatives, finite
+ differences, threshold uniqueness, the three-region condition, boundary
+ cases, and state monotonicity.
+\end{itemize}
+
+For \(z=0.5,c=0.8\), the code obtains:
+\[
+G_P^0=-0.070176,\quad
+G_L^0=0.126129,\quad
+G_X=0.256065,
+\]
+\[
+G_R=0.046348,\quad
+G_Y=0.550487.
+\]
+Finite-difference derivatives have the signs established in the proofs.
+The program also verifies that lowering \(F\) below \(\bar F\) removes the
+platform-dependent interval and that equal consumer-channel local contents
+set \(\Lambda\) exactly to zero.
+
+The file
+\texttt{figures/source\_data/appendix\_mechanism\_closures.csv}
+reports the full \(G\)-grid for:
 \begin{enumerate}
-  \item Derive the channel demands, $s_P'(z)>0$, and $P_M'(z)<0$ from the CES
-  expenditure problem.
-  \item State the admissible parameter region and the limit cases
-  $s_P\rightarrow0$ and $s_P\rightarrow1$.
+ \item the baseline;
+ \item \(\ell_A=\ell_P\);
+ \item complete platform-service localization;
+ \item \(\chi=0\);
+ \item partial platform-service localization.
 \end{enumerate}
-
-\subsection{Comparative-advantage definitions}
-
-\begin{enumerate}
-  \item Derive local factor opportunity costs from the background sector and
-  regional endowments.
-  \item Show how changes in the relevant endowment ratio affect
-  $\mathcal C^P_{ij}$ for industries with different factor intensities.
-  \item Keep \LCA, \ACA, viability, and realized comparative advantage
-  distinct throughout the derivation.
-\end{enumerate}
-
-\subsection{Entry, organization, and local-income thresholds}
-
-\begin{enumerate}
-  \item Solve the producer's entry problem and derive $G_E^*$.
-  \item Solve the $P$--$L$ producer-organization choice and derive the
-  conditions for $G_L^*$ or $M_L^*$.
-  \item Keep consumer channel $A$ distinct from producer organization $L$.
-  \item Construct one complete payment-flow table for channels $A$ and $P$,
-  local producer sales, and the local/external components of complementary
-  services.
-  \item Verify that organizational choice changes both local service income
-  and external payments; otherwise remove it from the baseline.
-  \item Derive the monotonicity and boundary conditions required for a unique
-  $G_Y^*$.
-  \item Derive $G_R^*$ and prove $G_R^*<G_Y^*$ when both thresholds are
-  interior.
-  \item Report parameter regions in which either threshold does not exist or
-  lies outside the feasible support.
-\end{enumerate}
-
-\subsection{Companion-paper mapping}
-
-The final appendix must reproduce the exact income-propagation equation used
-in the companion paper and provide a one-to-one map between:
-\begin{enumerate}
-  \item its autonomous-income term and the producer-side payments derived
-  here;
-  \item its local-retention denominator and the transaction set used here;
-  \item its consumer price index and $P_M(z)$;
-  \item its nominal and consumption-equivalent income definitions and
-  $(Y_i,R_i)$ here.
-\end{enumerate}
-This check is required to rule out double counting of local production,
-transaction services, and induced household spending.
-
-\subsection{Policy and robustness}
-
-The policy proof must state the market failure, government budget, real
-resource cost, and incidence of any platform or local-service payment.  It
-must also identify whether the intervention relaxes a constraint on
-comparative-advantage realization, organizational embeddedness, or both.
-Robustness work is limited to partial localization of platform-service income
-and multiple candidate industries unless an additional mechanism changes one
-of the core threshold results.
+All reported exercises use normalized, illustrative values.  No parameter is
+estimated, and the exercises do not constitute a calibration.
