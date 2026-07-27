@@ -25,6 +25,7 @@ class Parameters:
     a_platform: float = 0.40
     p_a: float = 1.0
     p_p_bar: float = 1.20
+    consumer_platform_wedge: float = 1.0
     ell_a: float = 0.70
     ell_p: float = 0.10
 
@@ -35,16 +36,18 @@ class Parameters:
     epsilon: float = 0.05
     gamma: float = 0.10
     chi: float = 0.20
-    c: float = 0.80
+    c: float = 0.90
     d_p: float = 0.40
     d_l: float = 0.10
     f: float = 0.30
     big_f: float = 0.50
     platform_localization: float = 0.0
+    tau_o_bar: float = 1.65
+    aca_reference_cost: float = 1.46
 
     # Enabling-state block
     kappa_private: float = 2.0
-    kappa_government: float = 0.50
+    kappa_government: float = 0.30
     infrastructure_revenue_scale: float = 0.80
 
 
@@ -57,6 +60,8 @@ def validate_parameters(p: Parameters) -> None:
         raise ValueError("eta and sigma must exceed one")
     if not 0.0 < p.a_platform < 1.0:
         raise ValueError("a_platform must lie in (0,1)")
+    if p.consumer_platform_wedge <= 0.0:
+        raise ValueError("consumer_platform_wedge must be positive")
     if not 0.0 <= p.ell_a <= 1.0 or not 0.0 <= p.ell_p <= 1.0:
         raise ValueError("local income contents must lie in [0,1]")
     if p.d_l >= p.d_p or p.d_l < 0.0:
@@ -67,6 +72,10 @@ def validate_parameters(p: Parameters) -> None:
         raise ValueError("gamma and chi must be nonnegative")
     if not 0.0 <= p.platform_localization <= 1.0:
         raise ValueError("platform_localization must lie in [0,1]")
+    if min(p.tau_o_bar, p.aca_reference_cost) <= 0.0:
+        raise ValueError("ACA comparison costs must be positive")
+    if not 0.0 < p.kappa_government < p.kappa_private:
+        raise ValueError("government financing wedge must be below the private wedge")
 
 
 def markup(p: Parameters) -> float:
@@ -79,7 +88,7 @@ def operating_profit_coefficient(p: Parameters) -> float:
 
 
 def platform_price(z: float, p: Parameters) -> float:
-    return p.p_p_bar * exp(-z)
+    return p.consumer_platform_wedge * p.p_p_bar * exp(-z)
 
 
 def platform_share(z: float, p: Parameters) -> float:
@@ -130,12 +139,29 @@ def producer_access_elasticity(g: float, p: Parameters) -> float:
     return p.epsilon + (p.sigma - 1.0) * p.chi * g
 
 
+def outbound_iceberg_cost(z: float, g: float, p: Parameters) -> float:
+    return p.tau_o_bar * exp(-(p.gamma + p.chi * z) * g)
+
+
 def marginal_cost(mode: str, p: Parameters) -> float:
     if mode == "P":
         return p.c + p.d_p
     if mode == "L":
         return p.c + p.d_l
     raise ValueError(f"unknown producer mode: {mode}")
+
+
+def actual_comparative_advantage_index(
+    mode: str, z: float, g: float, p: Parameters
+) -> float:
+    """Delivered candidate/background cost relative to the reference region.
+
+    The local background cost and the reference region's delivered
+    candidate/background cost ratio are summarized by aca_reference_cost.
+    Values below one indicate actual comparative advantage.
+    """
+
+    return outbound_iceberg_cost(z, g, p) * marginal_cost(mode, p) / p.aca_reference_cost
 
 
 def fixed_cost(mode: str, p: Parameters) -> float:
@@ -242,12 +268,34 @@ def raw_organization_switch_threshold(z: float, p: Parameters) -> float:
     return numerator / omega
 
 
+def raw_actual_advantage_threshold(mode: str, z: float, p: Parameters) -> float:
+    slope = p.gamma + p.chi * z
+    initial_index = p.tau_o_bar * marginal_cost(mode, p) / p.aca_reference_cost
+    if slope <= 0.0:
+        return -np.inf if initial_index <= 1.0 else np.inf
+    return log(initial_index) / slope
+
+
+def actual_advantage_threshold(z: float, p: Parameters) -> float:
+    raw = min(
+        raw_actual_advantage_threshold("P", z, p),
+        raw_actual_advantage_threshold("L", z, p),
+    )
+    return max(0.0, raw)
+
+
 def entry_threshold(z: float, p: Parameters) -> float:
     return max(0.0, min(raw_platform_entry_threshold(z, p), raw_local_entry_threshold(z, p)))
 
 
 def organization_threshold(z: float, p: Parameters) -> float:
-    return max(0.0, raw_organization_switch_threshold(z, p))
+    if platform_intermediate_condition(p):
+        raw = raw_organization_switch_threshold(z, p)
+    else:
+        # When the platform-dependent interval is absent, the local mode
+        # becomes the equilibrium organization at its own zero-profit point.
+        raw = raw_local_entry_threshold(z, p)
+    return max(0.0, raw)
 
 
 def platform_intermediate_condition(p: Parameters) -> bool:
@@ -317,6 +365,30 @@ def infrastructure_supply(vartheta: float, p: Parameters) -> float:
     return 0.5 * (-1.0 + sqrt(1.0 + 4.0 * ratio))
 
 
+def participation_threshold(target_g: float, p: Parameters) -> float:
+    """Minimum state participation required to supply target_g.
+
+    Returns zero if private provision already crosses the threshold and NaN
+    if even full participation cannot cross it.
+    """
+
+    lower_supply = infrastructure_supply(0.0, p)
+    upper_supply = infrastructure_supply(1.0, p)
+    if target_g <= lower_supply:
+        return 0.0
+    if target_g > upper_supply:
+        return np.nan
+    return float(
+        brentq(
+            lambda vartheta: infrastructure_supply(float(vartheta), p) - target_g,
+            0.0,
+            1.0,
+            xtol=1e-12,
+            rtol=1e-12,
+        )
+    )
+
+
 def with_cost(p: Parameters, c: float) -> Parameters:
     return replace(p, c=float(c))
 
@@ -330,6 +402,7 @@ def threshold_rows(
         rows.append(
             {
                 "c": float(c),
+                "G_A": actual_advantage_threshold(z, pc),
                 "G_E": entry_threshold(z, pc),
                 "G_L": organization_threshold(z, pc),
                 "G_R": real_income_threshold(z, pc),

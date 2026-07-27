@@ -26,6 +26,10 @@
 | 2026-07-24 | NSE 是地方发展侧的结构骨架，不只解释 producer response | CONFIRMED | NSE 同时约束禀赋与产业选择、LCA--ACA、viability、组织嵌入、本地产业联系、capture formation 和 facilitating state |
 | 2026-07-24 | consumer preferences、platform shock 和 EL multiplier 不重新定义为 NSE | CONFIRMED | 保留各模块的理论来源，避免用 NSE 覆盖全文所有机制 |
 | 2026-07-24 | 基准模型恢复最小的外部平台--本地嵌入组织选择，但不整体恢复旧三阈值模型 | CONFIRMED | 只内生化 local-service 与 external-payment incidence，不重新改变全文主轴 |
+| 2026-07-27 | ACA 使用现实双重相对交付成本单独生成 \(G_A\)，viability 使用零利润条件生成 \(G_E\) | CONFIRMED | 防止把盈利能力、实际进入或 \(1/c\) 错写为比较优势 |
+| 2026-07-27 | \(G_L\) 按均衡选择分段定义 | CONFIRMED | \(F>\bar F\) 时由 \(G_X\) 决定；\(F\leq\bar F\) 时平台中间区消失，应由 \(G_L^0\) 决定 |
+| 2026-07-27 | 数值基准采用 \(c=0.9,\kappa_g=0.3\) 和 \(\vartheta=0.05,0.50,0.95\) | CONFIRMED | 使 ACA、进入、收入和组织门槛及其政府参与门槛均在图示区间内，真正展示正文机制 |
+| 2026-07-27 | facilitation 与 protection 数值比较固定为同一本地组织结果 | CONFIRMED | 区分“降低真实约束”与“恶化外部渠道”两种实现本地化的方式 |
 
 ## 已完成的模型决定
 

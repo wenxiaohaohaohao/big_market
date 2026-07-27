@@ -13,8 +13,12 @@ from matplotlib.colors import BoundaryNorm, ListedColormap
 
 from model import (
     Parameters,
+    actual_advantage_threshold,
+    actual_comparative_advantage_index,
     consumer_price_index,
+    entry_threshold,
     infrastructure_supply,
+    local_producer_income,
     nominal_effect,
     nominal_income,
     platform_share,
@@ -76,19 +80,57 @@ def figure_phase_diagram(p: Parameters, z: float = 0.5) -> None:
             pc = replace(p, c=float(c))
             choice = producer_choice(z, float(g), pc)
             regime[i, j] = code[choice]
-            rows.append({"z": z, "c": float(c), "G": float(g), "regime": choice})
+            aca_index = min(
+                actual_comparative_advantage_index("P", z, float(g), pc),
+                actual_comparative_advantage_index("L", z, float(g), pc),
+            )
+            rows.append(
+                {
+                    "z": z,
+                    "c": float(c),
+                    "G": float(g),
+                    "regime": choice,
+                    "actual_comparative_advantage": int(aca_index <= 1.0),
+                }
+            )
 
-    write_rows(SOURCE_DIR / "figure_1_phase_diagram.csv", ["z", "c", "G", "regime"], rows)
+    write_rows(
+        SOURCE_DIR / "figure_1_phase_diagram.csv",
+        ["z", "c", "G", "regime", "actual_comparative_advantage"],
+        rows,
+    )
 
     fig, ax = plt.subplots(figsize=(6.4, 4.3))
     cmap = ListedColormap(["#d9d9d9", "#4c78a8", "#f2a541"])
     norm = BoundaryNorm([-0.5, 0.5, 1.5, 2.5], cmap.N)
-    mesh = ax.pcolormesh(costs, infrastructure, regime, cmap=cmap, norm=norm, shading="auto")
+    # Rasterizing only the dense regime layer prevents vector-PDF hairline
+    # seams while keeping axes, labels, and threshold lines as vector objects.
+    mesh = ax.pcolormesh(
+        costs,
+        infrastructure,
+        regime,
+        cmap=cmap,
+        norm=norm,
+        shading="auto",
+        rasterized=True,
+    )
     cbar = fig.colorbar(mesh, ax=ax, ticks=[0, 1, 2], pad=0.02)
     cbar.ax.set_yticklabels(["No entry", "External platform", "Local embedded"])
+    ga = np.array([actual_advantage_threshold(z, replace(p, c=float(c))) for c in costs])
+    ga_visible = np.where(ga <= infrastructure[-1], ga, np.nan)
+    ax.plot(
+        costs,
+        ga_visible,
+        color="#222222",
+        linestyle=":",
+        linewidth=1.6,
+        label=r"ACA boundary $G_A$",
+    )
     ax.set_xlabel("Relative production cost, $c$ (lower = stronger LCA)")
     ax.set_ylabel("Shared infrastructure, $G$")
+    ax.set_ylim(infrastructure[0], infrastructure[-1])
     ax.set_title("Industry realization and organizational regime")
+    ax.legend(frameon=False, loc="upper left")
     ax.text(
         0.02,
         0.02,
@@ -105,13 +147,14 @@ def figure_thresholds(p: Parameters, z: float = 0.5) -> None:
     rows = threshold_rows(costs, z, p)
     write_rows(
         SOURCE_DIR / "figure_2_thresholds.csv",
-        ["c", "G_E", "G_L", "G_R", "G_Y"],
+        ["c", "G_A", "G_E", "G_L", "G_R", "G_Y"],
         rows,
     )
 
     fig, ax = plt.subplots(figsize=(6.4, 4.3))
     c = np.array([row["c"] for row in rows])
     styles = {
+        "G_A": ("#222222", ":", "ACA $G_A$"),
         "G_E": ("#666666", "--", "Entry $G_E$"),
         "G_L": ("#f2a541", "-", "Embedding $G_L$"),
         "G_R": ("#54a24b", "-.", "Real income $G_R$"),
@@ -125,7 +168,7 @@ def figure_thresholds(p: Parameters, z: float = 0.5) -> None:
     ax.set_ylabel("Infrastructure threshold")
     ax.set_ylim(0.0, 2.10)
     ax.set_title("Comparative advantage and development thresholds")
-    ax.legend(frameon=False, ncol=2)
+    ax.legend(frameon=False, ncol=3)
     ax.text(
         0.02,
         0.02,
@@ -139,7 +182,7 @@ def figure_thresholds(p: Parameters, z: float = 0.5) -> None:
 
 def figure_reform_paths(p: Parameters) -> None:
     z_grid = np.linspace(0.0, 1.2, 161)
-    participation = [0.10, 0.50, 0.90]
+    participation = [0.05, 0.50, 0.95]
     colors = ["#4c78a8", "#f2a541", "#54a24b"]
     rows: list[dict] = []
 
@@ -171,7 +214,7 @@ def figure_reform_paths(p: Parameters) -> None:
                 }
             )
 
-        label = rf"$\vartheta={vartheta:.1f}$, $G={g:.2f}$"
+        label = rf"$\vartheta={vartheta:.2f}$, $G={g:.2f}$"
         axes[1].plot(z_grid, nominal_effects, color=color, linewidth=2, label=label)
         axes[2].plot(z_grid, real_effects, color=color, linewidth=2, label=label)
 
@@ -210,6 +253,7 @@ def mechanism_closures(p: Parameters, z: float = 0.5) -> None:
     scenarios = {
         "baseline": p,
         "no_consumer_capture_gap": replace(p, ell_p=p.ell_a),
+        "reverse_consumer_capture_gap": replace(p, ell_p=min(1.0, p.ell_a + 0.10)),
         "producer_payments_localized": replace(p, platform_localization=1.0),
         "no_access_infrastructure_complementarity": replace(p, chi=0.0),
         "partial_platform_localization": replace(p, platform_localization=0.5),
@@ -245,6 +289,63 @@ def mechanism_closures(p: Parameters, z: float = 0.5) -> None:
     )
 
 
+def policy_comparison(p: Parameters, z: float = 0.5) -> None:
+    """Compare facilitation and protection at the same binary localization outcome."""
+
+    scenarios = [
+        ("baseline", replace(p), 0.75),
+        ("facilitation", replace(p), 0.90),
+        (
+            "protection",
+            replace(p, d_p=0.50, consumer_platform_wedge=1.10),
+            0.75,
+        ),
+    ]
+    rows: list[dict] = []
+    expected_modes = {"baseline": "P", "facilitation": "L", "protection": "L"}
+    for name, ps, g in scenarios:
+        mode = producer_choice(z, g, ps)
+        if mode != expected_modes[name]:
+            raise RuntimeError(
+                f"policy design no longer matches the intended regime: {name}={mode}"
+            )
+        rows.append(
+            {
+                "scenario": name,
+                "z": z,
+                "G": g,
+                "d_P": ps.d_p,
+                "consumer_platform_wedge": ps.consumer_platform_wedge,
+                "regime": mode,
+                "platform_share": platform_share(z, ps),
+                "consumer_price_index": consumer_price_index(z, ps),
+                "producer_entry_threshold_G_E": entry_threshold(z, ps),
+                "local_producer_income": local_producer_income(mode, z, g, ps),
+                "nominal_local_income": nominal_income(z, g, ps),
+                "consumption_equivalent_income": real_income(z, g, ps),
+            }
+        )
+
+    write_rows(
+        SOURCE_DIR / "appendix_policy_comparison.csv",
+        [
+            "scenario",
+            "z",
+            "G",
+            "d_P",
+            "consumer_platform_wedge",
+            "regime",
+            "platform_share",
+            "consumer_price_index",
+            "producer_entry_threshold_G_E",
+            "local_producer_income",
+            "nominal_local_income",
+            "consumption_equivalent_income",
+        ],
+        rows,
+    )
+
+
 def main() -> None:
     p = Parameters()
     validate_parameters(p)
@@ -255,6 +356,7 @@ def main() -> None:
     figure_thresholds(p)
     figure_reform_paths(p)
     mechanism_closures(p)
+    policy_comparison(p)
     print(f"Figures written to {FIGURE_DIR}")
     print(f"Source data written to {SOURCE_DIR}")
 

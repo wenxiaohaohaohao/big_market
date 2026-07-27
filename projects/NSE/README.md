@@ -56,7 +56,7 @@ Comparative-Advantage Realization, and Local Value Capture**
 - `paper/references.bib`：唯一 BibTeX 文献库；
 - `notes/00_scoping/project_memo_zh.md`：项目身份和范围；
 - `notes/00_scoping/decision_log.md`：冻结决定；
-- `notes/01_theory/model_contract.md`：唯一活动模型合约（v3.0）；
+- `notes/01_theory/model_contract.md`：唯一活动模型合约（v3.1）；
 - `notes/01_theory/proposition_ledger.md`：唯一活动命题台账。
 
 候选文献清单不是正式 bibliography。只有完成元数据核实的来源才能进入
@@ -75,7 +75,8 @@ Comparative-Advantage Realization, and Local Value Capture**
 
 ## 第一版核心结果
 
-1. 更强的 LCA 降低本地企业实现 producer-side market access 所需的结构门槛；
+1. 更强的 LCA 分别降低形成 ACA 与 viable entry 所需的结构门槛，但
+   \(G_A\) 与 \(G_E\) 不被混为同一条件；
 2. 组织选择和本地配套服务来源内生决定 production gain 有多少转化为 local capture；
 3. 存在平台化提高名义地方收入的能力/基础设施阈值；
 4. 实际收入阈值弱低于名义收入阈值；两个根位于同一连续组织区间时严格更低；
@@ -119,9 +120,9 @@ NSE/
 - [x] 固定 access--capture 研究主轴；
 - [x] 明确 NSE 是地方发展侧结构骨架，并划清 EL 与平台模块边界；
 - [x] 归档偏离主轴的旧 contract；
-- [x] 建立活动 Model Contract v3.0 和命题台账；
+- [x] 建立活动 Model Contract v3.1 和命题台账；
 - [x] 闭合 consumer access 和 consumer-channel 支付流；
-- [x] 推导 producer-entry 和 organizational-embedding thresholds；
+- [x] 推导 ACA、producer-entry 和 organizational-embedding thresholds；
 - [x] 证明名义、实际收入阈值及条件性排序；
 - [x] 建立精简 facilitating-state 模块；
 - [x] 完成 illustrative numerical exercises、机制关闭和 source data；

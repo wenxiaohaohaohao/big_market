@@ -1,4 +1,4 @@
-# Model Contract v3.0
+# Model Contract v3.1
 
 日期：2026-07-27
 
@@ -17,8 +17,9 @@
 理论分工固定如下：
 
 1. 标准 CES 需求解释消费者渠道替代和价格接入；
-2. NSE 解释禀赋决定的 latent comparative advantage（LCA）如何通过软硬基础设施
-   转化为 actual comparative advantage（ACA）、viability、实际进入和本地组织嵌入；
+2. NSE 解释禀赋决定的 latent comparative advantage（LCA）如何与软硬基础设施
+   共同决定 actual comparative advantage（ACA）、viability、实际进入和本地组织
+   嵌入，并严格区分这些概念；
 3. 支付流决定 consumer-side retention \(\omega_C\) 和 producer-side retention
    \(\rho_r\)，二者都不是外生“本地能力”函数；
 4. EL 兼容的收入递归将第一轮本地收入映射为名义地方收入和消费等价实际收入；
@@ -217,6 +218,35 @@ c^P_{ij}
 比较静态参数。渠道 \(r\) 的总交付成本为 \(\tau_O(z,G)m_r\)。ACA 指候选产业的
 双重相对总成本低于参照地区，而不是指已经观察到生产或出口。
 
+将本地背景产业单位成本标准化为 1，以 \(\bar c_h^A>0\) 表示参照地区候选产业与
+背景产业的现实总交付成本比。组织方式 \(r\) 下：
+
+\[
+\mathcal C^A_{ijr}(z,G)
+=
+\frac{\tau_O(z,G)(c+d_r)}{\bar c_h^A}.
+\]
+
+\[
+\min_{r\in\{P,L\}}\mathcal C^A_{ijr}(z,G)\leq1
+\]
+
+表示地区 \(i\) 在产业 \(j\) 具有 ACA。对应的最低基础设施阈值是：
+
+\[
+G_A(z,c)
+=
+\max\left\{
+0,\,
+\min_{r\in\{P,L\}}
+\frac{\ln[\bar\tau_O(c+d_r)/\bar c_h^A]}
+{\gamma+\chi z}
+\right\}.
+\]
+
+\(G_A\) 是相对总交付成本门槛，不含固定成本；\(G_E\) 是利润与 viability 门槛，
+包含固定成本。两者不得合并。
+
 **Viability** 指企业在开放竞争中、不依赖持续保护，能够覆盖生产成本、组织成本和
 固定进入成本：
 
@@ -224,8 +254,9 @@ c^P_{ij}
 \max_{r\in\{P,L\}}\pi_r\geq0.
 \]
 
-**Realization** 指候选产业在均衡中实际进入、生产和销售。它是 LCA 经过 ACA 和
-viability 条件转化后的结果，不是 LCA 或 ACA 的定义。
+**Realization** 指候选产业在均衡中实际进入、生产和销售。它是可观察的均衡结果，
+不是 LCA 或 ACA 的定义。由于需求规模或保护也可能支持进入，realization 本身不
+证明 ACA；符合 NSE 的可持续转化要求同时考察 LCA、ACA 与 viability。
 
 ## 5. 生产者市场接入、进入与组织选择
 
@@ -348,10 +379,12 @@ G_X(z,c)
 }{\Omega(z)}.
 \]
 
-本地组织嵌入阈值：
+本地组织嵌入阈值必须直接按均衡选择定义：
 
 \[
-G_L(z,c)=\max\{0,G_X(z,c)\}.
+G_L(z,c)
+=
+\inf\{G\geq0:\pi_L(z,G)\geq\max\{0,\pi_P(z,G)\}\}.
 \]
 
 令 \(b_r=km_r^{1-\sigma}\)。当：
@@ -369,7 +402,18 @@ G_P^0<G_L^0<G_X.
 \]
 
 于是存在“不进入—外部平台依赖—本地嵌入”三个区间。若
-\(F\leq\bar F\)，企业可能从不进入直接转入 \(L\)；这一反例必须在附录报告。
+\(F\leq\bar F\)，企业从不进入直接转入 \(L\)。因此：
+
+\[
+G_L(z,c)
+=
+\begin{cases}
+\max\{0,G_X(z,c)\},&F>\bar F,\\
+\max\{0,G_L^0(z,c)\},&F\leq\bar F.
+\end{cases}
+\]
+
+用 \(G_X\) 无条件定义 \(G_L\) 是错误的；这一分段定义必须在代码、正文和证明中一致。
 
 ## 6. 生产者支付流与第一轮本地收入
 
@@ -531,22 +575,28 @@ G(\vartheta)
 
 ## 9. 四个正式命题
 
-### Proposition 1：Comparative-advantage realization
+### Proposition 1：LCA, ACA, and viable entry
 
-在 \(\Omega(z)>0\) 且进入阈值为内部解时，\(G_E\) 存在并且：
+在 \(\gamma+\chi z>0\)、\(\Omega(z)>0\) 且相应阈值为内部解时，\(G_A\) 与
+\(G_E\) 分别存在并且：
 
 \[
+\frac{\partial G_A}{\partial c}>0,
+\qquad
 \frac{\partial G_E}{\partial c}>0.
 \]
 
 由于 \(c\) 是 \(\mathcal C^P_{ij}\) 的单调成本统计量：
 
 \[
+\frac{\partial G_A}{\partial\mathcal C^P_{ij}}>0,
+\qquad
 \frac{\partial G_E}{\partial\mathcal C^P_{ij}}>0.
 \]
 
-更强 LCA 降低形成 ACA 和 viable entry 所需的基础设施。若原始阈值小于零，
-截断后的 \(G_E\) 只弱单调；这是边界而不是反例。
+更强 LCA 分别降低形成 ACA 和 viable entry 所需的基础设施。由于 \(G_A\) 不含
+固定成本、\(G_E\) 不含参照地区现实交付成本，二者一般不相等。若原始阈值小于零，
+截断后的阈值只弱单调；这是边界而不是反例。
 
 ### Proposition 2：Organizational embeddedness
 
@@ -607,11 +657,11 @@ G'(\vartheta)>0.
 \[
 \vartheta_H=\inf\{\vartheta:G(\vartheta)\geq G_H\},
 \quad
-H\in\{E,L,R,Y\}.
+H\in\{A,E,L,R,Y\}.
 \]
 
 政府参与提高 \(G\)，从而缩小 \(G_H-G(\vartheta)\)。更强 LCA 通过降低
-\(G_E,G_L,G_R,G_Y\) 弱降低相应政府参与门槛。
+\(G_A,G_E,G_L,G_R,G_Y\) 弱降低相应政府参与门槛。
 
 facilitation 和 protection 都可能促进本地化，但不等价：前者降低真实基础设施
 约束并扩大 producer access；后者提高外部平台价格或组织成本，恶化 consumer

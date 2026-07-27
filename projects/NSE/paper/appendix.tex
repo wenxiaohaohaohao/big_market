@@ -136,10 +136,32 @@ For the ACA interpretation, the focal region's delivered marginal cost is
 =-(\gamma+\chi z)<0,
 \]
 infrastructure lowers the focal region's total-cost ratio relative to a fixed
-reference region.  Stronger LCA starts from a lower production-cost ratio, so
-it requires weakly less \(G\) both to achieve a total-cost advantage and to
-cover the fixed cost.  The first condition is ACA; the second is viability.
-Entry and sales are realization.
+reference region.  More directly, the raw organization-specific ACA threshold
+from equation~\eqref{eq:aca_index} is:
+\[
+G_{Ar}^0
+=
+\frac{\ln[\bar\tau_O(c+d_r)/\bar c_h^A]}
+{\gamma+\chi z}.
+\]
+At an interior threshold:
+\[
+\frac{\partial G_{Ar}^0}{\partial c}
+=
+\frac{1}{(\gamma+\chi z)(c+d_r)}>0.
+\]
+The minimum across organizations preserves strict monotonicity before
+truncation at zero, by the same argument used for \(G_E\).  Holding the
+reference-region and background-industry ratios fixed and applying
+\(\partial c/\partial\mathcal C^P_{ij}>0\) yields the stated LCA comparative
+statics for \(G_A\).
+
+Stronger LCA therefore starts from a lower production-cost ratio and requires
+weakly less \(G\) both to achieve a delivered-cost advantage and to cover the
+fixed cost.  The first condition defines ACA; the second defines viability.
+They need not coincide because \(\bar c_h^A\) appears only in \(G_A\), while
+fixed costs appear only in \(G_E\).  Entry, production, and sales constitute
+realization.
 \end{proof}
 
 \section{Complete Entry and Organization Classification}
@@ -236,7 +258,7 @@ Define:
 \Delta(c)
 =(c+d_L)^{1-\sigma}-(c+d_P)^{1-\sigma}>0.
 \]
-The raw switch threshold is:
+When \(F>\bar F\), the raw switch threshold is:
 \[
 G_X
 =
@@ -254,19 +276,30 @@ Because:
 =(1-\sigma)
 \left[(c+d_L)^{-\sigma}-(c+d_P)^{-\sigma}\right]<0,
 \]
-we have \(\partial G_X/\partial c>0\).  Truncation at zero preserves weak
+we have \(\partial G_X/\partial c>0\).
+
+When \(F\leq\bar F\), Lemma~\ref{lem:three_region} shows that the local mode
+enters directly, so the economically relevant embeddedness threshold is
+\(\max\{0,G_L^0\}\), not \(G_X\).  Its derivative is:
+\[
+\frac{\partial G_L^0}{\partial c}
+=
+\frac{\sigma-1}{\Omega(z)(c+d_L)}>0.
+\]
+Thus equation~\eqref{eq:embedding_threshold_piecewise} is weakly increasing in
+\(c\) in either parameter region; truncation at zero preserves weak
 monotonicity.  The LCA result follows from
 \(\partial c/\partial\mathcal C^P_{ij}>0\).
 
-For \(G>G_X\):
+In the three-region case, for \(G>G_X\):
 \[
 \pi_L-\pi_P
 =
 k\Mcal_0e^{\varepsilon z+\Omega G}\Delta(c)-F>0.
 \]
-Hence \(L\) is selected whenever it also weakly dominates no entry; the
-classification in Lemma~\ref{lem:three_region} covers the possible entry
-orders.
+Hence \(L\) is selected whenever it also weakly dominates no entry.  In the
+direct-local case, it is selected once \(G\geq G_L^0\).  The classification in
+Lemma~\ref{lem:three_region} therefore covers both possible entry orders.
 
 Since \(d_L<d_P\):
 \[
@@ -460,7 +493,7 @@ For any fixed structural threshold \(G_H\), the monotonicity of
 a unique minimum \(\vartheta_H\), except for an economically irrelevant flat
 boundary if the infrastructure solution itself is constrained.  Increasing
 \(\vartheta\) reduces \(G_H-G(\vartheta)\).  Stronger LCA lowers
-\(G_E,G_L,G_R,G_Y\) by Propositions~\ref{prop:entry}--\ref{prop:income_thresholds};
+\(G_A,G_E,G_L,G_R,G_Y\) by Propositions~\ref{prop:entry}--\ref{prop:income_thresholds};
 applying the increasing inverse of \(G(\vartheta)\) weakly lowers the
 associated participation thresholds.
 
@@ -651,15 +684,16 @@ The numerical implementation consists of:
  cases, and state monotonicity.
 \end{itemize}
 
-For \(z=0.5,c=0.8\), the code obtains:
+For \(z=0.5,c=0.9\), the code obtains:
 \[
-G_P^0=-0.070176,\quad
-G_L^0=0.126129,\quad
-G_X=0.256065,
+G_P^0=0.330038,\quad
+G_L^0=0.652932,\quad
+G_X=0.881716,
 \]
 \[
-G_R=0.046348,\quad
-G_Y=0.550487.
+G_A=0.611694,\quad
+G_R=0.330500,\quad
+G_Y=0.835116.
 \]
 Finite-difference derivatives have the signs established in the proofs.
 The program also verifies that lowering \(F\) below \(\bar F\) removes the
@@ -672,9 +706,51 @@ reports the full \(G\)-grid for:
 \begin{enumerate}
  \item the baseline;
  \item \(\ell_A=\ell_P\);
+ \item \(\ell_P>\ell_A\);
  \item complete platform-service localization;
  \item \(\chi=0\);
  \item partial platform-service localization.
 \end{enumerate}
+
+\subsection{Equal-localization policy comparison}
+
+The policy comparison holds \(z=0.5\) and \(c=0.9\) fixed.  The baseline
+provides \(G=0.75\) and selects the external platform organization.  The
+facilitation exercise raises shared infrastructure to \(G=0.90\).  The
+protection exercise instead leaves \(G=0.75\), raises the external producer
+organization cost from \(d_P=0.40\) to \(0.50\), and applies a ten-percent
+consumer platform-price wedge.  Both counterfactuals select \(L\), so the
+comparison holds the binary localization outcome fixed rather than comparing
+different organizational regimes.
+
+\begin{table}[htbp]
+\centering
+\caption{Illustrative facilitation and protection comparison}
+\label{tab:policy_comparison}
+\begin{tabular}{lccc}
+\toprule
+Outcome & Baseline & Facilitation & Protection\\
+\midrule
+Infrastructure \(G\) & 0.75 & 0.90 & 0.75\\
+Equilibrium organization & \(P\) & \(L\) & \(L\)\\
+Platform expenditure share & 0.7655 & 0.7655 & 0.6696\\
+Consumer price index & 0.8287 & 0.8287 & 0.8875\\
+Entry threshold \(G_E\) & 0.3300 & 0.3300 & 0.6529\\
+First-round local producer income & 1.1876 & 3.7113 & 3.3919\\
+Nominal local income & 3.5527 & 7.6514 & 7.3737\\
+Consumption-equivalent income & 3.7942 & 8.1714 & 7.6882\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Facilitation and protection both induce local organization in this
+illustrative comparison, but they do so through different margins.
+Facilitation leaves consumer access unchanged, expands producer access, and
+raises local producer income.  Protection lowers the consumer platform share,
+raises the price index, and nearly doubles the entry threshold relative to the
+unprotected baseline.  These results are source-data outputs rather than
+calibrated welfare estimates.  The exact values are stored in
+\texttt{figures/source\_data/appendix\_policy\_comparison.csv}.
+
 All reported exercises use normalized, illustrative values.  No parameter is
 estimated, and the exercises do not constitute a calibration.

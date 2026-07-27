@@ -455,14 +455,44 @@ reference fixed, a larger \(G\) lowers the local total-cost ratio.  Thus a
 region can possess LCA while lacking ACA because inadequate infrastructure
 leaves its total delivered cost too high.
 
+More precisely, normalize the focal region's background-industry unit cost to
+one and let \(\bar c_h^A>0\) denote the reference region's delivered
+candidate-to-background cost ratio.  The organization-specific actual
+comparative-advantage index is:
+\begin{equation}
+ \mathcal C^A_{ijr}(z,G)
+ =
+ \frac{\tau_O(z,G)(c+d_r)}{\bar c_h^A}.
+ \label{eq:aca_index}
+\end{equation}
+The region has ACA in \(j\) if
+\(\min_{r\in\{P,L\}}\mathcal C^A_{ijr}\leq1\).  Its minimum infrastructure
+threshold for ACA is:
+\begin{equation}
+ G_A(z,c)
+ =
+ \max\left\{
+ 0,\,
+ \min_{r\in\{P,L\}}
+ \frac{\ln[\bar\tau_O(c+d_r)/\bar c_h^A]}
+ {\gamma+\chi z}
+ \right\}.
+ \label{eq:aca_threshold}
+\end{equation}
+This delivered-cost condition is distinct from the zero-profit condition
+below: ACA compares relative total costs, whereas viability also requires
+sales to cover fixed costs.
+
 \begin{definition}[Viability and realization]
 The candidate producer is viable if at least one available organization
 earns nonnegative profit in open competition without persistent protection:
 \[
 \max\{\pi_P,\pi_L\}\geq0.
 \]
-Comparative advantage is realized when the producer actually enters, produces,
-and sells in equilibrium.
+Industry realization occurs when the producer actually enters, produces, and
+sells in equilibrium.  Realization is observable, but by itself does not prove
+ACA: market size or protection can support an active industry whose relative
+delivered cost remains high.
 \end{definition}
 
 LCA describes a structural cost potential; ACA describes that potential under
@@ -571,19 +601,27 @@ The economically relevant entry threshold is:
  \label{eq:entry_threshold}
 \end{equation}
 
-\begin{proposition}[Comparative-advantage realization]
+\begin{proposition}[LCA, ACA, and viable entry]
 \label{prop:entry}
-Suppose \(\Omega(z)>0\).  A unique minimum infrastructure level \(G_E\)
-supports viable entry.  At an interior threshold:
+Suppose \(\gamma+\chi z>0\) and \(\Omega(z)>0\).  The minimum infrastructure
+levels \(G_A\) for ACA and \(G_E\) for viable entry exist.  At interior
+thresholds:
 \begin{equation}
+ \frac{\partial G_A}{\partial c}>0,
+ \qquad
  \frac{\partial G_E}{\partial c}>0,
+ \qquad
+ \frac{\partial G_A}{\partial\mathcal C^P_{ij}}>0,
  \qquad
  \frac{\partial G_E}{\partial\mathcal C^P_{ij}}>0.
  \label{eq:entry_lca_comparative_static}
 \end{equation}
-Hence stronger LCA lowers the infrastructure required to obtain ACA and
-viable realization.  If the raw threshold is negative, the economically
-truncated threshold is zero and the comparative static is weak.
+Hence stronger LCA lowers both the infrastructure required to obtain ACA and
+the infrastructure required for viable realization.  Neither threshold is
+generally equal to the other: fixed costs affect \(G_E\) but not \(G_A\), and
+the external delivered-cost benchmark affects \(G_A\) but not \(G_E\).  If a
+raw threshold is negative, its economically truncated value is zero and the
+corresponding comparative static is weak.
 \end{proposition}
 
 The result is not an assumption that LCA raises local income.  It follows from
@@ -612,9 +650,15 @@ infrastructure level at which \(\pi_L=\pi_P\) is:
  }{\Omega(z)}.
  \label{eq:switch_threshold_raw}
 \end{equation}
-The economically relevant embeddedness threshold is:
+The economically relevant embeddedness threshold is defined directly from the
+equilibrium choice:
 \begin{equation}
- G_L(z,c)=\max\{0,G_X(z,c)\}.
+ G_L(z,c)
+ =
+ \inf\left\{
+ G\geq0:
+ \pi_L(z,G)\geq\max\{0,\pi_P(z,G)\}
+ \right\}.
  \label{eq:embedding_threshold}
 \end{equation}
 
@@ -644,6 +688,16 @@ If \(F\leq\bar F\), the platform-dependent middle region can disappear:
 the producer may move directly from no entry to the local organization.  The
 middle state is therefore an economic result with a transparent parameter
 condition, not a stage imposed by terminology.
+Equivalently:
+\begin{equation}
+ G_L(z,c)
+ =
+ \begin{cases}
+ \max\{0,G_X(z,c)\},&F>\bar F,\\
+ \max\{0,G_L^0(z,c)\},&F\leq\bar F.
+ \end{cases}
+ \label{eq:embedding_threshold_piecewise}
+\end{equation}
 
 \subsection{Producer-side payment incidence}
 
@@ -904,16 +958,17 @@ and:
  G'(\vartheta)>0.
  \label{eq:state_G}
 \end{equation}
-For \(H\in\{E,L,R,Y\}\), define the minimum government participation needed
+For \(H\in\{A,E,L,R,Y\}\), define the minimum government participation needed
 to cross an existing threshold:
 \begin{equation}
  \vartheta_H=\inf\{\vartheta:G(\vartheta)\geq G_H\}.
  \label{eq:state_thresholds}
 \end{equation}
 Greater government participation reduces each gap \(G_H-G(\vartheta)\).
-Stronger LCA weakly lowers \(\vartheta_E,\vartheta_L,\vartheta_R\), and
-\(\vartheta_Y\), with strict effects where the corresponding structural
-thresholds are interior.
+Stronger LCA weakly lowers
+\(\vartheta_A,\vartheta_E,\vartheta_L,\vartheta_R\), and \(\vartheta_Y\),
+with strict effects where the corresponding structural thresholds are
+interior.
 
 Facilitation and protection are not equivalent.  Facilitation raises \(G\),
 reduces actual transaction constraints, and expands producer market access
@@ -975,14 +1030,14 @@ Producer demand
 & \(\sigma,\Mcal_0,\varepsilon\)
 & \(4,\ 5,\ 0.05\)\\
 Infrastructure access
-& \(\gamma,\chi\)
-& \(0.10,\ 0.20\)\\
+& \(\gamma,\chi,\bar\tau_O,\bar c_h^A\)
+& \(0.10,\ 0.20,\ 1.65,\ 1.46\)\\
 Production and organization
 & \(c,d_P,d_L,f,F\)
-& \(0.8,\ 0.4,\ 0.1,\ 0.3,\ 0.5\)\\
+& \(0.9,\ 0.4,\ 0.1,\ 0.3,\ 0.5\)\\
 State block
 & \(\kappa_p,\kappa_g,a_I\)
-& \(2.0,\ 0.5,\ 0.8\)\\
+& \(2.0,\ 0.3,\ 0.8\)\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1020,16 +1075,23 @@ The gray region contains no viable candidate industry.  The blue region
 contains local production that reaches the national market through the
 external platform organization.  The orange region contains locally embedded
 production and complementary services.  At a given \(G\), a stronger LCA
-industry is more likely both to enter and to embed.  At a given production
-cost, infrastructure can move the region through all three states.  The
-middle region is sizable under the baseline because \(F>\bar F\).
+industry is more likely both to enter and to embed.  For an intermediate range
+of production costs, increasing infrastructure moves the region through all
+three states; sufficiently strong LCA can make the industry locally embedded
+even at low \(G\), whereas sufficiently weak LCA may leave it nonviable
+throughout the plotted range.  The dotted \(G_A\) locus is the delivered-cost
+ACA boundary.  It need not coincide with a colored equilibrium boundary
+because ACA, viability, and organization are different concepts.  The
+platform-dependent middle region is sizable under the baseline because
+\(F>\bar F\).
 
 \subsection{Development thresholds}
 
-Figure~\ref{fig:thresholds} plots the entry, organizational, real-income, and
-nominal-income thresholds against \(c\).  The curves are computed from the
+Figure~\ref{fig:thresholds} plots the ACA, entry, organizational, real-income,
+and nominal-income thresholds against \(c\).  The curves are computed from the
 exact equilibrium choice and the minimum-\(G\) definitions in equations
-\eqref{eq:entry_threshold}, \eqref{eq:embedding_threshold},
+\eqref{eq:aca_threshold}, \eqref{eq:entry_threshold},
+\eqref{eq:embedding_threshold},
 \eqref{eq:GY}, and \eqref{eq:GR}.
 
 \begin{figure}[htbp]
@@ -1039,29 +1101,34 @@ exact equilibrium choice and the minimum-\(G\) definitions in equations
 \label{fig:thresholds}
 \end{figure}
 
-All four thresholds weakly rise as LCA weakens.  Kinks are economically
+All five thresholds weakly rise as LCA weakens.  Kinks are economically
 meaningful: they occur when the identity of the active entry mode or the
 organizational state containing an income threshold changes.  In the
-baseline at \(c=0.8,z=0.5\), the raw state thresholds are:
+baseline at \(c=0.9,z=0.5\), the relevant thresholds are:
 \[
-G_P^0=-0.0702,\qquad
-G_L^0=0.1261,\qquad
-G_X=0.2561.
+G_E=0.3300,\qquad
+G_A=0.6117,\qquad
+G_Y=0.8351,\qquad
+G_L=0.8817.
 \]
-The real- and nominal-income thresholds are:
+The real-income threshold is:
 \[
-G_R=0.0463,\qquad G_Y=0.5505.
+G_R=0.3305.
 \]
-The numerical ordering is strict, although the formal proposition preserves
-the weaker boundary result when a discrete switch determines both thresholds.
+Here the real effect turns positive immediately after viable platform entry,
+so \(G_R\) lies just above \(G_E\); ACA is attained only later because it is a
+relative delivered-cost criterion rather than a profit condition.  The strict
+ordering \(G_R<G_Y\) is numerical.  The formal proposition preserves the
+weaker boundary result when a discrete switch determines both income
+thresholds.
 
 \subsection{Platform integration under alternative state participation}
 
 The state specification yields:
 \[
-G(0.1)=0.3261,\qquad
-G(0.5)=0.4434,\qquad
-G(0.9)=0.7169.
+G(0.05)=0.3172,\qquad
+G(0.50)=0.4724,\qquad
+G(0.95)=1.0258.
 \]
 Figure~\ref{fig:reform} follows platform integration for those three
 infrastructure levels.  The first panel is common across participation levels
@@ -1077,21 +1144,39 @@ effects, not income indices.
 \end{figure}
 
 Platform penetration rises for every region.  At low participation, the
-nominal effect is initially negative and becomes positive only after
-producer-access gains and organizational embeddedness strengthen.  The
-consumption-equivalent effect crosses zero earlier because it includes the
-price gain.  Higher participation shifts both effects upward, but the
-consumer platform share is unchanged.  The small jumps in the income-effect
-curves are the entry or \(P\)-to-\(L\) organization switches established in
-the analytical model.
+candidate industry enters through \(P\) around \(z=0.532\); the real effect
+turns positive at that entry jump, while the nominal effect turns positive
+only around \(z=0.753\).  At middle participation, entry occurs earlier,
+around \(z=0.244\), and the real and nominal effects cross zero around
+\(z=0.397\) and \(z=0.664\), respectively.  At high participation, the
+industry is already platform organized at low \(z\) and switches to \(L\)
+around \(z=0.370\).  Before that switch, consumer-side capture drag can make
+the nominal curve locally U-shaped; the discrete rise at the switch is the
+endogenous local-service and payment-incidence effect.  The real effect is
+positive throughout the high-participation path.  The consumer platform share
+is common across cases because the baseline state intervention changes
+producer infrastructure, not the consumer platform price.
 
-The appendix reports five mechanism closures.  Setting
+The implied government-participation thresholds at \(z=0.5,c=0.9\) are:
+\[
+\vartheta_E=0.1044,\quad
+\vartheta_R=0.1063,\quad
+\vartheta_A=0.6991,\quad
+\vartheta_Y=0.8694,\quad
+\vartheta_L=0.8928.
+\]
+Thus the revised parameterization makes every structural threshold interior
+to the admissible participation interval rather than mechanically assigning
+most of them a zero state-participation requirement.
+
+The appendix reports six mechanism closures.  Setting
 \(\ell_A=\ell_P\) eliminates consumer-side capture drag.  Equating
 \(\rho_P\) and \(\rho_L\) eliminates the producer-side spatial payment
 difference.  Setting \(\chi=0\) eliminates infrastructure--platform
 complementarity.  A positive \(\lambda\) partially localizes platform
-services.  Finally, an equal-localization comparison shows that protection
-and facilitation have different consumer-access and marginal-entry
+services.  The reverse case \(\ell_P>\ell_A\) turns capture drag into a local
+retention gain.  Finally, an equal-localization comparison shows that
+protection and facilitation have different consumer-access and marginal-entry
 consequences.  Every figure is generated from the same public code and is
 accompanied by CSV source data.
 

@@ -18,22 +18,27 @@ CSV source data 和数值核验代码
 | 正文正式命题 | 4 个 |
 | 每个命题的证明 | 全部位于 `paper/appendix.tex` |
 | LCA、ACA、viability、realization | 定义分离，未用 \(1/c\) 定义比较优势 |
+| \(G_A\) 与 \(G_E\) | 分别由现实双重相对交付成本和零利润条件生成，未把盈利能力当作 ACA |
+| \(G_L\) | \(F>\bar F\) 时由 \(G_X\) 决定；中间区消失时改由 \(G_L^0\) 决定 |
 | consumer-side 与 producer-side access | 由同一 \(z\) 连接，但使用不同价格/市场接入方程 |
 | \(\omega_C\) 与 \(\rho_r\) | 均由支付流生成 |
 | \(G_R,G_Y\) 排序 | 全局只声称 \(G_R\leq G_Y\)；同一连续组织区间才声称严格不等式 |
 | local income 与 welfare | 正文明确排除 national-welfare 解释 |
 | iceberg cost | 使用 \(\tau_O=\bar\tau_Oe^{-(\gamma+\chi z)G}\geq1\)，不变基准项吸收到 \(\mathcal M_0\) |
 
-`code/theory/validate_model.py` 已核验解析导数、有限差分、三区域存在条件、低
-\(F\) 反例、\(\ell_A=\ell_P\)、\(\rho_P=\rho_L\)、\(\chi=0\)、保护政策比较、
-政府融资一阶条件以及参数网格中的收入阈值排序。连续阈值由有界网格括定后使用
+`code/theory/validate_model.py` 已核验解析导数、有限差分、ACA 边界、三区域存在
+条件、低 \(F\) 反例、\(\ell_A=\ell_P\)、\(\ell_P>\ell_A\)、
+\(\rho_P=\rho_L\)、\(\chi=0\)、同一本地化结果下的保护政策比较、政府融资一阶
+条件以及参数网格中的收入阈值排序。连续阈值由有界网格括定后使用
 SciPy 的 Brent 方法求根；离散进入或组织切换仍按均衡边界处理。最终运行结果为：
 
 ```text
 All analytical, boundary, and finite-difference checks passed.
-GP=-0.070176, GL0=0.126129, GX=0.256065
-GR=0.046348, GY=0.550487
-State supply: G(0.1)=0.3261, G(0.5)=0.4434, G(0.9)=0.7169
+GA=0.611694, GP=0.330038, GL0=0.652932, GX=0.881716
+GR=0.330500, GY=0.835116
+State supply: G(0.05)=0.3172, G(0.50)=0.4724, G(0.95)=1.0258
+State thresholds: vartheta_A=0.6991, vartheta_E=0.1044,
+vartheta_L=0.8928, vartheta_R=0.1063, vartheta_Y=0.8694
 ```
 
 ## 3. 引用与论断
@@ -60,13 +65,15 @@ screening。
 
 | artifact | source data | transformation | caption claim | limitations |
 |---|---|---|---|---|
-| Figure 1 | `figures/source_data/figure_1_phase_diagram.csv` | `code/numerical/generate_figures.py` 调用 `model.py` 逐点分类 | 三个组织状态的参数区域非空，且低 \(F\) 时平台中间区可消失 | 只显示标准化参数空间，不表示任何真实地区 |
-| Figure 2 | `figures/source_data/figure_2_thresholds.csv` | 同上，逐个 \(c\) 求 \(G_E,G_L,G_R,G_Y\) | LCA 变弱时阈值弱上升；拐点来自组织状态变化 | 曲线是模型比较静态，不是估计置信区间 |
-| Figure 3 | `figures/source_data/figure_3_reform_paths.csv` | 同上，按三个 \(\vartheta\) 求 \(G(\vartheta)\) 并遍历 \(z\) | state participation 改变 producer-side 收入路径，不改变基准 consumer platform share | 不识别政策因果效应，也不求最优 \(\vartheta\) |
+| Figure 1 | `figures/source_data/figure_1_phase_diagram.csv` | `code/numerical/generate_figures.py` 调用 `model.py` 逐点分类，并单独计算 ACA 指数 | 三个组织状态的参数区域非空；虚线 ACA 边界不等于均衡状态边界 | 只显示标准化参数空间，不表示任何真实地区 |
+| Figure 2 | `figures/source_data/figure_2_thresholds.csv` | 同上，逐个 \(c\) 求 \(G_A,G_E,G_L,G_R,G_Y\) | LCA 变弱时五个门槛弱上升；拐点来自 active mode 或状态切换 | 曲线是模型比较静态，不是估计置信区间 |
+| Figure 3 | `figures/source_data/figure_3_reform_paths.csv` | 同上，按 \(\vartheta=0.05,0.50,0.95\) 求 \(G(\vartheta)\) 并遍历 \(z\) | 三条路径分别展示进入前、平台依赖和本地嵌入；consumer share 保持共同 | 不识别政策因果效应，也不求最优 \(\vartheta\) |
 
 机制关闭结果位于
-`figures/source_data/appendix_mechanism_closures.csv`。图注、正文解释与 CSV
-方向一致。
+`figures/source_data/appendix_mechanism_closures.csv`。同一本地化结果下的
+facilitation--protection 对照位于
+`figures/source_data/appendix_policy_comparison.csv`。图注、正文解释、附录表格
+与 CSV 方向一致。
 
 ## 5. Numerical-exercise provenance
 
@@ -83,13 +90,15 @@ This check verifies disclosure and claim-to-provenance fidelity. It does not jud
 
 | 文件 | SHA256 |
 |---|---|
-| `code/numerical/generate_figures.py` | `091EDFEA704888663BA66E8B6F29DC04C750E9198443F58D774033B018201664` |
-| `code/numerical/model.py` | `9FA815D13B96F16DD1D180EBB4E2068DBF5100C301A8219CF4567EAB171645E9` |
-| `code/theory/validate_model.py` | `381BFB238A8710762C29B42D4D0A74C5FD9B805329DE69F6C35909C3088FB6B2` |
+| `code/numerical/generate_figures.py` | `AEA1229B1BF3CC56EBA07460BEE751E0EB3CE3D7B3305E34CF9D3976C7600875` |
+| `code/numerical/model.py` | `5DD219CF6E9FB093B9E1AAB000C22045B2AFD543C02B9F0D9E1C5932EDA96C19` |
+| `code/theory/validate_model.py` | `C3EB708DF9A0FF733A13708C7480BF97FA3EA02CBF28B0EBCA0D40D0AA68F007` |
 | `code/requirements.txt` | `87F086E6165AD9E2C92449573EA54BA7F91AD5397053A06EABB3467CEC51911C` |
-| `figure_1_phase_diagram.csv` | `29D66194A7E0BCF8EC294CDC699C700A81CF653613D46C8EA62DA306D10D8C0D` |
-| `figure_2_thresholds.csv` | `22D700325BD34677F4D0A396558623A698CEA1662A1D6E6BF9E89504ED0F04B1` |
-| `figure_3_reform_paths.csv` | `39736F9AB730D35810C521954A7AC131E0BFC16FABE3296BD4AF65569886924A` |
+| `figure_1_phase_diagram.csv` | `304310BAE917CC7AABCA5B4EE2321DF9E61780A84693B3AB4F271B2AC6EEA100` |
+| `figure_2_thresholds.csv` | `65481BD1F703F4818DB3A84BE40DFA4327DD838F5E61DC39D79995C8A0614509` |
+| `figure_3_reform_paths.csv` | `90D750B8D79FDB8EEBA7F867D37963B511B0D8E0AAD2C8C804C6FD4F1BE1A8D5` |
+| `appendix_mechanism_closures.csv` | `708031E752C68DE24F31F846F7084C5B3ADEA3748168751017731572EFA7FA72` |
+| `appendix_policy_comparison.csv` | `A54233276DCE10DA39C2F0F77B3B4CC174BC3F3B505EF5A2FA9A87D6273855BC` |
 
 ## 6. AI research failure-mode check
 
@@ -106,9 +115,11 @@ This check verifies disclosure and claim-to-provenance fidelity. It does not jud
 ## 7. 编译与版式
 
 - MiKTeX XeLaTeX + BibTeX 构建成功；
-- PDF 共 32 页：正文 20 页、参考文献 1 页、证明与稳健性附录 11 页；
+- PDF 共 34 页：正文 21 页、参考文献 1 页、证明与稳健性附录 12 页；
 - 最终 PDF SHA256：
-  `15EA9CD3865FF8C64A60779C4A92E7058BFE20928AAD6C7A925EB98FB81FD260`；
+  `101E66AE35E17972BF1887CE2A60AA01A8B083FAAEE5954CB943F3B8B076B6AE`；
 - 无 undefined citation、undefined reference、overfull box 或内部占位措辞；
 - 仅有窄表格中的 underfull box，未造成文字溢出或遮挡；
-- 已目视检查首页、命题页、三图页、结论页和附录首页。
+- 已目视检查首页、命题页、第6节标题页、三图页、结论页、附录首页和政策对照表。
+- Figure 1 的密集状态层已局部栅格化，PDF 不再出现矢量色块之间的白色细缝；
+  文字、坐标轴和 ACA 边界仍保持矢量。

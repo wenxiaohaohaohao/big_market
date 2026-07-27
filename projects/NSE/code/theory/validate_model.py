@@ -14,6 +14,8 @@ sys.path.insert(0, str(NUMERICAL_DIR))
 
 from model import (  # noqa: E402
     Parameters,
+    actual_advantage_threshold,
+    actual_comparative_advantage_index,
     capture_drag,
     consumer_price_index,
     entry_threshold,
@@ -24,6 +26,7 @@ from model import (  # noqa: E402
     nominal_income,
     nominal_income_threshold,
     organization_threshold,
+    participation_threshold,
     platform_intermediate_condition,
     platform_share,
     platform_share_derivative,
@@ -32,6 +35,7 @@ from model import (  # noqa: E402
     producer_profit,
     producer_retention,
     raw_local_entry_threshold,
+    raw_actual_advantage_threshold,
     raw_organization_switch_threshold,
     raw_platform_entry_threshold,
     real_effect,
@@ -62,6 +66,7 @@ def main() -> None:
     assert_close(dlogp_numeric, -platform_share(z, p), 2e-8, "consumer price derivative")
 
     # Profit thresholds and complete organizational classification.
+    ga = actual_advantage_threshold(z, p)
     gp = raw_platform_entry_threshold(z, p)
     gl0 = raw_local_entry_threshold(z, p)
     gx = raw_organization_switch_threshold(z, p)
@@ -75,6 +80,12 @@ def main() -> None:
         0.0,
         1e-10,
         "organization indifference",
+    )
+    assert_close(
+        actual_comparative_advantage_index("L", z, ga, p),
+        1.0,
+        1e-10,
+        "actual comparative-advantage boundary",
     )
     expected_modes = [
         (max(0.0, gp - 0.03), "0" if gp > 0.03 else "P"),
@@ -90,6 +101,9 @@ def main() -> None:
     costs = np.linspace(0.55, 1.25, 25)
     entry = np.array([entry_threshold(z, replace(p, c=float(c))) for c in costs])
     organization = np.array([organization_threshold(z, replace(p, c=float(c))) for c in costs])
+    advantage = np.array(
+        [actual_advantage_threshold(z, replace(p, c=float(c))) for c in costs]
+    )
     raw_organization = np.array(
         [raw_organization_switch_threshold(z, replace(p, c=float(c))) for c in costs]
     )
@@ -97,6 +111,8 @@ def main() -> None:
         raise AssertionError("entry threshold is not weakly increasing in relative production cost")
     if np.any(np.diff(organization) < -1e-10):
         raise AssertionError("clipped organization threshold is not weakly increasing in relative cost")
+    if np.any(np.diff(advantage) < -1e-10):
+        raise AssertionError("actual-advantage threshold is not weakly increasing in relative cost")
     if np.any(np.diff(raw_organization) <= 0.0):
         raise AssertionError("raw organization threshold is not strictly increasing in relative cost")
 
@@ -113,8 +129,8 @@ def main() -> None:
     gy = nominal_income_threshold(z, p)
     if not 0.0 < gr < gy < 1.5:
         raise AssertionError(f"baseline income thresholds are not ordered and interior: GR={gr}, GY={gy}")
-    if abs(gr - gx) < 1e-4 or abs(gy - gx) < 1e-4:
-        raise AssertionError("baseline income thresholds should not coincide with organization switching")
+    if abs(gy - gx) < 1e-4:
+        raise AssertionError("baseline nominal threshold should not coincide with organization switching")
 
     # The capture drag vanishes when both consumer channels have the same local content.
     no_gap = replace(p, ell_p=p.ell_a)
@@ -140,9 +156,16 @@ def main() -> None:
         raise AssertionError("platform local income must rise with service localization")
 
     # The platform-intermediate regime is conditional, not universal.
-    low_fixed_cost = replace(p, big_f=0.05)
+    low_fixed_cost = replace(p, big_f=0.05, market0=0.50)
     if platform_intermediate_condition(low_fixed_cost):
         raise AssertionError("low local fixed cost should eliminate the platform-intermediate condition")
+    low_gl0 = max(0.0, raw_local_entry_threshold(z, low_fixed_cost))
+    assert_close(
+        organization_threshold(z, low_fixed_cost),
+        low_gl0,
+        1e-12,
+        "direct-local organization threshold",
+    )
     if any(producer_choice(z, float(g), low_fixed_cost) == "P" for g in np.linspace(0.0, 1.5, 301)):
         raise AssertionError("platform mode should be absent when the local mode enters directly")
 
@@ -157,11 +180,23 @@ def main() -> None:
         )
 
     # Protection can favor localization only by worsening platform entry conditions.
-    protected = replace(p, d_p=0.55)
+    protected = replace(p, d_p=0.50, consumer_platform_wedge=1.10)
     if raw_platform_entry_threshold(z, protected) <= gp:
         raise AssertionError("protection must raise the platform entry threshold")
     if raw_organization_switch_threshold(z, protected) >= gx:
         raise AssertionError("protection must lower the local-organization switch threshold")
+    baseline_policy_g = 0.75
+    facilitated_g = 0.90
+    if producer_choice(z, baseline_policy_g, p) != "P":
+        raise AssertionError("policy baseline must remain platform dependent")
+    if producer_choice(z, facilitated_g, p) != "L":
+        raise AssertionError("facilitation must attain local embeddedness")
+    if producer_choice(z, baseline_policy_g, protected) != "L":
+        raise AssertionError("protection comparison must attain the same local organization")
+    if consumer_price_index(z, protected) <= consumer_price_index(z, p):
+        raise AssertionError("protection must worsen consumer access")
+    if platform_share(z, protected) >= platform_share(z, p):
+        raise AssertionError("protection must reduce the consumer platform share")
 
     # Global income effects are nondecreasing in G, and real thresholds never exceed nominal ones.
     for zz in (0.20, 0.50, 0.80):
@@ -182,20 +217,45 @@ def main() -> None:
     supplies = np.array([infrastructure_supply(float(v), p) for v in participation])
     if np.any(np.diff(supplies) <= 0.0):
         raise AssertionError("infrastructure supply must rise with state participation")
-    for vartheta in (0.1, 0.5, 0.9):
+    for vartheta in (0.05, 0.5, 0.95):
         g = infrastructure_supply(vartheta, p)
         lhs = p.infrastructure_revenue_scale / (1.0 + g)
         rhs = financing_wedge(vartheta, p) * g
         assert_close(lhs, rhs, 1e-12, f"infrastructure FOC at participation={vartheta}")
 
+    state_targets = {
+        "A": ga,
+        "E": entry_threshold(z, p),
+        "L": organization_threshold(z, p),
+        "R": gr,
+        "Y": gy,
+    }
+    state_thresholds = {
+        name: participation_threshold(target, p) for name, target in state_targets.items()
+    }
+    if any(not (0.0 < value < 1.0) for value in state_thresholds.values()):
+        raise AssertionError(f"all state thresholds must be interior: {state_thresholds}")
+    if not (
+        state_thresholds["E"]
+        <= state_thresholds["R"]
+        < state_thresholds["A"]
+        < state_thresholds["Y"]
+        < state_thresholds["L"]
+    ):
+        raise AssertionError(f"unexpected state-threshold ordering: {state_thresholds}")
+
     print("All analytical, boundary, and finite-difference checks passed.")
-    print(f"GP={gp:.6f}, GL0={gl0:.6f}, GX={gx:.6f}")
+    print(f"GA={ga:.6f}, GP={gp:.6f}, GL0={gl0:.6f}, GX={gx:.6f}")
     print(f"GR={gr:.6f}, GY={gy:.6f}")
     print(
         "State supply:",
         ", ".join(
-            f"G({v:.1f})={infrastructure_supply(v, p):.4f}" for v in (0.1, 0.5, 0.9)
+            f"G({v:.2f})={infrastructure_supply(v, p):.4f}" for v in (0.05, 0.5, 0.95)
         ),
+    )
+    print(
+        "State thresholds:",
+        ", ".join(f"vartheta_{name}={value:.4f}" for name, value in state_thresholds.items()),
     )
 
 

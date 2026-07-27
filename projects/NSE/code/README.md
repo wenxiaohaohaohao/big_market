@@ -8,7 +8,7 @@ code/
 │   └── validate_model.py       # 解析恒等式、有限差分、边界和反例
 ├── numerical/
 │   ├── model.py                # 论文方程和均衡选择
-│   └── generate_figures.py     # 三张正文图、机制关闭和CSV
+│   └── generate_figures.py     # 三张正文图、机制关闭、政策对照和CSV
 └── build_paper.ps1             # XeLaTeX--BibTeX完整构建
 ```
 
@@ -49,6 +49,7 @@ python -m venv .venv
 
 - 正文图：`figures/figure_*.pdf` 和 `figures/figure_*.png`；
 - 图形数据：`figures/source_data/*.csv`；
+- 政策对照：`figures/source_data/appendix_policy_comparison.csv`；
 - 编译论文：`output/NSE_draft.pdf`；
 - LaTeX 临时文件：`tmp/latex/`。
 

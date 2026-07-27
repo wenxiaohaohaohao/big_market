@@ -1,4 +1,4 @@
-# Proposition Ledger v3.0
+# Proposition Ledger v3.1
 
 日期：2026-07-27
 对应合约：`notes/01_theory/model_contract.md`
@@ -8,8 +8,8 @@
 | ID | 正式结果 | 关键条件 | 解析结论 | 边界或反例 | 状态 |
 |---|---|---|---|---|---|
 | L0 | 平台化提高平台支出份额并降低消费价格指数 | CES；\(\eta>1\)；\(p_P=\bar p_Pe^{-z}\) | \(s'=(\eta-1)s(1-s)>0\)；\(d\ln P_M/dz=-s<0\) | \(s\to0,1\) 时边际份额响应趋近零 | PROVED |
-| P1 | 更强 LCA 降低 viable entry 所需基础设施 | 双重相对成本；\(\Omega(z)>0\)；代表性产业 | \(\partial G_E/\partial \mathcal C^P_{ij}>0\)（内部解） | 阈值截断于零时只有弱单调；active mode 可切换 | PROVED |
-| P2 | 本地嵌入组织存在阈值并改变支付归属 | \(d_L<d_P\)；\(F>0\)；\(\Omega(z)>0\) | \(\partial G_L/\partial c>0\)；\(G\geq G_L\Rightarrow \rho_L>\rho_P,B_j^L>B_j^P\) | \(F\leq\bar F\) 时平台依赖区间消失 | PROVED |
+| P1 | 更强 LCA 分别降低 ACA 与 viable-entry 所需基础设施 | 双重相对成本；\(\gamma+\chi z>0\)；\(\Omega(z)>0\) | \(\partial G_A/\partial \mathcal C^P_{ij}>0\)、\(\partial G_E/\partial \mathcal C^P_{ij}>0\)（内部解） | \(G_A\neq G_E\) 一般成立；阈值截断于零时只有弱单调 | PROVED |
+| P2 | 本地嵌入组织存在阈值并改变支付归属 | \(d_L<d_P\)；\(F>0\)；\(\Omega(z)>0\) | \(G_L=\max\{0,G_X\}\) if \(F>\bar F\)，否则 \(G_L=\max\{0,G_L^0\}\)；\(\partial G_L/\partial c>0\) | \(F\leq\bar F\) 时平台依赖区间消失，不能继续用 \(G_X\) 定义均衡阈值 | PROVED |
 | P3a | 名义地方收入存在唯一最小阈值 | \(D>0\)；端点跨越；固定区间严格单调；状态切换向上跳 | \(G_Y=\inf\{G:d\ln Y/dz\geq0\}\) 唯一 | 若零点位于状态切换，阈值是离散边界 | PROVED |
 | P3b | 实际收入阈值弱低于名义收入阈值 | \(\alpha_Ms(z)>0\) | \(G_R\leq G_Y\)；同一连续区间内 \(G_R<G_Y\) | 同一离散切换可使 \(G_R=G_Y\) | PROVED |
 | C1 | 更强 LCA 降低收入阈值 | 更低 \(c\) 提高每个给定 \(G\) 的 \(B_j\) 和 \(\theta_r\) | \(G_R,G_Y\) 对 LCA strength 弱下降；同一内部区间严格下降 | 离散状态切换或零截断处可为弱关系 | PROVED |
@@ -29,22 +29,24 @@
 
 ## 3. 参数区域核验
 
-基准 illustrative 参数在 \(z=0.5,c=0.8\) 时产生：
+基准 illustrative 参数在 \(z=0.5,c=0.9\) 时产生：
 
 \[
-G_P^0=-0.070176,\qquad
-G_L^0=0.126129,\qquad
-G_X=0.256065,
+G_P^0=0.330038,\qquad
+G_L^0=0.652932,\qquad
+G_X=0.881716,
 \]
 
 \[
-G_R=0.046348,\qquad
-G_Y=0.550487.
+G_A=0.611694,\qquad
+G_R=0.330500,\qquad
+G_Y=0.835116.
 \]
 
 因此：
 
-- 候选产业在 \(G=0\) 已可通过外部平台进入；
+- 候选产业在 \(G<G_E\) 时不进入，在 \(G_E\leq G<G_L\) 时依赖外部平台；
+- \(G_E<G_A\) 说明 viability 与 ACA 是不同条件，盈利进入不自动证明相对总成本优势；
 - \(G<G_L\) 时维持外部平台依赖；
 - \(G\geq G_L\) 时形成本地嵌入；
 - 实际收入先于名义地方收入对平台化转正；
@@ -54,18 +56,29 @@ G_Y=0.550487.
 政府参与的闭式示例产生：
 
 \[
-G(0.1)=0.3261,\qquad
-G(0.5)=0.4434,\qquad
-G(0.9)=0.7169.
+G(0.05)=0.3172,\qquad
+G(0.50)=0.4724,\qquad
+G(0.95)=1.0258.
 \]
 
-三种参与度跨越不同的收入阈值，支持改革路径图。
+五个政府参与门槛全部为内部值：
+
+\[
+\vartheta_E=0.1044,\quad
+\vartheta_R=0.1063,\quad
+\vartheta_A=0.6991,\quad
+\vartheta_Y=0.8694,\quad
+\vartheta_L=0.8928.
+\]
+
+三种参与度分别对应低、中、高基础设施路径，支持改革路径图。
 
 ## 4. 机制关闭
 
 | 情景 | 被关闭或减弱的机制 | 理论预期 |
 |---|---|---|
 | \(\ell_A=\ell_P\) | consumer-side capture loss | \(\Lambda(z)=0\) |
+| \(\ell_P>\ell_A\) | consumer-side capture loss 反向 | \(\Lambda(z)<0\)，渠道替代提高本地留存 |
 | \(\rho_P=\rho_L\) | producer-side 空间支付差 | 组织选择只影响成本和销售，不影响留值率 |
 | \(\chi=0\) | 基础设施与平台 producer access 互补 | 收入效应失去 \((\sigma-1)\chi G\) 项 |
 | \(\lambda>0\) | 外部平台服务完全外地化 | \(\rho_P\) 上升，组织切换的 capture gain 缩小 |
