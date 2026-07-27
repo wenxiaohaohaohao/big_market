@@ -32,10 +32,12 @@
 | 2026-07-27 | facilitation 与 protection 数值比较固定为同一本地组织结果 | SUPERSEDED | 比较继续固定同一本地化结果，但外部渠道楔子降为单独的 `external-channel restriction` 例子，不再作为 Proposition 4 或一般 protection 定理 |
 | 2026-07-27 | 活动模型不单独构造 ACA 状态变量或 \(G_A\) | SUPERSEDED | 原说明仍把 ACA、viability 和 realization 排成三个不同阶段；2026-07-28 原文审计表明该四级结构并非 Lin--Wang 的理论写法 |
 | 2026-07-27 | 基准 producer access 为 \(\mathcal M_0\exp\{(\sigma-1)(\psi z+\gamma G)\}\) | CONFIRMED | \(z\) 与 \(G\) 已分别降低同一 outbound cost；额外 \(zG\) 不是核心命题所需，\(\chi^{ext}>0\) 只在附录扩展 |
-| 2026-07-27 | Proposition 4 只证明政府参与提高共享基础设施并跨越结构阈值 | CONFIRMED | 避免把一个特定渠道楔子误写成 NSE 中所有 protection，并避免预设 facilitation 的全面福利优越性 |
+| 2026-07-27 | Proposition 4 只证明政府参与提高共享基础设施并跨越结构阈值 | SUPERSEDED | 2026-07-28 决定 Lin--Wang 只进入 LCA--交易成本--ACA 模块，因此删除其融资结构和 \(\vartheta\) |
 | 2026-07-27 | 收入阈值算法直接检查 \(G_E,G_L\) 等离散结构事件 | CONFIRMED | 离散跳跃的经济阈值是事件本身，不能返回依赖网格密度的相邻数值点 |
 | 2026-07-28 | LCA--ACA 按 Lin--Wang 原文改为两层关系 | CONFIRMED | LCA 是相对生产成本所预示的潜在专业化；固定与可变交易成本、基础设施和市场条件决定实际生产/出口结构（ACA）。actual entry 是本文的国内市场对应，不另设 realization 状态 |
 | 2026-07-28 | viability 只作为进入利润条件的 NSE 解释边界 | CONFIRMED | Lin (2003) 的 viability 属于另一条理论线；本文固定成本含正常回报且无持续选择性保护，因此 \(\max_r\pi_r\geq0\) 与其相容，但不建立独立 viability index、threshold 或 proposition |
+| 2026-07-28 | Lin--Wang (2023) 只进入 LCA--交易成本--ACA 模块 | CONFIRMED | 不采用其 infrastructure-financing、public--private provision 或完整两国连续产业结构 |
+| 2026-07-28 | facilitating state 直接以共享基础设施增加 \(I\) 表示 | CONFIRMED | \(G=G_0+I\)，正式结果求跨越 \(G_E,G_L,G_R,G_Y\) 的最小 \(I_H=[G_H-G_0]_+\)；不求最优 \(I\)，不引入融资楔子 |
 
 ## 已完成的模型决定
 

@@ -21,7 +21,8 @@ EL 短文。
    本文对 LCA-to-ACA realization 的国内市场表达；
 3. \(P/L\) 组织选择生成本地服务与外部平台支付；
 4. 支付流生成 \(\rho_P,\rho_L\) 和 \(B_j^r\)；
-5. 基础设施融资问题生成 \(G(\vartheta)\)；
+5. 从初始 \(G_0\) 出发的共享基础设施增加生成最小 facilitating requirements
+   \(I_H=[G_H-G_0]_+\)，不引入单独的融资模型；
 6. 四个正式命题分别生成并区分 \(G_E,G_L,G_R,G_Y\)，而不是用一个“本地
    能力”参数替代这些经济门槛。
 
@@ -29,7 +30,8 @@ Lin--Wang (2023) 的 ACA 最终体现为交易成本加入后实际出现的生�
 RCA，而不是位于 realization 之前的独立 total-cost index。当前 focal-region
 模型因此不再为 ACA 另造 \(G_A\)：可观察的正式均衡结果是 actual entry and
 sales，以及进入后的 organizational embeddedness。Lin (2003) 的 viability 只
-用于约束利润条件的解释，不再生成独立变量或门槛。
+用于约束利润条件的解释，不再生成独立变量或门槛。Lin--Wang (2023) 的融资和
+基础设施供给结构不进入活动模型。
 
 这些对象在 EL 固定点中均为外生或不存在，构成新稿的独立理论内容。
 

@@ -56,7 +56,7 @@ Comparative-Advantage Realization, and Local Value Capture**
 - `paper/references.bib`：唯一 BibTeX 文献库；
 - `notes/00_scoping/project_memo_zh.md`：项目身份和范围；
 - `notes/00_scoping/decision_log.md`：冻结决定；
-- `notes/01_theory/model_contract.md`：唯一活动模型合约（v3.1）；
+- `notes/01_theory/model_contract.md`：唯一活动模型合约（v4.2）；
 - `notes/01_theory/proposition_ledger.md`：唯一活动命题台账。
 
 候选文献清单不是正式 bibliography。只有完成元数据核实的来源才能进入
@@ -72,6 +72,9 @@ Comparative-Advantage Realization, and Local Value Capture**
 | 留值率 | 由均衡支付流生成，不是外生能力指标 |
 | EL 作用 | access--capture 基准进入正文；精确传播公式在末端或附录映射 |
 | 独立性 | 不读取或写入 EL 的代码和输出，不重复宣称 EL 命题 |
+
+Lin--Wang (2023) 在活动模型中只用于 LCA--交易成本--ACA 关系。本文不采用其
+基础设施融资、public--private provision 或完整两国连续产业模型。
 
 ## 第一版核心结果
 
@@ -121,12 +124,13 @@ NSE/
 - [x] 固定 access--capture 研究主轴；
 - [x] 明确 NSE 是地方发展侧结构骨架，并划清 EL 与平台模块边界；
 - [x] 归档偏离主轴的旧 contract；
-- [x] 建立活动 Model Contract v3.1 和命题台账；
+- [x] 建立活动 Model Contract v4.2 和命题台账；
 - [x] 闭合 consumer access 和 consumer-channel 支付流；
 - [x] 按原始文献区分 LCA 与实际生产/出口意义上的 ACA，并推导 producer-entry
   和 organizational-embedding thresholds；
 - [x] 证明名义、实际收入阈值及条件性排序；
-- [x] 建立精简 facilitating-state 模块；
+- [x] 建立以最小共享基础设施增加为对象的 facilitating-state 模块，不引入
+  单独的融资模型；
 - [x] 完成 illustrative numerical exercises、机制关闭和 source data；
 - [x] 完成核心文献元数据审计和 EL 重复性审计；
 - [x] 形成20页英文正文、证明附录和可编译 PDF。

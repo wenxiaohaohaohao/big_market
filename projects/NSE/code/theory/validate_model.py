@@ -17,15 +17,12 @@ from model import (  # noqa: E402
     capture_drag,
     consumer_price_index,
     entry_threshold,
-    financing_wedge,
     income_denominator,
-    infrastructure_supply,
     local_producer_income,
     nominal_effect,
     nominal_income,
     nominal_income_threshold,
     organization_threshold,
-    participation_threshold,
     platform_intermediate_condition,
     platform_share,
     platform_share_derivative,
@@ -199,7 +196,11 @@ def main() -> None:
         raise AssertionError("the restriction must worsen consumer access")
     if platform_share(z, restricted) >= platform_share(z, p):
         raise AssertionError("the restriction must reduce the consumer platform share")
-
+    for mode in ("P", "L"):
+        if producer_profit(mode, z, facilitated_g, p) <= producer_profit(
+            mode, z, baseline_policy_g, p
+        ):
+            raise AssertionError("facilitation must raise producer profit in both modes")
     # Global income effects are nondecreasing in G, and real thresholds never exceed nominal ones.
     for zz in (0.20, 0.50, 0.80):
         for cost in (0.65, 0.80, 1.00):
@@ -214,48 +215,51 @@ def main() -> None:
             if math.isfinite(gr_grid) and math.isfinite(gy_grid) and gr_grid > gy_grid + 1e-8:
                 raise AssertionError(f"real threshold exceeds nominal threshold at z={zz}, c={cost}")
 
-    # State participation raises infrastructure.
-    participation = np.linspace(0.0, 1.0, 51)
-    supplies = np.array([infrastructure_supply(float(v), p) for v in participation])
-    if np.any(np.diff(supplies) <= 0.0):
-        raise AssertionError("infrastructure supply must rise with state participation")
-    for vartheta in (0.05, 0.5, 0.99):
-        g = infrastructure_supply(vartheta, p)
-        lhs = p.infrastructure_revenue_scale / (1.0 + g)
-        rhs = financing_wedge(vartheta, p) * g
-        assert_close(lhs, rhs, 1e-12, f"infrastructure FOC at participation={vartheta}")
-
-    state_targets = {
+    # Minimum state-enabled infrastructure additions inherit the structural
+    # threshold ordering without importing a separate financing model.
+    initial_g = 0.18
+    facilitating_targets = {
         "E": entry_threshold(z, p),
         "L": organization_threshold(z, p),
         "R": gr,
         "Y": gy,
     }
-    state_thresholds = {
-        name: participation_threshold(target, p) for name, target in state_targets.items()
+    facilitating_increments = {
+        name: max(0.0, target - initial_g)
+        for name, target in facilitating_targets.items()
     }
-    if any(not (0.0 < value < 1.0) for value in state_thresholds.values()):
-        raise AssertionError(f"all state thresholds must be interior: {state_thresholds}")
     if not (
-        state_thresholds["E"]
-        <= state_thresholds["R"]
-        <= state_thresholds["Y"]
-        <= state_thresholds["L"]
+        facilitating_increments["E"]
+        <= facilitating_increments["R"]
+        <= facilitating_increments["Y"]
+        <= facilitating_increments["L"]
     ):
-        raise AssertionError(f"unexpected state-threshold ordering: {state_thresholds}")
+        raise AssertionError(
+            f"unexpected facilitating-increment ordering: {facilitating_increments}"
+        )
+    stronger_lca = replace(p, c=0.80)
+    stronger_targets = {
+        "E": entry_threshold(z, stronger_lca),
+        "L": organization_threshold(z, stronger_lca),
+        "R": real_income_threshold(z, stronger_lca),
+        "Y": nominal_income_threshold(z, stronger_lca),
+    }
+    for name, target in stronger_targets.items():
+        stronger_increment = max(0.0, target - initial_g)
+        if stronger_increment > facilitating_increments[name] + 1e-10:
+            raise AssertionError(
+                f"stronger LCA raises the facilitating requirement for {name}"
+            )
 
     print("All analytical, boundary, and finite-difference checks passed.")
     print(f"GP={gp:.6f}, GL0={gl0:.6f}, GX={gx:.6f}")
     print(f"GR={gr:.6f}, GY={gy:.6f}")
     print(
-        "State supply:",
+        f"Minimum facilitating additions from G0={initial_g:.2f}:",
         ", ".join(
-            f"G({v:.2f})={infrastructure_supply(v, p):.4f}" for v in (0.05, 0.5, 0.99)
+            f"I_{name}={value:.4f}"
+            for name, value in facilitating_increments.items()
         ),
-    )
-    print(
-        "State thresholds:",
-        ", ".join(f"vartheta_{name}={value:.4f}" for name, value in state_thresholds.items()),
     )
 
 

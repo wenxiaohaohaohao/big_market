@@ -1,4 +1,4 @@
-# Proposition Ledger v4.0
+# Proposition Ledger v4.1
 
 日期：2026-07-27
 对应合约：`notes/01_theory/model_contract.md`
@@ -13,7 +13,7 @@
 | P3a | Nominal-income threshold | \(\psi>0\)；\(\ell_A>\ell_P\)；端点跨越；状态内严格单调、状态间无向下跳 | \(G_Y=\inf\{G:d\ln Y/dz\geq0\}\) 唯一 | 若高端满足 \((\sigma-1)\psi\leq\Lambda\)，名义阈值可以不存在 | PROVED |
 | P3b | Real-income threshold ordering | \(\alpha_Ms(z)>0\)；P3a 的单调结构 | \(G_R\leq G_Y\)；同一连续组织区间内 \(G_R<G_Y\) | 离散进入/组织切换可使阈值重合；基准中 \(G_R=G_E\) | PROVED |
 | C1 | Stronger LCA lowers income thresholds | 更低 \(c\) 提高各状态的 \(B_j\) 并提前状态切换 | \(G_R,G_Y\) 随 LCA 增强而弱下降；相同内部状态内严格下降 | 零截断和离散状态变化处仅弱关系 | PROVED |
-| P4 | Government participation and threshold crossing | \(\mathcal U_I''<0\)，\(C''\geq0\)，\(\kappa_I'(\vartheta)<0\) | \(G'(\vartheta)>0\)；\(H\in\{E,L,R,Y\}\) 的 \(\vartheta_H\) 唯一（存在时） | 不证明 \(\vartheta\) 全国最优；不包含 external-channel restriction | PROVED |
+| P4 | Facilitation and threshold crossing | \(G=G_0+I\)；\(C_I(0)=0,C_I'>0\)；各 \(G_H\) 存在 | \(I_H=[G_H-G_0]_+\)，\(K_H=C_I(I_H)\)；更强 LCA 弱降低二者；facilitation 提高两种组织利润而不改变 consumer access | 不求最优 \(I\)；external-channel restriction 可降低 \(G_X\)，但提高消费者价格与 \(G_P^0\) | PROVED |
 
 ## 2. 非正式但必须报告的结果
 
@@ -25,7 +25,7 @@
 | B4 | \(\ell_P>\ell_A\Rightarrow\Lambda<0\) | 反向渠道支付归属 | VERIFIED |
 | B5 | \(\lambda=1\Rightarrow\rho_P=\rho_L=1\) | 关闭 producer-side spatial-payment gap | VERIFIED |
 | B6 | \(\chi^{ext}>0\) | 正 infrastructure--platform complementarity 扩展 | VERIFIED |
-| B7 | 外部渠道限制提高 \(p_P,d_P\) | 可诱导 \(L\)，但提高消费价格并抬高 \(G_P^0\) | PROVED AS POLICY EXAMPLE |
+| B7 | 外部渠道限制提高 \(p_P,d_P\) | 可诱导 \(L\)，但提高消费价格并抬高 \(G_P^0\)；与 P4 中的 cost-reducing facilitation 不等价 | PROVED |
 
 ## 3. 当前 illustrative baseline
 
@@ -59,16 +59,12 @@ G_X=G_L=1.090996.
 
 其中 \(G_R=G_E\) 是由进入时的离散跳跃决定的精确 infimum，不是网格近似。
 
-State illustration：
+从 \(G_0=0.18\) 出发的最小 facilitating additions：
 
 \[
-\kappa_p=4.0,\quad\kappa_g=0.30,\quad a_I=0.80,
-\]
-
-\[
-\vartheta_E=\vartheta_R=0.2331,\quad
-\vartheta_Y=0.8308,\quad
-\vartheta_L=0.9863.
+I_E=I_R=0.030619,\quad
+I_Y=0.375415,\quad
+I_L=0.910996.
 \]
 
 ## 4. 术语约束
@@ -81,6 +77,8 @@ State illustration：
   固定成本；
 - \(\ell_r\) 与 \(\rho_r\) 是支付归属比率，不是能力参数；
 - external-channel restriction 不是 NSE 中所有 protection 的一般定义；
+- Lin--Wang (2023) 只进入 LCA--交易成本--ACA 模块，不提供本文的 state
+  financing 或 infrastructure-supply equation；
 - \(Y\) 和 \(R\) 不是 national welfare；
 - numerical exercises 不是 calibration。
 

@@ -1,4 +1,4 @@
-# Model Contract v4.1
+# Model Contract v4.2
 
 日期：2026-07-28
 状态：活动理论合约（`FROZEN`）
@@ -34,18 +34,21 @@
 | 本地嵌入 | 专业化生产者服务和产业联系具有本地固定成本 | Rodríguez-Clare (1996) | 原文完整均衡 |
 | 市场接入 | iceberg cost 以 \(1-\sigma\) 弹性进入 CES 市场接入 | 标准贸易/市场接入模型 | NEG 区位、迁移和集聚反馈 |
 | 地方收入传播 | household-endogenous local multiplier | Type II IO/SAM、Moretti、EL companion | 将乘数本身作为新贡献 |
-| facilitating state | 政府参与降低共享基础设施融资楔子 | Lin--Wang (2023) 的窄化适配；Lin--Monga 的一般逻辑 | 全国最优政府参与、任意产业补贴 |
+| facilitating state | 政府增加共享基础设施 \(G\)，解除 LCA-consistent 产业面对的共同交易约束 | Lin--Monga (2010)、Lin (2011, 2012) | 基础设施融资模型、全国最优公共投资、任意产业补贴 |
+
+Lin--Wang (2023) 在活动模型中只支持 LCA--交易成本--ACA 关系。其
+public--private infrastructure-financing block 不进入本文。
 
 ## 3. 范围、主体与时序
 
 一个 focal region \(i\) 嵌入外生全国市场。主体包括家庭、竞争性背景产业、
-代表性候选产业、消费者侧本地/平台渠道、生产者侧外部平台/本地嵌入组织、
-基础设施提供者和参与融资的政府。
+代表性候选产业、消费者侧本地/平台渠道、生产者侧外部平台/本地嵌入组织和
+提供共享基础设施的 facilitating state。
 
 时序：
 
-1. 禀赋、技术和政府参与度 \(\vartheta\) 给定；
-2. 基础设施提供者选择共享基础设施 \(G\)；
+1. 禀赋、技术和初始共享基础设施 \(G_0\) 给定；
+2. facilitating state 可增加共享基础设施 \(I\)，使 \(G=G_0+I\)；
 3. 平台化 \(z\) 同时影响 consumer access 与 producer access；
 4. 候选生产者在 \(0,P,L\) 中选择；
 5. 支付流决定第一轮本地收入；
@@ -366,36 +369,24 @@ consumption-equivalent local income，均不是 national welfare。
 ## 9. Facilitating state
 
 \[
-\kappa_I(\vartheta)
-=
-\kappa_p-(\kappa_p-\kappa_g)\vartheta,
-\qquad 0<\kappa_g<\kappa_p.
+G=G_0+I,\qquad I\geq0.
 \]
+
+对任意已存在的门槛 \(G_H\)，\(H\in\{E,L,R,Y\}\)，最小赋能投入为：
 
 \[
-\max_{G\geq0}
-\{\mathcal U_I(G)-\kappa_I(\vartheta)C(G)\},
+I_H(c,z;G_0)=[G_H(c,z)-G_0]_+.
 \]
+
+若 \(C_I(0)=0,C_I'>0\)，跨越门槛的最小真实资源成本为：
 
 \[
-\mathcal U_I'>0,\quad\mathcal U_I''<0,\quad
-C'>0,\quad C''\geq0.
+K_H=C_I(I_H).
 \]
 
-唯一内点满足：
-
-\[
-\mathcal U_I'[G(\vartheta)]
-=
-\kappa_I(\vartheta)C'[G(\vartheta)],
-\qquad G'(\vartheta)>0.
-\]
-
-这是 Lin--Wang (2023) 融资机制的窄化适配。它不等于任意成本补贴，不求解
-\(\vartheta\) 的全国福利最优值。
-
-外部渠道限制 \((\tau_C>1,d_P\uparrow)\) 只作为单独政策例子，不属于 Proposition
-4，也不被称为 NSE 中所有 protection 的一般定义。
+该模块不求解最优 \(I\)，也不使用 Lin--Wang (2023) 的融资机制。外部渠道限制
+\((\tau_C>1,d_P\uparrow)\) 与 facilitation 一并进入 Proposition 4，但不被称为
+NSE 中所有 protection 的一般定义。
 
 ## 10. 四个正式命题
 
@@ -418,11 +409,14 @@ C'>0,\quad C''\geq0.
    \[
    (\sigma-1)\psi+\alpha_Ms(z)>\Lambda(z).
    \]
-4. **Government participation and threshold crossing**：
-   \(G'(\vartheta)>0\)，且对 \(H\in\{E,L,R,Y\}\)：
+4. **Facilitation and threshold crossing**：对
+   \(H\in\{E,L,R,Y\}\)：
    \[
-   \vartheta_H=\inf\{\vartheta:G(\vartheta)\geq G_H\}.
+   I_H=[G_H-G_0]_+,\qquad K_H=C_I(I_H).
    \]
+   更强 LCA 弱降低 \(I_H,K_H\)。\(I\uparrow\) 提高两种组织方式的 producer
+   access 和利润但不恶化 consumer access；外部渠道限制可以降低 \(G_X\)，却
+   提高消费者价格和平台进入门槛。
 
 ## 11. 必须报告的边界和反例
 

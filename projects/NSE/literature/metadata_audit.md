@@ -18,7 +18,7 @@ dangling citation，也无 orphan reference。`NSE_literature_variable_inventory
 | Lin (2012), ISBN `9780821389553` | World Bank 专著 | NSE 总体框架、比较优势遵循和基础设施外部性 | 本文的 CES 或组织利润公式 |
 | Lin (2003), `10.1086/367535` | *EDCC* 51(2), 277--308 | viability 和违背比较优势的持续保护负担 | LCA--ACA 的具体总成本定义 |
 | Ju, Lin and Wang (2015), `10.1016/j.jmoneco.2015.09.006` | *JME* 76, 244--263 | 禀赋驱动产业结构及资本劳动比的正式 NSE 基础 | 本文不复制其无限产业动态模型 |
-| Lin and Wang (2023), NSE WP E2023001 | 本地 PDF 与北京大学新结构经济学研究院页面 | LCA 是相对生产成本所预示的潜在专业化；固定和可变交易成本决定产业是否实际生产、出口并形成 ACA；state 可通过基础设施改变 active-industry set | 不把 ACA 改写成独立 total-cost index，也不在 ACA 后再添加独立 realization 状态 |
+| Lin and Wang (2023), NSE WP E2023001 | 本地 PDF 与北京大学新结构经济学研究院页面 | **本文只使用**：LCA 是相对生产成本所预示的潜在专业化；固定和可变交易成本决定产业是否实际生产、出口并形成 ACA | 该文的 state-financing、public--private infrastructure provision、完整两国连续产业模型均不进入本文；不把 ACA 改写成独立 total-cost index，也不在 ACA 后再添加独立 realization 状态 |
 | Lin and Monga (2010), `10.1596/1813-9450-5313` | World Bank WPS 5313 | 识别 latent-CA industries、解除阻碍 private entry 的信息、协调和基础设施约束，使产业成为 actual comparative advantage；支持必须在政策退出后仍 viable 的边界 | 不支持“任意补贴优于保护”或四阶段 LCA--ACA--viability--realization 链条 |
 | Romalis (2004), `10.1257/000282804322970715` | *AER* 94(1), 67--97 | 要素丰裕度和行业要素密集度共同决定生产、贸易结构 | 不用于定义 ACA 或 viability |
 | Dixit and Stiglitz (1977) | *AER* 67(3), 297--308 | 标准 CES/垄断竞争需求基准 | 不承担平台或 NSE 机制 |
@@ -49,11 +49,11 @@ conditional local-income propagation，不把乘数本身再次作为 NSE 新贡
 
 1. Couture et al. (2021) 支持 access 与 local income 可能分离，不证明平台化在
    所有地区降低收入。
-2. Lin and Wang (2023) 支持 LCA--ACA 的交易成本区分和 state enabling 逻辑。
-   该文的 ACA 最终体现为实际生产、出口和 RCA；其模型通过基础设施改变固定成本、
-   可变交易效率、冰山成本和 active-industry cutoff。它既没有独立 ACA index，也
-   没有在 ACA 之后再定义 realization。本文的 \(G_E,G_L,G_R,G_Y\) 均不是该文
-   已有结果。
+2. Lin and Wang (2023) 在本文中只支持 LCA--ACA 的交易成本区分。该文的 ACA
+   最终体现为实际生产、出口和 RCA；其原模型还通过基础设施改变固定成本、可变
+   交易效率、冰山成本和 active-industry cutoff，但这些 state-financing 和
+   infrastructure-supply 结构不进入本文。它既没有独立 ACA index，也没有在 ACA
+   之后再定义 realization。本文的 \(G_E,G_L,G_R,G_Y\) 均不是该文已有结果。
 3. Ahn et al. (2011) 支持一种条件性的固定成本--边际成本渠道排序，不意味着所有
    数字平台都具有较高单位成本。
 4. Moretti (2010) 和 Miller--Blair (2009) 支持收入传播背景，不支持把 local income

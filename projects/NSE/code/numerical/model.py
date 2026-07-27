@@ -9,7 +9,7 @@ illustrative and normalized.
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
-from math import exp, log, sqrt
+from math import exp, log
 from typing import Iterable
 
 import numpy as np
@@ -45,12 +45,6 @@ class Parameters:
     big_f: float = 0.53
     platform_localization: float = 0.0
 
-    # Enabling-state block
-    kappa_private: float = 4.0
-    kappa_government: float = 0.30
-    infrastructure_revenue_scale: float = 0.80
-
-
 def validate_parameters(p: Parameters) -> None:
     if not 0.0 < p.alpha_m < 1.0:
         raise ValueError("alpha_m must lie in (0,1)")
@@ -72,10 +66,6 @@ def validate_parameters(p: Parameters) -> None:
         raise ValueError("producer-access cost effects must be nonnegative")
     if not 0.0 <= p.platform_localization <= 1.0:
         raise ValueError("platform_localization must lie in [0,1]")
-    if not 0.0 < p.kappa_government < p.kappa_private:
-        raise ValueError("government financing wedge must be below the private wedge")
-
-
 def markup(p: Parameters) -> float:
     return p.sigma / (p.sigma - 1.0)
 
@@ -343,48 +333,6 @@ def nominal_income_threshold(z: float, p: Parameters) -> float:
 
 def real_income_threshold(z: float, p: Parameters) -> float:
     return _minimal_effect_threshold(real_effect, z, p)
-
-
-def financing_wedge(vartheta: float, p: Parameters) -> float:
-    if not 0.0 <= vartheta <= 1.0:
-        raise ValueError("government participation must lie in [0,1]")
-    return p.kappa_private - (p.kappa_private - p.kappa_government) * vartheta
-
-
-def infrastructure_supply(vartheta: float, p: Parameters) -> float:
-    """Unique solution to a/(1+G) = kappa(vartheta) G.
-
-    Infrastructure revenue is a*log(1+G), and the real construction cost is
-    G^2/2 multiplied by the financing wedge.
-    """
-
-    wedge = financing_wedge(vartheta, p)
-    ratio = p.infrastructure_revenue_scale / wedge
-    return 0.5 * (-1.0 + sqrt(1.0 + 4.0 * ratio))
-
-
-def participation_threshold(target_g: float, p: Parameters) -> float:
-    """Minimum state participation required to supply target_g.
-
-    Returns zero if private provision already crosses the threshold and NaN
-    if even full participation cannot cross it.
-    """
-
-    lower_supply = infrastructure_supply(0.0, p)
-    upper_supply = infrastructure_supply(1.0, p)
-    if target_g <= lower_supply:
-        return 0.0
-    if target_g > upper_supply:
-        return np.nan
-    return float(
-        brentq(
-            lambda vartheta: infrastructure_supply(float(vartheta), p) - target_g,
-            0.0,
-            1.0,
-            xtol=1e-12,
-            rtol=1e-12,
-        )
-    )
 
 
 def with_cost(p: Parameters, c: float) -> Parameters:

@@ -21,7 +21,8 @@
 提供结构骨架，贯穿禀赋与产业选择、LCA、实际交易约束、actual entry、组织嵌入、
 本地产业联系、capture formation 和 facilitating-state 边界。Lin--Wang (2023)
 所称 ACA 是交易成本加入后实际出现的生产和出口结构；本文把 actual entry and
-sales 作为其国内市场对应，不再另造 ACA 或 realization 状态。
+sales 作为其国内市场对应，不再另造 ACA 或 realization 状态。该文在活动模型中
+只用于这一 LCA--交易成本--ACA 关系，其融资和基础设施供给方程不进入本文。
 
 ## 二、不可改变的主从关系
 
@@ -136,8 +137,9 @@ local producer income
    平台化才提高名义地方收入。
 4. **实际收入阈值及排序**：消费价格收益使实际收入阈值弱低于名义收入阈值；
    两个根位于同一连续且活跃的组织区间时严格低于，离散切换时可以重合。
-5. **facilitating-state 推论**：政府参与缓解共享基础设施融资约束并提高 \(G\)；
-   通过 external-channel restriction 提高外部渠道成本是单独的非等价政策例子。
+5. **facilitating-state 推论**：从初始 \(G_0\) 出发，政府增加共享基础设施
+   \(I\) 并跨越既有门槛；external-channel restriction 通过提高外部渠道成本
+   诱导本地化，与 cost-reducing facilitation 不等价。
 
 基准模型保留最小的“外部平台组织--本地嵌入式组织”选择，用于生成本地服务支付
 和外部支付。正文使用进入阈值 \(G_E\) 和组织嵌入阈值

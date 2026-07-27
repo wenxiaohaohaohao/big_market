@@ -440,45 +440,36 @@ remains interior to the same active organizational state.
 \section{Proof of Proposition~\ref{prop:state}}
 
 \begin{proof}
-Define the infrastructure provider's first-order condition:
+Equation~\eqref{eq:facilitating_investment} implies:
 \[
-\Phi(G,\vartheta)
+G_0+I\geq G_H
+\quad\Longleftrightarrow\quad
+I\geq [G_H-G_0]_+=I_H.
+\]
+Because \(C_I'>0\), \(K_H=C_I(I_H)\) is the minimum real resource cost among
+all additions that cross \(G_H\).  Stronger LCA weakly lowers
+\(G_E,G_L,G_R,G_Y\) by
+Propositions~\ref{prop:entry}--\ref{prop:income_thresholds}.  The positive-part
+operator and the monotonicity of \(C_I\) therefore imply that it weakly lowers
+\(I_H\) and \(K_H\), with strict inequalities when \(G_0<G_H\) and the
+underlying threshold response is strict.
+
+Since \(G=G_0+I\) and \(\Omega=(\sigma-1)\gamma>0\),
+\[
+\frac{\partial\Mcal(z,G)}{\partial I}
 =
-\mathcal U_I'(G)-\kappa_I(\vartheta)C'(G)=0.
+\Omega\Mcal(z,G)>0.
 \]
-Its derivative with respect to \(G\) is:
+For either organizational mode:
 \[
-\Phi_G
+\frac{\partial\pi_r}{\partial I}
 =
-\mathcal U_I''(G)-\kappa_I(\vartheta)C''(G)<0.
+\Omega k\Mcal(z,G)(c+d_r)^{1-\sigma}>0.
 \]
-The objective is therefore strictly concave and has at most one interior
-solution.  Under the maintained endpoint conditions, that solution exists and
-is unique.  Since:
-\[
-\Phi_\vartheta
-=-\kappa_I'(\vartheta)C'(G)>0,
-\]
-implicit differentiation gives:
-\[
-G'(\vartheta)
-=-\frac{\Phi_\vartheta}{\Phi_G}>0.
-\]
+The consumer equations contain \(z\) but not \(G\) or \(I\), so this
+producer-side facilitation leaves \(P_M(z)\) and \(s(z)\) unchanged.
 
-For any fixed structural threshold \(G_H\), the monotonicity of
-\(G(\vartheta)\) implies that the set
-\(\{\vartheta:G(\vartheta)\geq G_H\}\) is an interval.  When nonempty, it has
-a unique minimum \(\vartheta_H\), except for an economically irrelevant flat
-boundary if the infrastructure solution itself is constrained.  Increasing
-\(\vartheta\) reduces \(G_H-G(\vartheta)\).  Stronger LCA lowers
-\(G_E,G_L,G_R,G_Y\) by Propositions~\ref{prop:entry}--\ref{prop:income_thresholds};
-applying the increasing inverse of \(G(\vartheta)\) weakly lowers the
-associated participation thresholds.
-\end{proof}
-
-\subsection{External-channel restriction calculation}
-
-A consumer wedge \(\tau_C>1\) changes the effective platform price to
+A consumer wedge \(\tau_C>1\) instead changes the effective platform price to
 \(\tau_C\bar p_Pe^{-z}\).  The CES price index is increasing in an input
 price, so the restriction raises \(P_M\) and lowers the platform expenditure
 share.  On the producer side:
@@ -488,9 +479,7 @@ share.  On the producer side:
 \frac{\sigma-1}{\Omega(c+d_P)}>0.
 \]
 Thus the restriction makes the low-fixed-cost external entry mode harder for a
-marginal producer.
-
-Let:
+marginal producer.  Let:
 \[
 \Delta=(c+d_L)^{1-\sigma}-(c+d_P)^{1-\sigma}.
 \]
@@ -507,11 +496,12 @@ the switch threshold satisfies:
 -\frac{1}{\Omega\Delta}
 \frac{\partial\Delta}{\partial d_P}<0.
 \]
-The restriction can therefore induce a switch toward \(L\), but it does so by
-worsening \(P\), while simultaneously harming consumer access and making
-platform-based entry more difficult.  Facilitation raises \(G\), which
-increases market access under both modes and does not enter the consumer price
-equation.  The two interventions are not equivalent.
+The restriction can induce a switch toward \(L\), but it does so by worsening
+\(P\), while simultaneously harming consumer access and making
+platform-based entry more difficult.  Facilitation instead raises market
+access under both modes without entering the consumer price equation.  The
+two interventions are not equivalent.
+\end{proof}
 
 \section{Boundary Cases and Counterexamples}
 
@@ -653,7 +643,7 @@ The numerical implementation consists of:
  figures and source-data CSV files;
  \item the validation script, which checks analytical derivatives, finite
  differences, threshold uniqueness, the three-region condition, boundary
- cases, and state monotonicity.
+ cases, minimum facilitating additions, and the intervention comparison.
 \end{itemize}
 
 For \(z=0.5,c=0.9\), the code obtains:
@@ -666,6 +656,12 @@ G_X=1.090996,
 G_R=G_E=0.210619,\quad
 G_Y=0.555415,\quad
 G_L=1.090996.
+\]
+From \(G_0=0.18\), these values imply:
+\[
+I_E=I_R=0.030619,\quad
+I_Y=0.375415,\quad
+I_L=0.910996.
 \]
 The equality \(G_R=G_E\) is event-exact: actual entry generates a discrete
 upward jump in the real effect.  The threshold routine evaluates entry and

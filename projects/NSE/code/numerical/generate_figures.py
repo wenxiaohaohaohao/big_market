@@ -16,7 +16,6 @@ from model import (
     consumer_price_index,
     entry_threshold,
     income_denominator,
-    infrastructure_supply,
     local_producer_income,
     nominal_effect,
     nominal_income,
@@ -371,7 +370,7 @@ def _plot_event_aware_income(
     *,
     real: bool,
     event_rows: list[dict],
-    vartheta: float,
+    infrastructure_case: str,
 ) -> None:
     z_min, z_max = 0.0, 1.2
     events = _regime_transition_events(g, p, z_min, z_max)
@@ -436,7 +435,7 @@ def _plot_event_aware_income(
         if not real:
             event_rows.append(
                 {
-                    "vartheta": vartheta,
+                    "infrastructure_case": infrastructure_case,
                     "G": g,
                     "z": event_z,
                     "from_regime": left_mode,
@@ -461,7 +460,11 @@ def _plot_event_aware_income(
 
 def figure_reform_paths(p: Parameters) -> None:
     z_grid = np.linspace(0.0, 1.2, 321)
-    participation = [0.05, 0.50, 0.99]
+    infrastructure_cases = [
+        ("low", 0.18),
+        ("middle", 0.30),
+        ("high", 1.12),
+    ]
     colors = ["#4C78A8", "#D68A20", "#8B6F9E"]
     linestyles = ["-", "--", "-."]
     rows: list[dict] = []
@@ -470,8 +473,9 @@ def figure_reform_paths(p: Parameters) -> None:
     fig, axes = plt.subplots(1, 3, figsize=(11.0, 3.7))
     common_shares = [platform_share(float(z), p) for z in z_grid]
     axes[0].plot(z_grid, common_shares, color="#333333", linewidth=2.2)
-    for vartheta, color, linestyle in zip(participation, colors, linestyles):
-        g = infrastructure_supply(vartheta, p)
+    for (case_name, g), color, linestyle in zip(
+        infrastructure_cases, colors, linestyles
+    ):
         nominal_base = nominal_income(float(z_grid[0]), g, p)
         real_base = real_income(float(z_grid[0]), g, p)
         for z in z_grid:
@@ -482,7 +486,7 @@ def figure_reform_paths(p: Parameters) -> None:
             real_level = real_income(float(z), g, p) / real_base
             rows.append(
                 {
-                    "vartheta": vartheta,
+                    "infrastructure_case": case_name,
                     "G": g,
                     "z": float(z),
                     "platform_share": s,
@@ -497,7 +501,7 @@ def figure_reform_paths(p: Parameters) -> None:
                 }
             )
 
-        label = rf"$\vartheta={vartheta:.2f}$, $G={g:.2f}$"
+        label = rf"{case_name.capitalize()} infrastructure, $G={g:.2f}$"
         _plot_event_aware_income(
             axes[1],
             g,
@@ -507,7 +511,7 @@ def figure_reform_paths(p: Parameters) -> None:
             label,
             real=False,
             event_rows=event_rows,
-            vartheta=vartheta,
+            infrastructure_case=case_name,
         )
         _plot_event_aware_income(
             axes[2],
@@ -518,13 +522,13 @@ def figure_reform_paths(p: Parameters) -> None:
             label,
             real=True,
             event_rows=event_rows,
-            vartheta=vartheta,
+            infrastructure_case=case_name,
         )
 
     write_rows(
         SOURCE_DIR / "figure_3_reform_paths.csv",
         [
-            "vartheta",
+            "infrastructure_case",
             "G",
             "z",
             "platform_share",
@@ -542,7 +546,7 @@ def figure_reform_paths(p: Parameters) -> None:
     write_rows(
         SOURCE_DIR / "figure_3_transition_events.csv",
         [
-            "vartheta",
+            "infrastructure_case",
             "G",
             "z",
             "from_regime",
