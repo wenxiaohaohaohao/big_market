@@ -29,8 +29,9 @@ capture formation 和 facilitating-state 条件。
 ```text
 consumer-side platform access
   + producer-side national market access
-  -> endowment-conditioned LCA and ACA
-  -> viability, entry and organizational embeddedness
+  -> endowment-conditioned LCA
+  -> transaction-cost-constrained actual entry (domestic LCA-to-ACA realization)
+  -> organizational embeddedness
   -> local production, complementary services and payment location
   -> first-round local income
   -> nominal and consumption-equivalent income thresholds
@@ -40,8 +41,9 @@ consumer-side platform access
 ## 与 EL 的关系
 
 - EL 提供 access--capture 问题、消费价格收益和地方收入传播基准；
-- NSE 新稿内生化产业选择、LCA--ACA、viability、本地生产者进入、组织服务来源
-  和第一轮本地收入；
+- NSE 新稿内生化禀赋所预示的 LCA、交易约束下的实际进入、本地生产者组织
+  服务来源和第一轮本地收入；ACA 与 realization 不重复设状态，viability 不另设
+  指数或门槛；
 - 平台模块提供价格、市场接入和渠道替代冲击，不被改写为 NSE；
 - 新稿不是 `EL + kappa(CA,G)`；
 - EL 精确固定点只在完成支付流后映射，不进入生产侧资源约束。

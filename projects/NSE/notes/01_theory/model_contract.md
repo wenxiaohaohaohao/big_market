@@ -1,6 +1,6 @@
-# Model Contract v4.0
+# Model Contract v4.1
 
-日期：2026-07-27
+日期：2026-07-28
 状态：活动理论合约（`FROZEN`）
 主轴：`platform access--local capture`
 论文身份：EL 原问题的独立 NSE 理论扩展
@@ -8,15 +8,15 @@
 ## 1. 唯一研究问题
 
 > 平台化市场整合为什么能够普遍改善消费者接入，却只有在符合当地 latent
-> comparative advantage 的产业实现 viable entry、并把互补组织服务嵌入当地时，
+> comparative advantage 的产业实际进入全国市场、并把互补组织服务嵌入当地时，
 > 才转化为本地生产、收入和价值捕获？
 
 本文不是一般性的 LCA--ACA 论文，也不是把 EL 中的本地能力改名为比较优势。理论
 分工冻结如下：
 
 1. CES 需求解释消费者平台采用和价格接入；
-2. NSE 解释禀赋决定的 LCA、viability、realization、共享基础设施和 facilitating
-   state；
+2. NSE 解释禀赋决定的 LCA、交易约束如何影响其实际实现、共享基础设施和
+   facilitating state；
 3. 固定成本--单位成本组织选择解释外部平台依赖与本地组织嵌入；
 4. 支付流生成 consumer-side local content \(\omega_C\) 和 producer-side
    retention \(\rho_r\)；
@@ -27,8 +27,9 @@
 | 模块 | 本文使用的内容 | 理论来源 | 不使用的内容 |
 |---|---|---|---|
 | 消费需求 | CES 渠道份额与价格指数 | Dixit--Stiglitz | 平台战略定价、双边网络效应 |
-| LCA | 禀赋结构决定相对生产成本；LCA 不等于观察到的产业 | Lin (2011, 2012)、Ju--Lin--Wang、Romalis | 动态资本积累、完整多产业 GE |
-| ACA 与 viability 术语 | ACA 包含实际交易成本；viability 要求正常经营者在开放无扭曲竞争中覆盖全部经济成本 | Lin--Wang (2023)、Lin (2003) | 独立 ACA 状态变量和人为 \(G_A\) |
+| 禀赋与相对生产成本 | 禀赋结构约束产业结构和相对生产成本 | Lin (2011, 2012)、Ju--Lin--Wang、Romalis | 动态资本积累、完整多产业 GE |
+| LCA 到 ACA 的实现 | LCA 是相对生产成本所预示的潜在专业化；交易成本与基础设施决定实际生产/出口结构（ACA） | Lin--Wang (2023)、Lin--Monga (2010) | 独立 ACA 指数、把 realization 再设为第三个状态 |
+| viability 的解释边界 | 无持续补贴或保护时，正常经营企业能够获得正常利润 | Lin (2003) | 独立 viability 指数或独立门槛 |
 | 组织选择 | 低固定成本--高单位成本与高固定成本--低单位成本的条件性排序 | Ahn--Khandelwal--Wei | 异质企业分布、多目的地 |
 | 本地嵌入 | 专业化生产者服务和产业联系具有本地固定成本 | Rodríguez-Clare (1996) | 原文完整均衡 |
 | 市场接入 | iceberg cost 以 \(1-\sigma\) 弹性进入 CES 市场接入 | 标准贸易/市场接入模型 | NEG 区位、迁移和集聚反馈 |
@@ -105,7 +106,7 @@ D(z)=1-\beta-\alpha_M\omega_C(z).
 
 基准为 \(\ell_A>\ell_P\)；反向情形必须报告。
 
-## 5. 禀赋、LCA、viability 与 realization
+## 5. 禀赋、LCA 与实际实现
 
 \[
 e_i=\frac{K_i}{L_i}.
@@ -137,7 +138,16 @@ c^P_{ij}
 =\xi_je_i^{\theta_0-\theta_j}.
 \]
 
-本文把 NSE 的 LCA 定义操作化为双重相对生产成本：
+Lin--Wang (2023) 没有建立
+“LCA 指数—ACA 指数—viability—realization”四级理论。该文把传统理论基于
+相对生产成本所预测的专业化潜力称为 LCA；企业依据包括生产成本和交易成本在内
+的总成本决定是否进入，实际出现的生产和出口结构称为 ACA。其实证部分以国家
+禀赋与产品要素需求之间的距离识别 LCA，以出口参与和 RCA 识别 ACA；理论部分
+则让基础设施改变固定交易成本、可变交易效率和冰山成本，从而改变均衡中的
+active-industry set。
+
+本文的双重相对生产成本是该 production-cost criterion 在两地区、两产业环境中的
+操作化：
 
 \[
 \mathcal C^P_{ij}
@@ -153,17 +163,35 @@ c^P_{ij}
 \frac{\partial c}{\partial\mathcal C^P_{ij}}>0.
 \]
 
-概念边界：
+来源边界必须保持如下：
 
-- **LCA**：由当前禀赋结构决定的相对生产成本优势；
-- **ACA**：NSE 文献中加入现实交易成本后仍存在的比较优势；
-- **viability**：正常经营者在开放、无扭曲竞争中，不依赖持续补贴或保护，能够
-  覆盖全部实际经济成本并获得正常回报；
-- **realization**：本文定义的均衡进入、生产和销售事件。
+- Lin (2011)、Lin (2012) 和 Ju--Lin--Wang 支撑的是
+  “禀赋结构约束比较优势和产业结构”，不是本文双重相对成本公式的直接来源；
+- Lin--Wang (2023) 明确提出生产成本所预示的 LCA 与交易成本作用后的 ACA
+  之间的差异，但 ACA 在该文中最终表现为实际生产、出口和 RCA，而不只是一个
+  独立的 relative-total-cost index；
+- Lin--Monga (2010) 将政策问题写成识别 latent-CA industries、解除阻碍企业进入
+  的约束，并使这些产业成为 actual comparative advantage；
+- Lin (2003) 的 viability 是另一条理论线：正常经营企业在 free, open, and
+  competitive market 中不依赖外部补贴或保护而获得 socially acceptable normal
+  profit。它不是 Lin--Wang 的 LCA—ACA 模型中的中间状态。
 
-固定成本 \(f,F\) 包含正常回报和机会成本，因此 \(\pi_r\geq0\) 是归一化 viability
-条件。ACA 保留为严格的 NSE 概念，但不单独构造 \(G_A\)：单地区局部均衡若要精确
-求 ACA，必须再建立参照地区总成本系统，这不是 access--capture 问题所需的状态。
+因此，本文只正式建模两个必要边际：
+
+\[
+\underbrace{\text{endowment-conditioned relative production cost}}_{\text{LCA}}
+\quad+\quad
+\underbrace{\text{transaction costs, infrastructure, and market size}}_
+{\text{realization constraints}}
+\quad\longrightarrow\quad
+\underbrace{\max\{\pi_P,\pi_L\}\geq0}_{\text{actual entry and sales}}.
+\]
+
+实际进入和销售是本文对应于 LCA 转化为 ACA 的国内市场结果，不再另设
+realization 变量或 \(G_A\)。固定成本 \(f,F\) 包含正常回报和机会成本，且模型
+不存在持续的选择性保护，因此 \(\max\{\pi_P,\pi_L\}\geq0\) 与 Lin (2003) 的
+viability 判据相容；但本文不声称完整建模 viability，也不另设 viability index 或
+threshold。正式的 \(G_E\) 只是 actual-entry threshold。
 
 ## 6. Producer access 与组织选择
 
@@ -371,7 +399,7 @@ C'>0,\quad C''\geq0.
 
 ## 10. 四个正式命题
 
-1. **LCA and viable realization**：\(G_E\) 存在；内部解处
+1. **LCA and actual entry**：\(G_E\) 存在；内部解处
    \[
    \frac{\partial G_E}{\partial c}>0,\qquad
    \frac{\partial G_E}{\partial\mathcal C^P_{ij}}>0.

@@ -8,7 +8,7 @@
 | ID | 结果 | 必要条件 | 结论 | 边界/反例 | 状态 |
 |---|---|---|---|---|---|
 | L0 | Consumer access | CES；\(\eta>1\)；\(p_P=\bar p_Pe^{-z}\) | \(s'=(\eta-1)s(1-s)>0\)，\(d\ln P_M/dz=-s<0\) | \(s\to0,1\) 时份额边际响应趋近零 | PROVED |
-| P1 | LCA and viable realization | LCA 双重相对生产成本；\(\gamma>0\)；固定成本含正常回报 | \(G_E\) 存在；内部解处 \(\partial G_E/\partial c>0\)，\(\partial G_E/\partial\mathcal C^P_{ij}>0\) | 原始阈值小于零时截断为零；不另设 \(G_A\) | PROVED |
+| P1 | LCA and actual entry | LCA 双重相对生产成本；\(\gamma>0\)；固定成本含正常回报 | \(G_E\) 存在；内部解处 \(\partial G_E/\partial c>0\)，\(\partial G_E/\partial\mathcal C^P_{ij}>0\) | 原始阈值小于零时截断为零；actual entry 对应本文的 LCA-to-ACA realization，不另设 \(G_A\) | PROVED |
 | P2 | Organizational embeddedness | \(d_L<d_P\)，\(F>0\)，\(\Omega=(\sigma-1)\gamma>0\) | \(G_L\) 存在；内部解处 \(\partial G_L/\partial c>0\)；切换后 \(\rho_L>\rho_P\)、\(\mathcal R_L>\mathcal R_P\)、\(B_j^L>B_j^P\) | \(F\leq\bar F\) 时平台依赖区间消失 | PROVED |
 | P3a | Nominal-income threshold | \(\psi>0\)；\(\ell_A>\ell_P\)；端点跨越；状态内严格单调、状态间无向下跳 | \(G_Y=\inf\{G:d\ln Y/dz\geq0\}\) 唯一 | 若高端满足 \((\sigma-1)\psi\leq\Lambda\)，名义阈值可以不存在 | PROVED |
 | P3b | Real-income threshold ordering | \(\alpha_Ms(z)>0\)；P3a 的单调结构 | \(G_R\leq G_Y\)；同一连续组织区间内 \(G_R<G_Y\) | 离散进入/组织切换可使阈值重合；基准中 \(G_R=G_E\) | PROVED |
@@ -73,8 +73,10 @@ State illustration：
 
 ## 4. 术语约束
 
-- LCA、ACA、viability、realization 不得互换；
-- ACA 是 NSE 的总成本比较优势概念，但不是当前局部均衡中的独立阈值；
+- LCA 是相对生产成本所预示的潜在专业化；ACA 是交易成本加入后实际出现的
+  生产和出口结构。ACA 与 realization 不再作为两个独立状态；
+- viability 是 Lin (2003) 的企业属性。本文利润条件与其相容，但不另设 viability
+  index 或 threshold；
 - \(G\) 是共享非企业专用基础设施，\(f\) 是进入固定成本，\(F\) 是本地组织专用
   固定成本；
 - \(\ell_r\) 与 \(\rho_r\) 是支付归属比率，不是能力参数；
@@ -85,7 +87,8 @@ State illustration：
 ## 5. 验收
 
 - [x] 解析公式与数值实现使用 \(\psi,\gamma,\chi^{ext}\) 的同一含义；
-- [x] \(G_A\) 和独立 ACA 状态已从活动模型删除；
+- [x] \(G_A\)、独立 ACA index、独立 realization 状态和 viability threshold 已从
+  活动模型删除；
 - [x] 离散收入阈值按结构事件精确返回；
 - [x] P1--P4 均有证明；
 - [x] 所有关键边界与反例已进入附录；

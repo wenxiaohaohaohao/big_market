@@ -17,16 +17,19 @@ EL 短文。
 ## 2. NSE 新稿必须独立生成的对象
 
 1. 地区禀赋和行业要素密集度生成双重相对生产成本与 LCA；
-2. 现实交易成本和固定成本进入利润问题，生成 viability、entry 和 realization；
+2. 现实交易成本和固定成本进入利润问题，生成 actual entry and sales；该结果是
+   本文对 LCA-to-ACA realization 的国内市场表达；
 3. \(P/L\) 组织选择生成本地服务与外部平台支付；
 4. 支付流生成 \(\rho_P,\rho_L\) 和 \(B_j^r\)；
 5. 基础设施融资问题生成 \(G(\vartheta)\)；
 6. 四个正式命题分别生成并区分 \(G_E,G_L,G_R,G_Y\)，而不是用一个“本地
    能力”参数替代这些经济门槛。
 
-ACA 仍按 NSE 文献定义为加入现实交易成本后的比较优势，但当前 focal-region
-模型不再为它另造 \(G_A\)。ACA 的概念用于约束解释；可观察的正式均衡结果是
-viable realization 和 organizational embeddedness。
+Lin--Wang (2023) 的 ACA 最终体现为交易成本加入后实际出现的生产、出口和
+RCA，而不是位于 realization 之前的独立 total-cost index。当前 focal-region
+模型因此不再为 ACA 另造 \(G_A\)：可观察的正式均衡结果是 actual entry and
+sales，以及进入后的 organizational embeddedness。Lin (2003) 的 viability 只
+用于约束利润条件的解释，不再生成独立变量或门槛。
 
 这些对象在 EL 固定点中均为外生或不存在，构成新稿的独立理论内容。
 

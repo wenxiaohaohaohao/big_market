@@ -115,18 +115,20 @@ dependent.
 
 New Structural Economics (NSE) supplies the production-side discipline needed
 to explain this intermediate state.  NSE starts from the proposition that an
-economy's viable industrial structure is conditioned by its endowment
+economy's industrial structure is conditioned by its endowment
 structure and that each industrial structure requires corresponding hard and
 soft infrastructure \citep{Lin2011,Lin2012}.  A firm in an industry consistent
 with the comparative advantage implied by local factor endowments can
 nevertheless fail to operate if transaction and coordination costs remain too
 high.  \citet{LinWang2023} distinguish latent comparative advantage (LCA),
-which is based on relative production costs, from actual comparative advantage
-(ACA), which incorporates transaction costs.  This paper respects that
-distinction but does not introduce a free-standing ACA index or an independent
-ACA threshold.  Instead, it asks the narrower equilibrium question required by
-the platform problem: how much shared infrastructure is needed for an
-LCA-consistent industry to become viable, enter, and organize local
+which is the specialization potential indicated by relative production costs,
+from actual comparative advantage (ACA), which appears in realized production
+and exports only after transaction costs are taken into account.  This paper
+uses the domestic-market analogue of that distinction.  It does not introduce
+a free-standing ACA index or treat ``realization'' as a third comparative-
+advantage concept.  Instead, it asks the narrower equilibrium question required
+by the platform problem: how much shared infrastructure is needed for an
+LCA-consistent industry to enter the national market and then organize local
 complementary services?  The policy distinction matters because shared
 infrastructure constraints often cannot be removed by a single firm.  A
 facilitating state can help industries with latent comparative advantage
@@ -138,8 +140,10 @@ The use of NSE here is deliberately narrower than a general theory of
 structural transformation and broader than relabeling an exogenous
 ``capacity'' parameter.  Endowments determine relative production costs.
 Infrastructure affects actual delivered costs and producer market access.
-Those objects jointly determine viable entry and the organizational form used
-after entry.  Organizational choice then determines the location of
+Those objects jointly determine whether the LCA-consistent industry is
+actually produced and sold---the realization margin that
+\citet{LinWang2023} associate with the movement from LCA to ACA.  The
+organizational form used after entry then determines the location of
 complementary-service payments.  Thus NSE affects both whether local
 production exists and how much of the resulting value is locally embedded.
 It does not replace consumer demand, the platform shock, or the local-income
@@ -156,11 +160,13 @@ Second, a focal region is embedded in an otherwise exogenous national market.
 A competitive background industry determines local factor opportunity costs.
 The region's capital--labor endowment and the candidate industry's factor
 intensity generate its unit production cost.  LCA is defined strictly as a
-region--industry double relative production cost.  Viability and realization
-are then kept distinct: viability requires that a normally managed firm cover
-all economic costs, including a normal return, in open undistorted competition
-without continuing subsidy or protection; realization is equilibrium entry,
-production, and sales.
+region--industry double relative production cost.  Transaction costs,
+infrastructure, and market size then determine whether that latent cost
+advantage is realized in equilibrium entry, production, and sales.  The
+nonnegative-profit condition is consistent with \citet{Lin2003}'s viability
+criterion because fixed costs include the owners' normal return and the model
+does not use continuing selective protection.  Viability is not introduced as
+another state variable or another threshold.
 
 Third, a representative candidate producer faces CES national demand.  The
 same platform-integration index that reduces the consumer platform price also
@@ -195,7 +201,8 @@ infrastructure.  It is not a national social planner, and the paper does not
 claim that the chosen government participation is nationally optimal.
 
 Four propositions organize the results.  Proposition~1 shows that stronger
-LCA lowers the infrastructure required for viable entry.  Proposition~2 shows
+LCA lowers the infrastructure required for profitable entry and actual
+production.  Proposition~2 shows
 that a second threshold determines organizational embeddedness; stronger LCA
 also lowers this threshold, and crossing it changes local service income,
 external payments, and the producer-retention rate.  Proposition~3 combines
@@ -431,19 +438,33 @@ factor abundance shifts production and trade toward industries intensive in
 the abundant factor \citep{Romalis2004}, and with the NSE view that industrial
 composition evolves with endowment structure \citep{JuLinWang2015}.
 
-\subsection{LCA, viability, and realization}
+\subsection{Latent comparative advantage and actual realization}
 
-The model uses NSE terminology narrowly and keeps structural potential,
-firm-level viability, and observed realization distinct.
+The NSE sources do not posit a four-stage sequence consisting of separate LCA,
+ACA, viability, and realization variables.  The distinction used by
+\citet{LinWang2023} has two economic margins.  Relative production costs,
+predicted by endowments and technology, identify an industry's LCA.  Actual
+production and exports depend on total costs, including the fixed and variable
+transaction costs affected by hard and soft infrastructure; the realized
+production and export pattern is ACA.  In their empirical analysis, LCA is
+proxied by the distance between national factor endowments and product factor
+requirements, while ACA is observed through export participation and revealed
+comparative advantage.  In their model, infrastructure changes transaction
+costs and hence the set of active industries.  ACA and ``realization'' are
+therefore not two additional concepts to be modelled separately.
 
 \begin{definition}[Latent comparative advantage]
-Following the NSE definition, an industry has latent comparative advantage
-when it would have comparative advantage under production costs determined by
-the economy's current endowment structure, before infrastructure-induced
-transaction costs are added \citep{Lin2012,LinWang2023}.  Let \(h\) be an
-external reference region and \(0\) a background industry in each region.
-This paper operationalizes that definition by the double relative production
-cost:
+In the terminology of \citet{LinWang2023}, an industry has
+latent comparative advantage when the location has a relative production-cost
+advantage rooted in its endowment structure, before the transaction costs
+that determine actual competitiveness are added.  This definition combines
+the NSE proposition that endowment structure determines comparative advantage
+\citep{Lin2011,Lin2012,JuLinWang2015} with the production-cost/transaction-cost
+distinction in \citet{LinWang2023}.
+
+Let \(h\) be an external reference region and \(0\) a background industry in
+each region.  The present paper represents the relative-production-cost
+criterion by:
 \begin{equation}
  \mathcal C^P_{ij}
  =
@@ -455,11 +476,17 @@ Region \(i\) has LCA in industry \(j\) when
 \(\mathcal C^P_{ij}<1\).
 \end{definition}
 
-The double ratio is essential.  A low absolute unit cost or a positive
-accounting margin is not by itself comparative advantage.  In the analytical
-and numerical comparative statics below, \(c\equiv c^P_{ij}\) is a monotone
-sufficient statistic for \(\mathcal C^P_{ij}\), holding the
-reference-region and background-industry ratios fixed:
+Equation~\eqref{eq:lca} is this paper's two-region, two-industry
+implementation of the comparative-cost criterion; it is not a formula quoted
+from \citet{LinWang2023}.  The double comparison is necessary because a low
+absolute cost or a positive accounting margin is not comparative advantage.
+The factor-proportions mechanism behind the relative cost is consistent with
+\citet{Romalis2004}, while the interpretation of that cost pattern as
+endowment-conditioned industrial potential follows NSE.  In the analytical
+and numerical comparative statics below,
+\(c\equiv c^P_{ij}\) is only a monotone sufficient statistic for
+\(\mathcal C^P_{ij}\), holding the reference-region and
+background-industry ratios fixed:
 \begin{equation}
  \frac{\partial c}{\partial\mathcal C^P_{ij}}>0.
  \label{eq:cost_lca_mapping}
@@ -467,31 +494,43 @@ reference-region and background-industry ratios fixed:
 Lower \(c\) therefore means stronger LCA within the stated comparison, but the
 underlying definition remains equation~\eqref{eq:lca}.
 
-\begin{definition}[Viability and realization]
-A normally managed candidate producer is \emph{viable} if at least one
-available organization covers all variable and fixed economic costs,
-including the owners' normal return, in open undistorted competition without
-continuing subsidy or protection:
+The model does not construct a second, free-standing ACA index.  Such an index
+would require total costs and organizational alternatives for both the focal
+and reference regions, objects that are unnecessary in a focal-region model.
+Instead, infrastructure \(G\) changes the focal region's transaction costs and
+producer access, and the producer problem determines whether the candidate
+industry is actually active.  When
 \[
-\max\{\pi_P,\pi_L\}\geq0.
+\max\{\pi_P,\pi_L\}\geq0,
 \]
-The fixed costs below are defined to include these opportunity costs, so zero
-profit is the normalized viability boundary.  \emph{Realization} is this
-paper's term for the equilibrium event that the producer actually enters,
-produces, and sells.
-\end{definition}
+the LCA-consistent industry enters, produces, and sells through an available
+organization.  This event is the model's domestic-market counterpart of the
+LCA-to-ACA realization in \citet{LinWang2023}; it is not a new definition of
+comparative advantage.
 
-In NSE, ACA refers to a latent advantage that continues to be a comparative
-advantage after actual transaction costs are included
-\citep{LinWang2023}.  That concept motivates the infrastructure channel here,
-but it is not introduced as a separate model state.  Doing so in a
-single-region partial equilibrium would require an additional
-reference-region total-cost system that does no work in the platform
-access--capture question.  The paper therefore derives the economically
-observable viability and realization threshold directly.  Observed exports
-or revealed comparative advantage can be evidence of realization, but they do
-not define LCA and are not sufficient by themselves to establish the
-counterfactual ACA concept.
+The related concept of viability comes from a different NSE argument.
+\citet{Lin2003} defines a normally managed firm as viable when it can earn a
+socially acceptable normal profit in a free, open, and competitive market
+without external subsidy or protection.  The nonnegative-profit entry
+condition above is compatible with that criterion once fixed costs include
+the owners' normal return and shared infrastructure is distinguished from
+open-ended firm-specific support.  It is not a complete separate model of
+viability, however, and the paper introduces neither a viability index nor a
+viability threshold distinct from entry.
+
+The theoretical mapping used below is therefore:
+\[
+\underbrace{(E_i,\theta_j)\longmapsto c^P_{ij}/c^P_{i0}}_{\mathrm{LCA}}
+\quad+\quad
+\underbrace{(G,\tau_O,\Mcal)}_{\text{realization constraints}}
+\quad\Longrightarrow\quad
+\underbrace{\max_{r\in\{P,L\}}\pi_r\geq0}_
+{\text{actual production / ACA}}.
+\]
+Observed entry alone cannot identify the counterfactual production-cost
+comparison required for LCA, but the model needs no intervening ACA or
+viability state.  The formal threshold \(G_E\) below is simply the minimum
+infrastructure level for actual entry.
 
 \subsection{Producer market access}
 
@@ -541,7 +580,7 @@ producers can reach.  The same platform reform \(z\) moves both, which keeps
 the EL question intact, but the two margins have different payment incidence
 and only producer access depends on \(G\).
 
-\subsection{Entry and the realization threshold}
+\subsection{Entry and the actual-entry threshold}
 
 The producer can use an external platform organization \(P\) or a locally
 embedded organization \(L\):
@@ -560,7 +599,8 @@ settlement, fulfillment, and supply-chain system.  It therefore avoids the
 organization-specific fixed cost \(F\), but it entails a larger unit service
 payment.  The common entry cost \(f\) is a private economic cost of product
 adaptation, certification, and initial market entry; it includes the normal
-return needed for viability.  The additional \(F\) is the private or
+return required for a zero-economic-profit entry boundary.  The additional
+\(F\) is the private or
 collectively financed setup cost of a local warehouse, operations team,
 quality-control system, or seller-service network.  It is distinct from
 \(G\), which is non-firm-specific shared infrastructure.  The local
@@ -613,19 +653,19 @@ The economically relevant entry threshold is:
  \label{eq:entry_threshold}
 \end{equation}
 
-\begin{proposition}[LCA and viable realization]
+\begin{proposition}[LCA and actual entry]
 \label{prop:entry}
-Suppose \(\gamma>0\).  The minimum infrastructure level \(G_E\) for viable
+Suppose \(\gamma>0\).  The minimum infrastructure level \(G_E\) for profitable
 entry exists.  At an interior threshold:
 \begin{equation}
  \frac{\partial G_E}{\partial c}>0,
  \qquad
- \frac{\partial G_E}{\partial\mathcal C^P_{ij}}>0.
- \label{eq:entry_lca_comparative_static}
+\frac{\partial G_E}{\partial\mathcal C^P_{ij}}>0.
+\label{eq:entry_lca_comparative_static}
 \end{equation}
-Hence stronger LCA lowers the shared infrastructure required for viable
-realization.  If a raw threshold is negative, its economically truncated value
-is zero and the comparative static is weak.
+Hence stronger LCA lowers the shared infrastructure required for profitable
+entry and actual production.  If a raw threshold is negative, its economically
+truncated value is zero and the comparative static is weak.
 \end{proposition}
 
 The result is not an assumption that LCA raises local income.  It follows from
@@ -739,7 +779,7 @@ External payment included in retention measure
 \end{tabular}
 \end{table}
 
-Fixed costs affect viability and organization, but locally supplied fixed-cost
+Fixed costs affect entry and organization, but locally supplied fixed-cost
 services are payments to local factors or firms.  Deducting them again from
 local income would double count a local resource payment.  Conversely, the
 external unit payment is excluded from local income even if it is not a
@@ -1083,54 +1123,61 @@ Equation~\eqref{eq:provider_foc} then has the closed-form solution:
 
 Figure~\ref{fig:phase} varies the candidate industry's relative production
 cost and infrastructure at \(z=0.5\).  Moving right weakens LCA.  Moving up
-improves the infrastructure through which LCA can be converted into viable
-entry and local organization.
+improves the infrastructure through which LCA can be converted into actual
+entry and local organization.  The colored regions are filled directly
+between the analytical boundaries \(G_E(c)\) and \(G_L(c)\); they are not a
+smoothed or interpolated classification grid.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.78\textwidth]{../figures/figure_1_phase_diagram.pdf}
-\caption{Industry realization and organizational regime}
+\caption{Analytical phase diagram for actual production and organization}
 \label{fig:phase}
 \end{figure}
 
-The gray region contains no viable candidate industry.  The blue region
+The gray region contains no active candidate industry.  The blue region
 contains local production that reaches the national market through the
 external platform organization.  The orange region contains locally embedded
 production and complementary services.  At a given \(G\), a stronger LCA
 industry is more likely both to enter and to embed.  For an intermediate range
 of production costs, increasing infrastructure moves the region through all
 three states; sufficiently strong LCA can make the industry locally embedded
-even at low \(G\), whereas sufficiently weak LCA may leave it nonviable
+even at low \(G\), whereas sufficiently weak LCA may leave it unprofitable
 throughout the plotted range.  The platform-dependent middle region is sizable
 under the baseline because \(F>\bar F\); it is generated by the profit and
 organization problem rather than imposed as an additional comparative-
 advantage category.
 
-\subsection{Development thresholds}
+\subsection{Infrastructure thresholds}
 
-Figure~\ref{fig:thresholds} plots the entry, organizational, real-income, and
-nominal-income thresholds against \(c\).  The curves are computed from the
-exact equilibrium choice and the minimum-\(G\) definitions in equations
+Figure~\ref{fig:thresholds} separates the structural and income thresholds
+that were previously superimposed in one panel.  Panel (a) plots actual entry
+and local embeddedness; its shaded band is the platform-dependent interval.
+Panel (b) plots the real- and nominal-income thresholds; its shaded band is
+the range in which the real effect is nonnegative but the nominal effect
+remains negative.  All curves are computed from the exact equilibrium choice
+and the minimum-\(G\) definitions in equations
 \eqref{eq:entry_threshold}, \eqref{eq:embedding_threshold},
 \eqref{eq:GY}, and \eqref{eq:GR}.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/figure_2_thresholds.pdf}
-\caption{LCA-conditioned development thresholds}
+\includegraphics[width=\textwidth]{../figures/figure_2_thresholds.pdf}
+\caption{LCA-conditioned infrastructure thresholds}
 \label{fig:thresholds}
 \end{figure}
 
-All four thresholds weakly rise as LCA weakens.  Kinks are economically
-meaningful: they occur when the identity of the active entry mode or the
-organizational state containing an income threshold changes.  In the
-baseline at \(c=0.9,z=0.5\), the relevant thresholds are:
+All four thresholds weakly rise as LCA weakens.  Flat zero segments and kinks
+are economically meaningful: they arise from the nonnegativity bound on
+infrastructure or from a change in the active equilibrium mode.  They have
+not been removed by statistical smoothing.  In the baseline at
+\(c=0.9,z=0.5\), the relevant thresholds are:
 \[
 G_E=G_R=0.2106,\qquad
 G_Y=0.5554,\qquad
 G_L=1.0910.
 \]
-Here viable platform entry produces a discrete first-round income gain large
+Here platform entry produces a discrete first-round income gain large
 enough to turn the real effect positive, so the economic infimum satisfies
 \(G_R=G_E\) exactly.  The nominal effect turns positive only at an interior
 root.  The strict ordering \(G_R<G_Y\) is numerical; the proposition preserves
@@ -1150,15 +1197,32 @@ infrastructure levels.  The first panel is common across participation levels
 because the baseline state intervention affects producer infrastructure, not
 the consumer platform price.  The second and third panels report nominal and
 consumption-equivalent income relative to their own \(z=0\) values.  The
-source-data file also reports the underlying marginal effects used in
+curves are drawn separately within each equilibrium regime.  At entry and
+organization switches, open and filled markers report the left- and
+right-limit values and a vertical segment records the discrete jump.  Hence
+the figure does not connect a structural discontinuity with an artificial
+diagonal line.  The source-data files also report the transition events and
+the underlying marginal effects used in
 Proposition~\ref{prop:income_thresholds}.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{../figures/figure_3_reform_paths.pdf}
-\caption{Platform integration, state participation, and local-income paths}
+\caption{Event-aware platform-integration and local-income paths}
 \label{fig:reform}
 \end{figure}
+
+The vertical jumps are economic features of the representative-industry
+baseline, not insufficient plot resolution.  Crossing \(G_E\) adds the
+candidate industry's entire first-round income, while crossing \(G_L\)
+changes the location of its complementary-service payments.  Their numerical
+size depends on the standardized ratio of candidate-industry demand to
+background income and is not an empirical effect size.  A continuum of
+heterogeneous firms would distribute the entry and organization cutoffs and
+thereby smooth aggregate income paths, but it would add a productivity
+distribution and would remove the closed-form representative-industry
+benchmark.  Applying a spline to the present model would instead be
+incorrect because it would fabricate intermediate equilibria.
 
 Platform penetration rises for every region.  At low participation, the
 candidate industry enters through \(P\) around \(z=0.52\), reversing the

@@ -27,7 +27,7 @@
   -> relative production cost
   -> LCA
   -> hard/soft infrastructure and transaction costs
-  -> viability and realization under actual transaction costs
+  -> actual entry and production under total costs
   -> entry and organizational choice
   -> local complementary services and linkages
   -> endogenous components of local capture
@@ -67,7 +67,7 @@ Comparative-Advantage Realization, and Local Value Capture**
 | 层面 | 当前 NSE 稿 |
 |---|---|
 | 研究问题 | 保留 consumer access 与 local capture 的分离 |
-| NSE 结构骨架 | 严格区分 LCA、ACA、viability 与 realization，并内生化生产者进入、组织嵌入、本地产业联系和 facilitating state；不为 ACA 另造独立状态 |
+| NSE 结构骨架 | 禀赋决定 LCA；交易成本与共享基础设施决定 LCA 是否在实际进入、生产和销售中实现为 ACA；viability 仅作为利润条件的解释边界，不另设指数或门槛 |
 | 平台模块 | 给出 consumer/producer access 和渠道替代冲击，不被重新解释为 NSE |
 | 留值率 | 由均衡支付流生成，不是外生能力指标 |
 | EL 作用 | access--capture 基准进入正文；精确传播公式在末端或附录映射 |
@@ -75,8 +75,8 @@ Comparative-Advantage Realization, and Local Value Capture**
 
 ## 第一版核心结果
 
-1. 更强的 LCA 降低 viable realization 所需的基础设施门槛；ACA 作为 NSE 的
-   实际总成本概念保留，但不在 focal-region 模型中另造 \(G_A\)；
+1. 更强的 LCA 降低实际进入和生产所需的基础设施门槛；实际进入是本文对应于
+   LCA 转化为 ACA 的国内市场结果，不另造 \(G_A\) 或 realization 状态；
 2. 组织选择和本地配套服务来源内生决定 production gain 有多少转化为 local capture；
 3. 存在平台化提高名义地方收入的能力/基础设施阈值；
 4. 实际收入阈值弱低于名义收入阈值；两个根位于同一连续组织区间时严格更低；
@@ -123,7 +123,8 @@ NSE/
 - [x] 归档偏离主轴的旧 contract；
 - [x] 建立活动 Model Contract v3.1 和命题台账；
 - [x] 闭合 consumer access 和 consumer-channel 支付流；
-- [x] 严格定义 ACA，并推导 producer-entry 和 organizational-embedding thresholds；
+- [x] 按原始文献区分 LCA 与实际生产/出口意义上的 ACA，并推导 producer-entry
+  和 organizational-embedding thresholds；
 - [x] 证明名义、实际收入阈值及条件性排序；
 - [x] 建立精简 facilitating-state 模块；
 - [x] 完成 illustrative numerical exercises、机制关闭和 source data；

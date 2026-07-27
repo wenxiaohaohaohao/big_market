@@ -49,9 +49,23 @@ python -m venv .venv
 
 - 正文图：`figures/figure_*.pdf` 和 `figures/figure_*.png`；
 - 图形数据：`figures/source_data/*.csv`；
+- Figure 3 精确结构事件：
+  `figures/source_data/figure_3_transition_events.csv`；
 - 干预对照：`figures/source_data/appendix_channel_restriction.csv`；
 - 编译论文：`output/NSE_draft.pdf`；
 - LaTeX 临时文件：`tmp/latex/`。
 
 构建脚本把 `TEMP` 和 `TMP` 指向 NSE 项目内的 `tmp/`，不把大型临时文件写入
 C 盘。
+
+## 图形生成原则
+
+- Figure 1 直接填充解析门槛 \(G_E(c)\) 与 \(G_L(c)\) 之间的区域，不使用
+  分类网格或图像插值；
+- Figure 2 将结构门槛与收入门槛分为两个共享纵轴的面板，避免
+  \(G_E=G_R\) 时曲线完全重合造成误读；
+- Figure 3 在固定组织状态内绘制连续曲线，在进入和组织转换点使用精确
+  Brent 根、开/实心端点和垂直跳跃线；不得用普通折线跨越离散均衡事件；
+- Figure 3 的跳跃来自代表性候选产业一次性进入或切换组织，不是网格过疏。
+  若要从经济结构上平滑，必须扩展为异质企业分布，而不能对现有结果做 spline；
+- 所有 PDF 图保持矢量输出。真实的零约束、kink 和 jump 不作统计平滑。

@@ -18,9 +18,10 @@
 
 因此，本文不是一般性的 LCA--ACA 论文，也不是一篇完整 NSE 论文附带平台应用。
 平台化造成的 `market access--local capture` 分离是研究对象；NSE 为地方发展侧
-提供结构骨架，贯穿禀赋与产业选择、LCA、实际交易约束、viability、组织嵌入、
-本地产业联系、capture formation 和 facilitating-state 边界。ACA 仍按 NSE
-文献严格定义，但不是本文另行构造的均衡状态。
+提供结构骨架，贯穿禀赋与产业选择、LCA、实际交易约束、actual entry、组织嵌入、
+本地产业联系、capture formation 和 facilitating-state 边界。Lin--Wang (2023)
+所称 ACA 是交易成本加入后实际出现的生产和出口结构；本文把 actual entry and
+sales 作为其国内市场对应，不再另造 ACA 或 realization 状态。
 
 ## 二、不可改变的主从关系
 
@@ -93,12 +94,11 @@ EL 的完整固定点不进入生产侧资源约束，但 access--capture 分解
 - 地区禀赋和行业要素密集度决定相对生产成本；
 - 相对生产成本定义 LCA，而不是使用外生匹配指数；
 - 全国市场接入和软硬基础设施决定总交易成本；
-- NSE 将加入现实交易成本后仍存在的比较优势称为 actual comparative advantage
-  （ACA）；本文保留该严格概念，但不为它另造参照地区总成本方程或独立门槛；
-- viability 表示企业在开放竞争市场中不依赖持续保护或补贴而覆盖全部实际成本；
-  realization 表示企业实际进入、生产和销售。realization 是可观察的均衡结果，不是
-  ACA 的定义，也不自动证明 ACA；本文正式求解的是具有 LCA 的产业能否达到
-  viability 并实现进入；
+- Lin--Wang 将传统相对生产成本理论所预示的产业方向称为 LCA，并把现实交易
+  成本加入后实际出现的生产和出口结构称为 ACA；本文正式求解 LCA-consistent
+  产业是否实际进入、生产和销售，不再另造 \(G_A\) 或 realization 状态；
+- Lin (2003) 的 viability 表示企业在开放竞争市场中不依赖持续保护或补贴而获得
+  正常利润。本文的进入利润条件与此相容，但不把 viability 设成独立变量或门槛；
 - 进入全国市场以后，企业在外部平台组织与本地嵌入式组织之间选择；
 - 组织选择决定履约、认证、营销和供应链服务由本地还是外部主体提供；
 - 本地产业联系是同一交易所需配套服务的本地化结果，不是另加一个外生留值能力。
@@ -127,8 +127,8 @@ local producer income
 
 ## 五、核心命题层级
 
-1. **LCA 与 viable realization 命题**：更强的 LCA 降低 viable entry 所需的
-   基础设施条件 \(G_E\)。
+1. **LCA 与 actual entry 命题**：更强的 LCA 降低实际进入和生产所需的基础设施
+   条件 \(G_E\)。
 2. **组织嵌入命题**：本地组织和共享基础设施决定进入后的生产及配套服务有多少
    留在当地。
 3. **名义地方收入阈值**：只有 producer-side 和 local-service gains 足以抵消
@@ -157,7 +157,8 @@ local producer income
 ## 七、无数据理论稿的完成标准
 
 - consumer access、producer access、capture 和 local income 同时进入模型；
-- LCA、ACA 和 viability 使用严格且不混淆的定义；
+- LCA、ACA 和 viability 的来源边界准确：ACA 与实际实现不重复建模，viability
+  不被误写成独立状态；
 - 企业进入、组织嵌入和支付归属由行为方程决定；
 - NSE 同时生成 local production 和 local complementary-service income；
 - 至少证明名义与实际收入阈值及其条件性排序；

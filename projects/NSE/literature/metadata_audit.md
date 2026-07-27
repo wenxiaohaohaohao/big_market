@@ -18,8 +18,8 @@ dangling citation，也无 orphan reference。`NSE_literature_variable_inventory
 | Lin (2012), ISBN `9780821389553` | World Bank 专著 | NSE 总体框架、比较优势遵循和基础设施外部性 | 本文的 CES 或组织利润公式 |
 | Lin (2003), `10.1086/367535` | *EDCC* 51(2), 277--308 | viability 和违背比较优势的持续保护负担 | LCA--ACA 的具体总成本定义 |
 | Ju, Lin and Wang (2015), `10.1016/j.jmoneco.2015.09.006` | *JME* 76, 244--263 | 禀赋驱动产业结构及资本劳动比的正式 NSE 基础 | 本文不复制其无限产业动态模型 |
-| Lin and Wang (2023), NSE WP E2023001 | 本地 PDF 与北京大学新结构经济学研究院页面 | LCA 是相对生产成本潜势；ACA 要考虑交易成本；state 可通过基础设施降低企业不能内部化的交易约束 | 不把其国家贸易模型直接声称为本文平台模型 |
-| Lin and Monga (2010), `10.1596/1813-9450-5313` | World Bank WPS 5313 | 围绕潜在比较优势识别并解除信息、协调和基础设施约束 | 不支持“任意补贴优于保护” |
+| Lin and Wang (2023), NSE WP E2023001 | 本地 PDF 与北京大学新结构经济学研究院页面 | LCA 是相对生产成本所预示的潜在专业化；固定和可变交易成本决定产业是否实际生产、出口并形成 ACA；state 可通过基础设施改变 active-industry set | 不把 ACA 改写成独立 total-cost index，也不在 ACA 后再添加独立 realization 状态 |
+| Lin and Monga (2010), `10.1596/1813-9450-5313` | World Bank WPS 5313 | 识别 latent-CA industries、解除阻碍 private entry 的信息、协调和基础设施约束，使产业成为 actual comparative advantage；支持必须在政策退出后仍 viable 的边界 | 不支持“任意补贴优于保护”或四阶段 LCA--ACA--viability--realization 链条 |
 | Romalis (2004), `10.1257/000282804322970715` | *AER* 94(1), 67--97 | 要素丰裕度和行业要素密集度共同决定生产、贸易结构 | 不用于定义 ACA 或 viability |
 | Dixit and Stiglitz (1977) | *AER* 67(3), 297--308 | 标准 CES/垄断竞争需求基准 | 不承担平台或 NSE 机制 |
 
@@ -49,14 +49,44 @@ conditional local-income propagation，不把乘数本身再次作为 NSE 新贡
 
 1. Couture et al. (2021) 支持 access 与 local income 可能分离，不证明平台化在
    所有地区降低收入。
-2. Lin and Wang (2023) 支持 LCA--ACA 的交易成本区分和 state enabling 逻辑，
-   不自动证明本文的 \(G_E,G_L,G_R,G_Y\) 排序。
+2. Lin and Wang (2023) 支持 LCA--ACA 的交易成本区分和 state enabling 逻辑。
+   该文的 ACA 最终体现为实际生产、出口和 RCA；其模型通过基础设施改变固定成本、
+   可变交易效率、冰山成本和 active-industry cutoff。它既没有独立 ACA index，也
+   没有在 ACA 之后再定义 realization。本文的 \(G_E,G_L,G_R,G_Y\) 均不是该文
+   已有结果。
 3. Ahn et al. (2011) 支持一种条件性的固定成本--边际成本渠道排序，不意味着所有
    数字平台都具有较高单位成本。
 4. Moretti (2010) 和 Miller--Blair (2009) 支持收入传播背景，不支持把 local income
    解释为 national welfare。
 
-## 6. 最终逐条核实轨迹
+## 6. NSE 概念使用审计
+
+本轮原文复核纠正了此前过度形式化的四级表述。
+
+1. **LCA 的术语来源。** Lin (2011)、Lin (2012) 和 Ju--Lin--Wang (2015)
+   支撑“禀赋结构决定比较优势和适宜产业结构”的一般 NSE 命题；正文使用的
+   LCA--ACA 明确区分主要来自 Lin--Wang (2023)，而不是前三项文献中的一个
+   统一数学定义。
+2. **LCA 的测量与模型表达。** Lin--Wang 的实证以国家禀赋和产品要素需求之间
+   的距离识别 LCA；其理论沿用 Romalis 的要素密集度连续产业模型。本文的
+   两地区、两产业双重相对成本
+   \(\mathcal C^P_{ij}\) 是为保证 comparative 而非 absolute cost 所作的模型内
+   定义，不是 Lin--Wang 原文公式。
+3. **ACA 不是独立中间指数。** Lin--Wang 说明 LCA 产业只有在总成本相对较低时
+   才能成为 ACA，并在经验上用出口参与和 RCA 表示 ACA。本文因此把
+   \(\max_r\pi_r\geq0\) 所产生的实际进入和销售解释为国内市场中的
+   LCA-to-ACA realization，不再建立独立 \(G_A\) 或第二套参考地区总成本系统。
+4. **viability 不另行建模。** Lin (2003) 的 viability 是 normally managed firm
+   在 free, open, competitive market 中无需外部补贴或保护即可获得 socially
+   acceptable normal profit 的企业属性。本文的利润条件在固定成本包含正常回报、
+   且政府只提供共享基础设施时与其相容，但不是完整的 viability 模型。因此正文
+   不再设置 viability index、viability threshold 或独立命题。
+5. **本文真正新增的状态。** 外部平台依赖与本地组织嵌入是本文为回答
+   platform access--local capture 问题引入的组织选择，不是 NSE 既有术语。其
+   文献基础来自 Ahn--Khandelwal--Wei 的成本排序和 Rodríguez-Clare 的本地
+   producer-services linkage。
+
+## 7. 最终逐条核实轨迹
 
 核实日期：2026-07-28。下列链接均指向期刊、出版社、作者机构页或官方研究机构；
 每一项均核对作者、标题、年份、刊物或工作论文编号及页码/DOI（如适用）。

@@ -22,7 +22,7 @@
 | # | 文献                                                                                                                                                  | 核心变量/参数                                                                                                                                                                                                                                                        |
 | - | ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1 | **Lin, J.Y. (2011).** "New Structural Economics: A Framework for Rethinking Development." *World Bank Research Observer*, 26(2): 193–221.    | 要素禀赋 endowment:\\(K, L, N\\)（资本、劳动、自然资源）；禀赋结构 endowment structure: \\(K/L\\)；比较优势 comparative advantage；自生能力 viability；最优产业结构 optimal industrial structure；硬/软基础设施 hard/soft infrastructure；交易成本 transaction costs |
-| 2 | **Lin, J.Y. (2012).** *New Structural Economics: A Framework for Rethinking Development and Policy.* World Bank Publications.                 | 同上，加上：潜在比较优势 latent comparative advantage；实际比较优势 actual comparative advantage；要素生产成本 factor costs of production；总成本 total costs = factor costs + transaction costs                                                                     |
+| 2 | **Lin, J.Y. (2012).** *New Structural Economics: A Framework for Rethinking Development and Policy.* World Bank Publications.                 | NSE 总体框架：禀赋结构、比较优势遵循、产业升级、hard/soft infrastructure、交易成本与 facilitating state。本文不再把后来的 LCA--ACA 精确术语直接归于该书；production-cost/transaction-cost 的 LCA--ACA 明确区分以 Lin--Wang (2023) 为准。 |
 | 3 | **Lin, J.Y. (2012).** *The Quest for Prosperity: How Developing Economies Can Take Off.* Princeton University Press.                          | 增长甄别与因势利导框架 GIFF (Growth Identification and Facilitation Framework)；后发优势 latecomer advantage                                                                                                                                                         |
 | 4 | **Lin, J.Y. (2019).** "New Structural Economics: The Third Generation of Development Economics." *GEGI Working Paper 027*, Boston University. | 结构内生性（structure endogeneity）；要素禀赋结构决定生产结构、基础设施结构、上层制度结构；先行者外部性 first-mover externality                                                                                                                                      |
 | 5 | **林毅夫 (2017).** "新结构经济学的理论基础和发展方向." 北京大学国家发展研究院.                                                                  | 要素禀赋结构\\(\rightarrow\\) 比较优势 \\(\rightarrow\\) 最优产业结构；有效的市场 efficient market；有为政府 facilitating state                                                                                                                                      |
@@ -32,7 +32,7 @@
 
 | # | 文献                                                                                                                                                                                       | 核心变量/参数                                                                                                                                                                       |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 7 | **Lin, J.Y. (2003).** "Development Strategy, Viability, and Economic Convergence." *Economic Development and Cultural Change*, 51(2): 277–308.                                    | 自生能力 viability：企业\\(V_i = 1\\) 若有自生能力，\\(V_i = 0\\) 若需要保护/补贴；发展战略 strategy（CAF: comparative-advantage-following vs. CAD: comparative-advantage-defying） |
+| 7 | **Lin, J.Y. (2003).** "Development Strategy, Viability, and Economic Convergence." *Economic Development and Cultural Change*, 51(2): 277–308.                                    | 自生能力 viability：正常经营企业在 free, open, competitive market 中，无需外部补贴或保护即可获得 socially acceptable normal profit；发展战略区分 CAF 与 CAD。二元 \\(V_i\\) 只能是后续研究者的操作化，不是该文规定的原始变量。 |
 | 8 | **Lin, J.Y. & Tan, G. (1999).** "Policy Burdens, Accountability, and the Soft Budget Constraint." *American Economic Review*, 89(2): 426–31.                                      | 政策性负担 policy burden：战略性负担 strategic burden + 社会性负担 social burden；软预算约束 soft budget constraint                                                                 |
 | 9 | **Lin, J.Y. & Zhang, P. (2009).** "Industrial Structure, Appropriate Technology and Economic Growth in Less Developed Countries." *World Bank Policy Research Working Paper* 4905. | 适宜技术 appropriate technology：\\(A_i^* = f(E_i)\\)，即最优技术选择由要素禀赋内生决定；资本密集度 capital intensity：\\(k_j = K_j/L_j\\)；技术前沿 technology frontier            |
 
@@ -290,9 +290,9 @@
 
 | 变量名     | 含义                                     | 出处                                 |
 | ---------- | ---------------------------------------- | ------------------------------------ |
-| \\(V_i\\)  | 企业自生能力（二元或连续）               | Lin (2003)                           |
-| latent CA  | 潜在比较优势：要素成本最低但交易成本尚高 | Lin (2011); Lin & Monga (2011)       |
-| actual CA  | 实际比较优势：总成本具有市场竞争力       | Lin (2011)                           |
+| \\(V_i\\)  | 企业自生能力的可选经验操作化；不是 Lin (2003) 原文规定的状态变量 | Lin (2003) 的概念边界 |
+| latent CA  | 由禀赋与技术所预示的相对生产成本/产业方向，尚未保证实际生产或出口 | Lin--Monga (2010); Lin--Wang (2023) |
+| actual CA  | 交易成本加入后实际出现的生产和出口结构；经验上可用出口参与或 RCA 表示 | Lin--Wang (2023) |
 | congruence | 禀赋-产业一致性指数                      | 可在数值分析中构建（不替代理论核心） |
 
 ---
@@ -389,7 +389,7 @@
 | --- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | C18 | **林毅夫、文永恒、顾艳伟 (2020).** "国有企业、基础设施与经济增长." 新结构经济学工作论文         | **基础设施投资的正外部性**：上游自然垄断行业中的国有企业投资 → 正外部性 → 带动下游私营经济。实证：国有企业投资增加 → 非国有企业投资和居民消费上升、杠杆率下降                                                         |
 | C19 | **张博 (2024).** "技术选择、基础设施与要素约束：林均衡及其政策含义." 新结构经济学工作论文       | **林均衡 (Lin Equilibrium)**：基础设施正外部性 + 技术选择 + 要素禀赋约束的统一一般均衡。由于基础设施的公共品属性 → 市场失灵 → 三种政府矫正机制：庇古-林均衡、科斯-林均衡、瓦尔拉斯-林均衡                              |
-| C20 | **Lin, J.Y. & Wang, X. (2023).** "State Enabling and Comparative Advantages." NSE Working Paper | **LCA → ACA 转换条件**：潜在比较优势 (LCA) 转化为实际比较优势 (ACA) 需要国家降低交易成本。物理和制度基础设施投资是转换的充分条件。跨国实证：非洲和拉美 LCA-ACA 差距大，亚洲差距小；出口结构动态变化与基础设施发展正相关 |
+| C20 | **Lin, J.Y. & Wang, X. (2023).** "State Enabling and Comparative Advantages." NSE Working Paper | **LCA → ACA 实现机制**：相对生产成本所预示的 LCA 不保证产业实际出现；固定和可变交易成本、冰山成本及基础设施共同决定均衡生产/出口集合。实证以禀赋—产品要素需求距离识别 LCA，以出口参与和 RCA 表示 ACA。国家参与通过降低基础设施融资成本提高 \\(G\\)，进而扩大 active-industry set；不能概括为无条件“充分条件”。 |
 | C21 | **林毅夫、王勇、于海潮、张梓桐.** "新结构产业经济学的学科内涵与分析框架."                       | **匹配度指数**：产业 i 与地区禀赋结构的偏离程度指数；随时间增大的为转进型产业，随时间减小的为符合比较优势的产业。**有效市场 × 有为政府结合**的产业政策分析框架                                                    |
 | C22 | **林毅夫、向为、余淼杰 (2018).** "区域产业政策与企业生产率." NSE 工作论文                       | **国家级经济开发区**：提供更好的政策环境（更低税收）、正向溢出效应，但园区内集聚效应不显著。征收税率差异（园区内 15% vs. 园区外 33%）                                                                                    |
 

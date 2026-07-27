@@ -18,9 +18,8 @@
 | 每个命题的证明 | 全部位于 `paper/appendix.tex` |
 | 论文主问题 | platform access--local capture，没有改写为一般 LCA--ACA 论文 |
 | LCA | 地区、产业双重相对生产成本；未用 \(1/c\) 定义 |
-| ACA | 严格保留为加入现实交易成本后的比较优势概念；不另造 \(G_A\) |
-| viability | 覆盖全部实际成本和正常回报，不依赖持续保护或补贴 |
-| realization | 企业实际进入、生产和销售的均衡结果 |
+| ACA / realization | 按 Lin--Wang 原文合并为交易成本加入后实际出现的生产/出口结构；本文的 actual entry and sales 是国内市场对应，不另造 \(G_A\) 或 realization 状态 |
+| viability | 仅作为 Lin (2003) 的解释边界；利润条件与其相容，但无独立 index、threshold 或 proposition |
 | producer access | 从 outbound iceberg cost 推导；基准无 \(zG\) 交互 |
 | 组织选择 | 同一企业利润比较内生决定 \(P/L\) |
 | \(\omega_C,\rho_r\) | 均由可审计支付流生成 |
@@ -63,7 +62,10 @@ vartheta_R=0.2331, vartheta_Y=0.8308
 - 无 dangling citation 或 orphan reference；
 - 每个核心模块的来源和论断边界记录在
   `literature/metadata_audit.md` 与 `notes/01_theory/model_contract.md`；
-- Lin--Wang 只承担 LCA、ACA 和 state-enabling 概念，不承担本文的平台阈值；
+- Lin--Wang 只承担相对生产成本意义的 LCA、交易成本作用后的实际生产/出口
+  （ACA）和 state-enabling 机制，不承担本文的平台阈值；
+- Lin (2003) 只承担 viability 的解释边界；Lin--Monga 支持识别 latent-CA
+  industries、解除进入约束以及限制 open-ended support；
 - Ahn--Khandelwal--Wei 只承担条件性的组织成本排序；
 - Rodríguez-Clare 只承担本地专业化生产者服务和产业联系解释；
 - Miller--Blair、Moretti 和 EL companion 只承担 conditional income
@@ -75,14 +77,16 @@ vartheta_R=0.2331, vartheta_Y=0.8308
 
 | artifact | source data | 正文所表达的结果 | 边界 |
 |---|---|---|---|
-| Figure 1 | `figure_1_phase_diagram.csv` | 不进入、外部平台、本地嵌入三种均衡区域非空；LCA 越强，进入和嵌入越容易 | 不是地区分类数据 |
-| Figure 2 | `figure_2_thresholds.csv` | \(G_E,G_L,G_R,G_Y\) 随相对生产成本变化；\(G_R=G_E\) 的重合被明确解释 | 不是估计值或置信区间 |
-| Figure 3 | `figure_3_reform_paths.csv` | 不同政府参与下，共同的消费者平台份额和不同的名义、实际收入水平路径 | 收入按各自 \(z=0\) 标准化，不是政策因果估计 |
+| Figure 1 | `figure_1_phase_diagram.csv` | 解析 \(G_E(c),G_L(c)\) 直接生成不进入、外部平台、本地嵌入区域；无分类栅格或插值 | 不是地区分类数据 |
+| Figure 2 | `figure_2_thresholds.csv` | 双面板分开 \(G_E,G_L\) 与 \(G_R,G_Y\)，明确 \(G_R=G_E\) 的重合 | 非负截断和组织切换造成的真实 kink 不做平滑 |
+| Figure 3 | `figure_3_reform_paths.csv`；`figure_3_transition_events.csv` | 固定组织状态内连续绘图；Brent 精确事件根、左右极限和垂直跳跃表示进入/组织转换 | 收入按各自 \(z=0\) 标准化；代表性产业跳跃不是政策因果估计 |
 
 附录机制检查位于 `appendix_mechanism_closures.csv`；facilitation 与
 external-channel restriction 的条件性比较位于
 `appendix_channel_restriction.csv`。Figure 3 CSV 同时保存原始收入、标准化收入和
-命题 3 使用的边际效应。
+命题 3 使用的边际效应；transition-event CSV 单独保存每次转换的左右极限。
+任何 spline 都会制造模型中不存在的中间均衡，因此未使用。若未来引入异质企业
+分布，聚合路径可从经济结构上变得平滑，但那属于模型扩展。
 
 ## 6. Numerical-exercise provenance
 
@@ -95,13 +99,14 @@ calibration_claim: false
 
 | 文件 | SHA256 |
 |---|---|
-| `code/numerical/generate_figures.py` | `C585148E044BD0351D134A0A75232E4E011A79873F914DB75669FD38C2390264` |
+| `code/numerical/generate_figures.py` | `761E544ABCE8828D38DABC8C7A647394433DF0BC097750F70CFF26FF5C1DC63B` |
 | `code/numerical/model.py` | `06F2067BDC24053A5B6C6871A22B4A78B95C2D7D26560C1D013962F8C34B8D19` |
 | `code/theory/validate_model.py` | `95D439338D3AACB51702837375E517F62A2D8915590DA75B5D316581601F4CAA` |
 | `code/requirements.txt` | `87F086E6165AD9E2C92449573EA54BA7F91AD5397053A06EABB3467CEC51911C` |
-| `figure_1_phase_diagram.csv` | `A38AA7585ECF91E2A7898E87E776B297086B6D58B38784200454D0D494C9C00D` |
-| `figure_2_thresholds.csv` | `177608B4CE0D9C2DF96970CA471CD2223CE1677F60577B27E3E835554AE9537C` |
-| `figure_3_reform_paths.csv` | `32AAA781851A69FAEDA6393F8B1795D17C7FFF483BD0FE28A397329CEC6BC9C3` |
+| `figure_1_phase_diagram.csv` | `B2798262C2087E234074F8759EE4FD38C72860F1BA7FFA8340A348611A133291` |
+| `figure_2_thresholds.csv` | `F6B66D63ABD4B8466D6A56B49E2D7A35FCF2D86F16162BC989261F9780055E8A` |
+| `figure_3_reform_paths.csv` | `EEAC364A099110287C47B01849325D386369CA0360AD379C1A06D54C4CB3704D` |
+| `figure_3_transition_events.csv` | `52AFC5656D54DD76083388987AB2871F3F60F42AAB13E009352463CB042A77C1` |
 | `appendix_mechanism_closures.csv` | `64FF45EFE24F6C5091EF7164D8367B741C876E4313D7F95FDA8EDF67CD99A379` |
 | `appendix_channel_restriction.csv` | `3BCB824448A8C572948ABBBE853C89E1315C7894759EFE9D14DB55C3078597E8` |
 
@@ -109,15 +114,16 @@ calibration_claim: false
 
 - 使用项目 `code/build_paper.ps1` 调用本机 MiKTeX XeLaTeX 和 BibTeX；
 - 所有构建中间文件写入项目 `tmp/latex`，正式 PDF 写入 `output/`；
-- 最终 PDF 共 34 页：正文 21 页、参考文献和证明/稳健性附录随后排列；
+- 最终 PDF 共 36 页：正文 22 页、参考文献 2 页、证明和稳健性附录 12 页；
 - PDF SHA256：
-  `837CE54A09F7A7B173F090656F4F83E593F8D861D6AEA69A76734629CC0460C1`；
+  `4A6FD26C6BA6B8923D11138DA3978F7DEF3243475A9EAE59328747ED62A95EE2`；
 - 无 undefined citation、undefined reference、multiply-defined label 或
   overfull box；
 - 少量窄表格 underfull box 不造成文字溢出、遮挡或错位；
 - 已目视检查第 6 节标题页及三张正文图。Section 6 的编号与标题是标准 LaTeX
   section 版式，先前截图中的蓝框和圆形“1”是 PDF 批注选区，不属于论文排版；
-- Figure 3 现展示标准化收入水平路径，而不是以边际效应代替原计划要求的结果。
+- Figure 1--2 使用解析矢量曲线；Figure 3 展示标准化收入水平路径并准确保留
+  离散结构跳跃，而不是以边际效应或视觉 spline 代替模型结果。
 
 ## 8. 最终限制
 
